@@ -1,0 +1,6 @@
+# Default ignored files
+/Sudoku2.iws
+
+# Project exclude paths
+/.gradle/
+/out/
