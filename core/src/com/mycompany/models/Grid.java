@@ -44,6 +44,33 @@ public class Grid {
         return tmpCells;
     }
 
+    public Cell[] getSquareGrid(int index){
+        switch (index){
+            case 0: return getSquare(0, 0);
+            case 1: return getSquare(3, 0);
+            case 2: return getSquare(6, 0);
+            case 3: return getSquare(0, 3);
+            case 4: return getSquare(3, 3);
+            case 5: return getSquare(6, 3);
+            case 6: return getSquare(0, 6);
+            case 7: return getSquare(3, 6);
+            case 8: return getSquare(6, 6);
+            default: break;
+        }
+        return null;
+    }
+
+    private Cell[] getSquare(int column, int row){
+        int index = 0;
+        for (int y = 0; y<3; y++ ){
+            for (int x = 0; x<3; x++){
+                tmpCells[index++] = cells[column+x][row+y];
+            }
+
+        }
+        return tmpCells;
+    }
+
     public Cell getHit(int x, int y){
         for (Cell[] cellRow:cells){
             for (Cell cell:cellRow){
@@ -51,6 +78,14 @@ public class Grid {
             }
         }
         return null;
+    }
+
+    public void resetMark(){
+        for (Cell[] tmpRow:cells){
+            for (Cell cell:tmpRow){
+                cell.setMark(false);
+            }
+        }
     }
 
     private void createCells(){
@@ -71,6 +106,9 @@ public class Grid {
                 cell.setNumber(sudoku[column][row]);
                 cell.setMark(false);
                 cell.setRegion(manager.getNumber(cell.getNumber()));
+                if (cell.getNumber() == 0){
+                    cell.setActive(true);
+                }
             }
         }
     }

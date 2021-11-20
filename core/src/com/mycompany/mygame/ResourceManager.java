@@ -14,8 +14,10 @@ public class ResourceManager implements Disposable {
     private final String grid1 = "images/grid.png";
     private final String mark = "images/mark.png";
     private final String mark1 = "images/mark1.png";
+    private final String mark2 = "images/mark2.png";
+    private final String mark3 = "images/mark3.png";
 	private final String skin = "uiskin/uiskin.json";
-    private final String ui_orange  = "skin/ui-orange.atlas";
+    private final String ui_orange  = "skin/ui-green.atlas";
 
     public ResourceManager() {
         manager = new AssetManager();
@@ -29,6 +31,8 @@ public class ResourceManager implements Disposable {
         manager.load(grid1, Texture.class);
         manager.load(mark, Texture.class);
         manager.load(mark1, Texture.class);
+        manager.load(mark2, Texture.class);
+        manager.load(mark3, Texture.class);
     }
 
     private void loadSkin(){
@@ -72,6 +76,14 @@ public class ResourceManager implements Disposable {
 
     public TextureRegion getMark1(){
         return new TextureRegion(manager.get(mark1, Texture.class));
+    }
+
+    public TextureRegion getMark2(){
+        return new TextureRegion(manager.get(mark2, Texture.class));
+    }
+
+    public TextureRegion getMark3(){
+        return new TextureRegion(manager.get(mark3, Texture.class));
     }
 
     public Skin getSkin(){

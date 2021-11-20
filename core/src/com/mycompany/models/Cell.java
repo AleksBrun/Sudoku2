@@ -8,7 +8,7 @@ public class Cell {
     private TextureRegion region;
     private TextureRegion markRegion;
     private int number, index;
-    private boolean mark;
+    private boolean mark, active;
 
     public Cell(float _x, float _y, float _size, int _index) {
         this.x = _x;
@@ -71,5 +71,13 @@ public class Cell {
 
     public void setMarkRegion(TextureRegion markRegion) {
         this.markRegion = markRegion;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

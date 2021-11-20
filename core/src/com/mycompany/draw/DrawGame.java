@@ -36,7 +36,7 @@ public class DrawGame {
             if (mark != null && cell.isMark()){
                 batch.draw(mark, cell.getX(), cell.getY(), cell.getSize(), cell.getSize());
             }
-            if (region != null){
+            if (region != null && cell.getNumber() != 0){
                 batch.draw(region, cell.getX()+ Setting.pad_cell, cell.getY()+Setting.pad_cell,
                         cell.getSize()-Setting.pad_cell*2, cell.getSize()-Setting.pad_cell*2);
             }
