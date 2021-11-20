@@ -16,6 +16,7 @@ public class MyGdxGame extends Game {
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	private ResourceManager manager;
+	private int[][] sudoku;
 
 	
 	@Override
@@ -24,19 +25,19 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
-		mainScreen = new MainScreen(this);
-		menuScreen = new MenuScreen(this);
-		levelScreen = new LevelScreen(this);
 		setStateScreen(State.MENU);
 	}
 
 	public void setStateScreen(State state){
 		switch (state){
-			case MAIN: setScreen(mainScreen);
+			case MAIN: if (mainScreen == null) mainScreen =new MainScreen(this);
+			setScreen(mainScreen);
 			break;
-			case MENU: setScreen(menuScreen);
+			case MENU: if (menuScreen == null) menuScreen = new MenuScreen(this);
+			setScreen(menuScreen);
 			break;
-			case LEVEL: setScreen(levelScreen);
+			case LEVEL: if (levelScreen == null) levelScreen = new LevelScreen(this);
+			setScreen(levelScreen);
 			break;
 			default: break;
 		}
@@ -52,6 +53,14 @@ public class MyGdxGame extends Game {
 
 	public ShapeRenderer getShapeRenderer() {
 		return shapeRenderer;
+	}
+
+	public int[][] getSudoku() {
+		return sudoku;
+	}
+
+	public void setSudoku(int[][] sudoku) {
+		this.sudoku = sudoku;
 	}
 
 	@Override

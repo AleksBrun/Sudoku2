@@ -50,7 +50,7 @@ public class MainUi extends Stage {
         playIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                mainScreen.getUpdateGame().playGame();
+
             }
         });
         pauseIcon.addListener(new ClickListener(){

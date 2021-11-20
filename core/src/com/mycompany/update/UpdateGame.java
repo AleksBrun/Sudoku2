@@ -23,6 +23,7 @@ public class UpdateGame extends InputAdapter {
                 Setting.getSizeGrid(), mainScreen.getGame().getManager());
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y()/2 -Setting.getSizeGrid()/20,
                 Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
+        playGame(mainScreen.getGame().getSudoku());
     }
 
     public boolean checkingAllGrid(){
@@ -49,8 +50,8 @@ public class UpdateGame extends InputAdapter {
         return false;
     }
 
-    public void playGame(){
-        grid.loadSudoku(ExampleGrid.example1);
+    public void playGame(int[][] sudoku){
+        grid.loadSudoku(sudoku);
     }
 
     private void update(int screenX, int screenY){

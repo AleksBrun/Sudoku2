@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
@@ -22,7 +23,7 @@ public class LevelUI extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Label levelLabel = new Label("Уровень сложности", manager.getSkin(), Setting.font_white_big, Color.DARK_GRAY);
+        final Label levelLabel = new Label("Уровень сложности", manager.getSkin(), Setting.font_white_big, Color.DARK_GRAY);
 
         TextButton easy = new TextButton("Легкий", manager.getSkin(), Setting.rus_white_big);
 
@@ -42,6 +43,23 @@ public class LevelUI extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 levelScreen.dispose();
+                levelScreen.getGame().setSudoku(ExampleGrid.example1);
+                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+            }
+        });
+        average.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                levelScreen.dispose();
+                levelScreen.getGame().setSudoku(new int [9][9]);
+                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+            }
+        });
+        difficult.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                levelScreen.dispose();
+                levelScreen.getGame().setSudoku(new int [9][9]);
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });

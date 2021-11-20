@@ -65,7 +65,6 @@ public class Grid {
             for (int x = 0; x<3; x++){
                 tmpCells[index++] = cells[column+x][row+y];
             }
-
         }
         return tmpCells;
     }
@@ -93,7 +92,7 @@ public class Grid {
         for (int row = 0; row < cells.length; row++){
             for (int column = 0;column < cells[0].length; column++){
                 Cell cell = new Cell(x+column*sizeCell, y+row*sizeCell, sizeCell, index++);
-                cells[column][row] = cell;
+                cells[row][column] = cell;
             }
         }
     }
