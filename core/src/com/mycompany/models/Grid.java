@@ -1,8 +1,8 @@
 package com.mycompany.models;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.mycompany.mygame.ResourceManager;
+
 
 public class Grid {
 
@@ -10,6 +10,7 @@ public class Grid {
     private final TextureRegion background;
     private final ResourceManager manager;
     private Cell[][] cells = new Cell[9][9];
+    private final Cell[] tmpCells = new Cell[9];
 
     public Grid(float _x, float _y, float _size, ResourceManager _manager){
         this.x = _x;
@@ -29,6 +30,18 @@ public class Grid {
             }
         }
         return null;
+    }
+
+    public Cell[] getVerticalGroup(int column){
+        System.arraycopy(cells[column], 0, tmpCells, 0, 9);
+        return tmpCells;
+    }
+
+    public Cell[] getHorizontalGroup(int column){
+        for (int row = 0; row < 9; row++){
+            tmpCells[row] = cells[row][column];
+        }
+        return tmpCells;
     }
 
     public Cell getHit(int x, int y){
@@ -51,11 +64,22 @@ public class Grid {
         }
     }
 
-    public void loadSudoku(){
+    public void loadSudoku(int [][] sudoku){
+        for (int row = 0; row < 9; row++){
+            for (int column = 0; column < 9; column++){
+                Cell cell = cells[column][row];
+                cell.setNumber(sudoku[column][row]);
+                cell.setMark(false);
+                cell.setRegion(manager.getNumber(cell.getNumber()));
+            }
+        }
+    }
+
+    public void resetGrid(){
         for (Cell[] cellRow: cells){
             for (Cell cell:cellRow){
-                cell.setNumber(MathUtils.random(0, 9));
-                cell.setRegion(manager.getNumber(cell.getNumber()));
+                cell.setNumber(0);
+                cell.setMark(false);
             }
         }
     }

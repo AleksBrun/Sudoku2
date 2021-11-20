@@ -43,13 +43,17 @@ public class ResourceManager implements Disposable {
     public TextureRegion getIconBack(){
         return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_back"));
     }
-
+    public TextureRegion getIconCircle(){
+        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_circle"));
+    }
     public TextureRegion getIconPause(){
         return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_pause"));
     }
-
     public TextureRegion getIconPlay(){
         return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_play"));
+    }
+    public TextureRegion getIconCross(){
+        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_cross"));
     }
     public TextureRegion getNumber(int _number){
         return new TextureRegion(manager.get(numbers, TextureAtlas.class).findRegion("number"+_number));

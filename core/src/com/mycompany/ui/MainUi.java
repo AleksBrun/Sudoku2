@@ -20,6 +20,12 @@ public class MainUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
+        Image circleIcon = new Image(manager.getIconCircle());
+        circleIcon.setSize(Setting.size_icon, Setting.size_icon);
+
+        Image crossIcon = new Image(manager.getIconCross());
+        crossIcon.setSize(Setting.size_icon, Setting.size_icon);
+
         Image backIcon = new Image(manager.getIconBack());
         backIcon.setSize(Setting.size_icon, Setting.size_icon);
 
@@ -30,13 +36,29 @@ public class MainUi extends Stage {
         playIcon.setSize(Setting.size_icon, Setting.size_icon);
 
         table.add(playIcon).expand().top().right();
+        table.add(circleIcon).top();
+        table.add(crossIcon).top();
         table.add(pauseIcon).top();
         table.add(backIcon).top();
+
+        crossIcon.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                mainScreen.getUpdateGame().getGrid().resetGrid();
+            }
+        });
+
+        circleIcon.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+               System.out.print(mainScreen.getUpdateGame().checkingAllGrid());
+            }
+        });
 
         playIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                mainScreen.getUpdateGame().playGame();
             }
         });
         pauseIcon.addListener(new ClickListener(){

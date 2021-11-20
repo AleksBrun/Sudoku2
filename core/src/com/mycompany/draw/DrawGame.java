@@ -60,7 +60,7 @@ public class DrawGame {
             for (Cell cell:cellRow){
                 TextureRegion region = cell.getRegion();
                 TextureRegion markRegion = cell.getMarkRegion();
-                if (markRegion != null ){
+                if (cell.isMark() && markRegion != null ){
                     batch.draw(markRegion, cell.getX()+Setting.pad_mark, cell.getY()+Setting.pad_mark,
                             cell.getSize()-Setting.pad_mark*2, cell.getSize()-Setting.pad_mark*2);
                 }

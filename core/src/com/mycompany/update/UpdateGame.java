@@ -5,8 +5,11 @@ import com.badlogic.gdx.InputAdapter;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
+import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
+
+import java.util.Arrays;
 
 public class UpdateGame extends InputAdapter {
 
@@ -22,10 +25,33 @@ public class UpdateGame extends InputAdapter {
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y()/2 -Setting.getSizeGrid()/20,
                 Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
 
-        grid.loadSudoku();
+
     }
 
+    public boolean checkingAllGrid(){
+        for (int index = 0; index <9; index++){
+            if (checkingDuplicates(grid.getHorizontalGroup(index)) || checkingDuplicates(getGrid().getVerticalGroup(index))) return true;
+        }
+        return false;
+    }
 
+    private boolean checkingDuplicates(Cell[] group){
+        int index = 0;
+        for (int number = 1; number <= 9; number++){
+            for (Cell cell:group){
+                if (cell.getNumber() == number ){
+                    index++;
+                    if (index > 1) return true;
+                }
+            }
+            index = 0;
+        }
+        return false;
+    }
+
+    public void playGame(){
+        grid.loadSudoku(ExampleGrid.example1);
+    }
 
     public void update(float delta){
 
@@ -35,8 +61,10 @@ public class UpdateGame extends InputAdapter {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight()-screenY);
         if (cell != null){
+            cell.setMark(true);
             cell.setMarkRegion(mainScreen.getGame().getManager().getMark());
         }
+        System.out.print(checkingDuplicates(grid.getHorizontalGroup(0)));
         return false;
     }
 
