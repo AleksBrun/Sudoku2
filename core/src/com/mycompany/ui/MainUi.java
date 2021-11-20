@@ -20,26 +20,18 @@ public class MainUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Image circleIcon = new Image(manager.getIconCircle());
-        circleIcon.setSize(Setting.size_icon, Setting.size_icon);
-
+        Image circleIcon = new Image(manager.getIconStar());
         Image crossIcon = new Image(manager.getIconCross());
-        crossIcon.setSize(Setting.size_icon, Setting.size_icon);
-
         Image backIcon = new Image(manager.getIconBack());
-        backIcon.setSize(Setting.size_icon, Setting.size_icon);
-
         Image pauseIcon = new Image(manager.getIconPause());
-        pauseIcon.setSize(Setting.size_icon, Setting.size_icon);
-
         Image playIcon = new Image(manager.getIconPlay());
-        playIcon.setSize(Setting.size_icon, Setting.size_icon);
 
-        table.add(playIcon).expand().top().right();
-        table.add(circleIcon).top();
-        table.add(crossIcon).top();
-        table.add(pauseIcon).top();
-        table.add(backIcon).top();
+        float size = Setting.size_icon;
+        table.add(playIcon).width(size).height(size).expand().top().right().padTop(Setting.pad_cell);
+        table.add(circleIcon).width(size).height(size).top().padTop(Setting.pad_cell);
+        table.add(crossIcon).width(size).height(size).top().padTop(Setting.pad_cell);
+        table.add(pauseIcon).width(size).height(size).top().padTop(Setting.pad_cell);
+        table.add(backIcon).width(size).height(size).top().padTop(Setting.pad_cell);
 
         crossIcon.addListener(new ClickListener(){
             @Override

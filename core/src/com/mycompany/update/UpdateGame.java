@@ -9,8 +9,6 @@ import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
 
-import java.util.Arrays;
-
 public class UpdateGame extends InputAdapter {
 
     private final MainScreen mainScreen;

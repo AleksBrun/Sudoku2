@@ -31,7 +31,11 @@ public class DrawGame {
     private void drawKeys(SpriteBatch batch){
         Key key = updateGame.getKey();
         for (Cell cell:key.getKeys()){
+            TextureRegion mark = cell.getMarkRegion();
             TextureRegion region = cell.getRegion();
+            if (mark != null && cell.isMark()){
+                batch.draw(mark, cell.getX(), cell.getY(), cell.getSize(), cell.getSize());
+            }
             if (region != null){
                 batch.draw(region, cell.getX()+ Setting.pad_cell, cell.getY()+Setting.pad_cell,
                         cell.getSize()-Setting.pad_cell*2, cell.getSize()-Setting.pad_cell*2);

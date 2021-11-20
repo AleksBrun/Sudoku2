@@ -39,6 +39,9 @@ public class ResourceManager implements Disposable {
         manager.load(numbers, TextureAtlas.class);
         manager.load(ui_orange, TextureAtlas.class);
     }
+    public TextureRegion getIconStar(){
+        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_star"));
+    }
 
     public TextureRegion getIconBack(){
         return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_back"));
