@@ -43,7 +43,7 @@ public class LevelUI extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(ExampleGrid.example1);
+                levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.minimum));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
@@ -51,7 +51,7 @@ public class LevelUI extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(new int [9][9]);
+                levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.moderate));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
@@ -59,7 +59,7 @@ public class LevelUI extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(new int [9][9]);
+                levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });

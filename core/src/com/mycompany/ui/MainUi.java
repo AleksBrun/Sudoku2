@@ -1,8 +1,10 @@
 package com.mycompany.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,24 +28,21 @@ public class MainUi extends Stage {
         Image pauseIcon = new Image(manager.getIconPause());
         Image playIcon = new Image(manager.getIconPlay());
 
-        float size = Setting.size_icon;
-        table.add(playIcon).width(size).height(size).expand().top().right().padTop(Setting.pad_cell);
-        table.add(circleIcon).width(size).height(size).top().padTop(Setting.pad_cell);
-        table.add(crossIcon).width(size).height(size).top().padTop(Setting.pad_cell);
-        table.add(pauseIcon).width(size).height(size).top().padTop(Setting.pad_cell);
-        table.add(backIcon).width(size).height(size).top().padTop(Setting.pad_cell);
+        Label title = new Label("Sudoku", manager.getSkin(), Setting.font_white_big, Color.GREEN);
 
-        crossIcon.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                mainScreen.getUpdateGame().getGrid().resetGrid();
-            }
-        });
+        float size = Setting.size_icon;
+        table.top();
+        table.add(playIcon).width(size).height(size).expandX().top().right();
+        table.add(pauseIcon).width(size).height(size).top();
+        table.add(circleIcon).width(size).height(size).top();
+        table.add(backIcon).width(size).height(size).top();
+        table.add(crossIcon).width(size).height(size).top().row();
+        table.add(title).colspan(5).top();
 
         circleIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-               System.out.print(mainScreen.getUpdateGame().checkingAllGrid());
+
             }
         });
 
@@ -59,7 +58,7 @@ public class MainUi extends Stage {
 
             }
         });
-        backIcon.addListener(new ClickListener(){
+        crossIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 mainScreen.dispose();

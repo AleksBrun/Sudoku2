@@ -29,6 +29,7 @@ public class MainScreen implements Screen {
         mainUi = new MainUi(new FitViewport(Setting.width_Ui, Setting.getHeight_Ui()), game.getManager(), this);
         InputMultiplexer multiplexer = new InputMultiplexer(mainUi, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
+        updateGame.playGame(game.getSudoku());
     }
 
     @Override
