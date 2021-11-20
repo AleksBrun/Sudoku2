@@ -3,13 +3,12 @@ package com.mycompany.models;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mycompany.mygame.ResourceManager;
 
-
 public class Grid {
 
     private final float x, y, size;
     private final TextureRegion background;
     private final ResourceManager manager;
-    private Cell[][] cells = new Cell[9][9];
+    private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
 
     public Grid(float _x, float _y, float _size, ResourceManager _manager){
@@ -136,10 +135,6 @@ public class Grid {
 
     public Cell[][] getCells() {
         return cells;
-    }
-
-    public void setCells(Cell[][] cells) {
-        this.cells = cells;
     }
 
     public TextureRegion getBackground() {

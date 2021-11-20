@@ -17,7 +17,14 @@ public class ResourceManager implements Disposable {
     private final String mark2 = "images/mark2.png";
     private final String mark3 = "images/mark3.png";
 	private final String skin = "uiskin/uiskin.json";
-    private final String ui_orange  = "skin/ui-green.atlas";
+    private String name_ui;
+    private final String ui_blue  = "skin/ui-blue.atlas";
+    private final String ui_green  = "skin/ui-green.atlas";
+    private final String ui_red  = "skin/ui-red.atlas";
+    private final String ui_orange  = "skin/ui-orange.atlas";
+    private final String ui_gray = "skin/ui-gray.atlas";
+    private final String ui_white = "skin/ui-white.atlas";
+
 
     public ResourceManager() {
         manager = new AssetManager();
@@ -25,6 +32,7 @@ public class ResourceManager implements Disposable {
         loadTexture();
         loadSkin();
         manager.finishLoading();
+        setUi(5);
     }
 
     private void loadTexture(){
@@ -41,29 +49,46 @@ public class ResourceManager implements Disposable {
 
     private void loadTextureAtlas(){
         manager.load(numbers, TextureAtlas.class);
+        manager.load(ui_blue, TextureAtlas.class);
+        manager.load(ui_red, TextureAtlas.class);
+        manager.load(ui_green, TextureAtlas.class);
         manager.load(ui_orange, TextureAtlas.class);
+        manager.load(ui_gray, TextureAtlas.class);
+        manager.load(ui_white, TextureAtlas.class);
+
     }
     public TextureRegion getIconStar(){
-        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_star"));
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_star"));
     }
 
     public TextureRegion getIconBack(){
-        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_back"));
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_back"));
     }
     public TextureRegion getIconCircle(){
-        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_circle"));
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_circle"));
     }
     public TextureRegion getIconPause(){
-        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_pause"));
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_pause"));
     }
     public TextureRegion getIconPlay(){
-        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_play"));
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_play"));
     }
     public TextureRegion getIconCross(){
-        return new TextureRegion(manager.get(ui_orange, TextureAtlas.class).findRegion("icon_cross"));
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_cross"));
     }
     public TextureRegion getNumber(int _number){
         return new TextureRegion(manager.get(numbers, TextureAtlas.class).findRegion("number"+_number));
+    }
+
+    public void setUi(int index){
+        switch (index){
+            case 1: name_ui = ui_blue; break;
+            case 2: name_ui = ui_green; break;
+            case 3: name_ui = ui_red; break;
+            case 4: name_ui = ui_orange;break;
+            case 5: name_ui = ui_white;break;
+            default: name_ui = ui_gray;
+        }
     }
 
     public TextureRegion getGrid(){

@@ -23,18 +23,6 @@ public class UpdateGame extends InputAdapter {
                 Setting.getSizeGrid(), mainScreen.getGame().getManager());
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y()/2 -Setting.getSizeGrid()/20,
                 Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
-
-        /*for (int y = 0; y < 9; y++){
-            for (int x = 0; x < 9; x++){
-                System.out.print(grid.getCells()[x][y].getIndex()+" ");
-            }
-            System.out.println();
-        }
-
-        Cell[] tmp = grid.getSquareGrid(2);
-        for (int y = 0; y < 9; y++){
-            System.out.print(tmp[y].getIndex()+" ");
-        }*/
     }
 
     public boolean checkingAllGrid(){
@@ -63,10 +51,6 @@ public class UpdateGame extends InputAdapter {
 
     public void playGame(){
         grid.loadSudoku(ExampleGrid.example1);
-    }
-
-    public void update(float delta){
-
     }
 
     private void update(int screenX, int screenY){

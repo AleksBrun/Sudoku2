@@ -3,14 +3,16 @@ package com.mycompany.mygame;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mycompany.screens.LevelScreen;
 import com.mycompany.screens.MainScreen;
 import com.mycompany.screens.MenuScreen;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU}
+	public enum State {MAIN, MENU, LEVEL}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
+	private LevelScreen levelScreen;
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	private ResourceManager manager;
@@ -24,6 +26,7 @@ public class MyGdxGame extends Game {
 		shapeRenderer.setAutoShapeType(true);
 		mainScreen = new MainScreen(this);
 		menuScreen = new MenuScreen(this);
+		levelScreen = new LevelScreen(this);
 		setStateScreen(State.MENU);
 	}
 
@@ -32,6 +35,8 @@ public class MyGdxGame extends Game {
 			case MAIN: setScreen(mainScreen);
 			break;
 			case MENU: setScreen(menuScreen);
+			break;
+			case LEVEL: setScreen(levelScreen);
 			break;
 			default: break;
 		}
