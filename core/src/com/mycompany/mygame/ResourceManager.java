@@ -32,7 +32,7 @@ public class ResourceManager implements Disposable {
         loadTexture();
         loadSkin();
         manager.finishLoading();
-        setUi(4);
+        setUi(AppPreference.getColorUI());
     }
 
     private void loadTexture(){

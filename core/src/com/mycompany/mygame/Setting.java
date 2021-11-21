@@ -8,6 +8,7 @@ public class Setting
 	public static float width_Ui = 420;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
+	public final static String PREFS_NAME = "PREFS_NAME";
 	
 	public static float getHeight_Ui(){
 		return  width_Ui /((float)Gdx.graphics.getWidth()/Gdx.graphics.getHeight());
