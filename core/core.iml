@@ -20,5 +20,29 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../libs/gdx-1.9.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/lwjgl-2.9.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jinput-2.0.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jutils-1.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jorbis-0.0.17.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jlayer-1.0.1-gdx.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/lwjgl_util-2.9.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/gdx-backend-lwjgl-1.9.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/gdx-backend-android-1.9.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/lwjgl-platform-2.9.2-natives-osx.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jinput-platform-2.0.5-natives-osx.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/gdx-platform-1.9.6-natives-desktop.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/lwjgl-platform-2.9.2-natives-linux.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jinput-platform-2.0.5-natives-linux.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/lwjgl-platform-2.9.2-natives-windows.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../libs/jinput-platform-2.0.5-natives-windows.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

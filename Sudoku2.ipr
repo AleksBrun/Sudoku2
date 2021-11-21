@@ -212,29 +212,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
-  <component name="libraryTable">
-    <library name="gdx-1.9.6">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/gdx-1.9.6.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/gdx-backend-android-1.9.6.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/gdx-backend-lwjgl-1.9.6.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/gdx-platform-1.9.6-natives-desktop.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/jinput-2.0.5.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/jinput-platform-2.0.5-natives-linux.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/jinput-platform-2.0.5-natives-windows.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/jlayer-1.0.1-gdx.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/jorbis-0.0.17.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/jutils-1.0.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/lwjgl-2.9.2.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/lwjgl-platform-2.9.2-natives-linux.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/lwjgl-platform-2.9.2-natives-osx.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/lwjgl-platform-2.9.2-natives-windows.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../Soft/libs/lwjgl_util-2.9.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
-  </component>
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
