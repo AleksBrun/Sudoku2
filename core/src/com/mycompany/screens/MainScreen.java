@@ -44,10 +44,6 @@ public class MainScreen implements Screen {
         return game;
     }
 
-    public UpdateGame getUpdateGame() {
-        return updateGame;
-    }
-
     @Override
     public void resize(int width, int height) {
 

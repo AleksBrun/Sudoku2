@@ -1,7 +1,6 @@
 package com.mycompany.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -24,7 +23,7 @@ public class MenuUI extends Stage {
 
         TextButton start = new TextButton("Игра", manager.getSkin(), Setting.rus_white_big);
         TextButton exit = new TextButton("Выход", manager.getSkin(), Setting.rus_white_big);
-        TextButton color = new TextButton("", manager.getSkin(), Setting.rus_white_big);
+        TextButton color = new TextButton("Настройки", manager.getSkin(), Setting.rus_white_big);
 
         table.add(start).fillX().row();
         table.add(color).fillX().padTop(10).row();
@@ -47,7 +46,8 @@ public class MenuUI extends Stage {
         color.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                menuScreen.dispose();
+                menuScreen.getGame().setStateScreen(MyGdxGame.State.SETTING);
             }
         });
     }

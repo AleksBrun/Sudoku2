@@ -6,13 +6,15 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mycompany.screens.LevelScreen;
 import com.mycompany.screens.MainScreen;
 import com.mycompany.screens.MenuScreen;
+import com.mycompany.screens.SettingScreen;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL}
+	public enum State {MAIN, MENU, LEVEL, SETTING}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
+	private SettingScreen settingScreen;
 	private SpriteBatch batch;
 	private ShapeRenderer shapeRenderer;
 	private ResourceManager manager;
@@ -38,6 +40,9 @@ public class MyGdxGame extends Game {
 			break;
 			case LEVEL: if (levelScreen == null) levelScreen = new LevelScreen(this);
 			setScreen(levelScreen);
+			break;
+			case SETTING: if (settingScreen == null) settingScreen = new SettingScreen(this);
+			setScreen(settingScreen);
 			break;
 			default: break;
 		}

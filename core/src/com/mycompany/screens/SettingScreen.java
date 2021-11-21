@@ -6,32 +6,28 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Setting;
-import com.mycompany.ui.LevelUI;
+import com.mycompany.ui.SettingUi;
 
-public class LevelScreen implements Screen {
+public class SettingScreen implements Screen {
 
     private final MyGdxGame game;
-    private LevelUI levelUI;
+    private SettingUi settingUi;
 
-    public LevelScreen(MyGdxGame game) {
+    public SettingScreen(MyGdxGame game) {
         this.game = game;
     }
 
     @Override
     public void show() {
-        levelUI = new LevelUI(new FitViewport(Setting.width_Ui, Setting.getHeight_Ui()), game.getManager(), this);
-        Gdx.input.setInputProcessor(levelUI);
+        settingUi = new SettingUi(new FitViewport(Setting.width_Ui, Setting.getHeight_Ui()), game.getManager(), this);
+        Gdx.input.setInputProcessor(settingUi);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        levelUI.draw();
-    }
-
-    public MyGdxGame getGame() {
-        return game;
+        settingUi.draw();
     }
 
     @Override
@@ -56,6 +52,10 @@ public class LevelScreen implements Screen {
 
     @Override
     public void dispose() {
-        levelUI.dispose();
+        settingUi.dispose();
+    }
+
+    public MyGdxGame getGame() {
+        return game;
     }
 }

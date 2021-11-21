@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputAdapter;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
-import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
 

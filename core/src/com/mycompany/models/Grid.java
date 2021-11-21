@@ -21,7 +21,6 @@ public class Grid {
         createCells();
     }
 
-
     public Cell getCell(int index){
         for (Cell[] cellRow:cells){
             for (Cell cell:cellRow){
@@ -107,15 +106,6 @@ public class Grid {
                 if (cell.getNumber() == 0){
                     cell.setActive(true);
                 }
-            }
-        }
-    }
-
-    public void resetGrid(){
-        for (Cell[] cellRow: cells){
-            for (Cell cell:cellRow){
-                cell.setNumber(0);
-                cell.setMark(false);
             }
         }
     }
