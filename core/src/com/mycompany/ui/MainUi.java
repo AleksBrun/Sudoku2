@@ -28,7 +28,7 @@ public class MainUi extends Stage {
         Image pauseIcon = new Image(manager.getIconPause());
         Image playIcon = new Image(manager.getIconPlay());
 
-        Label title = new Label("Sudoku", manager.getSkin(), Setting.font_white_big, Color.GREEN);
+        Label title = new Label("Sudoku", manager.getSkin(), Setting.font_white_big, Color.BLACK);
 
         float size = Setting.size_icon;
         table.top();

@@ -1,9 +1,7 @@
 package com.mycompany.draw;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
@@ -18,8 +16,7 @@ public class DrawGame {
         this.updateGame = _updateGame;
     }
 
-    public void draw(SpriteBatch batch, ShapeRenderer renderer){
-        renderKeys(renderer);
+    public void draw(SpriteBatch batch){
         batch.begin();
         drawGrid(batch);
         drawCells(batch);
@@ -41,16 +38,6 @@ public class DrawGame {
                         cell.getSize()-Setting.pad_cell*2, cell.getSize()-Setting.pad_cell*2);
             }
         }
-    }
-
-    private void renderKeys(ShapeRenderer renderer){
-        Key key = updateGame.getKey();
-
-        renderer.begin();
-        renderer.set(ShapeRenderer.ShapeType.Filled);
-        renderer.setColor(Color.GRAY);
-        renderer.rect(key.getX(), key.getY(), key.getWidth(), key.getHeight());
-        renderer.end();
     }
 
     private void drawGrid(SpriteBatch batch){

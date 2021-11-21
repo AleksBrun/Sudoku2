@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 720;
 		config.height = 1280;
-		config.title = "Sudoku";
+		config.title = "Sudoku2";
 		new LwjglApplication(new MyGdxGame(), config);
 	}
 }

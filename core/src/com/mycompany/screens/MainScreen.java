@@ -36,7 +36,7 @@ public class MainScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        drawGame.draw(game.getBatch(), game.getShapeRenderer());
+        drawGame.draw(game.getBatch());
         mainUi.draw();
     }
 

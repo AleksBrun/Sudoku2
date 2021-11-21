@@ -2,7 +2,6 @@ package com.mycompany.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mycompany.screens.LevelScreen;
 import com.mycompany.screens.MainScreen;
 import com.mycompany.screens.MenuScreen;
@@ -16,7 +15,6 @@ public class MyGdxGame extends Game {
 	private LevelScreen levelScreen;
 	private SettingScreen settingScreen;
 	private SpriteBatch batch;
-	private ShapeRenderer shapeRenderer;
 	private ResourceManager manager;
 	private int[][] sudoku;
 
@@ -25,8 +23,6 @@ public class MyGdxGame extends Game {
 	public void create () {
 		manager = new ResourceManager();
 		batch = new SpriteBatch();
-		shapeRenderer = new ShapeRenderer();
-		shapeRenderer.setAutoShapeType(true);
 		setStateScreen(State.MENU);
 	}
 
@@ -56,10 +52,6 @@ public class MyGdxGame extends Game {
 		return manager;
 	}
 
-	public ShapeRenderer getShapeRenderer() {
-		return shapeRenderer;
-	}
-
 	public int[][] getSudoku() {
 		return sudoku;
 	}
@@ -71,7 +63,6 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		shapeRenderer.dispose();
 		manager.dispose();
 	}
 }
