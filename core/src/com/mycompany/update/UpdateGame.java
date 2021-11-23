@@ -5,6 +5,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
+import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
 
@@ -61,9 +62,9 @@ public class UpdateGame extends InputAdapter {
 
             cell.setMark(true);
             if (cell.isActive()){
-                cell.setMarkRegion(mainScreen.getGame().getManager().getMark());
+                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark));
             } else {
-                cell.setMarkRegion(mainScreen.getGame().getManager().getMark1());
+                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark1));
             }
         }
 
@@ -76,7 +77,7 @@ public class UpdateGame extends InputAdapter {
             }
             if (checkingAllGrid()){
                 cell.setMark(true);
-                cell.setMarkRegion(mainScreen.getGame().getManager().getMark3());
+                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark3));
             }
         }
     }

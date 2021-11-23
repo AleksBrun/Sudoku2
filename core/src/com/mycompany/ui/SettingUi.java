@@ -1,7 +1,6 @@
 package com.mycompany.ui;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,7 +18,8 @@ import com.mycompany.screens.SettingScreen;
 
 public class SettingUi extends Stage {
 
-    private Image color;
+    private final Image color;
+    private int indexColor = AppPreference.getColorUI();
 
     public SettingUi(Viewport viewport, final ResourceManager manager, final SettingScreen settingScreen){
         super(viewport);
@@ -35,7 +35,7 @@ public class SettingUi extends Stage {
 
         TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.rus_white_big);
 
-        color = new Image(manager.getIconCircle());
+        color = new Image(manager.getIconTexture(ResourceManager.ICON_STAR));
 
         table.top();
         table.add(title).padTop(10).row();
@@ -47,10 +47,10 @@ public class SettingUi extends Stage {
         color_ui.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                AppPreference.setColorUI(MathUtils.random(0, 4));
-                manager.setUi(AppPreference.getColorUI());
-                color.setDrawable(new TextureRegionDrawable(manager.getIconCircle()));
+                manager.setUiNew(indexColor++);
+                color.setDrawable(new TextureRegionDrawable(manager.getIconTexture(ResourceManager.ICON_STAR)));
                 color_ui.setChecked(false);
+                if (indexColor > 5) indexColor = 0;
             }
         });
         menu.addListener(new ClickListener(){

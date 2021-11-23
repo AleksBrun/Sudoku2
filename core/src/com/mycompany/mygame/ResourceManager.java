@@ -11,11 +11,11 @@ public class ResourceManager implements Disposable {
 
     private final AssetManager manager;
     private final String numbers = "images/numbers.pack";
-    private final String grid1 = "images/grid.png";
-    private final String mark = "images/mark.png";
-    private final String mark1 = "images/mark1.png";
-    private final String mark2 = "images/mark2.png";
-    private final String mark3 = "images/mark3.png";
+    public static final String grid1 = "images/grid.png";
+    public static final String mark = "images/mark.png";
+    public static final String mark1 = "images/mark1.png";
+    public static final String mark2 = "images/mark2.png";
+    public static final String mark3 = "images/mark3.png";
 	private final String skin = "uiskin/uiskin.json";
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
@@ -25,6 +25,13 @@ public class ResourceManager implements Disposable {
     private final String ui_gray = "skin/ui-gray.atlas";
     private final String ui_white = "skin/ui-white.atlas";
 
+    public final static String ICON_STAR = "icon_star";
+    public final static String ICON_BACK = "icon_back";
+    public final static String ICON_CIRCLE = "icon_circle";
+    public final static String ICON_PAUSE = "icon_pause";
+    public final static String ICON_CROSS = "icon_cross";
+    public final static String ICON_PLAY = "icon_play";
+
 
     public ResourceManager() {
         manager = new AssetManager();
@@ -32,7 +39,7 @@ public class ResourceManager implements Disposable {
         loadTexture();
         loadSkin();
         manager.finishLoading();
-        setUi(AppPreference.getColorUI());
+        setUiNew(AppPreference.getColorUI());
     }
 
     private void loadTexture(){
@@ -57,58 +64,22 @@ public class ResourceManager implements Disposable {
         manager.load(ui_white, TextureAtlas.class);
 
     }
-    public TextureRegion getIconStar(){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_star"));
+
+    public TextureRegion getTextureRegion(String nameTexture){
+        return new TextureRegion(manager.get(nameTexture, Texture.class));
     }
 
-    public TextureRegion getIconBack(){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_back"));
+    public TextureRegion getIconTexture(String nameIcon){
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion(nameIcon));
     }
-    public TextureRegion getIconCircle(){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_circle"));
-    }
-    public TextureRegion getIconPause(){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_pause"));
-    }
-    public TextureRegion getIconPlay(){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_play"));
-    }
-    public TextureRegion getIconCross(){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion("icon_cross"));
-    }
+
     public TextureRegion getNumber(int _number){
         return new TextureRegion(manager.get(numbers, TextureAtlas.class).findRegion("number"+_number));
     }
 
-    public void setUi(int index){
-        switch (index){
-            case 1: name_ui = ui_blue; break;
-            case 2: name_ui = ui_green; break;
-            case 3: name_ui = ui_red; break;
-            case 4: name_ui = ui_orange;break;
-            case 5: name_ui = ui_white;break;
-            default: name_ui = ui_gray;
-        }
-    }
-
-    public TextureRegion getGrid(){
-        return new TextureRegion(manager.get(grid1, Texture.class));
-    }
-
-    public TextureRegion getMark(){
-        return new TextureRegion(manager.get(mark, Texture.class));
-    }
-
-    public TextureRegion getMark1(){
-        return new TextureRegion(manager.get(mark1, Texture.class));
-    }
-
-    public TextureRegion getMark2(){
-        return new TextureRegion(manager.get(mark2, Texture.class));
-    }
-
-    public TextureRegion getMark3(){
-        return new TextureRegion(manager.get(mark3, Texture.class));
+    public String setUiNew(int index){
+        String[] tmp = {ui_blue, ui_green, ui_red, ui_orange, ui_white, ui_gray};
+        return name_ui = tmp[index];
     }
 
     public Skin getSkin(){

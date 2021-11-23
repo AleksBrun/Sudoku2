@@ -22,11 +22,10 @@ public class MainUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Image circleIcon = new Image(manager.getIconStar());
-        Image crossIcon = new Image(manager.getIconCross());
-        Image backIcon = new Image(manager.getIconBack());
-        Image pauseIcon = new Image(manager.getIconPause());
-        Image playIcon = new Image(manager.getIconPlay());
+        Image crossIcon = new Image(manager.getIconTexture(ResourceManager.ICON_CROSS));
+        Image backIcon = new Image(manager.getIconTexture(ResourceManager.ICON_BACK));
+        Image pauseIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PAUSE));
+        Image playIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PLAY));
 
         Label title = new Label("Sudoku", manager.getSkin(), Setting.font_white_big, Color.BLACK);
 
@@ -34,17 +33,10 @@ public class MainUi extends Stage {
         table.top();
         table.add(playIcon).width(size).height(size).expandX().top().right();
         table.add(pauseIcon).width(size).height(size).top();
-        table.add(circleIcon).width(size).height(size).top();
         table.add(backIcon).width(size).height(size).top();
         table.add(crossIcon).width(size).height(size).top().row();
         table.add(title).colspan(5).top();
 
-        circleIcon.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-            }
-        });
 
         playIcon.addListener(new ClickListener(){
             @Override
