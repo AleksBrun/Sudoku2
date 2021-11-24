@@ -1,6 +1,5 @@
 package com.mycompany.ui;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -23,15 +22,17 @@ public class LevelUI extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        final Label levelLabel = new Label("Уровень сложности", manager.getSkin(), Setting.font_white_big, Color.DARK_GRAY);
 
-        TextButton easy = new TextButton("Легкий", manager.getSkin(), Setting.rus_white_big);
 
-        TextButton average = new TextButton("Средний", manager.getSkin(), Setting.rus_white_big);
+        final Label levelLabel = new Label("Уровень", manager.getSkin(), Setting.label_style);
 
-        TextButton difficult = new TextButton("Тудный", manager.getSkin(), Setting.rus_white_big);
+        TextButton easy = new TextButton("Легкий", manager.getSkin(), Setting.button_style);
 
-        TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.rus_white_big);
+        TextButton average = new TextButton("  Средний  ", manager.getSkin(), Setting.button_style);
+
+        TextButton difficult = new TextButton("Тудный", manager.getSkin(), Setting.button_style);
+
+        TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.button_style);
 
         table.add(levelLabel).row();
         table.add(easy).fillX().padTop(20).row();

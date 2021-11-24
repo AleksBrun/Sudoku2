@@ -21,13 +21,15 @@ public class MenuUI extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        TextButton start = new TextButton("Игра", manager.getSkin(), Setting.rus_white_big);
-        TextButton exit = new TextButton("Выход", manager.getSkin(), Setting.rus_white_big);
-        TextButton color = new TextButton("Настройки", manager.getSkin(), Setting.rus_white_big);
+        TextButton start = new TextButton("Игра", manager.getSkin(), Setting.button_style);
+        TextButton exit = new TextButton("Выход", manager.getSkin(), Setting.button_style);
+        TextButton color = new TextButton("    Настройки   ", manager.getSkin(), Setting.button_style);
+        TextButton test = new TextButton("Привет", manager.getSkin(), Setting.button_style);
 
         table.add(start).fillX().row();
-        table.add(color).fillX().padTop(10).row();
-        table.add(exit).fillX().padTop(10);
+        table.add(color).fillX().padTop(5).row();
+        table.add(exit).fillX().padTop(5).row();
+        table.add(test).fillX().padTop(5);
 
         start.addListener(new ClickListener(){
             @Override

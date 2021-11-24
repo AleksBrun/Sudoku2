@@ -3,12 +3,14 @@ import com.badlogic.gdx.Gdx;
 
 public class Setting
 {
-	public static String rus_white_big ="rus-white-big";
-	public static String font_white_big = "font-white-big";
+	//public final static String rus_white_big ="rus-white-big";
+	public final static String font_white_big = "font-white-big";
+	public final static String button_style = "buttonStyle";
+	public final static String label_style = "labelStyle";
+	public final static String window_style = "windowStyle";
 	public static float width_Ui = 420;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
-	public final static String PREFS_NAME = "PREFS_NAME";
 	
 	public static float getHeight_Ui(){
 		return  width_Ui /((float)Gdx.graphics.getWidth()/Gdx.graphics.getHeight());

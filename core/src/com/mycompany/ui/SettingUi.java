@@ -30,10 +30,10 @@ public class SettingUi extends Stage {
 
         Label title = new Label("Настройки", manager.getSkin(), Setting.font_white_big, Color.BLACK);
 
-        final TextButton color_ui = new TextButton("Цвет UI", manager.getSkin(), Setting.rus_white_big);
+        final TextButton color_ui = new TextButton("Цвет UI", manager.getSkin(), Setting.button_style);
 
 
-        TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.rus_white_big);
+        TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.button_style);
 
         color = new Image(manager.getIconTexture(ResourceManager.ICON_STAR));
 
