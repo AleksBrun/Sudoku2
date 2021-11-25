@@ -20,7 +20,8 @@ public class ResourceManager implements Disposable {
     private final BitmapFont font;
     private Skin skin;
     private final String numbers = "images/numbers.pack";
-    public static final String grid1 = "images/grid.png";
+    public static final String grid1 = "images/grid2.png";
+    public static final String fon_menu = "images/fon_menu.png";
     public static final String mark = "images/mark.png";
     public static final String mark1 = "images/mark1.png";
     public static final String mark2 = "images/mark2.png";
@@ -63,6 +64,7 @@ public class ResourceManager implements Disposable {
         manager.load(mark1, Texture.class);
         manager.load(mark2, Texture.class);
         manager.load(mark3, Texture.class);
+        manager.load(fon_menu, Texture.class);
     }
 
     private void loadTextureAtlas(){
