@@ -15,6 +15,8 @@ import com.mycompany.screens.MainScreen;
 
 public class MainUi extends Stage {
 
+    private Label time, title;
+
     public MainUi(Viewport viewport, ResourceManager manager, final MainScreen mainScreen){
         super(viewport);
 
@@ -27,15 +29,19 @@ public class MainUi extends Stage {
         Image pauseIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PAUSE));
         Image playIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PLAY));
 
-        Label title = new Label("Sudoku", manager.getSkin(), Setting.font_white_big, Color.BLACK);
-
+        title = new Label("Легкий - 1", manager.getSkin(), Setting.font_white_big, Color.BLACK);
+        Label labelClock = new Label("Время игры: ", manager.getSkin(), Setting.font_white_small, Color.BLACK);
+        time = new Label("00:00", manager.getSkin(), Setting.font_white_small, Color.BLACK);
         float size = Setting.size_icon;
+
         table.top();
-        table.add(playIcon).width(size).height(size).expandX().top().right();
-        table.add(pauseIcon).width(size).height(size).top();
-        table.add(backIcon).width(size).height(size).top();
-        table.add(crossIcon).width(size).height(size).top().row();
-        table.add(title).colspan(5).top();
+        table.add(labelClock).left().padLeft(20);
+        table.add(time).expandX().left();
+        table.add(playIcon).width(size).height(size).right();
+        table.add(pauseIcon).width(size).height(size);
+        table.add(backIcon).width(size).height(size);
+        table.add(crossIcon).width(size).height(size).padRight(20).row();
+        table.add(title).colspan(6).top();
 
 
         playIcon.addListener(new ClickListener(){
@@ -57,5 +63,9 @@ public class MainUi extends Stage {
                 mainScreen.getGame().setStateScreen(MyGdxGame.State.MENU);
             }
         });
+    }
+
+    public void setTime(int minute, int second){
+        time.setText(minute+":"+second);
     }
 }

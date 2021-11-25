@@ -8,6 +8,7 @@ import com.mycompany.models.Key;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
+import com.mycompany.unils.Clock;
 
 public class UpdateGame extends InputAdapter {
 
@@ -48,6 +49,7 @@ public class UpdateGame extends InputAdapter {
         }
         return false;
     }
+
 
     public void playGame(int[][] sudoku){
         grid.loadSudoku(sudoku);
@@ -95,4 +97,5 @@ public class UpdateGame extends InputAdapter {
     public Key getKey() {
         return key;
     }
+
 }

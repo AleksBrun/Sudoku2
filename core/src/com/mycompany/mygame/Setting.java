@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 public class Setting
 {
 	public final static String font_white_big = "font-white-big";
+	public final static String font_white_normal = "font-white-normal";
+	public final static String font_white_small = "font-white-small";
+
 	public final static String button_style = "buttonStyle";
 	public final static String label_style = "labelStyle";
 	public final static String window_style = "windowStyle";

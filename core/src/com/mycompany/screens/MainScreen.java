@@ -9,6 +9,7 @@ import com.mycompany.draw.DrawGame;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Setting;
 import com.mycompany.ui.MainUi;
+import com.mycompany.unils.Clock;
 import com.mycompany.update.UpdateGame;
 
 public class MainScreen implements Screen {
@@ -17,11 +18,13 @@ public class MainScreen implements Screen {
     private MainUi mainUi;
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
+    private Clock clock = new Clock();
 
     public MainScreen(MyGdxGame game) {
         this.game = game;
         updateGame = new UpdateGame(this);
         drawGame = new DrawGame(updateGame);
+        clock.reset();
     }
 
     @Override
@@ -30,18 +33,25 @@ public class MainScreen implements Screen {
         InputMultiplexer multiplexer = new InputMultiplexer(mainUi, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
         updateGame.playGame(game.getSudoku());
+        clock.start();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        clock.update();
+        mainUi.setTime(clock.getMinute(), clock.getSecond());
         drawGame.draw(game.getBatch());
         mainUi.draw();
     }
 
     public MyGdxGame getGame() {
         return game;
+    }
+
+    public Clock getClock() {
+        return clock;
     }
 
     @Override
@@ -51,7 +61,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void pause() {
-
+        clock.pause();
     }
 
     @Override
