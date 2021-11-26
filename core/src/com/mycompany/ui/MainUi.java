@@ -29,9 +29,9 @@ public class MainUi extends Stage {
         Image pauseIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PAUSE));
         Image playIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PLAY));
 
-        title = new Label("Легкий - 1", manager.getSkin(), Setting.font_white_big, Color.BLACK);
-        Label labelClock = new Label("Время игры: ", manager.getSkin(), Setting.font_white_small, Color.BLACK);
-        time = new Label("00:00", manager.getSkin(), Setting.font_white_small, Color.BLACK);
+        title = new Label("Легкий - 1", manager.getSkin(), Setting.label_style);
+        Label labelClock = new Label("Время игры: ", manager.getSkin(), Setting.label_style);
+        time = new Label("00:00", manager.getSkin(), Setting.label_style);
         float size = Setting.size_icon;
 
         table.top();

@@ -97,7 +97,8 @@ public class ResourceManager implements Disposable {
     }
 
     private void createSkin(){
-        skin = manager.get(skinName, Skin.class);
+        //skin = manager.get(skinName, Skin.class);
+        skin = new Skin();
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.up = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("button_06"));
