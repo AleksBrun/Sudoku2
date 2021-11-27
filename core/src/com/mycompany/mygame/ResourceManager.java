@@ -27,7 +27,7 @@ public class ResourceManager implements Disposable {
     public static final String mark1 = "images/mark1.png";
     public static final String mark2 = "images/mark2.png";
     public static final String mark3 = "images/mark3.png";
-    public static final String heart = "images/heart.png";
+    public static final String heart = "images/heart.jpg";
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
     private final String ui_green  = "skin/ui-green.atlas";

@@ -8,10 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MenuScreen;
+import com.mycompany.unils.LoaderSudoku;
 
 public class MenuUI extends Stage {
 
@@ -26,13 +28,16 @@ public class MenuUI extends Stage {
         table.setFillParent(true);
         addActor(table);
 
+        TextButton continuation = new TextButton(Setting.name_continuation_button, manager.getSkin(), ResourceManager.button_style);
+        continuation.setVisible(AppPreference.isContinuationEnabled());
         TextButton start = new TextButton(Setting.name_play_button, manager.getSkin(), ResourceManager.button_style);
         TextButton exit = new TextButton(Setting.name_exit_button, manager.getSkin(), ResourceManager.button_style);
         TextButton color = new TextButton(Setting.name_setting_button, manager.getSkin(), ResourceManager.button_style);
         TextButton test = new TextButton(Setting.name_love_button, manager.getSkin(), ResourceManager.button_style);
 
         table.bottom();
-        table.add(start).fillX().row();
+        table.add(continuation).row();
+        table.add(start).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(color).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(exit).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(test).fillX().padTop(Setting.pad_ui_menu).padBottom(Setting.pad_ui_menu_bottom);
@@ -63,6 +68,14 @@ public class MenuUI extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 menuScreen.dispose();
                 menuScreen.getGame().setStateScreen(MyGdxGame.State.HELLO);
+            }
+        });
+        continuation.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                menuScreen.dispose();
+                menuScreen.getGame().setSudoku(LoaderSudoku.getIntegerSudoku(AppPreference.loadSudoku()));
+                menuScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
     }

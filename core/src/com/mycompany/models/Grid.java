@@ -110,6 +110,16 @@ public class Grid {
         }
     }
 
+    public int[][] getSudoku(){
+        int [][] tmp = new int[9][9];
+        for (int row = 0; row < 9; row++){
+            for (int column = 0; column < 9; column++){
+                tmp[column][row] = cells[column][row].getNumber();
+                }
+            }
+        return tmp;
+    }
+
     public float getX() {
         return x;
     }

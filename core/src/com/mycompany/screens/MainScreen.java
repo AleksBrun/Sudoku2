@@ -6,10 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mycompany.draw.DrawGame;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Setting;
 import com.mycompany.ui.MainUi;
 import com.mycompany.unils.Clock;
+import com.mycompany.unils.LoaderSudoku;
 import com.mycompany.update.UpdateGame;
 
 public class MainScreen implements Screen {
@@ -18,7 +20,7 @@ public class MainScreen implements Screen {
     private MainUi mainUi;
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
-    private Clock clock = new Clock();
+    private final Clock clock = new Clock();
 
     public MainScreen(MyGdxGame game) {
         this.game = game;
@@ -33,6 +35,7 @@ public class MainScreen implements Screen {
         InputMultiplexer multiplexer = new InputMultiplexer(mainUi, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
         updateGame.playGame(game.getSudoku());
+        clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
         clock.start();
     }
 
@@ -50,9 +53,6 @@ public class MainScreen implements Screen {
         return game;
     }
 
-    public Clock getClock() {
-        return clock;
-    }
 
     @Override
     public void resize(int width, int height) {
@@ -72,6 +72,9 @@ public class MainScreen implements Screen {
     @Override
     public void hide() {
         Gdx.input.setInputProcessor(null);
+        AppPreference.setTimeMinute(clock.getMinute());
+        AppPreference.setTimeSecond(clock.getSecond());
+        AppPreference.saveSudoku(LoaderSudoku.getStringSudoku(updateGame.getGrid().getSudoku()));
     }
 
     @Override

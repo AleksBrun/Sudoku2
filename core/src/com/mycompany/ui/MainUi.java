@@ -14,7 +14,8 @@ import com.mycompany.screens.MainScreen;
 
 public class MainUi extends Stage {
 
-    private Label time, title;
+    private final Label time;
+    private Label title;
 
     public MainUi(Viewport viewport, ResourceManager manager, final MainScreen mainScreen){
         super(viewport);
