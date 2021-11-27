@@ -23,14 +23,14 @@ public class MainUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Image crossIcon = new Image(manager.getIconTexture(ResourceManager.ICON_CROSS));
-        Image backIcon = new Image(manager.getIconTexture(ResourceManager.ICON_BACK));
-        Image pauseIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PAUSE));
-        Image playIcon = new Image(manager.getIconTexture(ResourceManager.ICON_PLAY));
+        Image crossIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_CROSS));
+        Image backIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_BACK));
+        Image pauseIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PAUSE));
+        Image playIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PLAY));
 
-        title = new Label("Легкий - 1", manager.getSkin(), Setting.label_style_normal);
-        Label labelClock = new Label("Время игры: ", manager.getSkin(), Setting.label_style_normal);
-        time = new Label("00:00", manager.getSkin(), Setting.label_style_normal);
+        title = new Label("Легкий - 1", manager.getSkin(), ResourceManager.label_style_normal);
+        Label labelClock = new Label("Время игры: ", manager.getSkin(), ResourceManager.label_style_normal);
+        time = new Label("00:00", manager.getSkin(), ResourceManager.label_style_normal);
         float size = Setting.size_icon;
 
         table.top();

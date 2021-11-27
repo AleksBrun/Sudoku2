@@ -1,6 +1,5 @@
 package com.mycompany.ui;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -28,14 +27,14 @@ public class SettingUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Label title = new Label("Настройки", manager.getSkin(), Setting.label_style_normal);
+        Label title = new Label("Настройки", manager.getSkin(), ResourceManager.label_style_normal);
 
-        final TextButton color_ui = new TextButton("Цвет UI", manager.getSkin(), Setting.button_style);
+        final TextButton color_ui = new TextButton("Цвет UI", manager.getSkin(), ResourceManager.button_style);
 
 
-        TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.button_style);
+        TextButton menu = new TextButton("Меню", manager.getSkin(), ResourceManager.button_style);
 
-        color = new Image(manager.getIconTexture(ResourceManager.ICON_STAR));
+        color = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
 
         table.top();
         table.add(title).padTop(10).row();
@@ -48,7 +47,7 @@ public class SettingUi extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 manager.setUiNew(indexColor++);
-                color.setDrawable(new TextureRegionDrawable(manager.getIconTexture(ResourceManager.ICON_STAR)));
+                color.setDrawable(new TextureRegionDrawable(manager.getTextureAtlas(ResourceManager.ICON_STAR)));
                 color_ui.setChecked(false);
                 if (indexColor > 5) indexColor = 0;
             }

@@ -3,13 +3,10 @@ import com.badlogic.gdx.Gdx;
 
 public class Setting
 {
-	public final static String font_white_big = "font-white-big";
 
 
-	public final static String button_style = "buttonStyle";
-	public final static String label_style_normal = "labelStyle_normal";
-	public final static String label_style_big = "labelStyle_big";
-	public final static String label_style_small = "labelStyle_small";
+
+
 	public static float width_Ui = 420;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
@@ -18,6 +15,7 @@ public class Setting
 	public static String name_menu_button = "Меню";
 	public static String name_exit_button = "Выход";
 	public static String name_setting_button = "    Настройка  ";
+	public static String name_love_button = "Любимой";
 	public static float pad_ui_menu = 5;
 	public static float pad_ui_menu_bottom = getHeight_Ui()/12;
 	

@@ -16,7 +16,7 @@ public class Grid {
         this.y = _y;
         this.size = _size;
         this.manager = _manager;
-        this.background = manager.getTextureRegion(ResourceManager.grid1);
+        this.background = manager.getTextureRegion(ResourceManager.grid);
 
         createCells();
     }

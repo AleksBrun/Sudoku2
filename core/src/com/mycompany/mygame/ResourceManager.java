@@ -16,16 +16,18 @@ import com.badlogic.gdx.utils.Disposable;
 public class ResourceManager implements Disposable {
 
     private final AssetManager manager;
-    private BitmapFont fontBig,  fontNormal, fontSmall;
+    private final BitmapFont fontBig;
+    private final BitmapFont fontNormal;
+    private final BitmapFont fontSmall;
     private Skin skin;
     private final String numbers = "images/numbers.pack";
-    public static final String grid1 = "images/grid2.png";
+    public static final String grid = "images/grid2.png";
     public static final String fon_menu = "images/fon_menu.png";
     public static final String mark = "images/mark.png";
     public static final String mark1 = "images/mark1.png";
     public static final String mark2 = "images/mark2.png";
     public static final String mark3 = "images/mark3.png";
-	private final String skinName = "uiskin/uiskin.json";
+    public static final String heart = "images/heart.png";
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
     private final String ui_green  = "skin/ui-green.atlas";
@@ -40,6 +42,14 @@ public class ResourceManager implements Disposable {
     public final static String ICON_CROSS = "icon_cross";
     public final static String ICON_PLAY = "icon_play";
 
+    public final static String button_style = "buttonStyle";
+    public final static String label_style_normal = "labelStyle_normal";
+    public final static String label_style_big = "labelStyle_big";
+    public final static String label_style_small = "labelStyle_small";
+
+    public final String BUTTON_DOWN = "button_05";
+    public final String BUTTON_UP = "button_06";
+
 
     public ResourceManager() {
         manager = new AssetManager();
@@ -50,21 +60,16 @@ public class ResourceManager implements Disposable {
         loadTexture();
         manager.finishLoading();
         setUiNew(5);
-
-
-    }
-
-    private void loadSkin(){
-        manager.load(skinName, Skin.class);
     }
 
     private void loadTexture(){
-        manager.load(grid1, Texture.class);
+        manager.load(grid, Texture.class);
         manager.load(mark, Texture.class);
         manager.load(mark1, Texture.class);
         manager.load(mark2, Texture.class);
         manager.load(mark3, Texture.class);
         manager.load(fon_menu, Texture.class);
+        manager.load(heart, Texture.class);
     }
 
     private void loadTextureAtlas(){
@@ -82,8 +87,8 @@ public class ResourceManager implements Disposable {
         return new TextureRegion(manager.get(nameTexture, Texture.class));
     }
 
-    public TextureRegion getIconTexture(String nameIcon){
-        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion(nameIcon));
+    public TextureRegion getTextureAtlas(String nameTexture){
+        return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion(nameTexture));
     }
 
     public TextureRegion getNumber(int _number){
@@ -100,25 +105,25 @@ public class ResourceManager implements Disposable {
         skin = new Skin();
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
-        style.up = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("button_06"));
-        style.down = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("button_05"));
+        style.up = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_UP));
+        style.down = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_DOWN));
         style.font = fontNormal;
-        skin.add(Setting.button_style, style, TextButton.TextButtonStyle.class);
+        skin.add(button_style, style, TextButton.TextButtonStyle.class);
 
         Label.LabelStyle labelStyle_normal = new Label.LabelStyle();
         labelStyle_normal.font = fontNormal;
         labelStyle_normal.fontColor = Color.BLACK;
-        skin.add(Setting.label_style_normal, labelStyle_normal, Label.LabelStyle.class);
+        skin.add(label_style_normal, labelStyle_normal, Label.LabelStyle.class);
 
         Label.LabelStyle labelStyle_big = new Label.LabelStyle();
         labelStyle_big.font = fontBig;
         labelStyle_big.fontColor = Color.BLACK;
-        skin.add(Setting.label_style_big, labelStyle_big, Label.LabelStyle.class);
+        skin.add(label_style_big, labelStyle_big, Label.LabelStyle.class);
 
         Label.LabelStyle labelStyle_small = new Label.LabelStyle();
         labelStyle_small.font = fontSmall;
         labelStyle_small.fontColor = Color.BLACK;
-        skin.add(Setting.label_style_small, labelStyle_small, Label.LabelStyle.class);
+        skin.add(label_style_small, labelStyle_small, Label.LabelStyle.class);
 
 
     }
@@ -130,7 +135,10 @@ public class ResourceManager implements Disposable {
 
     @Override
     public void dispose() {
-        manager.dispose();
         fontNormal.dispose();
+        fontBig.dispose();
+        fontSmall.dispose();
+        skin.dispose();
+        manager.dispose();
     }
 }

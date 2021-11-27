@@ -2,18 +2,16 @@ package com.mycompany.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mycompany.screens.LevelScreen;
-import com.mycompany.screens.MainScreen;
-import com.mycompany.screens.MenuScreen;
-import com.mycompany.screens.SettingScreen;
+import com.mycompany.screens.*;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL, SETTING}
+	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
 	private SettingScreen settingScreen;
+	private HelloScreen helloScreen;
 	private SpriteBatch batch;
 	private ResourceManager manager;
 	private int[][] sudoku;
@@ -39,6 +37,9 @@ public class MyGdxGame extends Game {
 			break;
 			case SETTING: if (settingScreen == null) settingScreen = new SettingScreen(this);
 			setScreen(settingScreen);
+			break;
+			case HELLO: if (helloScreen == null) helloScreen = new HelloScreen(this);
+			setScreen(helloScreen);
 			break;
 			default: break;
 		}

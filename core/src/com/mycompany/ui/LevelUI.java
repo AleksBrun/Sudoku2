@@ -24,15 +24,15 @@ public class LevelUI extends Stage {
 
 
 
-        final Label levelLabel = new Label("Уровень", manager.getSkin(), Setting.label_style_normal);
+        final Label levelLabel = new Label("Уровень", manager.getSkin(), ResourceManager.label_style_normal);
 
-        TextButton easy = new TextButton("Легкий", manager.getSkin(), Setting.button_style);
+        TextButton easy = new TextButton("Легкий", manager.getSkin(), ResourceManager.button_style);
 
-        TextButton average = new TextButton("  Средний  ", manager.getSkin(), Setting.button_style);
+        TextButton average = new TextButton("  Средний  ", manager.getSkin(), ResourceManager.button_style);
 
-        TextButton difficult = new TextButton("Тудный", manager.getSkin(), Setting.button_style);
+        TextButton difficult = new TextButton("Тудный", manager.getSkin(), ResourceManager.button_style);
 
-        TextButton menu = new TextButton("Меню", manager.getSkin(), Setting.button_style);
+        TextButton menu = new TextButton("Меню", manager.getSkin(), ResourceManager.button_style);
 
         table.add(levelLabel).row();
         table.add(easy).fillX().padTop(20).row();

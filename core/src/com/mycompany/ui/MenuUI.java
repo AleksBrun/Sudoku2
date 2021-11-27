@@ -26,10 +26,10 @@ public class MenuUI extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        TextButton start = new TextButton(Setting.name_play_button, manager.getSkin(), Setting.button_style);
-        TextButton exit = new TextButton(Setting.name_exit_button, manager.getSkin(), Setting.button_style);
-        TextButton color = new TextButton(Setting.name_setting_button, manager.getSkin(), Setting.button_style);
-        TextButton test = new TextButton("Привет", manager.getSkin(), Setting.button_style);
+        TextButton start = new TextButton(Setting.name_play_button, manager.getSkin(), ResourceManager.button_style);
+        TextButton exit = new TextButton(Setting.name_exit_button, manager.getSkin(), ResourceManager.button_style);
+        TextButton color = new TextButton(Setting.name_setting_button, manager.getSkin(), ResourceManager.button_style);
+        TextButton test = new TextButton(Setting.name_love_button, manager.getSkin(), ResourceManager.button_style);
 
         table.bottom();
         table.add(start).fillX().row();
@@ -56,6 +56,13 @@ public class MenuUI extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 menuScreen.dispose();
                 menuScreen.getGame().setStateScreen(MyGdxGame.State.SETTING);
+            }
+        });
+        test.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                menuScreen.dispose();
+                menuScreen.getGame().setStateScreen(MyGdxGame.State.HELLO);
             }
         });
     }
