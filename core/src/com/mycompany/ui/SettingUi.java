@@ -28,7 +28,7 @@ public class SettingUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Label title = new Label("Настройки", manager.getSkin(), Setting.font_white_big, Color.BLACK);
+        Label title = new Label("Настройки", manager.getSkin(), Setting.label_style_normal);
 
         final TextButton color_ui = new TextButton("Цвет UI", manager.getSkin(), Setting.button_style);
 

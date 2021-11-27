@@ -24,7 +24,7 @@ public class LevelUI extends Stage {
 
 
 
-        final Label levelLabel = new Label("Уровень", manager.getSkin(), Setting.label_style);
+        final Label levelLabel = new Label("Уровень", manager.getSkin(), Setting.label_style_normal);
 
         TextButton easy = new TextButton("Легкий", manager.getSkin(), Setting.button_style);
 

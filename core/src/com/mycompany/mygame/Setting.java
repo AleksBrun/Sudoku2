@@ -4,12 +4,12 @@ import com.badlogic.gdx.Gdx;
 public class Setting
 {
 	public final static String font_white_big = "font-white-big";
-	public final static String font_white_normal = "font-white-normal";
-	public final static String font_white_small = "font-white-small";
+
 
 	public final static String button_style = "buttonStyle";
-	public final static String label_style = "labelStyle";
-	public final static String window_style = "windowStyle";
+	public final static String label_style_normal = "labelStyle_normal";
+	public final static String label_style_big = "labelStyle_big";
+	public final static String label_style_small = "labelStyle_small";
 	public static float width_Ui = 420;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
