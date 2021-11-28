@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mycompany.mygame.*;
 import com.mycompany.screens.LevelScreen;
+import com.mycompany.unils.Sudoku;
 
 public class LevelUI extends Stage {
 
@@ -27,12 +28,15 @@ public class LevelUI extends Stage {
 
         TextButton difficult = new TextButton(Setting.level_3, manager.getSkin(), ResourceManager.button_style);
 
+        TextButton random = new TextButton(Setting.level_random, manager.getSkin(), ResourceManager.button_style);
+
         TextButton menu = new TextButton(Setting.name_menu_button, manager.getSkin(), ResourceManager.button_style);
 
         table.add(levelLabel).row();
         table.add(easy).fillX().padTop(20).row();
         table.add(average).fillX().padTop(10).row();
         table.add(difficult).fillX().padTop(10).row();
+        table.add(random).fillX().padTop(10).row();
         table.add(menu).fillX().padTop(10);
 
         easy.addListener(new ClickListener(){
@@ -63,6 +67,14 @@ public class LevelUI extends Stage {
                 levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
+            }
+        });
+        random.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                levelScreen.dispose();
+                levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(AppPreference.getMissingDigits()));
+                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
         menu.addListener(new ClickListener(){

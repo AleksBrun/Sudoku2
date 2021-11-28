@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
@@ -46,6 +47,8 @@ public class ResourceManager implements Disposable {
     public final static String label_style_normal = "labelStyle_normal";
     public final static String label_style_big = "labelStyle_big";
     public final static String label_style_small = "labelStyle_small";
+
+    public final static String slider_style_hor =  "slider_hor";
 
     public final String BUTTON_DOWN = "button_05";
     public final String BUTTON_UP = "button_06";
@@ -124,6 +127,11 @@ public class ResourceManager implements Disposable {
         labelStyle_small.font = fontSmall;
         labelStyle_small.fontColor = Color.BLACK;
         skin.add(label_style_small, labelStyle_small, Label.LabelStyle.class);
+
+        Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
+        sliderStyle.background = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("slider_back_hor"));
+        sliderStyle.knob = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("knob_05"));
+        skin.add(slider_style_hor, sliderStyle, Slider.SliderStyle.class);
 
 
     }

@@ -21,6 +21,7 @@ public class Setting
 	public static final String level_1 = "  Легко ";
 	public static final String level_2 = "  Нормально ";
 	public static final String level_3 = "  Трудно ";
+	public static final String level_random = " Случайно ";
 	public static float pad_ui_menu = 5;
 	public static float pad_ui_menu_bottom = getHeight_Ui()/12;
 	

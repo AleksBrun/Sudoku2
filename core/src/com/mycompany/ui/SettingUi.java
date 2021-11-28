@@ -1,11 +1,9 @@
 package com.mycompany.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -36,10 +34,13 @@ public class SettingUi extends Stage {
 
         color = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
 
+        final Slider slider = new Slider(30, 70, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
+
         table.top();
         table.add(title).padTop(10).row();
         table.add(color).top().padTop(40).row();
         table.add(color_ui).top().padTop(10).fillX().row();
+        table.add(slider).padTop(10).row();
         table.add(menu).top().padTop(10).fillX().row();
 
 
@@ -57,6 +58,22 @@ public class SettingUi extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 settingScreen.dispose();
                 settingScreen.getGame().setStateScreen(MyGdxGame.State.MENU);
+            }
+        });
+        slider.addListener(new InputListener() {
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                AppPreference.setMissingDigits((int)slider.getValue());
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                System.out.print(AppPreference.getMissingDigits());
             }
         });
     }
