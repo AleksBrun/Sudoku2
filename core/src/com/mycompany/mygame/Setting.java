@@ -7,7 +7,7 @@ public class Setting
 
 
 
-	public static float width_Ui = 420;
+	public static float width_Ui = 720;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mycompany.models.Star;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
@@ -15,7 +16,7 @@ import com.mycompany.screens.MainScreen;
 public class MainUi extends Stage {
 
     private final Label time;
-    private Label title;
+
 
     public MainUi(Viewport viewport, ResourceManager manager, final MainScreen mainScreen){
         super(viewport);
@@ -24,24 +25,31 @@ public class MainUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
+        float size = Setting.size_icon;
+
         Image crossIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_CROSS));
         Image backIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_BACK));
         Image pauseIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PAUSE));
         Image playIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PLAY));
 
-        title = new Label("Легкий - 1", manager.getSkin(), ResourceManager.label_style_normal);
-        Label labelClock = new Label("Время игры: ", manager.getSkin(), ResourceManager.label_style_normal);
-        time = new Label("00:00", manager.getSkin(), ResourceManager.label_style_normal);
-        float size = Setting.size_icon;
+        Label title = new Label("Уровень", manager.getSkin(), ResourceManager.label_style_small);
+        Label labelClock = new Label("Время игры: ", manager.getSkin(), ResourceManager.label_style_small);
+        time = new Label("00:00", manager.getSkin(), ResourceManager.label_style_small);
+
+        Star star = new Star(size/2, manager.getTextureAtlas(ResourceManager.ICON_STAR));
 
         table.top();
-        table.add(labelClock).left().padLeft(20);
-        table.add(time).expandX().left();
+        table.add().expandX();
         table.add(playIcon).width(size).height(size).right();
         table.add(pauseIcon).width(size).height(size);
         table.add(backIcon).width(size).height(size);
-        table.add(crossIcon).width(size).height(size).padRight(20).row();
-        table.add(title).colspan(6).top();
+        table.add(crossIcon).width(size).height(size).padRight(10);
+        table.row();
+        table.add(title).expandX();
+        table.add(star).expandX();
+        table.row();
+        table.add(labelClock).left().padLeft(20);
+        table.add(time).expandX().left();
 
 
         playIcon.addListener(new ClickListener(){
