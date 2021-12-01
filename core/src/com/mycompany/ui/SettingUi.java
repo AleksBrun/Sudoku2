@@ -22,6 +22,10 @@ public class SettingUi extends Stage {
     public SettingUi(Viewport viewport, final ResourceManager manager, final SettingScreen settingScreen){
         super(viewport);
 
+        Image background = new Image(manager.getTextureRegion(ResourceManager.background));
+        background.setBounds(0, 0, getWidth(), getHeight());
+        addActor(background);
+
         Table table = new Table();
         table.setFillParent(true);
         addActor(table);

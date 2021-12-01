@@ -2,6 +2,7 @@ package com.mycompany.update;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
@@ -16,6 +17,7 @@ public class UpdateGame extends InputAdapter {
     private final Grid grid;
     private  final Key key;
     private int indexCell;
+    private boolean pause;
 
     public UpdateGame(final MainScreen _mainScreen){
         this.mainScreen = _mainScreen;
@@ -71,7 +73,7 @@ public class UpdateGame extends InputAdapter {
         }
 
         Cell keyHit = key.getHit(screenX, Gdx.graphics.getHeight()-screenY);
-        if (keyHit != null){
+        if (keyHit != null && !isPause()){
             cell = grid.getCell(indexCell);
             if (cell.isActive()){
                 cell.setNumber(keyHit.getNumber());
@@ -90,6 +92,10 @@ public class UpdateGame extends InputAdapter {
         return false;
     }
 
+    public void pause(){
+        pause = !pause;
+    }
+
     public Grid getGrid() {
         return grid;
     }
@@ -98,4 +104,11 @@ public class UpdateGame extends InputAdapter {
         return key;
     }
 
+    public TextureRegion getBackground(){
+        return mainScreen.getGame().getManager().getTextureRegion(ResourceManager.background);
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
 }

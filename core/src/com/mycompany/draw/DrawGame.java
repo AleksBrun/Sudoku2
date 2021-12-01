@@ -1,5 +1,6 @@
 package com.mycompany.draw;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mycompany.models.Cell;
@@ -18,11 +19,16 @@ public class DrawGame {
 
     public void draw(SpriteBatch batch){
         batch.begin();
+        drawBackground(batch);
         drawGrid(batch);
         drawCells(batch);
         drawKeys(batch);
         batch.end();
 
+    }
+
+    private void drawBackground(SpriteBatch batch){
+        batch.draw(updateGame.getBackground(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     private void drawKeys(SpriteBatch batch){
@@ -39,13 +45,14 @@ public class DrawGame {
             }
         }
     }
-
+    
     private void drawGrid(SpriteBatch batch){
         Grid grid = updateGame.getGrid();
-        batch.draw(grid.getBackground(), grid.getX(), grid.getY(), grid.getSize(), grid.getSize());
+        batch.draw(updateGame.getGrid().getBackground(), grid.getX(), grid.getY(), grid.getSize(), grid.getSize());
     }
 
     private void drawCells(SpriteBatch batch){
+        if (updateGame.isPause()) return;
         Cell[][] cells = updateGame.getGrid().getCells();
         for (Cell[] cellRow:cells){
             for (Cell cell:cellRow){

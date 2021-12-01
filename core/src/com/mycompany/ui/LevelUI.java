@@ -2,6 +2,7 @@ package com.mycompany.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -15,6 +16,10 @@ public class LevelUI extends Stage {
 
     public LevelUI(Viewport viewport, ResourceManager manager, final LevelScreen levelScreen){
         super(viewport);
+
+        Image background = new Image(manager.getTextureRegion(ResourceManager.background));
+        background.setBounds(0, 0, getWidth(), getHeight());
+        addActor(background);
 
         Table table = new Table();
         table.setFillParent(true);

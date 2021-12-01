@@ -17,14 +17,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 public class HelloUi extends Stage {
     
     private String text =
-    "Моя любимая,родная./n"+
-    "Ты очень сильно мне нужна!/n"+
-    "С тобою рядом я счастливы/n"+
-    "Ты просто сводишь меня с ума./n"+"/n"+
+    "Моя любимая,родная."+
+    "Ты очень сильно мне нужна"+
+    "С тобою рядом я счастлив"+
+    "Ты просто сводишь меня с ума."+
 
-    "Ты так нежна, заботливая, красива./n"+
-    "С тобой хочу я жизнь делить./n"+
-    "И наслаждаться каждым мигом,/n"+
+    "Ты так нежна, заботливая, красива."+
+    "С тобой хочу я жизнь делить."+
+    "И наслаждаться каждым мигом,"+
     "О любви тебе говорить!";
 
     public HelloUi(Viewport viewport, ResourceManager manager, final HelloScreen helloScreen){
@@ -39,9 +39,11 @@ public class HelloUi extends Stage {
         addActor(table);
 
         TextButton menu = new TextButton(Setting.name_menu_button, manager.getSkin(), ResourceManager.button_style);
-        Label s  = new Label(text, manager.getSkin(), ResourceManager.label_style_normal);
+        Label s  = new Label("", manager.getSkin(), ResourceManager.label_style_small);
+
+        s.setWrap(true);
         table.top();
-        table.add(s).row();
+        table.add(s).expand().fill().top().left().row();
         table.add(menu).padBottom(20);
 
         menu.addListener(new ClickListener(){

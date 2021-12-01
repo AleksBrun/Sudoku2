@@ -37,7 +37,7 @@ public class MainScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
         updateGame.playGame(game.getSudoku());
         clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
-        clock.start();
+        //clock.start();
     }
 
     @Override
@@ -63,11 +63,13 @@ public class MainScreen implements Screen {
     @Override
     public void pause() {
         clock.pause();
+        updateGame.pause();
     }
 
     @Override
     public void resume() {
-
+        clock.start();
+        updateGame.pause();
     }
 
     @Override
@@ -83,8 +85,8 @@ public class MainScreen implements Screen {
     public void dispose() {
         mainUi.dispose();
     }
-    
-    public MainUi getMainUi(){
-        return this.mainUi;
+
+    public Clock getClock() {
+        return clock;
     }
 }

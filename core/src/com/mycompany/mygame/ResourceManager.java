@@ -26,9 +26,10 @@ public class ResourceManager implements Disposable {
     public static final String fon_menu = "images/fon_menu.png";
     public static final String mark = "images/mark.png";
     public static final String mark1 = "images/mark1.png";
-    public static final String mark2 = "images/mark2.png";
+    public static final String mark2 = "images/mark4.png";
     public static final String mark3 = "images/mark3.png";
     public static final String heart = "images/heart.jpg";
+    public static final String background = "images/background.jpg";
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
     private final String ui_green  = "skin/ui-green.atlas";
@@ -73,6 +74,7 @@ public class ResourceManager implements Disposable {
         manager.load(mark3, Texture.class);
         manager.load(fon_menu, Texture.class);
         manager.load(heart, Texture.class);
+        manager.load(background, Texture.class);
     }
 
     private void loadTextureAtlas(){
