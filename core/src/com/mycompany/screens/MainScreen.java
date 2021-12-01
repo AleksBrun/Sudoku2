@@ -31,7 +31,8 @@ public class MainScreen implements Screen {
 
     @Override
     public void show() {
-        mainUi = new MainUi(new FitViewport(Setting.width_Ui, Setting.getHeight_Ui()), game.getManager(), this);
+        mainUi = new MainUi(new FitViewport(Setting.width_main_ui, Setting.getHeight_Ui(Setting.width_main_ui)), game.getManager(), this);
+        mainUi.setStars(AppPreference.getDifficultyLevel());
         InputMultiplexer multiplexer = new InputMultiplexer(mainUi, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
         updateGame.playGame(game.getSudoku());
@@ -75,10 +76,15 @@ public class MainScreen implements Screen {
         AppPreference.setTimeMinute(clock.getMinute());
         AppPreference.setTimeSecond(clock.getSecond());
         AppPreference.saveSudoku(LoaderSudoku.getStringSudoku(updateGame.getGrid().getSudoku()));
+        
     }
 
     @Override
     public void dispose() {
         mainUi.dispose();
+    }
+    
+    public MainUi getMainUi(){
+        return this.mainUi;
     }
 }

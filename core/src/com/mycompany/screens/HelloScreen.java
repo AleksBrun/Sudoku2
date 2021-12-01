@@ -19,7 +19,7 @@ public class HelloScreen implements Screen {
 
     @Override
     public void show() {
-        helloUi = new HelloUi(new FitViewport(Setting.width_Ui, Setting.getHeight_Ui()), game.getManager(), this);
+        helloUi = new HelloUi(new FitViewport(Setting.width_menu_ui, Setting.getHeight_Ui(Setting.width_menu_ui)), game.getManager(), this);
         Gdx.input.setInputProcessor(helloUi);
     }
 

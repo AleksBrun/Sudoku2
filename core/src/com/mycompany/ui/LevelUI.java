@@ -45,6 +45,7 @@ public class LevelUI extends Stage {
                 reset();
                 levelScreen.dispose();
                 levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.minimum));
+                AppPreference.setDifficultyLevel(2);
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
             }
@@ -55,6 +56,7 @@ public class LevelUI extends Stage {
                 reset();
                 levelScreen.dispose();
                 levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.moderate));
+                AppPreference.setDifficultyLevel(3);
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
             }
@@ -65,6 +67,7 @@ public class LevelUI extends Stage {
                 reset();
                 levelScreen.dispose();
                 levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
+                AppPreference.setDifficultyLevel(4);
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
             }
@@ -72,6 +75,7 @@ public class LevelUI extends Stage {
         random.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                reset();
                 levelScreen.dispose();
                 levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(AppPreference.getMissingDigits()));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);

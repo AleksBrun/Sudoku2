@@ -14,49 +14,60 @@ public class AppPreference {
     private static final String PREF_MINUTE = "time_minute";
     private static final String PREF_SECOND = "time_second";
     private static final String PREF_MISSING_DIGITS = "missing_digits";
+    private static final String PREF_DIFFICULTY_LEVEL = "difficulty_level";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
-    public static void saveSudoku(String sudoku){
+    // Сохранить ровень сложности
+    public static void setDifficultyLevel(int level){
+        prefs.putInteger(PREF_DIFFICULTY_LEVEL, level);
+        prefs.flush();
+    }
+    // Получить уровень сложности
+    public static int getDifficultyLevel(){
+        return prefs.getInteger(PREF_DIFFICULTY_LEVEL);
+    }
+    // Записать сетку судоку в строке
+    public static void saveSudoku(String sudoku) {
         prefs.putString(PREF_SUDOKU, sudoku);
         prefs.flush();
     }
-
-    public static void setMissingDigits(int missing_digits){
+    // Записать колличество пустых ячеек
+    public static void setMissingDigits(int missing_digits) {
         prefs.putInteger(PREF_MISSING_DIGITS, missing_digits);
         prefs.flush();
     }
-
-    public static int getMissingDigits(){
+    // Получить колличество пустых ячек
+    public static int getMissingDigits() {
         return prefs.getInteger(PREF_MISSING_DIGITS, 25);
     }
-
-    public static String loadSudoku(){
+    // Получить строку судоку
+    public static String loadSudoku() {
         return prefs.getString(PREF_SUDOKU);
     }
-
-    public static boolean isContinuationEnabled(){
+    // Проверка возможности продолжить игру
+    public static boolean isContinuationEnabled() {
         return prefs.getBoolean(PREF_CONTINUATION_ENABLED, false);
     }
-
-    public static void setContinuationEnabled(boolean continuationEnabled){
+    // Записаить сосояие продолжить игпу
+    public static void setContinuationEnabled(boolean continuationEnabled) {
         prefs.putBoolean(PREF_CONTINUATION_ENABLED, continuationEnabled);
         prefs.flush();
     }
 
-    public static int getTimeMinute(){
+    public static int getTimeMinute() {
         return prefs.getInteger(PREF_MINUTE, 0);
     }
 
-    public static int getTimeSecond(){
+    public static int getTimeSecond() {
         return prefs.getInteger(PREF_SECOND, 0);
     }
 
-    public static void setTimeMinute(int minute){
+    public static void setTimeMinute(int minute) {
         prefs.putInteger(PREF_MINUTE, minute);
         prefs.flush();
     }
 
-    public static void setTimeSecond(int second){
+    public static void setTimeSecond(int second) {
         prefs.putInteger(PREF_SECOND, second);
         prefs.flush();
     }
@@ -97,12 +108,12 @@ public class AppPreference {
         prefs.flush();
     }
 
-    public static void setColorUI(int indexColor){
+    public static void setColorUI(int indexColor) {
         prefs.putInteger(PREF_COLOR_INDEX, indexColor);
         prefs.flush();
     }
 
-    public static int getColorUI(){
+    public static int getColorUI() {
         return prefs.getInteger(PREF_COLOR_INDEX, 0);
     }
 
