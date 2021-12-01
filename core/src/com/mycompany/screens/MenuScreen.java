@@ -19,7 +19,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-        menuUI = new MenuUI(new FillViewport(Setting.width_Ui, Setting.getHeight_Ui()), game.getManager(), this);
+        menuUI = new MenuUI(new FillViewport(Setting.width_menu_ui, Setting.getHeight_Ui(Setting.width_menu_ui)), game.getManager(), this);
         Gdx.input.setInputProcessor(menuUI);
     }
 
