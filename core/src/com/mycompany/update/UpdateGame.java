@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
+import com.mycompany.mygame.AppPreference;
+import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
-import com.mycompany.unils.Clock;
 
 public class UpdateGame extends InputAdapter {
 
@@ -28,7 +29,7 @@ public class UpdateGame extends InputAdapter {
                 Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
     }
 
-    public boolean checkingAllGrid(){
+    public boolean errorAllGrid(){
         for (int index = 0; index <9; index++){
             if (checkingDuplicates(grid.getHorizontalGroup(index)) ||
                     checkingDuplicates(grid.getVerticalGroup(index)) ||
@@ -52,9 +53,13 @@ public class UpdateGame extends InputAdapter {
         return false;
     }
 
-
     public void playGame(int[][] sudoku){
         grid.loadSudoku(sudoku);
+    }
+
+    public void victoryGame(){
+        mainScreen.dispose();
+        mainScreen.getGame().setStateScreen(MyGdxGame.State.VICTORY);
     }
 
     private void update(int screenX, int screenY){
@@ -79,9 +84,12 @@ public class UpdateGame extends InputAdapter {
                 cell.setNumber(keyHit.getNumber());
                 cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
             }
-            if (checkingAllGrid()){
+            if (errorAllGrid()){
                 cell.setMark(true);
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark3));
+                AppPreference.setErrorGame(AppPreference.getErrorGame()+1);
+            } else if (grid.isFilledIn()){
+                victoryGame();
             }
         }
     }

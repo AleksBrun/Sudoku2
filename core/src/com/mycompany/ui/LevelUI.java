@@ -82,7 +82,17 @@ public class LevelUI extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 reset();
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(AppPreference.getMissingDigits()));
+                int mission_digits = AppPreference.getMissingDigits();
+                if (mission_digits >= 25 && mission_digits < 30){
+                    AppPreference.setDifficultyLevel(1);
+                } else if (mission_digits >=30 && mission_digits < 35){
+                    AppPreference.setDifficultyLevel(2);
+                } else if (mission_digits >=35 && mission_digits< 40){
+                    AppPreference.setDifficultyLevel(3);
+                } else if (mission_digits >=40 && mission_digits <50){
+                    AppPreference.setDifficultyLevel(4);
+                } else AppPreference.setDifficultyLevel(5);
+                levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(mission_digits));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
@@ -98,5 +108,6 @@ public class LevelUI extends Stage {
         AppPreference.setContinuationEnabled(true);
         AppPreference.setTimeMinute(0);
         AppPreference.setTimeSecond(0);
+        AppPreference.setErrorGame(0);
     }
 }

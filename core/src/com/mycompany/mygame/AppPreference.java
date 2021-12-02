@@ -1,8 +1,11 @@
 package com.mycompany.mygame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.mycompany.unils.Puzzle;
 
 public class AppPreference {
+    private static final String PREF_ERROR_GAME = "error.game";
+    private static final String PREF_ALL_STARS = "all.stars";
     private static final String PREF_MUSIC_VOLUME = "volume";
     private static final String PREF_MUSIC_ENABLED = "music.enabled";
     private static final String PREF_SOUND_ENABLED = "sound.enabled";
@@ -17,6 +20,25 @@ public class AppPreference {
     private static final String PREF_DIFFICULTY_LEVEL = "difficulty_level";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
+
+    // Сохранить колличество ошибок за игру
+    public static void setErrorGame(int errorGame){
+        prefs.putInteger(PREF_ERROR_GAME, errorGame);
+        prefs.flush();
+    }
+    // Получить колличество ошибок за игру
+    public static int getErrorGame(){
+        return prefs.getInteger(PREF_ERROR_GAME, 0);
+    }
+    // сочранить общее число звезд(ОЧКОВ)
+    public static void setAllStars(int stars){
+        prefs.putInteger(PREF_ALL_STARS, stars);
+        prefs.flush();
+    }
+    // Получить общее число звезд
+    public static int getAllStars(){
+        return prefs.getInteger(PREF_ALL_STARS, 0);
+    }
     // Сохранить ровень сложности
     public static void setDifficultyLevel(int level){
         prefs.putInteger(PREF_DIFFICULTY_LEVEL, level);

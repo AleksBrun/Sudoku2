@@ -21,6 +21,15 @@ public class Grid {
         createCells();
     }
 
+    public boolean isFilledIn(){
+        for (Cell[] rowCell:cells){
+            for (Cell cell:rowCell){
+                if (cell.getNumber() == 0) return false;
+            }
+        }
+        return true;
+    }
+
     public Cell getCell(int index){
         for (Cell[] cellRow:cells){
             for (Cell cell:cellRow){

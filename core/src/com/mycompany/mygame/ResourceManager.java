@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -50,6 +47,8 @@ public class ResourceManager implements Disposable {
     public final static String label_style_small = "labelStyle_small";
 
     public final static String slider_style_hor =  "slider_hor";
+
+    public final static String textbox_style = "textbox_01";
 
     public final String BUTTON_DOWN = "button_05";
     public final String BUTTON_UP = "button_06";
@@ -135,7 +134,10 @@ public class ResourceManager implements Disposable {
         sliderStyle.knob = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("knob_05"));
         skin.add(slider_style_hor, sliderStyle, Slider.SliderStyle.class);
 
-
+        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+        textFieldStyle.background = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("textbox_01"));
+        textFieldStyle.font = fontNormal;
+        skin.add(textbox_style, textFieldStyle, TextField.TextFieldStyle.class);
     }
 
     public Skin getSkin(){

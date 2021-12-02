@@ -38,21 +38,25 @@ public class SettingUi extends Stage {
 
         TextButton menu = new TextButton(Setting.name_menu_button, manager.getSkin(), ResourceManager.button_style);
 
+        TextField textField = new TextField("", manager.getSkin(), ResourceManager.textbox_style);
+        textField.setPasswordMode(true);
+
         color = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
 
-        final Slider slider = new Slider(30, 70, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
+        final Slider slider = new Slider(25, 60, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
         slider.setValue(AppPreference.getMissingDigits());
         
         sladerInfo = new Label(""+AppPreference.getMissingDigits(), manager.getSkin(), ResourceManager.label_style_normal);
 
         table.top();
-        table.add(title).padTop(10).row();
-        table.add(color).top().padTop(40).row();
-        table.add(color_ui).top().padTop(10).fillX().row();
-        table.add(slider).colspan(2).padTop(10).fillX();
+        table.add(title).colspan(2).padTop(10).row();
+        table.add(color).colspan(2).top().padTop(40).row();
+        table.add(color_ui).colspan(2).top().padTop(10).fillX().row();
+        table.add(slider).padTop(10).fillX();
         table.add(sladerInfo).padTop(10).padLeft(10).fillX().row();
-        table.add(reset).padTop(10).fillX().row();
-        table.add(menu).top().padTop(10).fillX().row();
+        table.add(reset).colspan(2).padTop(10).fillX().row();
+        table.add(textField).colspan(2).padTop(10).fillX().row();
+        table.add(menu).colspan(2).top().padTop(10).fillX().row();
 
 
         color_ui.addListener(new ClickListener(){
@@ -67,6 +71,7 @@ public class SettingUi extends Stage {
         menu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 settingScreen.dispose();
                 settingScreen.getGame().setStateScreen(MyGdxGame.State.MENU);
             }
@@ -75,7 +80,7 @@ public class SettingUi extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 AppPreference.setContinuationEnabled(false);
-                AppPreference.setMissingDigits(30);
+                AppPreference.setMissingDigits(25);
                 sladerInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
                 slider.setValue(AppPreference.getMissingDigits());
             }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
@@ -34,7 +35,7 @@ public class MainUi extends Stage {
         Image pauseIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PAUSE));
         Image playIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PLAY));
 
-        Label stars = new Label("- 3", manager.getSkin(), ResourceManager.label_style_big);
+        Label stars = new Label(""+AppPreference.getAllStars(), manager.getSkin(), ResourceManager.label_style_big);
         Label title = new Label("Уровень сложности ", manager.getSkin(), ResourceManager.label_style_normal);
         Label labelClock = new Label("Время игры: ", manager.getSkin(), ResourceManager.label_style_normal);
         time = new Label("00:00", manager.getSkin(), ResourceManager.label_style_normal);
