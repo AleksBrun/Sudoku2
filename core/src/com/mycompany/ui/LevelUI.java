@@ -2,11 +2,11 @@ package com.mycompany.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mycompany.mygame.*;
 import com.mycompany.screens.LevelScreen;
@@ -17,11 +17,8 @@ public class LevelUI extends Stage {
     public LevelUI(Viewport viewport, ResourceManager manager, final LevelScreen levelScreen){
         super(viewport);
 
-        Image background = new Image(manager.getTextureRegion(ResourceManager.background));
-        background.setBounds(0, 0, getWidth(), getHeight());
-        addActor(background);
-
         Table table = new Table();
+        table.setBackground(new TextureRegionDrawable(manager.getTextureRegion(ResourceManager.background)));
         table.setFillParent(true);
         addActor(table);
 
@@ -81,17 +78,9 @@ public class LevelUI extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 reset();
-                levelScreen.dispose();
                 int mission_digits = AppPreference.getMissingDigits();
-                if (mission_digits >= 25 && mission_digits < 30){
-                    AppPreference.setDifficultyLevel(1);
-                } else if (mission_digits >=30 && mission_digits < 35){
-                    AppPreference.setDifficultyLevel(2);
-                } else if (mission_digits >=35 && mission_digits< 40){
-                    AppPreference.setDifficultyLevel(3);
-                } else if (mission_digits >=40 && mission_digits <50){
-                    AppPreference.setDifficultyLevel(4);
-                } else AppPreference.setDifficultyLevel(5);
+                AppPreference.setDifficultyLevel(getDifficultyLevel(mission_digits));
+                levelScreen.dispose();
                 levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(mission_digits));
                 levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
@@ -109,5 +98,18 @@ public class LevelUI extends Stage {
         AppPreference.setTimeMinute(0);
         AppPreference.setTimeSecond(0);
         AppPreference.setErrorGame(0);
+    }
+
+    private int getDifficultyLevel(int mission_digits){
+        if (mission_digits >= 25 && mission_digits < 30){
+            return 1;
+        } else if (mission_digits >=30 && mission_digits < 35){
+            return 2;
+        } else if (mission_digits >=35 && mission_digits< 40){
+            return 3;
+        } else if (mission_digits >=40 && mission_digits <50){
+            return 4;
+        }
+        return 5;
     }
 }

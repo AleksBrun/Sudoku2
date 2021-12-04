@@ -13,21 +13,21 @@
         <element id="module-output" name="desktop" />
         <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.9.6/57c2831c870743712b808384187ea856e541878f/gdx-backend-android-1.9.6.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.6/47d1e9b890e364ec28f128e9bb3b9a12a94c164/gdx-1.9.6.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/gdx-1.9.6.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/gdx-backend-android-1.9.6.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/gdx-backend-lwjgl-1.9.6.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/gdx-platform-1.9.6-natives-desktop.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/jinput-2.0.5.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/jinput-platform-2.0.5-natives-linux.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/jinput-platform-2.0.5-natives-windows.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/jlayer-1.0.1-gdx.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/jorbis-0.0.17.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/jutils-1.0.0.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/lwjgl-2.9.2.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/lwjgl-platform-2.9.2-natives-linux.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/lwjgl-platform-2.9.2-natives-osx.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/lwjgl-platform-2.9.2-natives-windows.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/../../Soft/libs/lwjgl_util-2.9.2.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/gdx-1.9.6.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/gdx-backend-android-1.9.6.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/gdx-backend-lwjgl-1.9.6.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/gdx-platform-1.9.6-natives-desktop.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/jinput-2.0.5.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/jinput-platform-2.0.5-natives-linux.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/jinput-platform-2.0.5-natives-windows.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/jlayer-1.0.1-gdx.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/jorbis-0.0.17.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/jutils-1.0.0.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/lwjgl-2.9.2.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/lwjgl-platform-2.9.2-natives-linux.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/lwjgl-platform-2.9.2-natives-osx.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/lwjgl-platform-2.9.2-natives-windows.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/Soft/libs/lwjgl_util-2.9.2.jar" path-in-jar="/" />
       </root>
     </artifact>
   </component>
@@ -215,11 +215,11 @@
   <component name="libraryTable">
     <library name="libs">
       <CLASSES>
-        <root url="file://$PROJECT_DIR$/../../Soft/libs" />
+        <root url="file://$USER_HOME$/Soft/libs" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
-      <jarDirectory url="file://$PROJECT_DIR$/../../Soft/libs" recursive="false" />
+      <jarDirectory url="file://$USER_HOME$/Soft/libs" recursive="false" />
     </library>
   </component>
   <component name="masterDetails">

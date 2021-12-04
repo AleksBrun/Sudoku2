@@ -3,10 +3,10 @@ package com.mycompany.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
@@ -20,11 +20,8 @@ public class MenuUI extends Stage {
     public MenuUI(Viewport viewport, final ResourceManager manager, final MenuScreen menuScreen){
         super(viewport);
 
-        Image fon = new Image(manager.getTextureRegion(ResourceManager.fon_menu));
-        fon.setBounds(0, 0, getWidth(), getHeight());
-        addActor(fon);
-
         Table table = new Table();
+        table.setBackground(new TextureRegionDrawable(manager.getTextureRegion(ResourceManager.fon_menu)));
         table.setFillParent(true);
         addActor(table);
 
@@ -78,6 +75,5 @@ public class MenuUI extends Stage {
                 menuScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
-
     }
 }

@@ -16,10 +16,6 @@ import com.mycompany.screens.SettingScreen;
 
 public class SettingUi extends Stage {
 
-    //private final Image color;
-    private int indexColor = AppPreference.getColorUI();
-    //private final Label sliderInfo;
-
     public SettingUi(Viewport viewport, final ResourceManager manager, final SettingScreen settingScreen){
         super(viewport);
 
@@ -38,6 +34,7 @@ public class SettingUi extends Stage {
         final TextButton color_ui = new TextButton(Setting.name_colorUi_button, manager.getSkin(), ResourceManager.button_style);
 
         final TextButton reset = new TextButton(Setting.name_reset_button, manager.getSkin(), ResourceManager.button_style);
+        reset.setVisible(false);
 
         final TextButton menu = new TextButton(Setting.name_menu_button, manager.getSkin(), ResourceManager.button_style);
 
@@ -61,14 +58,16 @@ public class SettingUi extends Stage {
         table.add(textField).colspan(2).padTop(10).fillX().row();
         table.add(menu).colspan(2).top().padTop(10).fillX().row();
 
-
         color_ui.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                manager.setUiNew(indexColor++);
+                int indexColor = AppPreference.getColorUI();
+                indexColor++;
+                manager.setUiNew(indexColor);
                 color.setDrawable(new TextureRegionDrawable(manager.getTextureAtlas(ResourceManager.ICON_STAR)));
                 color_ui.setChecked(false);
-                if (indexColor > 5) indexColor = 0;
+                if (indexColor > 4) indexColor = 0;
+                AppPreference.setColorUI(indexColor);
             }
         });
         menu.addListener(new ClickListener(){
@@ -84,8 +83,11 @@ public class SettingUi extends Stage {
             public void clicked(InputEvent event, float x, float y){
                 AppPreference.setContinuationEnabled(false);
                 AppPreference.setMissingDigits(25);
+                AppPreference.setColorUI(0);
+                AppPreference.setAllStars(0);
                 sliderInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
                 slider.setValue(AppPreference.getMissingDigits());
+                reset.setVisible(false);
             }
         });
         slider.addListener(new InputListener() {
@@ -110,8 +112,7 @@ public class SettingUi extends Stage {
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 if (keycode == Input.Keys.ENTER && textField.getText().equals("2018")){
-                    settingScreen.dispose();
-                    settingScreen.getGame().setStateScreen(MyGdxGame.State.HELLO);
+                    reset.setVisible(true);
                 }
                 return false;
             }

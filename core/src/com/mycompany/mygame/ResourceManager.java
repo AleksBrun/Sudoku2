@@ -63,7 +63,7 @@ public class ResourceManager implements Disposable {
         loadTextureAtlas();
         loadTexture();
         manager.finishLoading();
-        setUiNew(5);
+        setUiNew(AppPreference.getColorUI());
     }
 
     private void loadTexture(){

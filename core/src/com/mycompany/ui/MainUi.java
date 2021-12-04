@@ -16,7 +16,7 @@ import com.mycompany.models.Star;
 
 public class MainUi extends Stage {
 
-    private final Label time;
+    private final Label time, labelClock;
     private final Star star;
 
     public MainUi(Viewport viewport, ResourceManager manager, final MainScreen mainScreen){
@@ -24,12 +24,10 @@ public class MainUi extends Stage {
 
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
+        table.setDebug(true);
         addActor(table);
 
-
         Image starIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
-
         Image crossIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_CROSS));
         Image backIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_BACK));
         Image pauseIcon = new Image(manager.getTextureAtlas(ResourceManager.ICON_PAUSE));
@@ -37,7 +35,8 @@ public class MainUi extends Stage {
 
         Label stars = new Label(""+AppPreference.getAllStars(), manager.getSkin(), ResourceManager.label_style_big);
         Label title = new Label("Уровень сложности ", manager.getSkin(), ResourceManager.label_style_normal);
-        Label labelClock = new Label("Время игры: ", manager.getSkin(), ResourceManager.label_style_normal);
+        labelClock = new Label("Время игры - ", manager.getSkin(), ResourceManager.label_style_normal);
+        Label errorLabel = new Label("Ошибки - ", manager.getSkin(), ResourceManager.label_style_normal);
         time = new Label("00:00", manager.getSkin(), ResourceManager.label_style_normal);
         
         
@@ -54,10 +53,11 @@ public class MainUi extends Stage {
         table.add(title).colspan(2).top().right().padTop(5);
         table.add(star).colspan(4).top().left().padTop(5);
         table.row();
-        table.add(labelClock).colspan(2).top().right().padTop(5);
-        table.add(time).colspan(4).top().left().padTop(5);
-       
+        table.layout();
 
+        table.add(labelClock).top().right().padTop(5);
+        table.add(time).colspan(6).top().center().padTop(5);
+       
         playIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -80,7 +80,8 @@ public class MainUi extends Stage {
     }
 
     public void setTime(int minute, int second){
-        time.setText(minute+":"+second);
+        //time.setText(minute+":"+second);
+        labelClock.setText("Время игры - "+minute+":"+second);
     }
     
     public void setStars(int _stars){
