@@ -6,18 +6,18 @@ import com.mycompany.screens.*;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY}
+	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
 	private SettingScreen settingScreen;
 	private HelloScreen helloScreen;
 	private VictoryScreen victoryScreen;
+	private LoseScreen loseScreen;
 	private SpriteBatch batch;
 	private ResourceManager manager;
 	private int[][] sudoku;
 
-	
 	@Override
 	public void create () {
 		manager = new ResourceManager();
@@ -44,7 +44,10 @@ public class MyGdxGame extends Game {
 			break;
 			case VICTORY: if (victoryScreen == null) victoryScreen = new VictoryScreen(this);
 			setScreen(victoryScreen);
-			default: break;
+			break;
+			case LOSE: if (loseScreen == null) loseScreen = new LoseScreen(this);
+			setScreen(loseScreen);
+			break;
 		}
 	}
 

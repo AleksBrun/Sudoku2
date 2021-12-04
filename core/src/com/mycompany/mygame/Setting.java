@@ -8,6 +8,9 @@ public class Setting {
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
 
+	public static String label_lvl = "Уровень сложности";
+	public static String label_time_game = "Время игры     ";
+	public static String label_error = "Ошибки    ";
 	public static String name_continuation_button = "    Продолжить  ";
 	public static String name_play_button = "   Новая Игра ";
 	public static String name_menu_button = "   Меню ";
@@ -36,7 +39,8 @@ public class Setting {
 	public static float getPositionGrid_X() {
 		return (Gdx.graphics.getWidth() - getSizeGrid()) / 2;
 	}
-    public static float getPositionGrid_Y() {
+
+	public static float getPositionGrid_Y() {
 		return (Gdx.graphics.getHeight() - getSizeGrid()) / 2;
     }
 

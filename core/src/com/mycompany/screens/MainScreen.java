@@ -26,7 +26,6 @@ public class MainScreen implements Screen {
         this.game = game;
         updateGame = new UpdateGame(this);
         drawGame = new DrawGame(updateGame);
-        clock.reset();
     }
 
     @Override
@@ -37,7 +36,11 @@ public class MainScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
         updateGame.playGame(game.getSudoku());
         clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
-        //clock.start();
+        game.getManager().getMusic().setVolume(AppPreference.getMusicVolume());
+        game.getManager().getMusic().setLooping(true);
+        if (AppPreference.isMusicEnabled()){
+            game.getManager().getMusic().play();
+        }
     }
 
     @Override
@@ -62,14 +65,21 @@ public class MainScreen implements Screen {
 
     @Override
     public void pause() {
-        clock.pause();
         updateGame.pause();
+        if (updateGame.isPause()){
+            clock.pause();
+            game.getManager().getMusic().pause();
+        } else {
+            clock.start();
+            if (AppPreference.isMusicEnabled()){
+                game.getManager().getMusic().play();
+            }
+        }
     }
 
     @Override
     public void resume() {
-        clock.start();
-        updateGame.pause();
+
     }
 
     @Override
@@ -78,6 +88,7 @@ public class MainScreen implements Screen {
         AppPreference.setTimeMinute(clock.getMinute());
         AppPreference.setTimeSecond(clock.getSecond());
         AppPreference.saveSudoku(LoaderSudoku.getStringSudoku(updateGame.getGrid().getSudoku()));
+        game.getManager().getMusic().pause();
         
     }
 
@@ -86,7 +97,7 @@ public class MainScreen implements Screen {
         mainUi.dispose();
     }
 
-    public Clock getClock() {
-        return clock;
+    public MainUi getMainUi() {
+        return mainUi;
     }
 }

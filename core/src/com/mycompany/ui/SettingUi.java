@@ -27,9 +27,11 @@ public class SettingUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        final Label title = new Label(Setting.name_setting_button, manager.getSkin(), ResourceManager.label_style_normal);
+        final Label title = new Label(Setting.name_setting_button, manager.getSkin(), ResourceManager.label_style_big);
 
         final Label levelInfo = new Label("Сложность", manager.getSkin(), ResourceManager.label_style_small);
+
+        final Label labelInfoMusic = new Label("Громкость", manager.getSkin(), ResourceManager.label_style_small);
 
         final TextButton color_ui = new TextButton(Setting.name_colorUi_button, manager.getSkin(), ResourceManager.button_style);
 
@@ -41,10 +43,13 @@ public class SettingUi extends Stage {
         final TextField textField = new TextField("", manager.getSkin(), ResourceManager.textbox_style);
         textField.setAlignment(1);
 
-        final Image color = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
+        final Image color = new Image(manager.getTextureAtlas(ResourceManager.ICON_CIRCLE));
 
-        final Slider slider = new Slider(25, 60, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
+        final Slider slider = new Slider(1, 60, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
         slider.setValue(AppPreference.getMissingDigits());
+
+        final Slider sliderVolume = new Slider(0, 1, .1f, false, manager.getSkin(), ResourceManager.slider_style_hor);
+        sliderVolume.setValue(AppPreference.getMusicVolume());
         
         final Label sliderInfo = new Label(""+AppPreference.getMissingDigits(), manager.getSkin(), ResourceManager.label_style_normal);
 
@@ -54,9 +59,11 @@ public class SettingUi extends Stage {
         table.add(levelInfo).colspan(2).padTop(10).row();
         table.add(slider).padTop(10).fillX();
         table.add(sliderInfo).padTop(10).padLeft(10).fillX().row();
-        table.add(reset).colspan(2).padTop(10).fillX().row();
-        table.add(textField).colspan(2).padTop(10).fillX().row();
+        table.add(labelInfoMusic).colspan(2).padTop(10).row();
+        table.add(sliderVolume).colspan(2).padTop(10).fillX().row();
         table.add(menu).colspan(2).top().padTop(10).fillX().row();
+        table.add(textField).colspan(2).padTop(10).fillX().row();
+        table.add(reset).colspan(2).padTop(10).fillX().row();
 
         color_ui.addListener(new ClickListener(){
             @Override
@@ -64,7 +71,7 @@ public class SettingUi extends Stage {
                 int indexColor = AppPreference.getColorUI();
                 indexColor++;
                 manager.setUiNew(indexColor);
-                color.setDrawable(new TextureRegionDrawable(manager.getTextureAtlas(ResourceManager.ICON_STAR)));
+                color.setDrawable(new TextureRegionDrawable(manager.getTextureAtlas(ResourceManager.ICON_CIRCLE)));
                 color_ui.setChecked(false);
                 if (indexColor > 4) indexColor = 0;
                 AppPreference.setColorUI(indexColor);
@@ -105,6 +112,19 @@ public class SettingUi extends Stage {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
+            }
+        });
+        sliderVolume.addListener(new InputListener(){
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                AppPreference.setMusicVolume(sliderVolume.getValue());
+                manager.getMusic().setVolume(AppPreference.getMusicVolume());
+                AppPreference.setMusicEnabled(sliderVolume.getValue() != 0);
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
             }
         });
         textField.addListener(new InputListener(){

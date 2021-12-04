@@ -2,6 +2,7 @@ package com.mycompany.mygame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class ResourceManager implements Disposable {
 
+    private final String music = "music/music.mp3";
     private final AssetManager manager;
     private final BitmapFont fontBig;
     private final BitmapFont fontNormal;
@@ -40,6 +42,8 @@ public class ResourceManager implements Disposable {
     public final static String ICON_PAUSE = "icon_pause";
     public final static String ICON_CROSS = "icon_cross";
     public final static String ICON_PLAY = "icon_play";
+    public final static String ICON_MUSIC = "icon_music";
+    public final static String ICON_CIRCLE = "icon_circle";
 
     public final static String button_style = "buttonStyle";
     public final static String label_style_normal = "labelStyle_normal";
@@ -62,6 +66,7 @@ public class ResourceManager implements Disposable {
         fontBig = new BitmapFont(Gdx.files.internal("font/font-white-big.fnt"));
         loadTextureAtlas();
         loadTexture();
+        loadMusic();
         manager.finishLoading();
         setUiNew(AppPreference.getColorUI());
     }
@@ -75,6 +80,10 @@ public class ResourceManager implements Disposable {
         manager.load(fon_menu, Texture.class);
         manager.load(heart, Texture.class);
         manager.load(background, Texture.class);
+    }
+
+    private void loadMusic(){
+        manager.load(music, Music.class);
     }
 
     private void loadTextureAtlas(){
@@ -150,6 +159,10 @@ public class ResourceManager implements Disposable {
 
     public Skin getSkin(){
         return this.skin;
+    }
+
+    public Music getMusic(){
+        return manager.get(music, Music.class);
     }
 
 

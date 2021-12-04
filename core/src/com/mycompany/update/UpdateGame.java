@@ -58,10 +58,16 @@ public class UpdateGame extends InputAdapter {
         loadSudoku(sudoku);
     }
 
-    public void victoryGame(){
+    private void victoryGame(){
         mainScreen.dispose();
         mainScreen.getGame().setStateScreen(MyGdxGame.State.VICTORY);
     }
+    private void loseGame(){
+        mainScreen.dispose();
+        mainScreen.getGame().setStateScreen(MyGdxGame.State.LOSE);
+    }
+
+
 
     private void loadSudoku(int [][] sudoku){
         for (int row = 0; row < 9; row++){
@@ -103,8 +109,12 @@ public class UpdateGame extends InputAdapter {
                 cell.setMark(true);
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark3));
                 AppPreference.setErrorGame(AppPreference.getErrorGame()+1);
+                mainScreen.getMainUi().setLabelError(AppPreference.getErrorGame());
             } else if (grid.isFilledIn()){
                 victoryGame();
+            }
+            if (AppPreference.getErrorGame() >= 5){
+                loseGame();
             }
         }
     }
