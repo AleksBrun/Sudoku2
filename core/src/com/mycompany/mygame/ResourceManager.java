@@ -23,12 +23,13 @@ public class ResourceManager implements Disposable {
     private final String numbers = "images/numbers.pack";
     public static final String grid = "images/grid2.png";
     public static final String fon_menu = "images/fon_menu.png";
+    public static final String cup = "images/cup.png";
     public static final String mark = "images/mark.png";
     public static final String mark1 = "images/mark1.png";
     public static final String mark2 = "images/mark4.png";
     public static final String mark3 = "images/mark3.png";
     public static final String heart = "images/heart.jpg";
-    public static final String background = "images/background.jpg";
+    public static final String background = "images/background1.jpg";
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
     private final String ui_green  = "skin/ui-green.atlas";
@@ -58,6 +59,8 @@ public class ResourceManager implements Disposable {
     public final String BUTTON_DOWN = "button_05";
     public final String BUTTON_UP = "button_06";
 
+    private TextureRegion[] cups = new TextureRegion[3];
+
 
     public ResourceManager() {
         manager = new AssetManager();
@@ -68,6 +71,7 @@ public class ResourceManager implements Disposable {
         loadTexture();
         loadMusic();
         manager.finishLoading();
+        getCups();
         setUiNew(AppPreference.getColorUI());
     }
 
@@ -94,6 +98,7 @@ public class ResourceManager implements Disposable {
         manager.load(ui_orange, TextureAtlas.class);
         manager.load(ui_gray, TextureAtlas.class);
         manager.load(ui_white, TextureAtlas.class);
+        manager.load(cup, Texture.class);
 
     }
 
@@ -107,6 +112,16 @@ public class ResourceManager implements Disposable {
 
     public TextureRegion getNumber(int _number){
         return new TextureRegion(manager.get(numbers, TextureAtlas.class).findRegion("number"+_number));
+    }
+
+    public TextureRegion getCup(int index){
+        return cups[index];
+    }
+
+    private void getCups(){
+        Texture texture = manager.get(cup, Texture.class);
+        TextureRegion[][] tmp = TextureRegion.split(texture, texture.getWidth()/3, texture.getHeight());
+        System.arraycopy(tmp[0], 0, cups, 0, 3);
     }
 
     public void setUiNew(int index){

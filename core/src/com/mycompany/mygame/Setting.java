@@ -18,6 +18,7 @@ public class Setting {
 	public static String name_setting_button = "    Настройка  ";
 	public static String name_love_button = "   Любимой ";
     public static String name_reset_button = "  Сброс ";
+	public static String name_trophy_button = "   Награда   ";
 	public static final String name_colorUi_button ="   Цвет ";
 	public static final String level_1 = "  Легко ";
 	public static final String level_2 = "  Нормально ";

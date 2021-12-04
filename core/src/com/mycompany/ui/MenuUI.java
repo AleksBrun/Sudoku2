@@ -30,6 +30,7 @@ public class MenuUI extends Stage {
         TextButton start = new TextButton(Setting.name_play_button, manager.getSkin(), ResourceManager.button_style);
         TextButton exit = new TextButton(Setting.name_exit_button, manager.getSkin(), ResourceManager.button_style);
         TextButton color = new TextButton(Setting.name_setting_button, manager.getSkin(), ResourceManager.button_style);
+        TextButton trophy = new TextButton(Setting.name_trophy_button, manager.getSkin(), ResourceManager.button_style);
         TextButton test = new TextButton(Setting.name_love_button, manager.getSkin(), ResourceManager.button_style);
 
         table.bottom();
@@ -37,6 +38,7 @@ public class MenuUI extends Stage {
         table.add(start).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(color).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(exit).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(trophy).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(test).fillX().padTop(Setting.pad_ui_menu).padBottom(Setting.pad_ui_menu_bottom);
 
         start.addListener(new ClickListener(){
@@ -73,6 +75,13 @@ public class MenuUI extends Stage {
                 menuScreen.dispose();
                 menuScreen.getGame().setSudoku(LoaderSudoku.getIntegerSudoku(AppPreference.loadSudoku()));
                 menuScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+            }
+        });
+        trophy.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                menuScreen.dispose();
+                menuScreen.getGame().setStateScreen(MyGdxGame.State.TROPHY);
             }
         });
     }
