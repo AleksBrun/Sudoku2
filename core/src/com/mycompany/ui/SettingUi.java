@@ -1,5 +1,6 @@
 package com.mycompany.ui;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -15,9 +16,9 @@ import com.mycompany.screens.SettingScreen;
 
 public class SettingUi extends Stage {
 
-    private final Image color;
+    //private final Image color;
     private int indexColor = AppPreference.getColorUI();
-    private Label sladerInfo;
+    //private final Label sliderInfo;
 
     public SettingUi(Viewport viewport, final ResourceManager manager, final SettingScreen settingScreen){
         super(viewport);
@@ -30,30 +31,32 @@ public class SettingUi extends Stage {
         table.setFillParent(true);
         addActor(table);
 
-        Label title = new Label(Setting.name_setting_button, manager.getSkin(), ResourceManager.label_style_normal);
+        final Label title = new Label(Setting.name_setting_button, manager.getSkin(), ResourceManager.label_style_normal);
+
+        final Label levelInfo = new Label("Сложность", manager.getSkin(), ResourceManager.label_style_small);
 
         final TextButton color_ui = new TextButton(Setting.name_colorUi_button, manager.getSkin(), ResourceManager.button_style);
 
-        TextButton reset = new TextButton(Setting.name_reset_button, manager.getSkin(), ResourceManager.button_style);
+        final TextButton reset = new TextButton(Setting.name_reset_button, manager.getSkin(), ResourceManager.button_style);
 
-        TextButton menu = new TextButton(Setting.name_menu_button, manager.getSkin(), ResourceManager.button_style);
+        final TextButton menu = new TextButton(Setting.name_menu_button, manager.getSkin(), ResourceManager.button_style);
 
-        TextField textField = new TextField("", manager.getSkin(), ResourceManager.textbox_style);
-        textField.setPasswordMode(true);
+        final TextField textField = new TextField("", manager.getSkin(), ResourceManager.textbox_style);
+        textField.setAlignment(1);
 
-        color = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
+        final Image color = new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
 
         final Slider slider = new Slider(25, 60, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
         slider.setValue(AppPreference.getMissingDigits());
         
-        sladerInfo = new Label(""+AppPreference.getMissingDigits(), manager.getSkin(), ResourceManager.label_style_normal);
+        final Label sliderInfo = new Label(""+AppPreference.getMissingDigits(), manager.getSkin(), ResourceManager.label_style_normal);
 
-        table.top();
         table.add(title).colspan(2).padTop(10).row();
-        table.add(color).colspan(2).top().padTop(40).row();
-        table.add(color_ui).colspan(2).top().padTop(10).fillX().row();
+        table.add(color_ui).fillX().padTop(40);
+        table.add(color).padTop(40).row();
+        table.add(levelInfo).colspan(2).padTop(10).row();
         table.add(slider).padTop(10).fillX();
-        table.add(sladerInfo).padTop(10).padLeft(10).fillX().row();
+        table.add(sliderInfo).padTop(10).padLeft(10).fillX().row();
         table.add(reset).colspan(2).padTop(10).fillX().row();
         table.add(textField).colspan(2).padTop(10).fillX().row();
         table.add(menu).colspan(2).top().padTop(10).fillX().row();
@@ -81,7 +84,7 @@ public class SettingUi extends Stage {
             public void clicked(InputEvent event, float x, float y){
                 AppPreference.setContinuationEnabled(false);
                 AppPreference.setMissingDigits(25);
-                sladerInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
+                sliderInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
                 slider.setValue(AppPreference.getMissingDigits());
             }
         });
@@ -89,7 +92,7 @@ public class SettingUi extends Stage {
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {
                 AppPreference.setMissingDigits((int)slider.getValue());
-                sladerInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
+                sliderInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
             }
 
             @Override
@@ -99,7 +102,18 @@ public class SettingUi extends Stage {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //System.out.print(AppPreference.getMissingDigits());
+
+            }
+        });
+        textField.addListener(new InputListener(){
+
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (keycode == Input.Keys.ENTER && textField.getText().equals("2018")){
+                    settingScreen.dispose();
+                    settingScreen.getGame().setStateScreen(MyGdxGame.State.HELLO);
+                }
+                return false;
             }
         });
     }

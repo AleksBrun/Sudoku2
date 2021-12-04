@@ -24,7 +24,8 @@ public class UpdateGame extends InputAdapter {
         this.mainScreen = _mainScreen;
 
         grid = new Grid(Setting.getPositionGrid_X(),Setting.getPositionGrid_Y(),
-                Setting.getSizeGrid(), mainScreen.getGame().getManager());
+                Setting.getSizeGrid());
+        grid.setBackground(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.grid));
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y()/2 -Setting.getSizeGrid()/20,
                 Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
     }
@@ -54,12 +55,26 @@ public class UpdateGame extends InputAdapter {
     }
 
     public void playGame(int[][] sudoku){
-        grid.loadSudoku(sudoku);
+        loadSudoku(sudoku);
     }
 
     public void victoryGame(){
         mainScreen.dispose();
         mainScreen.getGame().setStateScreen(MyGdxGame.State.VICTORY);
+    }
+
+    private void loadSudoku(int [][] sudoku){
+        for (int row = 0; row < 9; row++){
+            for (int column = 0; column < 9; column++){
+                Cell cell = grid.getCells()[column][row];
+                cell.setNumber(sudoku[column][row]);
+                cell.setMark(false);
+                cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+                if (cell.getNumber() == 0){
+                    cell.setActive(true);
+                }
+            }
+        }
     }
 
     private void update(int screenX, int screenY){

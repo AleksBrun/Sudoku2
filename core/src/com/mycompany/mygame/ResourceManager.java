@@ -45,6 +45,7 @@ public class ResourceManager implements Disposable {
     public final static String label_style_normal = "labelStyle_normal";
     public final static String label_style_big = "labelStyle_big";
     public final static String label_style_small = "labelStyle_small";
+    public final static String window_style = "window_01";
 
     public final static String slider_style_hor =  "slider_hor";
 
@@ -136,8 +137,15 @@ public class ResourceManager implements Disposable {
 
         TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
         textFieldStyle.background = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("textbox_01"));
+        textFieldStyle.cursor = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("textbox_cursor_02"));
         textFieldStyle.font = fontNormal;
+        textFieldStyle.fontColor = Color.BLACK;
         skin.add(textbox_style, textFieldStyle, TextField.TextFieldStyle.class);
+
+        Window.WindowStyle windowStyle = new Window.WindowStyle();
+        windowStyle.background = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("window_01"));
+        windowStyle.titleFont = fontSmall;
+        skin.add(window_style, windowStyle, Window.WindowStyle.class);
     }
 
     public Skin getSkin(){

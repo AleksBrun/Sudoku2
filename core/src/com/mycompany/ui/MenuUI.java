@@ -78,5 +78,6 @@ public class MenuUI extends Stage {
                 menuScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
+
     }
 }

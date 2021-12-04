@@ -6,17 +6,17 @@ import com.mycompany.mygame.ResourceManager;
 public class Grid {
 
     private final float x, y, size;
-    private final TextureRegion background;
-    private final ResourceManager manager;
+    private TextureRegion background;
+    //private final ResourceManager manager;
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
 
-    public Grid(float _x, float _y, float _size, ResourceManager _manager){
+    public Grid(float _x, float _y, float _size){
         this.x = _x;
         this.y = _y;
         this.size = _size;
-        this.manager = _manager;
-        this.background = manager.getTextureRegion(ResourceManager.grid);
+        //this.manager = _manager;
+        //this.background = manager.getTextureRegion(ResourceManager.grid);
 
         createCells();
     }
@@ -105,20 +105,6 @@ public class Grid {
         }
     }
 
-    public void loadSudoku(int [][] sudoku){
-        for (int row = 0; row < 9; row++){
-            for (int column = 0; column < 9; column++){
-                Cell cell = cells[column][row];
-                cell.setNumber(sudoku[column][row]);
-                cell.setMark(false);
-                cell.setRegion(manager.getNumber(cell.getNumber()));
-                if (cell.getNumber() == 0){
-                    cell.setActive(true);
-                }
-            }
-        }
-    }
-
     public int[][] getSudoku(){
         int [][] tmp = new int[9][9];
         for (int row = 0; row < 9; row++){
@@ -147,5 +133,10 @@ public class Grid {
 
     public TextureRegion getBackground() {
         return background;
+    }
+
+    public void setBackground(TextureRegion background) {
+
+        this.background = background;
     }
 }
