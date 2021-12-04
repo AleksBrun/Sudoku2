@@ -39,7 +39,6 @@ public class MainUi extends Stage {
         Label errorLabel = new Label("Ошибки - ", manager.getSkin(), ResourceManager.label_style_normal);
         time = new Label("00:00", manager.getSkin(), ResourceManager.label_style_normal);
         
-        
         star = new Star(Setting.size_icon/2, manager.getTextureAtlas(ResourceManager.ICON_STAR));
 
         float size = Setting.size_icon;
@@ -55,8 +54,8 @@ public class MainUi extends Stage {
         table.row();
         table.layout();
 
-        table.add(labelClock).top().right().padTop(5);
-        table.add(time).colspan(6).top().center().padTop(5);
+        table.add(labelClock).colspan(2).top().left().padTop(5).padLeft(10);
+        table.add(time).colspan(4).top().center().padTop(5);
        
         playIcon.addListener(new ClickListener(){
             @Override
