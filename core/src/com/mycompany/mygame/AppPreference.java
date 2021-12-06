@@ -136,7 +136,7 @@ public class AppPreference {
     }
 
     public static int getColorUI() {
-        return prefs.getInteger(PREF_COLOR_INDEX, 0);
+        return prefs.getInteger(PREF_COLOR_INDEX, 6);
     }
 
 }

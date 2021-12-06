@@ -28,6 +28,7 @@ public class ResourceManager implements Disposable {
     public static final String mark1 = "images/mark1.png";
     public static final String mark2 = "images/mark4.png";
     public static final String mark3 = "images/mark3.png";
+    public static final String mark4 = "images/mark2.png";
     public static final String heart = "images/heart.jpg";
     public static final String background = "images/background1.jpg";
     private String name_ui;
@@ -37,12 +38,13 @@ public class ResourceManager implements Disposable {
     private final String ui_orange  = "skin/ui-orange.atlas";
     private final String ui_gray = "skin/ui-gray.atlas";
     private final String ui_white = "skin/ui-white.atlas";
+    private final String ui_yellow = "skin/ui-yellow.atlas";
 
     public final static String ICON_STAR = "icon_star";
     public final static String ICON_BACK = "icon_back";
     public final static String ICON_PAUSE = "icon_pause";
     public final static String ICON_CROSS = "icon_cross";
-    public final static String ICON_PLAY = "icon_play";
+    //public final static String ICON_PLAY = "icon_play";
     public final static String ICON_MUSIC = "icon_music";
     public final static String ICON_CIRCLE = "icon_circle";
 
@@ -59,7 +61,7 @@ public class ResourceManager implements Disposable {
     public final String BUTTON_DOWN = "button_05";
     public final String BUTTON_UP = "button_06";
 
-    private TextureRegion[] cups = new TextureRegion[3];
+    private final TextureRegion[] cups = new TextureRegion[3];
 
 
     public ResourceManager() {
@@ -72,7 +74,7 @@ public class ResourceManager implements Disposable {
         loadMusic();
         manager.finishLoading();
         getCups();
-        setUiNew(AppPreference.getColorUI());
+        setUiNew(AppPreference.getColorUI(), Color.BLACK);
     }
 
     private void loadTexture(){
@@ -81,6 +83,7 @@ public class ResourceManager implements Disposable {
         manager.load(mark1, Texture.class);
         manager.load(mark2, Texture.class);
         manager.load(mark3, Texture.class);
+        manager.load(mark4, Texture.class);
         manager.load(fon_menu, Texture.class);
         manager.load(heart, Texture.class);
         manager.load(background, Texture.class);
@@ -98,6 +101,7 @@ public class ResourceManager implements Disposable {
         manager.load(ui_orange, TextureAtlas.class);
         manager.load(ui_gray, TextureAtlas.class);
         manager.load(ui_white, TextureAtlas.class);
+        manager.load(ui_yellow, TextureAtlas.class);
         manager.load(cup, Texture.class);
 
     }
@@ -124,19 +128,20 @@ public class ResourceManager implements Disposable {
         System.arraycopy(tmp[0], 0, cups, 0, 3);
     }
 
-    public void setUiNew(int index){
-        String[] tmp = {ui_blue, ui_green, ui_red, ui_orange, ui_white, ui_gray};
+    public void setUiNew(int index, Color color){
+        String[] tmp = {ui_white, ui_blue, ui_green, ui_red, ui_orange, ui_gray, ui_yellow};
         name_ui = tmp[index];
-        createSkin();
+        createSkin(color);
     }
 
-    private void createSkin(){
+    private void createSkin(Color color){
         skin = new Skin();
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.up = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_UP));
         style.down = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_DOWN));
         style.font = fontNormal;
+        style.fontColor = color;
         skin.add(button_style, style, TextButton.TextButtonStyle.class);
 
         Label.LabelStyle labelStyle_normal = new Label.LabelStyle();

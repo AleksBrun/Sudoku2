@@ -37,9 +37,9 @@ public class MenuUI extends Stage {
         table.add(continuation).row();
         table.add(start).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(color).fillX().padTop(Setting.pad_ui_menu).row();
-        table.add(exit).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(test).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(trophy).fillX().padTop(Setting.pad_ui_menu).row();
-        table.add(test).fillX().padTop(Setting.pad_ui_menu).padBottom(Setting.pad_ui_menu_bottom);
+        table.add(exit).fillX().padTop(Setting.pad_ui_menu).padBottom(Setting.pad_ui_menu_bottom);
 
         start.addListener(new ClickListener(){
             @Override

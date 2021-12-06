@@ -1,6 +1,7 @@
 package com.mycompany.ui;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -70,11 +71,15 @@ public class SettingUi extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 int indexColor = AppPreference.getColorUI();
                 indexColor++;
-                manager.setUiNew(indexColor);
-                color.setDrawable(new TextureRegionDrawable(manager.getTextureAtlas(ResourceManager.ICON_CIRCLE)));
-                color_ui.setChecked(false);
-                if (indexColor > 4) indexColor = 0;
+
+                if (indexColor > 6) {
+                    indexColor = 0;
+                }
+                manager.setUiNew(indexColor, Color.BLACK);
                 AppPreference.setColorUI(indexColor);
+                System.out.print(AppPreference.getColorUI());
+                color_ui.setChecked(false);
+                color.setDrawable(new TextureRegionDrawable(manager.getTextureAtlas(ResourceManager.ICON_CIRCLE)));
             }
         });
         menu.addListener(new ClickListener(){

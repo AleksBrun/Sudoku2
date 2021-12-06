@@ -10,7 +10,7 @@ import com.mycompany.ui.TrophyUi;
 
 public class TrophyScreen implements Screen {
 
-    private MyGdxGame game;
+    private final MyGdxGame game;
     private TrophyUi trophyUi;
 
     public TrophyScreen(MyGdxGame game) {
@@ -19,7 +19,7 @@ public class TrophyScreen implements Screen {
 
     @Override
     public void show() {
-        trophyUi = new TrophyUi(new FitViewport(Setting.width_menu_ui, Setting.getHeight_Ui(Setting.width_menu_ui)), game.getManager(), this);
+        trophyUi = new TrophyUi(new FitViewport(Setting.width_main_ui, Setting.getHeight_Ui(Setting.width_main_ui)), game.getManager(), this);
         Gdx.input.setInputProcessor(trophyUi);
     }
 
