@@ -1,61 +1,93 @@
 package com.mycompany.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
+import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.ui.MenuUI;
+import com.mycompany.unils.LoaderSudoku;
 
-public class MenuScreen implements Screen {
-
-    private final MyGdxGame game;
-    private MenuUI menuUI;
+public class MenuScreen extends CommonScreen {
 
     public MenuScreen(MyGdxGame game) {
-        this.game = game;
+        super(500, game);
     }
 
     @Override
     public void show() {
-        menuUI = new MenuUI(new FillViewport(Setting.width_menu_ui, Setting.getHeight_Ui(Setting.width_menu_ui)), game.getManager(), this);
-        Gdx.input.setInputProcessor(menuUI);
-    }
+        super.show();
+        TextButton continuation = new TextButton(Setting.name_continuation_button, getSkin(), ResourceManager.button_style);
+        continuation.setVisible(AppPreference.isContinuationEnabled());
+        TextButton start = new TextButton(Setting.name_play_button, getSkin(), ResourceManager.button_style);
+        TextButton exit = new TextButton(Setting.name_exit_button, getSkin(), ResourceManager.button_style);
+        TextButton color = new TextButton(Setting.name_setting_button, getSkin(), ResourceManager.button_style);
+        TextButton trophy = new TextButton(Setting.name_trophy_button, getSkin(), ResourceManager.button_style);
+        TextButton test = new TextButton(Setting.name_love_button, getSkin(), ResourceManager.button_style);
+        TextButton statistics = new TextButton(Setting.name_statistics_button, getSkin(), ResourceManager.button_style);
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(.5f, .5f, .5f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        menuUI.draw();
-    }
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.fon_menu)));
+        table.bottom();
+        table.add(continuation).row();
+        table.add(start).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(color).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(test).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(statistics).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(trophy).fillX().padTop(Setting.pad_ui_menu).row();
+        table.add(exit).fillX().padTop(Setting.pad_ui_menu).padBottom(Setting.pad_ui_menu_bottom);
 
-    public MyGdxGame getGame() {
-        return game;
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void dispose() {
-        menuUI.dispose();
+        start.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.LEVEL);
+            }
+        });
+        exit.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                Gdx.app.exit();
+            }
+        });
+        color.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.SETTING);
+            }
+        });
+        test.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.HELLO);
+            }
+        });
+        continuation.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setSudoku(LoaderSudoku.getIntegerSudoku(AppPreference.loadSudoku()));
+                game.setStateScreen(MyGdxGame.State.MAIN);
+            }
+        });
+        trophy.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.TROPHY);
+            }
+        });
+        statistics.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                dispose();
+                game.setStateScreen(MyGdxGame.State.STATISTICS);
+            }
+        });
     }
 }

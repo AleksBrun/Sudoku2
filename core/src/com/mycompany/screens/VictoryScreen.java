@@ -1,64 +1,47 @@
 package com.mycompany.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
+import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.ui.VictoryUI;
 
-public class VictoryScreen implements Screen {
-
-    private MyGdxGame game;
-    private VictoryUI victoryUI;
+public class VictoryScreen extends CommonScreen {
 
     public VictoryScreen(MyGdxGame game) {
-        this.game = game;
+        super(500, game);
     }
 
     @Override
     public void show() {
+        super.show();
         AppPreference.setAllStars(AppPreference.getAllStars()+AppPreference.getDifficultyLevel());
         AppPreference.setContinuationEnabled(false);
-        victoryUI =new VictoryUI( new FitViewport(Setting.width_menu_ui, Setting.getHeight_Ui(Setting.width_menu_ui)), game.getManager(), this);
-        Gdx.input.setInputProcessor(victoryUI);
-    }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        victoryUI.draw();
-    }
+        Label title  = new Label("Результат", getSkin(), ResourceManager.label_style_big);
+        Label time = new Label("Время игры -  "+ AppPreference.getTimeMinute()+":"+AppPreference.getTimeSecond(), getSkin(), ResourceManager.label_style_normal);
+        Label error = new Label("Ошибки - "+AppPreference.getErrorGame(), getSkin(), ResourceManager.label_style_normal);
+        Label stars= new Label("Звезд за игру - "+AppPreference.getDifficultyLevel(), getSkin(), ResourceManager.label_style_normal);
+        Label allStars = new Label("Всего звезд - "+AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_normal);
 
-    @Override
-    public void resize(int width, int height) {
+        TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
-    }
+        table.add(title).row();
+        table.add(time).padTop(20).row();
+        table.add(error).row();
+        table.add(stars).row();
+        table.add(allStars).row();
+        table.add(menu).padTop(20);
 
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void dispose() {
-        victoryUI.dispose();
-    }
-
-    public MyGdxGame getGame() {
-        return game;
+        menu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.MENU);
+            }
+        });
     }
 }

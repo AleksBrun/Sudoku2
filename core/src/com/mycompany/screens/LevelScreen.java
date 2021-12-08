@@ -9,7 +9,6 @@ import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.ui.LevelUI;
 import com.mycompany.unils.Sudoku;
 
 public class LevelScreen extends CommonScreen {
@@ -22,17 +21,17 @@ public class LevelScreen extends CommonScreen {
     public void show() {
         super.show();
 
-        final Label levelLabel = new Label("Уровень", getManager().getSkin(), ResourceManager.label_style_normal);
+        final Label levelLabel = new Label("Уровень", getSkin(), ResourceManager.label_style_normal);
 
-        TextButton easy = new TextButton(Setting.level_1, getManager().getSkin(), ResourceManager.button_style);
+        TextButton easy = new TextButton(Setting.level_1, getSkin(), ResourceManager.button_style);
 
-        TextButton average = new TextButton(Setting.level_2, getManager().getSkin(), ResourceManager.button_style);
+        TextButton average = new TextButton(Setting.level_2, getSkin(), ResourceManager.button_style);
 
-        TextButton difficult = new TextButton(Setting.level_3, getManager().getSkin(), ResourceManager.button_style);
+        TextButton difficult = new TextButton(Setting.level_3, getSkin(), ResourceManager.button_style);
 
-        TextButton random = new TextButton(Setting.level_random, getManager().getSkin(), ResourceManager.button_style);
+        TextButton random = new TextButton(Setting.level_random, getSkin(), ResourceManager.button_style);
 
-        TextButton menu = new TextButton(Setting.name_menu_button, getManager().getSkin(), ResourceManager.button_style);
+        TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
         table.add(levelLabel).row();
         table.add(easy).fillX().padTop(20).row();
@@ -44,43 +43,40 @@ public class LevelScreen extends CommonScreen {
         easy.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    game.reset();
                     dispose();
+                    game.reset();
                     game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.minimum));
-                    AppPreference.setDifficultyLevel(2);
                     game.setStateScreen(MyGdxGame.State.MAIN);
-
+                    AppPreference.setDifficultyLevel(2);
                 }
             });
         average.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    game.reset();
                     dispose();
+                    game.reset();
                     game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.moderate));
-                    AppPreference.setDifficultyLevel(3);
                     game.setStateScreen(MyGdxGame.State.MAIN);
-
+                    AppPreference.setDifficultyLevel(3);
                 }
             });
         difficult.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    game.reset();
                     dispose();
+                    game.reset();
                     game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
-                    AppPreference.setDifficultyLevel(4);
                     game.setStateScreen(MyGdxGame.State.MAIN);
-
+                    AppPreference.setDifficultyLevel(4);
                 }
             });
         random.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    dispose();
                     game.reset();
                     int mission_digits = AppPreference.getMissingDigits();
                     AppPreference.setDifficultyLevel(getDifficultyLevel(mission_digits));
-                    dispose();
                     game.setSudoku(Sudoku.getRandomSudoku(mission_digits));
                     game.setStateScreen(MyGdxGame.State.MAIN);
                 }
@@ -94,7 +90,6 @@ public class LevelScreen extends CommonScreen {
             });
     }
     
-
     private int getDifficultyLevel(int mission_digits) {
         if (mission_digits >= 25 && mission_digits < 30) {
             return 1;
