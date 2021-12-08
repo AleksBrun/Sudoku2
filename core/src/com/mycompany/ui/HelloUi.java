@@ -35,7 +35,7 @@ public class HelloUi extends Stage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 helloScreen.dispose();
-                helloScreen.getGame().setStateScreen(MyGdxGame.State.MENU);
+               // helloScreen.game.setStateScreen(MyGdxGame.State.MENU);
             }
         });
     }

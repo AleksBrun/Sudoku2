@@ -13,6 +13,8 @@ import com.mycompany.ui.MainUi;
 import com.mycompany.unils.Clock;
 import com.mycompany.unils.LoaderSudoku;
 import com.mycompany.update.UpdateGame;
+import com.badlogic.gdx.math.GridPoint2;
+import com.mycompany.unils.TimeUtils;
 
 public class MainScreen implements Screen {
 
@@ -79,6 +81,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void resume() {
+        System.out.println("resume|");
 
     }
 
@@ -87,6 +90,9 @@ public class MainScreen implements Screen {
         Gdx.input.setInputProcessor(null);
         AppPreference.setTimeMinute(clock.getMinute());
         AppPreference.setTimeSecond(clock.getSecond());
+        int allTime = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
+        allTime += AppPreference.getAllTime();
+        AppPreference.setAllTeme(allTime);
         AppPreference.saveSudoku(LoaderSudoku.getStringSudoku(updateGame.getGrid().getSudoku()));
         game.getManager().getMusic().pause();
         

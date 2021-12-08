@@ -4,6 +4,8 @@ import com.badlogic.gdx.Preferences;
 import com.mycompany.unils.Puzzle;
 
 public class AppPreference {
+    private static final String PREF_ALL_MINUTE = "all.minute";
+    private static final String PREF_ALL_SECOND = "all.second";
     private static final String PREF_ERROR_GAME = "error.game";
     private static final String PREF_ALL_STARS = "all.stars";
     private static final String PREF_MUSIC_VOLUME = "volume";
@@ -21,6 +23,13 @@ public class AppPreference {
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
 
+    public static void setAllTeme(int minute){
+        prefs.putInteger(PREF_ALL_MINUTE, minute);
+        prefs.flush();
+    }
+    public static int getAllTime(){
+        return prefs.getInteger(PREF_ALL_MINUTE, 0);
+    }
     // Сохранить колличество ошибок за игру
     public static void setErrorGame(int errorGame){
         prefs.putInteger(PREF_ERROR_GAME, errorGame);

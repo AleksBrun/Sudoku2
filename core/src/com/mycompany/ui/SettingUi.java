@@ -46,7 +46,7 @@ public class SettingUi extends Stage {
 
         final Image color = new Image(manager.getTextureAtlas(ResourceManager.ICON_CIRCLE));
 
-        final Slider slider = new Slider(1, 60, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
+        final Slider slider = new Slider(25, 60, 5, false, manager.getSkin(), ResourceManager.slider_style_hor);
         slider.setValue(AppPreference.getMissingDigits());
 
         final Slider sliderVolume = new Slider(0, 1, .1f, false, manager.getSkin(), ResourceManager.slider_style_hor);

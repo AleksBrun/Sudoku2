@@ -1,61 +1,37 @@
 package com.mycompany.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mycompany.mygame.MyGdxGame;
+import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.ui.HelloUi;
 
-public class HelloScreen implements Screen {
+public class HelloScreen extends CommonScreen {
 
-    private MyGdxGame game;
-    private HelloUi helloUi;
-
-    public HelloScreen(MyGdxGame game) {
-        this.game = game;
+    public HelloScreen( MyGdxGame game) {
+        super(500, game);
     }
 
     @Override
     public void show() {
-        helloUi = new HelloUi(new FitViewport(Setting.width_menu_ui, Setting.getHeight_Ui(Setting.width_menu_ui)), game.getManager(), this);
-        Gdx.input.setInputProcessor(helloUi);
+        super.show();
+        
+        TextButton menu = new TextButton(Setting.name_menu_button, game.getManager().getSkin(), ResourceManager.button_style);
+        
+        table.setBackground(new TextureRegionDrawable(game.getManager().getTextureRegion(ResourceManager.heart)));
+        table.top();
+        table.add(menu);
+
+        menu.addListener(new ClickListener(){
+             @Override
+             public void clicked(InputEvent event, float x, float y) {
+                 dispose();
+                 game.setStateScreen(MyGdxGame.State.MENU);
+             }
+        });
+        
     }
 
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        helloUi.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void dispose() {
-        helloUi.dispose();
-    }
-
-    public MyGdxGame getGame() {
-        return game;
-    }
 }

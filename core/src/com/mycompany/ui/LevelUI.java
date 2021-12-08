@@ -46,9 +46,9 @@ public class LevelUI extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 reset();
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.minimum));
+                //.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.minimum));
                 AppPreference.setDifficultyLevel(2);
-                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+                //levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
             }
         });
@@ -57,9 +57,9 @@ public class LevelUI extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 reset();
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.moderate));
+                //levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.moderate));
                 AppPreference.setDifficultyLevel(3);
-                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+                //levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
             }
         });
@@ -68,9 +68,9 @@ public class LevelUI extends Stage {
             public void clicked(InputEvent event, float x, float y) {
                 reset();
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
+                //levelScreen.getGame().setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
                 AppPreference.setDifficultyLevel(4);
-                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+                //levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
 
             }
         });
@@ -81,15 +81,15 @@ public class LevelUI extends Stage {
                 int mission_digits = AppPreference.getMissingDigits();
                 AppPreference.setDifficultyLevel(getDifficultyLevel(mission_digits));
                 levelScreen.dispose();
-                levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(mission_digits));
-                levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
+                //levelScreen.getGame().setSudoku(Sudoku.getRandomSudoku(mission_digits));
+                //levelScreen.getGame().setStateScreen(MyGdxGame.State.MAIN);
             }
         });
         menu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 levelScreen.dispose();
-                levelScreen.getGame().setStateScreen(MyGdxGame.State.MENU);
+                //levelScreen.getGame().setStateScreen(MyGdxGame.State.MENU);
             }
         });
     }

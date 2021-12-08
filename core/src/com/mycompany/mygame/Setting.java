@@ -14,6 +14,7 @@ public class Setting {
 	public static String name_continuation_button = "    Продолжить  ";
 	public static String name_play_button = "   Новая Игра ";
 	public static String name_menu_button = "   Меню ";
+    public static String name_statistics_button = "    Статистика  ";
 	public static String name_exit_button = "   Выход ";
 	public static String name_setting_button = "    Настройка  ";
 	public static String name_love_button = "   Любимой ";

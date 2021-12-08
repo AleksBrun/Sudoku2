@@ -2,11 +2,19 @@ package com.mycompany.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mycompany.screens.*;
+import com.mycompany.screens.HelloScreen;
+import com.mycompany.screens.LevelScreen;
+import com.mycompany.screens.LoseScreen;
+import com.mycompany.screens.MainScreen;
+import com.mycompany.screens.MenuScreen;
+import com.mycompany.screens.SettingScreen;
+import com.mycompany.screens.StatisticsScreen;
+import com.mycompany.screens.TrophyScreen;
+import com.mycompany.screens.VictoryScreen;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY}
+	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
@@ -15,12 +23,15 @@ public class MyGdxGame extends Game {
 	private VictoryScreen victoryScreen;
 	private LoseScreen loseScreen;
 	private TrophyScreen trophyScreen;
+    private StatisticsScreen statisticsScreen;
 	private SpriteBatch batch;
 	private ResourceManager manager;
 	private int[][] sudoku;
 
 	@Override
 	public void create () {
+        //System.out.println(TimeUtils.setTime(5, 46));
+        //System.out.println(TimeUtils.getTime(346));
 		manager = new ResourceManager();
 		batch = new SpriteBatch();
 		setStateScreen(State.MENU);
@@ -52,6 +63,9 @@ public class MyGdxGame extends Game {
 			case TROPHY: if (trophyScreen == null) trophyScreen = new TrophyScreen(this);
 			setScreen(trophyScreen);
 			break;
+            case STATISTICS: if (statisticsScreen == null) statisticsScreen = new StatisticsScreen(this);
+            setScreen(statisticsScreen);
+            break;
 		}
 	}
 
@@ -70,6 +84,13 @@ public class MyGdxGame extends Game {
 	public void setSudoku(int[][] sudoku) {
 		this.sudoku = sudoku;
 	}
+    
+    public void reset() {
+        AppPreference.setContinuationEnabled(true);
+        AppPreference.setTimeMinute(0);
+        AppPreference.setTimeSecond(0);
+        AppPreference.setErrorGame(0);
+    }
 
 	@Override
 	public void dispose () {
