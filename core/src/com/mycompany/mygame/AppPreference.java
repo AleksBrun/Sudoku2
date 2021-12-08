@@ -1,7 +1,6 @@
 package com.mycompany.mygame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.mycompany.unils.Puzzle;
 
 public class AppPreference {
     private static final String PREF_ALL_MINUTE = "all.minute";
@@ -23,7 +22,7 @@ public class AppPreference {
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
 
-    public static void setAllTeme(int minute){
+    public static void setAllTime(int minute){
         prefs.putInteger(PREF_ALL_MINUTE, minute);
         prefs.flush();
     }
@@ -147,5 +146,4 @@ public class AppPreference {
     public static int getColorUI() {
         return prefs.getInteger(PREF_COLOR_INDEX, 6);
     }
-
 }

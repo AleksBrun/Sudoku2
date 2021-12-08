@@ -1,60 +1,49 @@
 package com.mycompany.screens;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+
+import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
-import com.mycompany.ui.StatisticsUi;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
+import com.mycompany.unils.TimeUtils;
 
-public class StatisticsScreen implements Screen {
-
-    private MyGdxGame game;
-    private StatisticsUi statisticsUi;
+public class StatisticsScreen extends CommonScreen {
 
     public StatisticsScreen(MyGdxGame game) {
-        this.game = game;
+        super(500, game);
     }
-    
-    public MyGdxGame getGame() {
-        return game;
-    }
+
     @Override
     public void show() {
-        statisticsUi = new StatisticsUi(new FitViewport(Setting.width_main_ui, Setting.getHeight_Ui(Setting.width_main_ui)), game.getManager(), this);
-        Gdx.input.setInputProcessor(statisticsUi);
-    }
+        super.show();
 
-    @Override
-    public void render(float p1) {
-        Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        statisticsUi.draw();
-    }
+        Label title = new Label("Статистика", getSkin(), ResourceManager.label_style_big);
 
-    @Override
-    public void resize(int p1, int p2) {
-    }
+        Label allStarLabel = new Label("Получено звезд: "+ AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_normal);
 
-    @Override
-    public void pause() {
-    }
+        GridPoint2 allTime = TimeUtils.getTime(AppPreference.getAllTime());
+        Label allTimeLabel = new Label("Общее время игры: "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_normal);
 
-    @Override
-    public void resume() {
-    }
+        Label allErrorLabel = new Label("Сделано ошибок: ", getSkin(), ResourceManager.label_style_normal);
 
-    @Override
-    public void hide() {
-        Gdx.input.setInputProcessor(null);
-    }
+        TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
-    @Override
-    public void dispose() {
-        statisticsUi.dispose();
-    }
+        table.add(title).row();
+        table.add(allStarLabel).padTop(20).row();
+        table.add(allTimeLabel).padTop(10).row();
+        table.add(allErrorLabel).padTop(10).row();
+        table.add(menu).padTop(10);
 
-    
-    
-    
+        menu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                dispose();
+                game.setStateScreen(MyGdxGame.State.MENU);
+            }
+        });
+    }
 }

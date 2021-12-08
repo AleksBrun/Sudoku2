@@ -1,61 +1,67 @@
 package com.mycompany.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mycompany.models.Reward;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
+import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.ui.TrophyUi;
 
-public class TrophyScreen implements Screen {
+public class TrophyScreen extends CommonScreen {
 
-    private final MyGdxGame game;
-    private TrophyUi trophyUi;
+    private Reward reward;
 
     public TrophyScreen(MyGdxGame game) {
-        this.game = game;
+        super(500, game);
     }
 
     @Override
     public void show() {
-        trophyUi = new TrophyUi(new FitViewport(Setting.width_main_ui, Setting.getHeight_Ui(Setting.width_main_ui)), game.getManager(), this);
-        Gdx.input.setInputProcessor(trophyUi);
+        super.show();
+
+        Label title = new Label("Награды",getSkin(), ResourceManager.label_style_big);
+
+        reward = new Reward(0, 0, stage.getWidth()-80, stage.getWidth(), getManager());
+
+        TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
+
+
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
+        table.top();
+        table.add(title).padTop(20).row();
+        table.add(reward).expand().top().padTop(10).row();
+        table.add(menu).bottom().padBottom(20);
+
+        menu.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.MENU);
+            }
+        });
+
+        String[] score = {"1", "5", "10", "20", "50", "100", "250", "500", "1000"};
+        for (int i = 0; i < 9; i++) {
+            if (AppPreference.getAllStars() >= Integer.parseInt(score[i])){
+                setTextureCell(i, getManager().getCup(0));
+            }
+
+        }
+        for (int i = 0; i < 9; i++) {
+            setLabelCell(i, score[i]);
+        }
+    }
+    private void setTextureCell(int cell, TextureRegion textureRegion){
+        reward.getCells()[cell].setDrawable(new TextureRegionDrawable(textureRegion));
     }
 
-    @Override
-    public void render(float v) {
-        Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        trophyUi.draw();
+    private void setLabelCell (int cell, String text){
+        reward.getNames()[cell].setText(text);
     }
 
-    @Override
-    public void resize(int i, int i1) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-        Gdx.input.setInputProcessor(null);
-    }
-
-    @Override
-    public void dispose() {
-        trophyUi.dispose();
-    }
-
-    public MyGdxGame getGame() {
-        return game;
-    }
 }
