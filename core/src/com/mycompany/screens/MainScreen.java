@@ -10,10 +10,10 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Setting;
 import com.mycompany.ui.MainUi;
-import com.mycompany.unils.Clock;
-import com.mycompany.unils.LoaderSudoku;
+import com.mycompany.utils.Clock;
+import com.mycompany.utils.LoaderSudoku;
 import com.mycompany.update.UpdateGame;
-import com.mycompany.unils.TimeUtils;
+import com.mycompany.utils.TimeUtils;
 
 public class MainScreen implements Screen {
 
@@ -33,15 +33,16 @@ public class MainScreen implements Screen {
     public void show() {
         mainUi = new MainUi(new FitViewport(Setting.width_main_ui, Setting.getHeight_Ui(Setting.width_main_ui)), game.getManager(), this);
         mainUi.setStars(AppPreference.getDifficultyLevel());
-        InputMultiplexer multiplexer = new InputMultiplexer(mainUi, updateGame);
-        Gdx.input.setInputProcessor(multiplexer);
+
         updateGame.playGame(game.getSudoku());
+
         clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
+
         game.getManager().getMusic().setVolume(AppPreference.getMusicVolume());
         game.getManager().getMusic().setLooping(true);
-        if (AppPreference.isMusicEnabled()){
-            game.getManager().getMusic().play();
-        }
+
+        InputMultiplexer multiplexer = new InputMultiplexer(mainUi, updateGame);
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
@@ -80,21 +81,22 @@ public class MainScreen implements Screen {
 
     @Override
     public void resume() {
-        System.out.println("resume|");
-
     }
 
     @Override
     public void hide() {
+        saveData();
         Gdx.input.setInputProcessor(null);
+        game.getManager().getMusic().pause();
+    }
+
+    private void saveData(){
         AppPreference.setTimeMinute(clock.getMinute());
         AppPreference.setTimeSecond(clock.getSecond());
         int allTime = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
         allTime += AppPreference.getAllTime();
         AppPreference.setAllTime(allTime);
         AppPreference.saveSudoku(LoaderSudoku.getStringSudoku(updateGame.getGrid().getSudoku()));
-        game.getManager().getMusic().pause();
-        
     }
 
     @Override

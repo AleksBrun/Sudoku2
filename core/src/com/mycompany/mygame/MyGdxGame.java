@@ -30,8 +30,6 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void create () {
-        //System.out.println(TimeUtils.setTime(5, 46));
-        //System.out.println(TimeUtils.getTime(346));
 		manager = new ResourceManager();
 		batch = new SpriteBatch();
 		setStateScreen(State.MENU);
@@ -40,6 +38,9 @@ public class MyGdxGame extends Game {
 	public void setStateScreen(State state){
 		switch (state){
 			case MAIN: if (mainScreen == null) mainScreen =new MainScreen(this);
+				if (AppPreference.isMusicEnabled()){
+					getManager().getMusic().play();
+				}
 			setScreen(mainScreen);
 			break;
 			case MENU: if (menuScreen == null) menuScreen = new MenuScreen(this);

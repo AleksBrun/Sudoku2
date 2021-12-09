@@ -1,4 +1,4 @@
-package com.mycompany.unils;
+package com.mycompany.utils;
 
 public class LoaderSudoku {
 

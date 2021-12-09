@@ -9,7 +9,7 @@ import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.unils.Sudoku;
+import com.mycompany.utils.Sudoku;
 
 public class LevelScreen extends CommonScreen {
 

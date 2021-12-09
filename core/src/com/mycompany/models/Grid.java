@@ -7,7 +7,6 @@ public class Grid {
 
     private final float x, y, size;
     private TextureRegion background;
-    //private final ResourceManager manager;
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
 
@@ -15,9 +14,6 @@ public class Grid {
         this.x = _x;
         this.y = _y;
         this.size = _size;
-        //this.manager = _manager;
-        //this.background = manager.getTextureRegion(ResourceManager.grid);
-
         createCells();
     }
 

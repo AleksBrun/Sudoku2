@@ -9,7 +9,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.unils.TimeUtils;
+import com.mycompany.utils.TimeUtils;
 
 public class StatisticsScreen extends CommonScreen {
 

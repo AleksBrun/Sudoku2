@@ -24,7 +24,6 @@ public class DrawGame {
         drawCells(batch);
         drawKeys(batch);
         batch.end();
-
     }
 
     private void drawBackground(SpriteBatch batch){
