@@ -9,7 +9,6 @@ import com.mycompany.models.Key;
 import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.Colors;
 import com.badlogic.gdx.graphics.Color;
 
 public class DrawGame {
@@ -27,13 +26,7 @@ public class DrawGame {
         drawCells(batch);
         drawKeys(batch);
         batch.end();
-        
-        render.begin();
-        render.set(ShapeRenderer.ShapeType.Line);
-        render.setColor(Color.ORANGE);
-        drawRender(render);
-        render.end();
-
+        //drawRender(render);
     }
 
     private void drawBackground(SpriteBatch batch){
@@ -80,6 +73,9 @@ public class DrawGame {
     }
     
     private void drawRender(ShapeRenderer render){
+        render.begin();
+        render.set(ShapeRenderer.ShapeType.Line);
+        render.setColor(Color.ORANGE);
         Cell[][] cells = updateGame.getGrid().getCells();
         for (Cell[] rowCell:cells){
             for (Cell cell:rowCell){
@@ -88,5 +84,6 @@ public class DrawGame {
                 }
             }
         }
+        render.end();
     }
 }

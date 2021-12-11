@@ -21,7 +21,7 @@ public class ResourceManager implements Disposable {
     private final BitmapFont fontSmall;
     private Skin skin;
     private final String numbers = "images/numbers.pack";
-    public static final String grid = "images/grid2.png";
+    public static final String grid = "images/grid1.png";
     public static final String fon_menu = "images/fon_menu.png";
     public static final String cup = "images/cup.png";
     public static final String mark = "images/mark.png";
