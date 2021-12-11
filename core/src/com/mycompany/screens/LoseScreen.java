@@ -42,4 +42,12 @@ public class LoseScreen extends CommonScreen {
         AppPreference.setErrorGame(0);
         AppPreference.setContinuationEnabled(false);
     }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        stage.draw();
+    }
+    
+    
 }

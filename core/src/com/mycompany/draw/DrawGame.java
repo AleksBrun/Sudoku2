@@ -8,6 +8,9 @@ import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
 import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Colors;
+import com.badlogic.gdx.graphics.Color;
 
 public class DrawGame {
 
@@ -17,13 +20,20 @@ public class DrawGame {
         this.updateGame = _updateGame;
     }
 
-    public void draw(SpriteBatch batch){
+    public void draw(SpriteBatch batch, ShapeRenderer render){
         batch.begin();
         drawBackground(batch);
         drawGrid(batch);
         drawCells(batch);
         drawKeys(batch);
         batch.end();
+        
+        render.begin();
+        render.set(ShapeRenderer.ShapeType.Line);
+        render.setColor(Color.ORANGE);
+        drawRender(render);
+        render.end();
+
     }
 
     private void drawBackground(SpriteBatch batch){
@@ -64,6 +74,17 @@ public class DrawGame {
                 if (region != null && cell.getNumber() != 0){
                     batch.draw(region, cell.getX()+ Setting.pad_cell, cell.getY()+Setting.pad_cell,
                             cell.getSize()-Setting.pad_cell*2, cell.getSize()-Setting.pad_cell*2);
+                }
+            }
+        }
+    }
+    
+    private void drawRender(ShapeRenderer render){
+        Cell[][] cells = updateGame.getGrid().getCells();
+        for (Cell[] rowCell:cells){
+            for (Cell cell:rowCell){
+                if (cell.isMark()){
+                    render.circle(cell.getX()+cell.getSize()/2, cell.getY()+cell.getSize()/2, cell.getSize()/2);
                 }
             }
         }

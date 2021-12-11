@@ -9,7 +9,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.utils.TimeUtils;
+import com.mycompany.unils.TimeUtils;
 
 public class StatisticsScreen extends CommonScreen {
 
@@ -45,5 +45,11 @@ public class StatisticsScreen extends CommonScreen {
                 game.setStateScreen(MyGdxGame.State.MENU);
             }
         });
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        stage.draw();
     }
 }

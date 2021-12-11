@@ -9,7 +9,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.utils.LoaderSudoku;
+import com.mycompany.unils.LoaderSudoku;
 
 public class MenuScreen extends CommonScreen {
 
@@ -90,4 +90,12 @@ public class MenuScreen extends CommonScreen {
             }
         });
     }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        stage.draw();
+    }
+    
+    
 }

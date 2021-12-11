@@ -64,4 +64,10 @@ public class TrophyScreen extends CommonScreen {
         reward.getNames()[cell].setText(text);
     }
 
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        stage.draw();
+    }
+
 }

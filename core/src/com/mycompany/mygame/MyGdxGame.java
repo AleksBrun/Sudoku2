@@ -11,6 +11,7 @@ import com.mycompany.screens.SettingScreen;
 import com.mycompany.screens.StatisticsScreen;
 import com.mycompany.screens.TrophyScreen;
 import com.mycompany.screens.VictoryScreen;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class MyGdxGame extends Game {
 
@@ -25,13 +26,16 @@ public class MyGdxGame extends Game {
 	private TrophyScreen trophyScreen;
     private StatisticsScreen statisticsScreen;
 	private SpriteBatch batch;
+    private ShapeRenderer render;
 	private ResourceManager manager;
 	private int[][] sudoku;
 
 	@Override
 	public void create () {
-		manager = new ResourceManager();
+        manager = new ResourceManager();
 		batch = new SpriteBatch();
+        render = new ShapeRenderer();
+        render.setAutoShapeType(true);
 		setStateScreen(State.MENU);
 	}
 
@@ -73,6 +77,10 @@ public class MyGdxGame extends Game {
 	public SpriteBatch getBatch() {
 		return batch;
 	}
+    
+    public ShapeRenderer getRender(){
+        return this.render;
+    }
 
 	public ResourceManager getManager() {
 		return manager;
@@ -96,6 +104,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
+        render.dispose();
 		manager.dispose();
 	}
 }

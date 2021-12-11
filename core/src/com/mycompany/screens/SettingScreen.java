@@ -135,4 +135,12 @@ public class SettingScreen extends CommonScreen {
             }
         });
     }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        stage.draw();
+    }
+    
+    
 }

@@ -1,5 +1,6 @@
-package com.mycompany.utils;
+package com.mycompany.unils;
 import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.MathUtils;
 
 public class TimeUtils {
     

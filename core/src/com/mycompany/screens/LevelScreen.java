@@ -9,7 +9,7 @@ import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.utils.Sudoku;
+import com.mycompany.unils.Sudoku;
 
 public class LevelScreen extends CommonScreen {
 
@@ -101,5 +101,11 @@ public class LevelScreen extends CommonScreen {
             return 4;
         }
         return 5;
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+        stage.draw();
     }
 }
