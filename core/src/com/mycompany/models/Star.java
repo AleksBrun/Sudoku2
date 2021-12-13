@@ -1,16 +1,15 @@
 package com.mycompany.models;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Star extends Group {
     
-    private Image[] stars;
+    private final Image[] stars;
     public Star(float size, TextureRegion texture){
-        setSize(size*5, size);
+        setSize(size*6, size);
         
-        stars = new Image[5];
+        stars = new Image[6];
         for (int i = 0; i < stars.length; i++) {
             Image tmp = new Image(texture);
             tmp.setBounds(size * i, 0, size, size);

@@ -74,7 +74,7 @@ public class ResourceManager implements Disposable {
         loadMusic();
         manager.finishLoading();
         getCups();
-        setUiNew(AppPreference.getColorUI(), Color.BLACK);
+        setUiNew();
     }
 
     private void loadTexture(){
@@ -128,19 +128,25 @@ public class ResourceManager implements Disposable {
         System.arraycopy(tmp[0], 0, cups, 0, 3);
     }
 
-    public void setUiNew(int index, Color color){
+    public void setUiNew(){
         String[] tmp = {ui_white, ui_blue, ui_green, ui_red, ui_orange, ui_gray, ui_yellow};
-        name_ui = tmp[index];
-        createSkin(color);
+        name_ui = tmp[AppPreference.getColorUI()];
+        createSkin(AppPreference.getColorFont());
     }
 
-    private void createSkin(Color color){
+    private void createSkin(int index_color_font){
         skin = new Skin();
 
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.up = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_UP));
         style.down = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_DOWN));
         style.font = fontNormal;
+        Color color;
+        if (index_color_font == 1) {
+            color = Color.WHITE;
+        } else {
+            color = Color.BLACK;
+        }
         style.fontColor = color;
         skin.add(button_style, style, TextButton.TextButtonStyle.class);
 

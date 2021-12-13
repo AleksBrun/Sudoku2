@@ -9,7 +9,8 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.unils.LoaderSudoku;
+import com.mycompany.utils.LoaderSudoku;
+
 
 public class MenuScreen extends CommonScreen {
 

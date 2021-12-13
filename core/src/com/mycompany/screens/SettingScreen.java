@@ -1,7 +1,6 @@
 package com.mycompany.screens;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -24,11 +23,12 @@ public class SettingScreen extends CommonScreen {
 
         final Label title = new Label(Setting.name_setting_button, getSkin(), ResourceManager.label_style_big);
 
-        final Label levelInfo = new Label("Сложность", getSkin(), ResourceManager.label_style_small);
 
         final Label labelInfoMusic = new Label("Громкость", getSkin(), ResourceManager.label_style_small);
 
         final TextButton color_ui = new TextButton(Setting.name_colorUi_button, getSkin(), ResourceManager.button_style);
+
+        final TextButton color_font = new TextButton(Setting.name_colorFont_button, getSkin(), ResourceManager.button_style);
 
         final TextButton reset = new TextButton(Setting.name_reset_button, getSkin(), ResourceManager.button_style);
         reset.setVisible(false);
@@ -40,26 +40,30 @@ public class SettingScreen extends CommonScreen {
 
         final Image color = new Image(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE));
 
-        final Slider slider = new Slider(25, 60, 5, false, getSkin(), ResourceManager.slider_style_hor);
-        slider.setValue(AppPreference.getMissingDigits());
+
 
         final Slider sliderVolume = new Slider(0, 1, .1f, false, getSkin(), ResourceManager.slider_style_hor);
         sliderVolume.setValue(AppPreference.getMusicVolume());
 
-        final Label sliderInfo = new Label(""+AppPreference.getMissingDigits(), getSkin(), ResourceManager.label_style_normal);
+
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
-        table.add(title).colspan(2).padTop(10).row();
+        table.add(title).colspan(2).padTop(10);
+        table.row();
         table.add(color_ui).fillX().padTop(40);
-        table.add(color).padTop(40).row();
-        table.add(levelInfo).colspan(2).padTop(10).row();
-        table.add(slider).padTop(10).fillX();
-        table.add(sliderInfo).padTop(10).padLeft(10).fillX().row();
-        table.add(labelInfoMusic).colspan(2).padTop(10).row();
-        table.add(sliderVolume).colspan(2).padTop(10).fillX().row();
-        table.add(menu).colspan(2).top().padTop(10).fillX().row();
-        table.add(textField).colspan(2).padTop(10).fillX().row();
-        table.add(reset).colspan(2).padTop(10).fillX().row();
+        table.add(color).padTop(40);
+        table.row();
+        table.add(color_font).colspan(2).padTop(10).fillX();
+        table.row();
+        table.add(labelInfoMusic).colspan(2).padTop(10);
+        table.row();
+        table.add(sliderVolume).colspan(2).padTop(10).fillX();
+        table.row();
+        table.add(menu).colspan(2).top().padTop(10).fillX();
+        table.row();
+        table.add(textField).colspan(2).padTop(10).fillX();
+        table.row();
+        table.add(reset).colspan(2).padTop(10).fillX();
 
         color_ui.addListener(new ClickListener(){
             @Override
@@ -69,10 +73,23 @@ public class SettingScreen extends CommonScreen {
                 if (indexColor > 6) {
                     indexColor = 0;
                 }
-                getManager().setUiNew(indexColor, Color.BLACK);
                 AppPreference.setColorUI(indexColor);
+                getManager().setUiNew();
+
                 color_ui.setChecked(false);
                 color.setDrawable(new TextureRegionDrawable(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE)));
+            }
+        });
+        color_font.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                int index_color = AppPreference.getColorFont();
+                if (index_color == 0){
+                    AppPreference.setColorFont(1);
+                } else {
+                    AppPreference.setColorFont(0);
+                }
+                getManager().setUiNew();
             }
         });
         menu.addListener(new ClickListener(){
@@ -86,31 +103,18 @@ public class SettingScreen extends CommonScreen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 AppPreference.setContinuationEnabled(false);
-                AppPreference.setMissingDigits(25);
-                AppPreference.setColorUI(0);
+                AppPreference.setMissingDigits(40);
+                AppPreference.setDifficultyLevel(1);
+                AppPreference.setColorUI(Setting.start_color);
+                AppPreference.setColorFont(Setting.start_color_font);
                 AppPreference.setAllStars(0);
-                sliderInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
-                slider.setValue(AppPreference.getMissingDigits());
+                AppPreference.setAllError(0);
+                AppPreference.setAllTime(0);
                 reset.setVisible(false);
+                getManager().setUiNew();
             }
         });
-        slider.addListener(new InputListener() {
-            @Override
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                AppPreference.setMissingDigits((int)slider.getValue());
-                sliderInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
-            }
 
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
-            }
-        });
         sliderVolume.addListener(new InputListener(){
             @Override
             public void touchDragged(InputEvent event, float x, float y, int pointer) {

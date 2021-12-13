@@ -2,20 +2,12 @@ package com.mycompany.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mycompany.screens.HelloScreen;
-import com.mycompany.screens.LevelScreen;
-import com.mycompany.screens.LoseScreen;
-import com.mycompany.screens.MainScreen;
-import com.mycompany.screens.MenuScreen;
-import com.mycompany.screens.SettingScreen;
-import com.mycompany.screens.StatisticsScreen;
-import com.mycompany.screens.TrophyScreen;
-import com.mycompany.screens.VictoryScreen;
+import com.mycompany.screens.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS}
+	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS, CREATE}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
@@ -25,6 +17,7 @@ public class MyGdxGame extends Game {
 	private LoseScreen loseScreen;
 	private TrophyScreen trophyScreen;
     private StatisticsScreen statisticsScreen;
+	private CreateScreen createScreen;
 	private SpriteBatch batch;
     private ShapeRenderer render;
 	private ResourceManager manager;
@@ -36,6 +29,7 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
         render = new ShapeRenderer();
         render.setAutoShapeType(true);
+		System.out.print(ExampleGrid.minimum3.length());
 		setStateScreen(State.MENU);
 	}
 
@@ -71,6 +65,9 @@ public class MyGdxGame extends Game {
             case STATISTICS: if (statisticsScreen == null) statisticsScreen = new StatisticsScreen(this);
             setScreen(statisticsScreen);
             break;
+			case CREATE: if (createScreen == null) createScreen = new CreateScreen(this);
+			setScreen(createScreen);
+			break;
 		}
 	}
 

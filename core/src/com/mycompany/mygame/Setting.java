@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 public class Setting {
 
     public static float width_main_ui = 720;
-    public final static float width_menu_ui = 420;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
+	public static final int start_color = 5;
+	public static final int start_color_font = 1;
 
 	public static String label_lvl = "Уровень сложности";
 	public static String label_time_game = "Время игры     ";
@@ -21,6 +22,7 @@ public class Setting {
     public static String name_reset_button = "  Сброс ";
 	public static String name_trophy_button = "   Награда   ";
 	public static final String name_colorUi_button ="   Цвет ";
+	public static final String name_colorFont_button = "    Цвет шрифта ";
 	public static final String level_1 = "  Легко ";
 	public static final String level_2 = "  Нормально ";
 	public static final String level_3 = "  Трудно ";

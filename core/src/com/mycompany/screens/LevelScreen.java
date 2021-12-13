@@ -4,12 +4,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.ExampleGrid;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.unils.Sudoku;
+
 
 public class LevelScreen extends CommonScreen {
 
@@ -33,6 +34,7 @@ public class LevelScreen extends CommonScreen {
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
         table.add(levelLabel).row();
         table.add(easy).fillX().padTop(20).row();
         table.add(average).fillX().padTop(10).row();
@@ -75,10 +77,7 @@ public class LevelScreen extends CommonScreen {
                 public void clicked(InputEvent event, float x, float y) {
                     dispose();
                     game.reset();
-                    int mission_digits = AppPreference.getMissingDigits();
-                    AppPreference.setDifficultyLevel(getDifficultyLevel(mission_digits));
-                    game.setSudoku(Sudoku.getRandomSudoku(mission_digits));
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    game.setStateScreen(MyGdxGame.State.CREATE);
                 }
             });
         menu.addListener(new ClickListener(){
@@ -90,18 +89,7 @@ public class LevelScreen extends CommonScreen {
             });
     }
     
-    private int getDifficultyLevel(int mission_digits) {
-        if (mission_digits >= 25 && mission_digits < 30) {
-            return 1;
-        } else if (mission_digits >= 30 && mission_digits < 35) {
-            return 2;
-        } else if (mission_digits >= 35 && mission_digits < 40) {
-            return 3;
-        } else if (mission_digits >= 40 && mission_digits < 50) {
-            return 4;
-        }
-        return 5;
-    }
+
 
     @Override
     public void render(float delta) {

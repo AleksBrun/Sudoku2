@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
@@ -14,7 +15,7 @@ import com.mycompany.unils.TimeUtils;
 public class StatisticsScreen extends CommonScreen {
 
     public StatisticsScreen(MyGdxGame game) {
-        super(500, game);
+        super(720, game);
     }
 
     @Override
@@ -23,15 +24,16 @@ public class StatisticsScreen extends CommonScreen {
 
         Label title = new Label("Статистика", getSkin(), ResourceManager.label_style_big);
 
-        Label allStarLabel = new Label("Получено звезд: "+ AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_normal);
+        Label allStarLabel = new Label("Получено звезд  "+ AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_small);
 
         GridPoint2 allTime = TimeUtils.getTime(AppPreference.getAllTime());
-        Label allTimeLabel = new Label("Общее время игры: "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_normal);
+        Label allTimeLabel = new Label("Общее время игры  "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_small);
 
-        Label allErrorLabel = new Label("Сделано ошибок: ", getSkin(), ResourceManager.label_style_normal);
+        Label allErrorLabel = new Label("Сделано ошибок  "+AppPreference.getAllError(), getSkin(), ResourceManager.label_style_small);
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
         table.add(title).row();
         table.add(allStarLabel).padTop(20).row();
         table.add(allTimeLabel).padTop(10).row();

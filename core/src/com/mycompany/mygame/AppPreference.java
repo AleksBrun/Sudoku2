@@ -5,15 +5,13 @@ import com.badlogic.gdx.Preferences;
 public class AppPreference {
     private static final String ALL_ERROR = "all.error";
     private static final String PREF_ALL_MINUTE = "all.minute";
-    private static final String PREF_ALL_SECOND = "all.second";
     private static final String PREF_ERROR_GAME = "error.game";
     private static final String PREF_ALL_STARS = "all.stars";
     private static final String PREF_MUSIC_VOLUME = "volume";
     private static final String PREF_MUSIC_ENABLED = "music.enabled";
-    private static final String PREF_SOUND_ENABLED = "sound.enabled";
-    private static final String PREF_SOUND_VOL = "sound";
     private static final String PREFS_NAME = "b2dtut";
     private static final String PREF_COLOR_INDEX = "color.ui";
+    private static final String COLOR_FONT = "color.font";
     private static final String PREF_SUDOKU = "sudoku";
     private static final String PREF_CONTINUATION_ENABLED = "continuation.enabled";
     private static final String PREF_MINUTE = "time_minute";
@@ -22,7 +20,15 @@ public class AppPreference {
     private static final String PREF_DIFFICULTY_LEVEL = "difficulty_level";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
-
+    // записать индекс цвета шрифта
+    public static void setColorFont(int index_color){
+        prefs.putInteger(COLOR_FONT, index_color);
+        prefs.flush();
+    }
+    // Получить индекс цвета шрифта
+    public static int getColorFont(){
+        return prefs.getInteger(COLOR_FONT, Setting.start_color_font);
+    }
     // Сохранить общее время игры
     public static void setAllTime(int minute){
         prefs.putInteger(PREF_ALL_MINUTE, minute);
@@ -80,7 +86,7 @@ public class AppPreference {
     }
     // Получить колличество пустых ячек
     public static int getMissingDigits() {
-        return prefs.getInteger(PREF_MISSING_DIGITS, 25);
+        return prefs.getInteger(PREF_MISSING_DIGITS, 40);
     }
     // Получить строку судоку
     public static String loadSudoku() {
@@ -114,15 +120,6 @@ public class AppPreference {
         prefs.flush();
     }
 
-    public static boolean isSoundEffectsEnabled() {
-        return prefs.getBoolean(PREF_SOUND_ENABLED, true);
-    }
-
-    public static void setSoundEffectsEnabled(boolean soundEffectsEnabled) {
-        prefs.putBoolean(PREF_SOUND_ENABLED, soundEffectsEnabled);
-        prefs.flush();
-    }
-
     public static boolean isMusicEnabled() {
         return prefs.getBoolean(PREF_MUSIC_ENABLED, true);
     }
@@ -141,21 +138,12 @@ public class AppPreference {
         prefs.flush();
     }
 
-    public static float getSoundVolume() {
-        return prefs.getFloat(PREF_SOUND_VOL, 0.5f);
-    }
-
-    public static void setSoundVolume(float volume) {
-        prefs.putFloat(PREF_SOUND_VOL, volume);
-        prefs.flush();
-    }
-
     public static void setColorUI(int indexColor) {
         prefs.putInteger(PREF_COLOR_INDEX, indexColor);
         prefs.flush();
     }
 
     public static int getColorUI() {
-        return prefs.getInteger(PREF_COLOR_INDEX, 6);
+        return prefs.getInteger(PREF_COLOR_INDEX, Setting.start_color);
     }
 }

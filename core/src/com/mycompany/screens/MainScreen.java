@@ -19,7 +19,6 @@ public class MainScreen extends CommonScreen {
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
     private Label labelClock, labelError;
-    private Star star;
 
     public MainScreen(MyGdxGame game) {
         super(720, game);
@@ -44,7 +43,8 @@ public class MainScreen extends CommonScreen {
         labelClock = new Label(Setting.label_time_game, getManager().getSkin(), ResourceManager.label_style_normal);
         labelError = new Label(Setting.label_error+AppPreference.getErrorGame(), getManager().getSkin(), ResourceManager.label_style_normal);
 
-        star = new Star(Setting.size_icon/2, getManager().getTextureAtlas(ResourceManager.ICON_STAR));
+        Star star = new Star(Setting.size_icon / 2, getManager().getTextureAtlas(ResourceManager.ICON_STAR));
+        star.setStars(AppPreference.getDifficultyLevel());
 
         float size = Setting.size_icon;
         table.top().add(starIcon).width(size).height(size).left().padTop(5).padLeft(10);
@@ -89,7 +89,7 @@ public class MainScreen extends CommonScreen {
 
     @Override
     public void render(float delta) {
-        updateGame.update(delta);
+        updateGame.update();
         drawGame.draw(game.getBatch(), game.getRender());
         stage.draw();
     }
@@ -112,10 +112,6 @@ public class MainScreen extends CommonScreen {
     
     public void setTime(int minute, int second){
         labelClock.setText(Setting.label_time_game+minute+":"+second);
-    }
-
-    public void setStars(int _stars){
-        star.setStars(_stars);
     }
 
     public void setLabelError(int _errors){

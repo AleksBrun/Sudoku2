@@ -11,9 +11,9 @@ import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
-import com.mycompany.unils.Clock;
-import com.mycompany.unils.LoaderSudoku;
 import com.mycompany.unils.TimeUtils;
+import com.mycompany.utils.Clock;
+import com.mycompany.utils.LoaderSudoku;
 
 public class UpdateGame extends InputAdapter {
 
@@ -22,7 +22,7 @@ public class UpdateGame extends InputAdapter {
     private  final Key key;
     private int indexCell;
     private boolean pause;
-    private Clock clock;
+    private final Clock clock;
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -35,7 +35,7 @@ public class UpdateGame extends InputAdapter {
         clock = new Clock();
     }
 
-    public void update(float delta) {
+    public void update() {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
     }
@@ -128,6 +128,7 @@ public class UpdateGame extends InputAdapter {
                 cell.setMark(true);
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark3));
                 AppPreference.setErrorGame(AppPreference.getErrorGame() + 1);
+                AppPreference.setAllError(AppPreference.getAllError()+1);
                 mainScreen.setLabelError(AppPreference.getErrorGame());
             } else if (grid.isFilledIn()) {
                 victoryGame();
@@ -188,9 +189,5 @@ public class UpdateGame extends InputAdapter {
 
     public boolean isPause() {
         return pause;
-    }
-
-    public Clock getClock() {
-        return clock;
     }
 }
