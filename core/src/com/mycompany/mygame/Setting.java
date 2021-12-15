@@ -33,6 +33,10 @@ public class Setting {
 	public static float getHeight_Ui(float width) {
 		return  width / ((float)Gdx.graphics.getWidth() / Gdx.graphics.getHeight());
 	}
+    
+    public static float getWidth(float height){
+        return  height*((float)Gdx.graphics.getWidth()/Gdx.graphics.getHeight());
+    }
 
 	public static float size_icon = width_main_ui / 10;
 

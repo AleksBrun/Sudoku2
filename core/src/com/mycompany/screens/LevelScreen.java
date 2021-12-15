@@ -1,5 +1,6 @@
 package com.mycompany.screens;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -23,6 +24,9 @@ public class LevelScreen extends CommonScreen {
         super.show();
 
         final Label levelLabel = new Label("Уровень", getSkin(), ResourceManager.label_style_normal);
+        
+        TextButton continuation = new TextButton(Setting.name_continuation_button, getSkin(), ResourceManager.button_style);
+        continuation.setVisible(AppPreference.isContinuationEnabled());
 
         TextButton easy = new TextButton(Setting.level_1, getSkin(), ResourceManager.button_style);
 
@@ -34,22 +38,31 @@ public class LevelScreen extends CommonScreen {
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
         table.add(levelLabel).row();
-        table.add(easy).fillX().padTop(20).row();
+        table.add(continuation).fillX().padTop(20).row();
+        table.add(easy).fillX().padTop(10).row();
         table.add(average).fillX().padTop(10).row();
         table.add(difficult).fillX().padTop(10).row();
         table.add(random).fillX().padTop(10).row();
         table.add(menu).fillX().padTop(10);
+        
+        continuation.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.dispose();
+                game.setStateScreen(MyGdxGame.State.MAIN);
+            }
+        });
 
         easy.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     dispose();
                     game.reset();
-                    game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.minimum));
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Difficulty.minimum, MathUtils.random(1, 3)));
                     AppPreference.setDifficultyLevel(2);
+                    game.setStateScreen(MyGdxGame.State.MAIN);
                 }
             });
         average.addListener(new ClickListener(){
@@ -57,19 +70,19 @@ public class LevelScreen extends CommonScreen {
                 public void clicked(InputEvent event, float x, float y) {
                     dispose();
                     game.reset();
-                    game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.moderate));
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Difficulty.moderate));
                     AppPreference.setDifficultyLevel(3);
+                    game.setStateScreen(MyGdxGame.State.MAIN);
                 }
             });
         difficult.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     dispose();
-                    game.reset();
-                    game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Level.maximum));
-                    game.setStateScreen(MyGdxGame.State.MAIN);
                     AppPreference.setDifficultyLevel(4);
+                    game.reset();
+                    game.setSudoku(ExampleGrid.getSudoku(ExampleGrid.Difficulty.maximum));
+                    game.setStateScreen(MyGdxGame.State.MAIN);
                 }
             });
         random.addListener(new ClickListener(){
@@ -88,7 +101,7 @@ public class LevelScreen extends CommonScreen {
                 }
             });
     }
-    
+
 
 
     @Override

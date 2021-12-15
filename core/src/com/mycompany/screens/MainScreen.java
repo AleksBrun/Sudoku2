@@ -13,6 +13,8 @@ import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class MainScreen extends CommonScreen {
 
@@ -36,9 +38,11 @@ public class MainScreen extends CommonScreen {
         Image crossIcon = new Image(getManager().getTextureAtlas(ResourceManager.ICON_CROSS));
         Image backIcon = new Image(getManager().getTextureAtlas(ResourceManager.ICON_BACK));
         Image pauseIcon = new Image(getManager().getTextureAtlas(ResourceManager.ICON_PAUSE));
-        Image musicIcon = new Image(getManager().getTextureAtlas(ResourceManager.ICON_MUSIC));
-
-        Label stars = new Label(""+AppPreference.getAllStars(), getManager().getSkin(), ResourceManager.label_style_big);
+        //Image musicIcon = new Image(getManager().getTextureAtlas(ResourceManager.ICON_SOUND_ON));
+        
+        final ImageButton musicIcon = new ImageButton(getManager().getSkin(), ResourceManager.image_button_style);
+        
+        Label stars = new Label(String.valueOf(AppPreference.getAllStars()), getManager().getSkin(), ResourceManager.label_style_big);
         Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_normal);
         labelClock = new Label(Setting.label_time_game, getManager().getSkin(), ResourceManager.label_style_normal);
         labelError = new Label(Setting.label_error+AppPreference.getErrorGame(), getManager().getSkin(), ResourceManager.label_style_normal);
@@ -49,7 +53,7 @@ public class MainScreen extends CommonScreen {
         float size = Setting.size_icon;
         table.top().add(starIcon).width(size).height(size).left().padTop(5).padLeft(10);
         table.add(stars).expandX().left().padTop(5);
-        table.add(musicIcon).width(size).height(size).padTop(5);
+        table.add(musicIcon).width(size).height(size).padTop(5).fill();
         table.add(pauseIcon).width(size).height(size).padTop(5);
         table.add(backIcon).width(size).height(size).padTop(5);
         table.add(crossIcon).width(size).height(size).padTop(5).padRight(10);
@@ -63,16 +67,19 @@ public class MainScreen extends CommonScreen {
         musicIcon.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (getManager().getMusic().isPlaying()){
-                        updateGame.pauseMusic();
-                    } else {
-                        updateGame.playMusic();
+                    if (!updateGame.isPause()){
+                        if (musicIcon.isChecked()){
+                            updateGame.pauseMusic();
+                        } else {
+                            updateGame.playMusic();
+                        }
                     }
                 }
             });
         pauseIcon.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    musicIcon.setChecked(!musicIcon.isChecked());
                     pause();
                 }
             });

@@ -1,0 +1,117 @@
+
+Texture.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background1
+  rotate: false
+  xy: 804, 917
+  size: 720, 1018
+  orig: 720, 1018
+  offset: 0, 0
+  index: -1
+background3
+  rotate: false
+  xy: 2, 2
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+background5
+  rotate: false
+  xy: 804, 115
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+cup1
+  rotate: false
+  xy: 1526, 1061
+  size: 270, 290
+  orig: 270, 290
+  offset: 0, 0
+  index: -1
+cup2
+  rotate: false
+  xy: 1526, 1353
+  size: 271, 290
+  orig: 271, 290
+  offset: 0, 0
+  index: -1
+cup3
+  rotate: false
+  xy: 1526, 1645
+  size: 273, 290
+  orig: 273, 290
+  offset: 0, 0
+  index: -1
+love
+  rotate: false
+  xy: 2, 804
+  size: 800, 1131
+  orig: 800, 1131
+  offset: 0, 0
+  index: -1
+mark
+  rotate: false
+  xy: 1526, 931
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+mark1
+  rotate: false
+  xy: 1606, 801
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+mark2
+  rotate: false
+  xy: 1801, 1677
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+mark3
+  rotate: false
+  xy: 1801, 1807
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+mark4
+  rotate: false
+  xy: 1656, 931
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+
+Texture2.png
+size: 2048, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+background2
+  rotate: false
+  xy: 2, 804
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+background4
+  rotate: false
+  xy: 804, 804
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1
+grid1
+  rotate: false
+  xy: 2, 2
+  size: 800, 800
+  orig: 800, 800
+  offset: 0, 0
+  index: -1

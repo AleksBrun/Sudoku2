@@ -2,18 +2,19 @@ package com.mycompany.utils;
 
 public class Sudoku {
 
-    private static int[][] mat;
-    private final int N = 9; // number of columns/rows.
+    private int[][] mat;
+    private int [][] copyMat;
+    private int N = 9; // number of columns/rows.
     private final int SRN = 3; // square root of N
-    int K; // No. Of missing digits
+    private int K; // No. Of missing digits
 
     // Constructor
-    Sudoku(int _K)
+    public Sudoku()
     {
-        this.K = _K;
 
         // Compute square root of N
         mat = new int[9][9];
+        copyMat = new int[9][9];
     }
 
     // Sudoku Generator
@@ -25,6 +26,7 @@ public class Sudoku {
         // Fill remaining blocks
         fillRemaining(0, SRN);
 
+        //copyMat = mat;
         // Remove Randomly K digits to make game
         removeKDigits();
     }
@@ -40,7 +42,7 @@ public class Sudoku {
     }
 
     // Returns false if given 3 x 3 block contains num.
-    boolean unUsedInBox(int rowStart, int colStart, int num)
+    private boolean unUsedInBox(int rowStart, int colStart, int num)
     {
         for (int i = 0; i<SRN; i++)
             for (int j = 0; j<SRN; j++)
@@ -51,7 +53,7 @@ public class Sudoku {
     }
 
     // Fill a 3 x 3 matrix.
-    void fillBox(int row,int col)
+    private void fillBox(int row,int col)
     {
         int num;
         for (int i=0; i<SRN; i++)
@@ -70,13 +72,13 @@ public class Sudoku {
     }
 
     // Random generator
-    int randomGenerator(int num)
+    private int randomGenerator(int num)
     {
         return (int) Math.floor((Math.random()*num+1));
     }
 
     // Check if safe to put in cell
-    boolean CheckIfSafe(int i,int j,int num)
+    private boolean CheckIfSafe(int i,int j,int num)
     {
         return (unUsedInRow(i, num) &&
                 unUsedInCol(j, num) &&
@@ -84,7 +86,7 @@ public class Sudoku {
     }
 
     // check in the row for existence
-    boolean unUsedInRow(int i,int num)
+    private boolean unUsedInRow(int i,int num)
     {
         for (int j = 0; j<N; j++)
             if (mat[i][j] == num)
@@ -93,7 +95,7 @@ public class Sudoku {
     }
 
     // check in the row for existence
-    boolean unUsedInCol(int j,int num)
+    private boolean unUsedInCol(int j,int num)
     {
         for (int i = 0; i<N; i++)
             if (mat[i][j] == num)
@@ -102,7 +104,7 @@ public class Sudoku {
     }
     // A recursive function to fill remaining
     // matrix
-    boolean fillRemaining(int i, int j)
+    private boolean fillRemaining(int i, int j)
     {
         // System.out.println(i+" "+j);
         if (j>=N && i<N-1)
@@ -149,7 +151,7 @@ public class Sudoku {
     }
     // Remove the K no. of digits to
     // complete game
-    public void removeKDigits()
+    private void removeKDigits()
     {
         int count = K;
         while (count != 0)
@@ -167,10 +169,24 @@ public class Sudoku {
         }
     }
     // Driver code
-    public static int[][] getRandomSudoku(int missing_digits)
+    public int[][] getRandomSudoku(int missing_digits)
     {
-        Sudoku sudoku = new Sudoku(missing_digits);
-        sudoku.fillValues();
+        this.N = 9;
+        this.K = missing_digits;
+        clearMat();
+        fillValues();
         return mat;
+    }
+    
+    private void clearMat(){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                mat[i][j] = 0;
+            }
+        }
+    }
+    
+    public int [][] getCopyMat(){
+        return copyMat;
     }
 }

@@ -30,8 +30,8 @@ public class MenuScreen extends CommonScreen {
         TextButton test = new TextButton(Setting.name_love_button, getSkin(), ResourceManager.button_style);
         TextButton statistics = new TextButton(Setting.name_statistics_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.fon_menu)));
-        table.bottom();
+        table.setBackground(new TextureRegionDrawable(getManager().getBackground(ResourceManager.background2)));
+        table.bottom().right().padRight(10).padBottom(10);
         table.add(continuation).row();
         table.add(start).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(color).fillX().padTop(Setting.pad_ui_menu).row();

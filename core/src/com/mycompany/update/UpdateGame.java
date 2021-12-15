@@ -11,7 +11,7 @@ import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
-import com.mycompany.unils.TimeUtils;
+import com.mycompany.utils.TimeUtils;
 import com.mycompany.utils.Clock;
 import com.mycompany.utils.LoaderSudoku;
 
@@ -184,7 +184,7 @@ public class UpdateGame extends InputAdapter {
     }
 
     public TextureRegion getBackground() {
-        return mainScreen.getGame().getManager().getTextureRegion(ResourceManager.background);
+        return mainScreen.getGame().getManager().getTextureRegion(ResourceManager.background1);
     }
 
     public boolean isPause() {

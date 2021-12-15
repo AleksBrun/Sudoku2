@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mycompany.screens.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mycompany.utils.Sudoku;
 
 public class MyGdxGame extends Game {
 
@@ -22,14 +23,16 @@ public class MyGdxGame extends Game {
     private ShapeRenderer render;
 	private ResourceManager manager;
 	private int[][] sudoku;
+    private Sudoku createSudoku;
 
 	@Override
 	public void create () {
+        createSudoku = new Sudoku();
         manager = new ResourceManager();
 		batch = new SpriteBatch();
         render = new ShapeRenderer();
         render.setAutoShapeType(true);
-		System.out.print(ExampleGrid.minimum3.length());
+		//System.out.print(ExampleGrid.minimum3.length());
 		setStateScreen(State.MENU);
 	}
 
@@ -87,9 +90,13 @@ public class MyGdxGame extends Game {
 		return sudoku;
 	}
 
-	public void setSudoku(int[][] sudoku) {
-		this.sudoku = sudoku;
+	public void setSudoku(int[][] _sudoku) {
+		this.sudoku = _sudoku;
 	}
+    
+    public void createSudoku(int missing_digits){
+        setSudoku(createSudoku.getRandomSudoku(missing_digits));
+    }
     
     public void reset() {
         AppPreference.setContinuationEnabled(true);

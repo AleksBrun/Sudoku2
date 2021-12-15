@@ -3,7 +3,10 @@ package com.mycompany.screens;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mycompany.mygame.AppPreference;
@@ -38,7 +41,7 @@ public class SettingScreen extends CommonScreen {
         final TextField textField = new TextField("", getSkin(), ResourceManager.textbox_style);
         textField.setAlignment(1);
 
-        final Image color = new Image(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE));
+        //final Image color = new Image(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE));
 
 
 
@@ -47,11 +50,11 @@ public class SettingScreen extends CommonScreen {
 
 
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
         table.add(title).colspan(2).padTop(10);
         table.row();
-        table.add(color_ui).fillX().padTop(40);
-        table.add(color).padTop(40);
+        table.add(color_ui).colspan(2).fillX().padTop(40);
+        //table.add(color).padTop(40);
         table.row();
         table.add(color_font).colspan(2).padTop(10).fillX();
         table.row();
@@ -76,8 +79,10 @@ public class SettingScreen extends CommonScreen {
                 AppPreference.setColorUI(indexColor);
                 getManager().setUiNew();
 
-                color_ui.setChecked(false);
-                color.setDrawable(new TextureRegionDrawable(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE)));
+                //color_ui.setChecked(false);
+                dispose();
+                game.setStateScreen(MyGdxGame.State.SETTING);
+                //color.setDrawable(new TextureRegionDrawable(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE)));
             }
         });
         color_font.addListener(new ClickListener(){
@@ -90,6 +95,9 @@ public class SettingScreen extends CommonScreen {
                     AppPreference.setColorFont(0);
                 }
                 getManager().setUiNew();
+                dispose();
+                game.setStateScreen(MyGdxGame.State.SETTING);
+                
             }
         });
         menu.addListener(new ClickListener(){

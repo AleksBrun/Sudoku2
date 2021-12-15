@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,16 +20,21 @@ public class ResourceManager implements Disposable {
     private final BitmapFont fontSmall;
     private Skin skin;
     private final String numbers = "images/numbers.pack";
-    public static final String grid = "images/grid1.png";
-    public static final String fon_menu = "images/fon_menu.png";
-    public static final String cup = "images/cup.png";
-    public static final String mark = "images/mark.png";
-    public static final String mark1 = "images/mark1.png";
-    public static final String mark2 = "images/mark4.png";
-    public static final String mark3 = "images/mark3.png";
-    public static final String mark4 = "images/mark2.png";
-    public static final String heart = "images/heart.jpg";
-    public static final String background = "images/background1.jpg";
+    private final String textureAtlas =  "atlas/Texture.atlas";
+
+    public static final String grid = "grid1";
+    public static final String mark = "mark";
+    public static final String mark1 = "mark1";
+    public static final String mark2 = "mark4";
+    public static final String mark3 = "mark3";
+    public static final String mark4 = "mark2";
+    public static final String love = "love";
+    public static final String background1 = "background1";
+    public static final String background2 = "background2";
+    public static final String background3 = "background3";
+    public static final String background4 = "background4";
+    public static final String background5 = "background5";
+    
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
     private final String ui_green  = "skin/ui-green.atlas";
@@ -44,18 +48,16 @@ public class ResourceManager implements Disposable {
     public final static String ICON_BACK = "icon_back";
     public final static String ICON_PAUSE = "icon_pause";
     public final static String ICON_CROSS = "icon_cross";
-    //public final static String ICON_PLAY = "icon_play";
-    public final static String ICON_MUSIC = "icon_music";
-    public final static String ICON_CIRCLE = "icon_circle";
+    public final static String ICON_SOUND_ON = "icon_sound_on";
+    public final static String ICON_SOUND_OFF = "icon_sound_off";
 
     public final static String button_style = "buttonStyle";
     public final static String label_style_normal = "labelStyle_normal";
     public final static String label_style_big = "labelStyle_big";
     public final static String label_style_small = "labelStyle_small";
     public final static String window_style = "window_01";
-
+    public final static String image_button_style = "imageButtonStyle|";
     public final static String slider_style_hor =  "slider_hor";
-
     public final static String textbox_style = "textbox_01";
 
     public final String BUTTON_DOWN = "button_05";
@@ -70,23 +72,10 @@ public class ResourceManager implements Disposable {
         fontNormal = new BitmapFont(Gdx.files.internal("font/font-white-normal.fnt"));
         fontBig = new BitmapFont(Gdx.files.internal("font/font-white-big.fnt"));
         loadTextureAtlas();
-        loadTexture();
         loadMusic();
         manager.finishLoading();
         getCups();
         setUiNew();
-    }
-
-    private void loadTexture(){
-        manager.load(grid, Texture.class);
-        manager.load(mark, Texture.class);
-        manager.load(mark1, Texture.class);
-        manager.load(mark2, Texture.class);
-        manager.load(mark3, Texture.class);
-        manager.load(mark4, Texture.class);
-        manager.load(fon_menu, Texture.class);
-        manager.load(heart, Texture.class);
-        manager.load(background, Texture.class);
     }
 
     private void loadMusic(){
@@ -102,12 +91,12 @@ public class ResourceManager implements Disposable {
         manager.load(ui_gray, TextureAtlas.class);
         manager.load(ui_white, TextureAtlas.class);
         manager.load(ui_yellow, TextureAtlas.class);
-        manager.load(cup, Texture.class);
+        manager.load(textureAtlas, TextureAtlas.class);
 
     }
 
     public TextureRegion getTextureRegion(String nameTexture){
-        return new TextureRegion(manager.get(nameTexture, Texture.class));
+        return new TextureRegion(manager.get(textureAtlas, TextureAtlas.class).findRegion(nameTexture));
     }
 
     public TextureRegion getTextureAtlas(String nameTexture){
@@ -123,9 +112,9 @@ public class ResourceManager implements Disposable {
     }
 
     private void getCups(){
-        Texture texture = manager.get(cup, Texture.class);
-        TextureRegion[][] tmp = TextureRegion.split(texture, texture.getWidth()/3, texture.getHeight());
-        System.arraycopy(tmp[0], 0, cups, 0, 3);
+        cups[0] = manager.get(textureAtlas, TextureAtlas.class).findRegion("cup1");
+        cups[1] = manager.get(textureAtlas, TextureAtlas.class).findRegion("cup2");
+        cups[2] = manager.get(textureAtlas, TextureAtlas.class).findRegion("cup3");
     }
 
     public void setUiNew(){
@@ -181,6 +170,12 @@ public class ResourceManager implements Disposable {
         windowStyle.background = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("window_01"));
         windowStyle.titleFont = fontSmall;
         skin.add(window_style, windowStyle, Window.WindowStyle.class);
+        
+        ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
+        imageButtonStyle.up = new TextureRegionDrawable(getTextureAtlas(ICON_SOUND_ON));
+        imageButtonStyle.down = new TextureRegionDrawable(getTextureAtlas(ICON_SOUND_OFF));
+        imageButtonStyle.checked = new TextureRegionDrawable(getTextureAtlas(ICON_SOUND_OFF));
+        skin.add(image_button_style, imageButtonStyle, ImageButton.ImageButtonStyle.class);
     }
 
     public Skin getSkin(){
@@ -189,6 +184,12 @@ public class ResourceManager implements Disposable {
 
     public Music getMusic(){
         return manager.get(music, Music.class);
+    }
+    
+    public TextureRegion getBackground(String nameBackground){
+        int height = manager.get(textureAtlas, TextureAtlas.class).findRegion(nameBackground).getRegionHeight();
+        return new TextureRegion(manager.get(textureAtlas,TextureAtlas.class).findRegion(nameBackground), 200, 0, (int)Setting.getWidth(height), height);
+        
     }
 
 

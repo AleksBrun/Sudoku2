@@ -24,6 +24,8 @@ public class TrophyScreen extends CommonScreen {
     public void show() {
         super.show();
 
+        AppPreference.setAllStars(500);
+
         Label title = new Label("Награды",getSkin(), ResourceManager.label_style_big);
 
         reward = new Reward(0, 0, stage.getWidth()-80, stage.getWidth(), getManager());
@@ -31,7 +33,7 @@ public class TrophyScreen extends CommonScreen {
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
         table.top();
         table.add(title).padTop(20).row();
         table.add(reward).expand().top().padTop(10).row();

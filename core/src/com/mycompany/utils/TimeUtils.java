@@ -1,4 +1,4 @@
-package com.mycompany.unils;
+package com.mycompany.utils;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.MathUtils;
 

@@ -36,7 +36,7 @@ public class CreateScreen extends CommonScreen{
 
         final TextButton play = new TextButton(Setting.name_play_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
         table.add(levelInfo).colspan(2);
         table.row();
         table.add(star).colspan(2).padTop(20).fillX().center();
@@ -61,7 +61,7 @@ public class CreateScreen extends CommonScreen{
                 dispose();
                 int mission_digits = AppPreference.getMissingDigits();
                 AppPreference.setDifficultyLevel(getDifficultyLevel(mission_digits));
-                game.setSudoku(Sudoku.getRandomSudoku(mission_digits));
+                game.createSudoku(AppPreference.getMissingDigits());
                 game.setStateScreen(MyGdxGame.State.MAIN);
             }
         });

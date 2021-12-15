@@ -1,8 +1,9 @@
 package com.mycompany.mygame;
+import com.mycompany.utils.LoaderSudoku;
 
 public class ExampleGrid {
 
-    public enum Level {minimum, moderate, maximum}
+    public enum Difficulty {minimum, moderate, maximum}
 
     private static final int[][] example3 ={
             {0,9,7,8,0,0,0,0,0},
@@ -37,8 +38,26 @@ public class ExampleGrid {
             {0,9,6,0,8,0,0,1,0},
             {0,0,7,5,0,2,9,0,0}
     };
-    public static int [][] getSudoku(Level level){
-        switch (level){
+    
+    public static int [][] getSudoku(Difficulty difficulty, int level){
+        String tmp = null;
+        if (difficulty == Difficulty.minimum) {
+            switch (level) {
+                case 1:
+                    tmp = minimum1;
+                    break;
+                case 2:
+                    tmp = minimum2;
+                    break;
+                case 3:
+                    tmp = minimum3;
+                    break;
+            }
+        }
+        return LoaderSudoku.getIntegerSudoku(tmp);
+    }
+    public static int [][] getSudoku(Difficulty difficulty){
+        switch (difficulty){
             case minimum: return example1;
             case moderate: return example2;
             case maximum: return example3;
