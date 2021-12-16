@@ -17,7 +17,7 @@ public class Reward extends Group {
 
         cells = new Image[9];
         for (int i = 0; i < 9; i++){
-            Image cell = new Image(manager.getTextureRegion(ResourceManager.mark4));
+            Image cell = new Image(manager.getTextureRegionAtlas(ResourceManager.mark4));
             cell.setSize(getWidth()/3, getWidth()/3);
             addActor(cell);
             cells[i] = cell;

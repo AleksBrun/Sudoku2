@@ -9,24 +9,28 @@ public class Setting {
 	public static final int start_color = 5;
 	public static final int start_color_font = 1;
 
-	public static String label_lvl = "Уровень сложности";
-	public static String label_time_game = "Время игры     ";
-	public static String label_error = "Ошибки    ";
-	public static String name_continuation_button = "    Продолжить  ";
-	public static String name_play_button = "   Новая Игра ";
-	public static String name_menu_button = "   Меню ";
-    public static String name_statistics_button = "    Статистика  ";
-	public static String name_exit_button = "   Выход ";
-	public static String name_setting_button = "    Настройка  ";
-	public static String name_love_button = "   Любимой ";
-    public static String name_reset_button = "  Сброс ";
-	public static String name_trophy_button = "   Награда   ";
+	public static final String label_lvl = "Уровень сложности";
+	public static final String label_time_game = "Время игры     ";
+	public static final String label_error = "Ошибки    ";
+	public static final String name_continuation_button = "    Продолжить  ";
+	public static final String name_play_button = "   Новая Игра ";
+	public static final String name_menu_button = "   Меню ";
+    public static final String name_statistics_button = "    Статистика  ";
+	public static final String name_exit_button = "   Выход ";
+	public static final String name_setting_button = "    Настройка  ";
+	public static final String name_love_button = "   Любимой ";
+    public static final String name_reset_button = "  Сброс ";
+	public static final String name_trophy_button = "   Награда   ";
 	public static final String name_colorUi_button ="   Цвет ";
 	public static final String name_colorFont_button = "    Цвет шрифта ";
-	public static final String level_1 = "  Легко ";
-	public static final String level_2 = "  Нормально ";
-	public static final String level_3 = "  Трудно ";
+    
+    public static final String level_0 = "   Очень легко ";
+	public static final String level_1 = "   Легко ";
+	public static final String level_2 = "   Нормально ";
+	public static final String level_3 = "   Трудно ";
+    public static final String level_4 = "   Очень трудно ";
 	public static final String level_random = " Создать ";
+    
 	public static float pad_ui_menu = 5;
 	public static float pad_ui_menu_bottom = getHeight_Ui(420) / 12;
 

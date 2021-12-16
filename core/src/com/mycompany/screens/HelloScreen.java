@@ -20,7 +20,7 @@ public class HelloScreen extends CommonScreen {
         
         TextButton menu = new TextButton(Setting.name_menu_button, game.getManager().getSkin(), ResourceManager.button_style);
         
-        table.setBackground(new TextureRegionDrawable(game.getManager().getTextureRegion(ResourceManager.love)));
+        table.setBackground(new TextureRegionDrawable(game.getManager().getTextureRegionAtlas(ResourceManager.love)));
         table.top();
         table.add(menu);
 

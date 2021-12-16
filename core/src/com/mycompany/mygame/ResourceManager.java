@@ -34,6 +34,12 @@ public class ResourceManager implements Disposable {
     public static final String background3 = "background3";
     public static final String background4 = "background4";
     public static final String background5 = "background5";
+    public static final String coin = "Coin";
+    public static final String crystal = "Crystal";
+    public static final String paper = "Paper";
+    public static final String skull = "Skull";
+    public static final String minerals = "Minerals";
+    public static final String star = "Star";
     
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
@@ -50,13 +56,21 @@ public class ResourceManager implements Disposable {
     public final static String ICON_CROSS = "icon_cross";
     public final static String ICON_SOUND_ON = "icon_sound_on";
     public final static String ICON_SOUND_OFF = "icon_sound_off";
+    
+    public final static String white_musicOff = "white_musicOff";
+    public final static String white_musicOn = "white_musicOn";
+    public final static String black_musicOn = "black_musicOn";
+    public final static String black_MusicOff = "black_MusicOff";
 
     public final static String button_style = "buttonStyle";
     public final static String label_style_normal = "labelStyle_normal";
     public final static String label_style_big = "labelStyle_big";
     public final static String label_style_small = "labelStyle_small";
     public final static String window_style = "window_01";
-    public final static String image_button_style = "imageButtonStyle|";
+    public final static String image_button_music = "imageButtonStyle|";
+    public final static String image_button_pause = "imageButtonPause";
+    public final static String image_button_home = "imageButtonHome";
+    public final static String image_button_setting = "imageButtonSetting";
     public final static String slider_style_hor =  "slider_hor";
     public final static String textbox_style = "textbox_01";
 
@@ -95,7 +109,7 @@ public class ResourceManager implements Disposable {
 
     }
 
-    public TextureRegion getTextureRegion(String nameTexture){
+    public TextureRegion getTextureRegionAtlas(String nameTexture){
         return new TextureRegion(manager.get(textureAtlas, TextureAtlas.class).findRegion(nameTexture));
     }
 
@@ -171,11 +185,26 @@ public class ResourceManager implements Disposable {
         windowStyle.titleFont = fontSmall;
         skin.add(window_style, windowStyle, Window.WindowStyle.class);
         
-        ImageButton.ImageButtonStyle imageButtonStyle = new ImageButton.ImageButtonStyle();
-        imageButtonStyle.up = new TextureRegionDrawable(getTextureAtlas(ICON_SOUND_ON));
-        imageButtonStyle.down = new TextureRegionDrawable(getTextureAtlas(ICON_SOUND_OFF));
-        imageButtonStyle.checked = new TextureRegionDrawable(getTextureAtlas(ICON_SOUND_OFF));
-        skin.add(image_button_style, imageButtonStyle, ImageButton.ImageButtonStyle.class);
+        ImageButton.ImageButtonStyle imageButtonMusic = new ImageButton.ImageButtonStyle();
+        imageButtonMusic.up = new TextureRegionDrawable(getTextureRegionAtlas("black_musicOn"));
+        imageButtonMusic.down = new TextureRegionDrawable(getTextureRegionAtlas("white_musicOn"));
+        imageButtonMusic.checked = new TextureRegionDrawable(getTextureRegionAtlas("black_MusicOff"));
+        skin.add(image_button_music, imageButtonMusic, ImageButton.ImageButtonStyle.class);
+
+        ImageButton.ImageButtonStyle imageButtonPause = new ImageButton.ImageButtonStyle();
+        imageButtonPause.up = new TextureRegionDrawable(getTextureRegionAtlas("black_pause"));
+        imageButtonPause.down = new TextureRegionDrawable(getTextureRegionAtlas("white_pause"));
+        skin.add(image_button_pause, imageButtonPause, ImageButton.ImageButtonStyle.class);
+
+        ImageButton.ImageButtonStyle imageButtonSetting = new ImageButton.ImageButtonStyle();
+        imageButtonSetting.up = new TextureRegionDrawable(getTextureRegionAtlas("black_config"));
+        imageButtonSetting.down = new TextureRegionDrawable(getTextureRegionAtlas("white_config"));
+        skin.add(image_button_setting, imageButtonSetting, ImageButton.ImageButtonStyle.class);
+
+        ImageButton.ImageButtonStyle imageButtonHome = new ImageButton.ImageButtonStyle();
+        imageButtonHome.up = new TextureRegionDrawable(getTextureRegionAtlas("black_home"));
+        imageButtonHome.down = new TextureRegionDrawable(getTextureRegionAtlas("white_home"));
+        skin.add(image_button_home, imageButtonHome, ImageButton.ImageButtonStyle.class);
     }
 
     public Skin getSkin(){

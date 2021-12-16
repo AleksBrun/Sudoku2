@@ -37,7 +37,7 @@ public class StatisticsScreen extends CommonScreen {
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(title);
         table.row();
         table.add(allStarLabel).padTop(20);

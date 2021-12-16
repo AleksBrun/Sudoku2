@@ -11,6 +11,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
+import com.badlogic.gdx.math.MathUtils;
 
 public class TrophyScreen extends CommonScreen {
 
@@ -24,7 +25,7 @@ public class TrophyScreen extends CommonScreen {
     public void show() {
         super.show();
 
-        AppPreference.setAllStars(500);
+        //AppPreference.setAllStars(240);
 
         Label title = new Label("Награды",getSkin(), ResourceManager.label_style_big);
 
@@ -33,7 +34,7 @@ public class TrophyScreen extends CommonScreen {
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.top();
         table.add(title).padTop(20).row();
         table.add(reward).expand().top().padTop(10).row();
@@ -47,10 +48,10 @@ public class TrophyScreen extends CommonScreen {
             }
         });
 
-        String[] score = {"1", "5", "10", "20", "50", "100", "250", "500", "1000"};
+        String[] score = {"1", "5", "10", "20", "50", "75", "100", "200", "500"};
         for (int i = 0; i < 9; i++) {
             if (AppPreference.getAllStars() >= Integer.parseInt(score[i])){
-                setTextureCell(i, getManager().getCup(0));
+                setTextureCell(i, getManager().getCup(MathUtils.random(1,1)));
             }
 
         }

@@ -50,7 +50,7 @@ public class SettingScreen extends CommonScreen {
 
 
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(title).colspan(2).padTop(10);
         table.row();
         table.add(color_ui).colspan(2).fillX().padTop(40);

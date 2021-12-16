@@ -12,7 +12,6 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.utils.Sudoku;
 
 public class CreateScreen extends CommonScreen{
     public CreateScreen( MyGdxGame _game) {
@@ -36,7 +35,7 @@ public class CreateScreen extends CommonScreen{
 
         final TextButton play = new TextButton(Setting.name_play_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegion(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(levelInfo).colspan(2);
         table.row();
         table.add(star).colspan(2).padTop(20).fillX().center();

@@ -31,7 +31,7 @@ public class Key {
         for (int column = 0; column < keys.length; column++){
             Cell cell = new Cell(x+column*height, y, height, column);
             cell.setNumber(column);
-            cell.setMarkRegion(manager.getTextureRegion(ResourceManager.mark2));
+            cell.setMarkRegion(manager.getTextureRegionAtlas(ResourceManager.mark2));
             cell.setMark(true);
             cell.setRegion(manager.getNumber(column));
             keys[column] = cell;

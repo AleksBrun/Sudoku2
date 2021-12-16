@@ -29,7 +29,7 @@ public class UpdateGame extends InputAdapter {
 
         grid = new Grid(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y(),
                         Setting.getSizeGrid());
-        grid.setBackground(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.grid));
+        grid.setBackground(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.grid));
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y() / 2 - Setting.getSizeGrid() / 20,
                       Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
         clock = new Clock();
@@ -111,9 +111,9 @@ public class UpdateGame extends InputAdapter {
 
             cell.setMark(true);
             if (cell.isActive()) {
-                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark));
+                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark));
             } else {
-                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark1));
+                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
             }
         }
 
@@ -126,7 +126,7 @@ public class UpdateGame extends InputAdapter {
             }
             if (errorAllGrid()) {
                 cell.setMark(true);
-                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegion(ResourceManager.mark3));
+                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark3));
                 AppPreference.setErrorGame(AppPreference.getErrorGame() + 1);
                 AppPreference.setAllError(AppPreference.getAllError()+1);
                 mainScreen.setLabelError(AppPreference.getErrorGame());
@@ -184,7 +184,7 @@ public class UpdateGame extends InputAdapter {
     }
 
     public TextureRegion getBackground() {
-        return mainScreen.getGame().getManager().getTextureRegion(ResourceManager.background1);
+        return mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.background1);
     }
 
     public boolean isPause() {
