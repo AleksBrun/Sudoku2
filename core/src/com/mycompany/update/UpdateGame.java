@@ -3,6 +3,7 @@ package com.mycompany.update;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.mycompany.models.Bonus;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
@@ -11,9 +12,9 @@ import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.screens.MainScreen;
-import com.mycompany.utils.TimeUtils;
 import com.mycompany.utils.Clock;
 import com.mycompany.utils.LoaderSudoku;
+import com.mycompany.utils.TimeUtils;
 
 public class UpdateGame extends InputAdapter {
 
@@ -23,6 +24,7 @@ public class UpdateGame extends InputAdapter {
     private int indexCell;
     private boolean pause;
     private final Clock clock;
+    private final Bonus bonus;
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -33,9 +35,11 @@ public class UpdateGame extends InputAdapter {
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y() / 2 - Setting.getSizeGrid() / 20,
                       Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
         clock = new Clock();
+
+        bonus = new Bonus();
     }
 
-    public void update() {
+    public void update(float delta) {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
     }
@@ -101,6 +105,11 @@ public class UpdateGame extends InputAdapter {
             }
         }
     }
+    
+    private void bonusActivation(float _x, float _y, float _size, int indexBonus){
+        bonus.init(_x, _y, _size, indexBonus);
+        bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.star));
+    }
 
     private void update(int screenX, int screenY) {
         grid.resetMark();
@@ -128,10 +137,15 @@ public class UpdateGame extends InputAdapter {
                 cell.setMark(true);
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark3));
                 AppPreference.setErrorGame(AppPreference.getErrorGame() + 1);
-                AppPreference.setAllError(AppPreference.getAllError()+1);
+                AppPreference.setAllError(AppPreference.getAllError() + 1);
                 mainScreen.setLabelError(AppPreference.getErrorGame());
-            } else if (grid.isFilledIn()) {
-                victoryGame();
+            } else {
+                if (cell.getBonusId() != 0){
+                    bonusActivation(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
+                    }
+                if (grid.isFilledIn()) {
+                    victoryGame();
+                    }
             }
             if (AppPreference.getErrorGame() >= 5) {
                 loseGame();
@@ -189,5 +203,9 @@ public class UpdateGame extends InputAdapter {
 
     public boolean isPause() {
         return pause;
+    }
+    
+    public Bonus getBonus(){
+        return this.bonus;
     }
 }

@@ -10,6 +10,7 @@ import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.Color;
+import com.mycompany.models.Bonus;
 
 public class DrawGame {
 
@@ -24,6 +25,7 @@ public class DrawGame {
         drawBackground(batch);
         drawGrid(batch);
         drawCells(batch);
+        drawBonus(batch);
         drawKeys(batch);
         batch.end();
         //drawRender(render);
@@ -31,6 +33,13 @@ public class DrawGame {
 
     private void drawBackground(SpriteBatch batch){
         batch.draw(updateGame.getBackground(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+    
+    private void drawBonus(SpriteBatch batch){
+        Bonus bonus = updateGame.getBonus();
+        if (bonus != null && bonus.isActive()){
+            batch.draw(bonus.getRegion(), bonus.getX(), bonus.getY(), bonus.getSize(), bonus.getSize());
+        }
     }
 
     private void drawKeys(SpriteBatch batch){

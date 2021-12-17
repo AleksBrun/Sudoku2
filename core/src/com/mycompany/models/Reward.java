@@ -51,7 +51,7 @@ public class Reward extends Group {
     }
 
     private Image getIconStar(ResourceManager manager){
-        return new Image(manager.getTextureAtlas(ResourceManager.ICON_STAR));
+        return new Image(manager.getTextureRegionAtlas(ResourceManager.star));
     }
 
     public Image[] getCells() {

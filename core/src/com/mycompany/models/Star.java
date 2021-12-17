@@ -3,17 +3,18 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Star extends Group {
+public class Star extends CommonGroup {
     
     private final Image[] stars;
-    public Star(float size, TextureRegion texture){
-        setSize(size*6, size);
+    public Star(float sizeCell, TextureRegion texture){
+        super(sizeCell*6, sizeCell);
         
         stars = new Image[6];
         for (int i = 0; i < stars.length; i++) {
             Image tmp = new Image(texture);
-            tmp.setBounds(size * i, 0, size, size);
-            addActor(tmp);
+            tmp.setSize(sizeCell, sizeCell);
+            //tmp.setBounds(sizeCell * i, 0, sizeCell, sizeCell);
+            getTable().add(tmp);
             stars[i] = tmp;
         }
     }

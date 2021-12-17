@@ -4,10 +4,26 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Cell {
 
-    private float x, y, size;
+    private float x;
+    private float y;
+
+    public void setSize(float size) {
+        this.size = size;
+    }
+
+    private float size;
     private TextureRegion region;
     private TextureRegion markRegion;
-    private int number, index;
+    private int number, index, bonusId;
+
+    public int getBonusId() {
+        return bonusId;
+    }
+
+    public void setBonusId(int bonusId) {
+        this.bonusId = bonusId;
+    }
+
     private boolean mark, active;
 
     public Cell(float _x, float _y, float _size, int _index) {
@@ -48,9 +64,17 @@ public class Cell {
     public float getX() {
         return x;
     }
+    
+    public void setX(float _x){
+        this.x = _x;
+    }
 
     public float getY() {
         return y;
+    }
+    
+    public void setY(float _y){
+        this.y = _y;
     }
 
     public float getSize() {

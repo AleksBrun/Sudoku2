@@ -2,24 +2,28 @@ package com.mycompany.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mycompany.draw.DrawGame;
+import com.mycompany.models.CommonGroup;
 import com.mycompany.models.Star;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
 public class MainScreen extends CommonScreen {
 
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
-    private Label labelClock, labelError;
+    private Label labelClock;
+    private Star skull;
+    private Vector2 positionStar = new Vector2();
 
     public MainScreen(MyGdxGame game) {
         super(720, game);
@@ -33,35 +37,64 @@ public class MainScreen extends CommonScreen {
         updateGame.playGame(game.getSudoku());
         updateGame.setVolume();
         
+        float size = Setting.size_icon;
+        
+        CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
+        
+        CommonGroup row2 = new CommonGroup(stage.getWidth(), size/1.5f);
+       
+        CommonGroup row3 = new CommonGroup(stage.getWidth(), size/1.5f);
+        
+        CommonGroup row4 = new CommonGroup(stage.getWidth(), size/1.5f);
+       
+        table.top().padTop(20);
+        table.add(row1).row();
+        table.add(row2).padTop(10).row();
+        table.add(row3).row();
+        table.add(row4);
+        
         final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
-
+        final Label stars = new Label(String.valueOf(AppPreference.getAllStars()), getManager().getSkin(), ResourceManager.label_style_big);
         final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
         final ImageButton pauseIcon = new ImageButton(getSkin(), ResourceManager.image_button_pause);
         final ImageButton settingIcon = new ImageButton(getSkin(), ResourceManager.image_button_setting);
         final ImageButton homeIcon = new ImageButton(getSkin(), ResourceManager.image_button_home);
         
-        Label stars = new Label(String.valueOf(AppPreference.getAllStars()), getManager().getSkin(), ResourceManager.label_style_big);
-        Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_normal);
-        labelClock = new Label(Setting.label_time_game, getManager().getSkin(), ResourceManager.label_style_normal);
-        labelError = new Label(Setting.label_error+AppPreference.getErrorGame(), getManager().getSkin(), ResourceManager.label_style_normal);
+        final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
+        labelClock = new Label(Setting.label_time_game, getManager().getSkin(), ResourceManager.label_style_big);
+        final Label labelError = new Label(Setting.label_error, getManager().getSkin(), ResourceManager.label_style_big);
 
-        Star star = new Star(Setting.size_icon / 2, getManager().getTextureAtlas(ResourceManager.ICON_STAR));
+        Star star = new Star(size / 2, getManager().getTextureRegionAtlas(ResourceManager.star));
         star.setStars(AppPreference.getDifficultyLevel());
+        
+        skull = new Star(size/2, getManager().getTextureRegionAtlas(ResourceManager.skull));
+        skull.setStars(AppPreference.getErrorGame());
 
-        float size = Setting.size_icon;
-        table.top().add(starIcon).width(size).height(size).left().padTop(5).padLeft(10);
-        table.add(stars).expandX().left().padTop(5);
-        table.add(musicIcon).width(size).height(size).padTop(5).padRight(5).fill();
-        table.add(pauseIcon).width(size).height(size).padTop(5).padRight(5);
-        table.add(settingIcon).width(size).height(size).padTop(5).padRight(5);
-        table.add(homeIcon).width(size).height(size).padTop(5).padRight(10);
-        table.row();
-        table.add(title).colspan(2).top().right().padTop(5);
-        table.add(star).colspan(4).top().left().padTop(5);
-        table.row();
-        table.add(labelClock).colspan(2).top().left().padTop(5).padLeft(10);
-        table.add(labelError).colspan(4).top().left().padTop(5);
-
+        
+        row1.getTable().add(starIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
+        row1.getTable().add(stars).expandX().left().padLeft(5);
+        row1.getTable().add(musicIcon).width(size).height(size).padRight(5).fill();
+        row1.getTable().add(pauseIcon).width(size).height(size).padRight(5);
+        row1.getTable().add(settingIcon).width(size).height(size).padRight(5);
+        row1.getTable().add(homeIcon).width(size).height(size).padRight(20);
+        
+        row2.getTable().add(title).padLeft(30);
+        row2.getTable().add(star).expandX().left().padLeft(10);
+        
+        row3.getTable().add(labelClock).expandX().left().padLeft(30);
+        
+        row4.getTable().add(labelError).padLeft(30);
+        row4.getTable().add(skull).expandX().left().padLeft(10);
+        
+        starIcon.screenToLocalCoordinates(positionStar);
+        
+        settingIcon.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                dispose();
+                game.setStateScreen(MyGdxGame.State.SETTING);
+            }
+        });
         musicIcon.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -94,7 +127,7 @@ public class MainScreen extends CommonScreen {
 
     @Override
     public void render(float delta) {
-        updateGame.update();
+        updateGame.update(delta);
         drawGame.draw(game.getBatch(), game.getRender());
         stage.draw();
     }
@@ -120,6 +153,10 @@ public class MainScreen extends CommonScreen {
     }
 
     public void setLabelError(int _errors){
-        labelError.setText(Setting.label_error+_errors);
+        skull.setStars(_errors);
+    }
+    
+    public Vector2 getPositionStarIcon(){
+        return this.positionStar;
     }
 }
