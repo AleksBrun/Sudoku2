@@ -31,6 +31,7 @@ public class Cell {
         this.y = _y;
         this.size = _size;
         this.index = _index;
+        this.bonusId = 1;
     }
 
     public Cell hit(float touchX, float touchY){

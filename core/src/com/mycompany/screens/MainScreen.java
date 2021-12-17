@@ -2,7 +2,6 @@ package com.mycompany.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -21,9 +20,8 @@ public class MainScreen extends CommonScreen {
 
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
-    private Label labelClock;
+    private Label labelClock, stars;
     private Star skull;
-    private Vector2 positionStar = new Vector2();
 
     public MainScreen(MyGdxGame game) {
         super(720, game);
@@ -54,7 +52,7 @@ public class MainScreen extends CommonScreen {
         table.add(row4);
         
         final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
-        final Label stars = new Label(String.valueOf(AppPreference.getAllStars()), getManager().getSkin(), ResourceManager.label_style_big);
+        stars = new Label(String.valueOf(AppPreference.getStarsGame()), getManager().getSkin(), ResourceManager.label_style_big);
         final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
         final ImageButton pauseIcon = new ImageButton(getSkin(), ResourceManager.image_button_pause);
         final ImageButton settingIcon = new ImageButton(getSkin(), ResourceManager.image_button_setting);
@@ -85,9 +83,7 @@ public class MainScreen extends CommonScreen {
         
         row4.getTable().add(labelError).padLeft(30);
         row4.getTable().add(skull).expandX().left().padLeft(10);
-        
-        starIcon.screenToLocalCoordinates(positionStar);
-        
+
         settingIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
@@ -152,11 +148,13 @@ public class MainScreen extends CommonScreen {
         labelClock.setText(Setting.label_time_game+minute+":"+second);
     }
 
+    public void setStars(int _stars){
+        AppPreference.setStarGame(AppPreference.getStarsGame()+_stars);
+        stars.setText(String.valueOf(AppPreference.getStarsGame()));
+    }
+
     public void setLabelError(int _errors){
         skull.setStars(_errors);
     }
-    
-    public Vector2 getPositionStarIcon(){
-        return this.positionStar;
-    }
+
 }

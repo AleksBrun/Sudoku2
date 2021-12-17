@@ -26,7 +26,7 @@ public class StatisticsScreen extends CommonScreen {
 
         Label allStarLabel = new Label("Получено звезд  "+ AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_normal);
         
-        Label starLabel = new Label("Звезд за игру  "+AppPreference.getDifficultyLevel(), getSkin(), ResourceManager.label_style_normal);
+        Label starLabel = new Label("Звезд за игру  "+AppPreference.getStarsGame(), getSkin(), ResourceManager.label_style_normal);
 
         GridPoint2 allTime = TimeUtils.getTime(AppPreference.getAllTime());
         Label allTimeLabel = new Label("Общее время игры  "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_normal);
@@ -34,6 +34,8 @@ public class StatisticsScreen extends CommonScreen {
         Label timeLabel = new Label("Время текущей игры   "+AppPreference.getTimeMinute()+":"+AppPreference.getTimeMinute(), getSkin(), ResourceManager.label_style_normal);
 
         Label allErrorLabel = new Label("Сделано ошибок  "+AppPreference.getAllError(), getSkin(), ResourceManager.label_style_normal);
+
+        Label errorLabel = new Label("Сделано ошибок за игру  "+AppPreference.getErrorGame(), getSkin(), ResourceManager.label_style_normal);
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
@@ -47,6 +49,8 @@ public class StatisticsScreen extends CommonScreen {
         table.add(allTimeLabel).padTop(10);
         table.row();
         table.add(timeLabel).padTop(10);
+        table.row();
+        table.add(errorLabel).padTop(10);
         table.row();
         table.add(allErrorLabel).padTop(10);
         table.row();

@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class CommonGroup extends Group {
 
-    private Table table;
+    private final Table table;
 
     public CommonGroup(float _width, float _height) {
         setSize(_width, _height);

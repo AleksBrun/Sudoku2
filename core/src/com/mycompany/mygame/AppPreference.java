@@ -3,6 +3,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class AppPreference {
+    private static final String STARS_GAME = "stars.game";
     private static final String ALL_ERROR = "all.error";
     private static final String PREF_ALL_MINUTE = "all.minute";
     private static final String PREF_ERROR_GAME = "error.game";
@@ -38,11 +39,6 @@ public class AppPreference {
     public static int getAllTime(){
         return prefs.getInteger(PREF_ALL_MINUTE, 0);
     }
-    // Сохранить колличество ошибок за игру
-    public static void setErrorGame(int errorGame){
-        prefs.putInteger(PREF_ERROR_GAME, errorGame);
-        prefs.flush();
-    }
     // Сохранить общее колличество ошибок
     public static void setAllError(int errors){
         prefs.putInteger(ALL_ERROR, errors);
@@ -52,9 +48,23 @@ public class AppPreference {
     public static int getAllError(){
         return prefs.getInteger(ALL_ERROR, 0);
     }
+    // Сохранить колличество ошибок за игру
+    public static void setErrorGame(int errorGame){
+        prefs.putInteger(PREF_ERROR_GAME, errorGame);
+        prefs.flush();
+    }
     // Получить колличество ошибок за игру
     public static int getErrorGame(){
         return prefs.getInteger(PREF_ERROR_GAME, 0);
+    }
+    // Сохранить звезды за игру
+    public static void setStarGame(int stars){
+        prefs.putInteger(STARS_GAME, stars);
+        prefs.flush();
+    }
+    // Получить звезды за игру
+    public static int getStarsGame(){
+        return prefs.getInteger(STARS_GAME, 0);
     }
     // сочранить общее число звезд(ОЧКОВ)
     public static void setAllStars(int stars){

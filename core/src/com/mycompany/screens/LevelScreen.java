@@ -65,60 +65,39 @@ public class LevelScreen extends CommonScreen {
         easy_min.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dispose();
-                    AppPreference.setDifficultyLevel(1);
-                    game.reset();
-                    game.createSudoku(35);
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    startNewGame(1, 35);
                 }
             });
 
         easy.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dispose();
-                    AppPreference.setDifficultyLevel(2);
-                    game.reset();
-                    game.createSudoku(40);
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    startNewGame(2,40);
                 }
             });
         average.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dispose();
-                    AppPreference.setDifficultyLevel(3);
-                    game.reset();
-                    game.createSudoku(45);
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    startNewGame(3, 45);
                 }
             });
         difficult.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dispose();
-                    AppPreference.setDifficultyLevel(4);
-                    game.reset();
-                    game.createSudoku(50);
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    startNewGame(4, 50);
                 }
             });
         difficult_max.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dispose();
-                    AppPreference.setDifficultyLevel(5);
-                    game.reset();
-                    game.createSudoku(55);
-                    game.setStateScreen(MyGdxGame.State.MAIN);
+                    startNewGame(5, 55);
+
                 }
             });
         random.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    dispose();
-                    game.reset();
-                    game.setStateScreen(MyGdxGame.State.CREATE);
+
                 }
             });
         menu.addListener(new ClickListener(){
@@ -130,7 +109,20 @@ public class LevelScreen extends CommonScreen {
             });
     }
 
-
+    private void startNewGame(int difficulty, int missing_digits){
+        dispose();
+        AppPreference.setDifficultyLevel(difficulty);
+        reset();
+        game.createSudoku(missing_digits);
+        game.setStateScreen(MyGdxGame.State.MAIN);
+    }
+    private void reset() {
+        AppPreference.setContinuationEnabled(true);
+        AppPreference.setTimeMinute(0);
+        AppPreference.setTimeSecond(0);
+        AppPreference.setErrorGame(0);
+        AppPreference.setStarGame(0);
+    }
 
     @Override
     public void render(float delta) {

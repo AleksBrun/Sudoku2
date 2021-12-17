@@ -25,14 +25,11 @@ public class TrophyScreen extends CommonScreen {
     public void show() {
         super.show();
 
-        //AppPreference.setAllStars(240);
-
         Label title = new Label("Награды",getSkin(), ResourceManager.label_style_big);
 
         reward = new Reward(0, 0, stage.getWidth()-80, stage.getWidth(), getManager());
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
-
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.top();
@@ -53,7 +50,6 @@ public class TrophyScreen extends CommonScreen {
             if (AppPreference.getAllStars() >= Integer.parseInt(score[i])){
                 setTextureCell(i, getManager().getCup(MathUtils.random(1,1)));
             }
-
         }
         for (int i = 0; i < 9; i++) {
             setLabelCell(i, score[i]);
@@ -72,5 +68,4 @@ public class TrophyScreen extends CommonScreen {
         super.render(delta);
         stage.draw();
     }
-
 }

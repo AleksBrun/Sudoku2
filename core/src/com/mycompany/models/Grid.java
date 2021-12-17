@@ -1,7 +1,6 @@
 package com.mycompany.models;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mycompany.mygame.ResourceManager;
 
 public class Grid {
 

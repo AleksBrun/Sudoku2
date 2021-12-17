@@ -32,7 +32,6 @@ public class MyGdxGame extends Game {
 		batch = new SpriteBatch();
         render = new ShapeRenderer();
         render.setAutoShapeType(true);
-		//System.out.print(ExampleGrid.minimum3.length());
 		setStateScreen(State.MENU);
 	}
 
@@ -98,12 +97,7 @@ public class MyGdxGame extends Game {
         setSudoku(createSudoku.getRandomSudoku(missing_digits));
     }
     
-    public void reset() {
-        AppPreference.setContinuationEnabled(true);
-        AppPreference.setTimeMinute(0);
-        AppPreference.setTimeSecond(0);
-        AppPreference.setErrorGame(0);
-    }
+
 
 	@Override
 	public void dispose () {

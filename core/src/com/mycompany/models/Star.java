@@ -1,5 +1,5 @@
 package com.mycompany.models;
-import com.badlogic.gdx.scenes.scene2d.Group;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -13,7 +13,6 @@ public class Star extends CommonGroup {
         for (int i = 0; i < stars.length; i++) {
             Image tmp = new Image(texture);
             tmp.setSize(sizeCell, sizeCell);
-            //tmp.setBounds(sizeCell * i, 0, sizeCell, sizeCell);
             getTable().add(tmp);
             stars[i] = tmp;
         }

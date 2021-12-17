@@ -25,6 +25,7 @@ public class UpdateGame extends InputAdapter {
     private boolean pause;
     private final Clock clock;
     private final Bonus bonus;
+    private int counter_bonus;
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -42,6 +43,15 @@ public class UpdateGame extends InputAdapter {
     public void update(float delta) {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
+        if (bonus.isActive()){
+            if (counter_bonus < 30){
+                counter_bonus++;
+            } else {
+                bonus.setActive(false);
+                counter_bonus = 0;
+                mainScreen.setStars(10);
+            }
+        }
     }
 
     public boolean errorAllGrid() {
