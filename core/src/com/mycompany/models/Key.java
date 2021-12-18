@@ -5,18 +5,18 @@ import com.mycompany.mygame.ResourceManager;
 public class Key {
 
     private final ResourceManager manager;
-    private final float x, y, width, height;
+    private final float x, y, width, sizeCell;
     private final Cell[] keys;
+    private boolean active;
 
-    public Key(float _x, float _y, float _width, float _height,  ResourceManager _manager) {
+    public Key(float _x, float _y, float _width, float _sizeCell,  ResourceManager _manager) {
         this.x = _x;
         this.y = _y;
         this.width = _width;
-        this.height = _height;
+        this.sizeCell = _sizeCell;
         this.manager = _manager;
 
         keys = new Cell[10];
-
         createKey();
     }
 
@@ -29,7 +29,7 @@ public class Key {
 
     private void createKey(){
         for (int column = 0; column < keys.length; column++){
-            Cell cell = new Cell(x+column*height, y, height, column);
+            Cell cell = new Cell(x+column* sizeCell, y, sizeCell, column);
             cell.setNumber(column);
             cell.setMarkRegion(manager.getTextureRegionAtlas(ResourceManager.mark2));
             cell.setMark(true);
@@ -50,11 +50,11 @@ public class Key {
         return y;
     }
 
-    public float getWidth() {
-        return width;
+    public boolean isActive() {
+        return active;
     }
 
-    public float getHeight() {
-        return height;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

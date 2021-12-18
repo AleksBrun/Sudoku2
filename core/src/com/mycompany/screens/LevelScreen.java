@@ -122,6 +122,7 @@ public class LevelScreen extends CommonScreen {
         AppPreference.setTimeSecond(0);
         AppPreference.setErrorGame(0);
         AppPreference.setStarGame(0);
+        AppPreference.setBonus(5);
     }
 
     @Override

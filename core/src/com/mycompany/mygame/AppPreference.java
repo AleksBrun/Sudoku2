@@ -3,24 +3,40 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class AppPreference {
+    private static final String BONUS = "bonus";
+    private static final String COLOR_TOPIC = "color.topic";
     private static final String STARS_GAME = "stars.game";
     private static final String ALL_ERROR = "all.error";
-    private static final String PREF_ALL_MINUTE = "all.minute";
-    private static final String PREF_ERROR_GAME = "error.game";
-    private static final String PREF_ALL_STARS = "all.stars";
-    private static final String PREF_MUSIC_VOLUME = "volume";
-    private static final String PREF_MUSIC_ENABLED = "music.enabled";
+    private static final String ALL_MINUTE = "all.minute";
+    private static final String ERROR_GAME = "error.game";
+    private static final String ALL_STARS = "all.stars";
+    private static final String MUSIC_VOLUME = "volume";
+    private static final String MUSIC_ENABLED = "music.enabled";
     private static final String PREFS_NAME = "b2dtut";
-    private static final String PREF_COLOR_INDEX = "color.ui";
+    private static final String COLOR_INDEX = "color.ui";
     private static final String COLOR_FONT = "color.font";
-    private static final String PREF_SUDOKU = "sudoku";
-    private static final String PREF_CONTINUATION_ENABLED = "continuation.enabled";
-    private static final String PREF_MINUTE = "time_minute";
-    private static final String PREF_SECOND = "time_second";
-    private static final String PREF_MISSING_DIGITS = "missing_digits";
-    private static final String PREF_DIFFICULTY_LEVEL = "difficulty_level";
+    private static final String SUDOKU = "sudoku";
+    private static final String CONTINUATION_ENABLED = "continuation.enabled";
+    private static final String MINUTE = "time_minute";
+    private static final String SECOND = "time_second";
+    private static final String MISSING_DIGITS = "missing_digits";
+    private static final String DIFFICULTY_LEVEL = "difficulty_level";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
+    public static void setBonus(int bonus){
+        prefs.putInteger(BONUS, bonus);
+        prefs.flush();
+    }
+    public static int getBonus(){
+        return prefs.getInteger(BONUS, 5);
+    }
+    public static void setColorTopic(int colorTopic){
+        prefs.putInteger(COLOR_TOPIC, colorTopic);
+        prefs.flush();
+    }
+    public static int getColorTopic(){
+        return prefs.getInteger(COLOR_TOPIC, 0);
+    }
     // записать индекс цвета шрифта
     public static void setColorFont(int index_color){
         prefs.putInteger(COLOR_FONT, index_color);
@@ -32,12 +48,12 @@ public class AppPreference {
     }
     // Сохранить общее время игры
     public static void setAllTime(int minute){
-        prefs.putInteger(PREF_ALL_MINUTE, minute);
+        prefs.putInteger(ALL_MINUTE, minute);
         prefs.flush();
     }
     // получить общее время игры
     public static int getAllTime(){
-        return prefs.getInteger(PREF_ALL_MINUTE, 0);
+        return prefs.getInteger(ALL_MINUTE, 0);
     }
     // Сохранить общее колличество ошибок
     public static void setAllError(int errors){
@@ -50,12 +66,12 @@ public class AppPreference {
     }
     // Сохранить колличество ошибок за игру
     public static void setErrorGame(int errorGame){
-        prefs.putInteger(PREF_ERROR_GAME, errorGame);
+        prefs.putInteger(ERROR_GAME, errorGame);
         prefs.flush();
     }
     // Получить колличество ошибок за игру
     public static int getErrorGame(){
-        return prefs.getInteger(PREF_ERROR_GAME, 0);
+        return prefs.getInteger(ERROR_GAME, 0);
     }
     // Сохранить звезды за игру
     public static void setStarGame(int stars){
@@ -68,92 +84,92 @@ public class AppPreference {
     }
     // сочранить общее число звезд(ОЧКОВ)
     public static void setAllStars(int stars){
-        prefs.putInteger(PREF_ALL_STARS, stars);
+        prefs.putInteger(ALL_STARS, stars);
         prefs.flush();
     }
     // Получить общее число звезд
     public static int getAllStars(){
-        return prefs.getInteger(PREF_ALL_STARS, 0);
+        return prefs.getInteger(ALL_STARS, 0);
     }
     // Сохранить ровень сложности
     public static void setDifficultyLevel(int level){
-        prefs.putInteger(PREF_DIFFICULTY_LEVEL, level);
+        prefs.putInteger(DIFFICULTY_LEVEL, level);
         prefs.flush();
     }
     // Получить уровень сложности
     public static int getDifficultyLevel(){
-        return prefs.getInteger(PREF_DIFFICULTY_LEVEL);
+        return prefs.getInteger(DIFFICULTY_LEVEL);
     }
     // Записать сетку судоку в строке
     public static void saveSudoku(String sudoku) {
-        prefs.putString(PREF_SUDOKU, sudoku);
+        prefs.putString(SUDOKU, sudoku);
         prefs.flush();
+    }
+    // Получить строку судоку
+    public static String loadSudoku() {
+        return prefs.getString(SUDOKU);
     }
     // Записать колличество пустых ячеек
     public static void setMissingDigits(int missing_digits) {
-        prefs.putInteger(PREF_MISSING_DIGITS, missing_digits);
+        prefs.putInteger(MISSING_DIGITS, missing_digits);
         prefs.flush();
     }
     // Получить колличество пустых ячек
     public static int getMissingDigits() {
-        return prefs.getInteger(PREF_MISSING_DIGITS, 40);
-    }
-    // Получить строку судоку
-    public static String loadSudoku() {
-        return prefs.getString(PREF_SUDOKU);
+        return prefs.getInteger(MISSING_DIGITS, 40);
     }
     // Проверка возможности продолжить игру
     public static boolean isContinuationEnabled() {
-        return prefs.getBoolean(PREF_CONTINUATION_ENABLED, false);
+        return prefs.getBoolean(CONTINUATION_ENABLED, false);
     }
     // Записаить сосояие продолжить игпу
     public static void setContinuationEnabled(boolean continuationEnabled) {
-        prefs.putBoolean(PREF_CONTINUATION_ENABLED, continuationEnabled);
+        prefs.putBoolean(CONTINUATION_ENABLED, continuationEnabled);
         prefs.flush();
     }
 
     public static int getTimeMinute() {
-        return prefs.getInteger(PREF_MINUTE, 0);
+        return prefs.getInteger(MINUTE, 0);
     }
 
     public static int getTimeSecond() {
-        return prefs.getInteger(PREF_SECOND, 0);
+        return prefs.getInteger(SECOND, 0);
     }
 
     public static void setTimeMinute(int minute) {
-        prefs.putInteger(PREF_MINUTE, minute);
+        prefs.putInteger(MINUTE, minute);
         prefs.flush();
     }
 
     public static void setTimeSecond(int second) {
-        prefs.putInteger(PREF_SECOND, second);
+        prefs.putInteger(SECOND, second);
         prefs.flush();
     }
 
     public static boolean isMusicEnabled() {
-        return prefs.getBoolean(PREF_MUSIC_ENABLED, true);
+        return prefs.getBoolean(MUSIC_ENABLED, true);
     }
 
     public static void setMusicEnabled(boolean musicEnabled) {
-        prefs.putBoolean(PREF_MUSIC_ENABLED, musicEnabled);
+        prefs.putBoolean(MUSIC_ENABLED, musicEnabled);
         prefs.flush();
     }
 
     public static float getMusicVolume() {
-        return prefs.getFloat(PREF_MUSIC_VOLUME, 0.5f);
+        return prefs.getFloat(MUSIC_VOLUME, 0.5f);
     }
 
     public static void setMusicVolume(float volume) {
-        prefs.putFloat(PREF_MUSIC_VOLUME, volume);
+        prefs.putFloat(MUSIC_VOLUME, volume);
         prefs.flush();
     }
 
     public static void setColorUI(int indexColor) {
-        prefs.putInteger(PREF_COLOR_INDEX, indexColor);
+        prefs.putInteger(COLOR_INDEX, indexColor);
         prefs.flush();
     }
 
     public static int getColorUI() {
-        return prefs.getInteger(PREF_COLOR_INDEX, Setting.start_color);
+        return prefs.getInteger(COLOR_INDEX, Setting.start_color);
     }
 }

@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mycompany.models.Star;
+import com.mycompany.models.GroupImage;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
@@ -22,7 +22,7 @@ public class CreateScreen extends CommonScreen{
     public void show() {
         super.show();
 
-        final Star star = new Star(Setting.size_icon/2, getManager().getTextureAtlas(ResourceManager.ICON_STAR));
+        final GroupImage star = new GroupImage(5, Setting.size_icon/2, getManager().getTextureAtlas(ResourceManager.ICON_STAR));
         star.setStars(getDifficultyLevel(AppPreference.getMissingDigits()));
 
         final Label levelInfo = new Label("Сложность", getSkin(), ResourceManager.label_style_big);

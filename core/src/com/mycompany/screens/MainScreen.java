@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mycompany.draw.DrawGame;
 import com.mycompany.models.CommonGroup;
-import com.mycompany.models.Star;
+import com.mycompany.models.GroupImage;
 import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
@@ -21,7 +21,7 @@ public class MainScreen extends CommonScreen {
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
     private Label labelClock, stars;
-    private Star skull;
+    private GroupImage skull, bonus;
 
     public MainScreen(MyGdxGame game) {
         super(720, game);
@@ -32,8 +32,7 @@ public class MainScreen extends CommonScreen {
     @Override
     public void show() {
         super.show();
-        updateGame.playGame(game.getSudoku());
-        updateGame.setVolume();
+
         
         float size = Setting.size_icon;
         
@@ -44,30 +43,42 @@ public class MainScreen extends CommonScreen {
         CommonGroup row3 = new CommonGroup(stage.getWidth(), size/1.5f);
         
         CommonGroup row4 = new CommonGroup(stage.getWidth(), size/1.5f);
+
+        CommonGroup row5 = new CommonGroup(stage.getWidth(), size/1.5f);
        
         table.top().padTop(20);
         table.add(row1).row();
-        table.add(row2).padTop(10).row();
+        table.add(row2).row();
         table.add(row3).row();
-        table.add(row4);
-        
-        final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
-        stars = new Label(String.valueOf(AppPreference.getStarsGame()), getManager().getSkin(), ResourceManager.label_style_big);
-        final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
-        final ImageButton pauseIcon = new ImageButton(getSkin(), ResourceManager.image_button_pause);
-        final ImageButton settingIcon = new ImageButton(getSkin(), ResourceManager.image_button_setting);
-        final ImageButton homeIcon = new ImageButton(getSkin(), ResourceManager.image_button_home);
-        
-        final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
-        labelClock = new Label(Setting.label_time_game, getManager().getSkin(), ResourceManager.label_style_big);
-        final Label labelError = new Label(Setting.label_error, getManager().getSkin(), ResourceManager.label_style_big);
+        table.add(row4).row();
+        table.add(row5);
 
-        Star star = new Star(size / 2, getManager().getTextureRegionAtlas(ResourceManager.star));
+        final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.crystal));
+
+        final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
+        //musicIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
+
+        final ImageButton pauseIcon = new ImageButton(getSkin(), ResourceManager.image_button_pause);
+        //pauseIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
+
+        final ImageButton settingIcon = new ImageButton(getSkin(), ResourceManager.image_button_setting);
+        //settingIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
+
+        final ImageButton homeIcon = new ImageButton(getSkin(), ResourceManager.image_button_home);
+        //homeIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
+
+        final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
+        final Label labelError = new Label(Setting.label_error, getManager().getSkin(), ResourceManager.label_style_big);
+        final GroupImage star = new GroupImage(5,size / 2, getManager().getTextureRegionAtlas(ResourceManager.star));
         star.setStars(AppPreference.getDifficultyLevel());
         
-        skull = new Star(size/2, getManager().getTextureRegionAtlas(ResourceManager.skull));
+        skull = new GroupImage(5,size/2, getManager().getTextureRegionAtlas(ResourceManager.skull));
         skull.setStars(AppPreference.getErrorGame());
+        labelClock = new Label(Setting.label_time_game, getSkin(), ResourceManager.label_style_big);
+        stars = new Label(String.valueOf(AppPreference.getStarsGame()), getManager().getSkin(), ResourceManager.label_style_big);
 
+        final Label bonusLabel = new Label(Setting.label_bonus, getSkin(), ResourceManager.label_style_big);
+        bonus = new GroupImage(5, size/2, getManager().getTextureRegionAtlas(ResourceManager.crystal));
         
         row1.getTable().add(starIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
         row1.getTable().add(stars).expandX().left().padLeft(5);
@@ -83,6 +94,9 @@ public class MainScreen extends CommonScreen {
         
         row4.getTable().add(labelError).padLeft(30);
         row4.getTable().add(skull).expandX().left().padLeft(10);
+
+        row5.getTable().add(bonusLabel).padLeft(30);
+        row5.getTable().add(bonus).expandX().left().padLeft(10);
 
         settingIcon.addListener(new ClickListener(){
             @Override
@@ -117,24 +131,23 @@ public class MainScreen extends CommonScreen {
                     game.setStateScreen(MyGdxGame.State.MENU);
                 }
             });
+
+        updateGame.playGame(game.getSudoku());
+        updateGame.setVolume();
         InputMultiplexer multiplexer = new InputMultiplexer(stage, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
     public void render(float delta) {
-        updateGame.update(delta);
+        updateGame.update();
         drawGame.draw(game.getBatch(), game.getRender());
         stage.draw();
     }
 
-    public MyGdxGame getGame() {
-        return game;
-    }
-
-
     @Override
     public void pause() {
+        super.pause();
         updateGame.pause();
     }
 
@@ -142,6 +155,9 @@ public class MainScreen extends CommonScreen {
     public void hide() {
         super.hide();
         updateGame.saveGame();
+    }
+    public void setBonus(int _bonus){
+        bonus.setStars(_bonus);
     }
     
     public void setTime(int minute, int second){
@@ -152,9 +168,11 @@ public class MainScreen extends CommonScreen {
         AppPreference.setStarGame(AppPreference.getStarsGame()+_stars);
         stars.setText(String.valueOf(AppPreference.getStarsGame()));
     }
-
     public void setLabelError(int _errors){
         skull.setStars(_errors);
     }
 
+    public MyGdxGame getGame() {
+        return game;
+    }
 }

@@ -3,6 +3,7 @@ package com.mycompany.update;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.mycompany.models.Bonus;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
@@ -21,11 +22,12 @@ public class UpdateGame extends InputAdapter {
     private final MainScreen mainScreen;
     private final Grid grid;
     private  final Key key;
-    private int indexCell;
+
     private boolean pause;
     private final Clock clock;
     private final Bonus bonus;
     private int counter_bonus;
+    private int indexCell;
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -40,7 +42,7 @@ public class UpdateGame extends InputAdapter {
         bonus = new Bonus();
     }
 
-    public void update(float delta) {
+    public void update() {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
         if (bonus.isActive()){
@@ -54,33 +56,26 @@ public class UpdateGame extends InputAdapter {
         }
     }
 
-    public boolean errorAllGrid() {
-        for (int index = 0; index < 9; index++) {
-            if (checkingDuplicates(grid.getHorizontalGroup(index)) ||
-                checkingDuplicates(grid.getVerticalGroup(index)) ||
-                checkingDuplicates(grid.getSquareGrid(index)))
-                return true;
-        }
-        return false;
-    }
-
-    private boolean checkingDuplicates(Cell[] group) {
-        int index = 0;
-        for (int number = 1; number <= 9; number++) {
-            for (Cell cell:group) {
-                if (cell.getNumber() == number) {
-                    index++;
-                    if (index > 1) return true;
+    public void playGame(int[][] sudoku) {
+        Array<Cell> cellArray = new Array<Cell>();
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                Cell cell = grid.getCells()[column][row];
+                cell.setNumber(sudoku[column][row]);
+                cell.setMark(false);
+                cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+                if (cell.getNumber() == 0) {
+                    cell.setActive(true);
+                    cellArray.add(cell);
                 }
             }
-            index = 0;
         }
-        return false;
-    }
-
-    public void playGame(int[][] sudoku) {
-        loadSudoku(sudoku);
+        grid.resetBonus();
+        for (int i = 0; i < AppPreference.getBonus(); i++){
+            cellArray.random().setBonusId(1);
+        }
         clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
+        mainScreen.setBonus(AppPreference.getBonus());
     }
 
     public void saveGame() {
@@ -102,70 +97,56 @@ public class UpdateGame extends InputAdapter {
         mainScreen.getGame().setStateScreen(MyGdxGame.State.LOSE);
     }
 
-    private void loadSudoku(int [][] sudoku) {
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                Cell cell = grid.getCells()[column][row];
-                cell.setNumber(sudoku[column][row]);
-                cell.setMark(false);
-                cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
-                if (cell.getNumber() == 0) {
-                    cell.setActive(true);
-                }
-            }
-        }
-    }
-    
-    private void bonusActivation(float _x, float _y, float _size, int indexBonus){
-        bonus.init(_x, _y, _size, indexBonus);
-        bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.star));
+    private void bonusActivation(Cell cell){
+        bonus.init(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
+        bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal));
+        cell.setBonusId(0);
+        AppPreference.setBonus(AppPreference.getBonus()-1);
+        mainScreen.setBonus(AppPreference.getBonus());
     }
 
-    private void update(int screenX, int screenY) {
+    private void updateTouch(int screenX, int screenY) {
         grid.resetMark();
-        Cell cell;
-        cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
+        Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
         if (cell != null) {
             indexCell = cell.getIndex();
-
             cell.setMark(true);
+            key.setActive(true);
             if (cell.isActive()) {
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark));
             } else {
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
             }
         }
-
         Cell keyHit = key.getHit(screenX, Gdx.graphics.getHeight() - screenY);
-        if (keyHit != null && !isPause()) {
+        if (keyHit != null && key.isActive()) {
+            key.setActive(false);
             cell = grid.getCell(indexCell);
             if (cell.isActive()) {
                 cell.setNumber(keyHit.getNumber());
                 cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
             }
-            if (errorAllGrid()) {
+            if (grid.errorAllGrid()) {
                 cell.setMark(true);
                 cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark3));
                 AppPreference.setErrorGame(AppPreference.getErrorGame() + 1);
                 AppPreference.setAllError(AppPreference.getAllError() + 1);
                 mainScreen.setLabelError(AppPreference.getErrorGame());
-            } else {
-                if (cell.getBonusId() != 0){
-                    bonusActivation(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
-                    }
-                if (grid.isFilledIn()) {
-                    victoryGame();
-                    }
+            } else if (cell.getBonusId() != 0){
+                bonusActivation(cell);
             }
             if (AppPreference.getErrorGame() >= 5) {
                 loseGame();
+            }
+            if (grid.isFilledIn()) {
+                victoryGame();
             }
         }
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        update(screenX, screenY);
+        updateTouch(screenX, screenY);
         return false;
     }
 

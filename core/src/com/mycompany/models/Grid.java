@@ -34,19 +34,43 @@ public class Grid {
         return null;
     }
 
-    public Cell[] getVerticalGroup(int column){
+    public boolean errorAllGrid() {
+        for (int index = 0; index < 9; index++) {
+            if (checkingDuplicates(getHorizontalGroup(index)) ||
+                    checkingDuplicates(getVerticalGroup(index)) ||
+                    checkingDuplicates(getSquareGrid(index)))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean checkingDuplicates(Cell[] group) {
+        int index = 0;
+        for (int number = 1; number <= 9; number++) {
+            for (Cell cell:group) {
+                if (cell.getNumber() == number) {
+                    index++;
+                    if (index > 1) return true;
+                }
+            }
+            index = 0;
+        }
+        return false;
+    }
+
+    private Cell[] getVerticalGroup(int column){
         System.arraycopy(cells[column], 0, tmpCells, 0, 9);
         return tmpCells;
     }
 
-    public Cell[] getHorizontalGroup(int column){
+    private Cell[] getHorizontalGroup(int column){
         for (int row = 0; row < 9; row++){
             tmpCells[row] = cells[row][column];
         }
         return tmpCells;
     }
 
-    public Cell[] getSquareGrid(int index){
+    private Cell[] getSquareGrid(int index){
         switch (index){
             case 0: return getSquare(0, 0);
             case 1: return getSquare(3, 0);
@@ -85,6 +109,13 @@ public class Grid {
         for (Cell[] tmpRow:cells){
             for (Cell cell:tmpRow){
                 cell.setMark(false);
+            }
+        }
+    }
+    public void resetBonus(){
+        for (Cell[] tmpRow:cells){
+            for (Cell cell:tmpRow){
+                cell.setBonusId(0);
             }
         }
     }
@@ -131,7 +162,6 @@ public class Grid {
     }
 
     public void setBackground(TextureRegion background) {
-
         this.background = background;
     }
 }

@@ -26,12 +26,13 @@ public class SettingScreen extends CommonScreen {
 
         final Label title = new Label(Setting.name_setting_button, getSkin(), ResourceManager.label_style_big);
 
-
         final Label labelInfoMusic = new Label("Громкость", getSkin(), ResourceManager.label_style_small);
 
         final TextButton color_ui = new TextButton(Setting.name_colorUi_button, getSkin(), ResourceManager.button_style);
 
         final TextButton color_font = new TextButton(Setting.name_colorFont_button, getSkin(), ResourceManager.button_style);
+
+        final TextButton color_topic = new TextButton("     Кнопки ", getSkin(), ResourceManager.button_style);
 
         final TextButton reset = new TextButton(Setting.name_reset_button, getSkin(), ResourceManager.button_style);
         reset.setVisible(false);
@@ -40,10 +41,6 @@ public class SettingScreen extends CommonScreen {
 
         final TextField textField = new TextField("", getSkin(), ResourceManager.textbox_style);
         textField.setAlignment(1);
-
-        //final Image color = new Image(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE));
-
-
 
         final Slider sliderVolume = new Slider(0, 1, .1f, false, getSkin(), ResourceManager.slider_style_hor);
         sliderVolume.setValue(AppPreference.getMusicVolume());
@@ -54,9 +51,10 @@ public class SettingScreen extends CommonScreen {
         table.add(title).colspan(2).padTop(10);
         table.row();
         table.add(color_ui).colspan(2).fillX().padTop(40);
-        //table.add(color).padTop(40);
         table.row();
         table.add(color_font).colspan(2).padTop(10).fillX();
+        table.row();
+        table.add(color_topic).colspan(2).padTop(10).fillX();
         table.row();
         table.add(labelInfoMusic).colspan(2).padTop(10);
         table.row();
@@ -78,11 +76,8 @@ public class SettingScreen extends CommonScreen {
                 }
                 AppPreference.setColorUI(indexColor);
                 getManager().setUiNew();
-
-                //color_ui.setChecked(false);
                 dispose();
                 game.setStateScreen(MyGdxGame.State.SETTING);
-                //color.setDrawable(new TextureRegionDrawable(getManager().getTextureAtlas(ResourceManager.ICON_CIRCLE)));
             }
         });
         color_font.addListener(new ClickListener(){
@@ -98,6 +93,17 @@ public class SettingScreen extends CommonScreen {
                 dispose();
                 game.setStateScreen(MyGdxGame.State.SETTING);
                 
+            }
+        });
+        color_topic.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                int indexColor = AppPreference.getColorTopic();
+                indexColor++;
+                if (indexColor > 3) {
+                    indexColor = 0;
+                }
+                AppPreference.setColorTopic(indexColor);
             }
         });
         menu.addListener(new ClickListener(){

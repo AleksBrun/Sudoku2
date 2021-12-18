@@ -22,22 +22,22 @@ public class StatisticsScreen extends CommonScreen {
     public void show() {
         super.show();
 
-        Label title = new Label("Статистика", getSkin(), ResourceManager.label_style_big);
+        final Label title = new Label("Статистика", getSkin(), ResourceManager.label_style_big);
 
-        Label allStarLabel = new Label("Получено звезд  "+ AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_normal);
+        final Label allStarLabel = new Label("Получено звезд  "+ AppPreference.getAllStars(), getSkin(), ResourceManager.label_style_normal);
         
-        Label starLabel = new Label("Звезд за игру  "+AppPreference.getStarsGame(), getSkin(), ResourceManager.label_style_normal);
+        final Label starLabel = new Label("Звезд за игру  "+AppPreference.getStarsGame(), getSkin(), ResourceManager.label_style_normal);
 
-        GridPoint2 allTime = TimeUtils.getTime(AppPreference.getAllTime());
-        Label allTimeLabel = new Label("Общее время игры  "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_normal);
+        final GridPoint2 allTime = TimeUtils.getTime(AppPreference.getAllTime());
+        final Label allTimeLabel = new Label("Общее время игры  "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_normal);
         
-        Label timeLabel = new Label("Время текущей игры   "+AppPreference.getTimeMinute()+":"+AppPreference.getTimeMinute(), getSkin(), ResourceManager.label_style_normal);
+        final Label timeLabel = new Label("Время текущей игры   "+AppPreference.getTimeMinute()+":"+AppPreference.getTimeMinute(), getSkin(), ResourceManager.label_style_normal);
 
-        Label allErrorLabel = new Label("Сделано ошибок  "+AppPreference.getAllError(), getSkin(), ResourceManager.label_style_normal);
+        final Label allErrorLabel = new Label("Сделано ошибок  "+AppPreference.getAllError(), getSkin(), ResourceManager.label_style_normal);
 
-        Label errorLabel = new Label("Сделано ошибок за игру  "+AppPreference.getErrorGame(), getSkin(), ResourceManager.label_style_normal);
+        final Label errorLabel = new Label("Сделано ошибок за игру  "+AppPreference.getErrorGame(), getSkin(), ResourceManager.label_style_normal);
 
-        TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
+        final TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(title);

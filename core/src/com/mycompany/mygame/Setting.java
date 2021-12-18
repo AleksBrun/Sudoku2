@@ -1,5 +1,6 @@
 package com.mycompany.mygame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
 public class Setting {
 
@@ -12,6 +13,7 @@ public class Setting {
 	public static final String label_lvl = "Уровень сложности";
 	public static final String label_time_game = "Время игры     ";
 	public static final String label_error = "Ошибки    ";
+	public static final String label_bonus = "Бонусы    ";
 	public static final String name_continuation_button = "    Продолжить  ";
 	public static final String name_play_button = "   Новая Игра ";
 	public static final String name_menu_button = "   Меню ";
@@ -63,4 +65,14 @@ public class Setting {
     public static float getHeightKeys() {
 		return getWidthKeys() / 10;
     }
+
+	public static Color getColorTopic(int indexColor){
+		switch (indexColor){
+			case 0: return Color.BLACK;
+			case 1: return Color.BLUE;
+			case 2: return Color.RED;
+			case 3: return Color.GREEN;
+			default: return Color.WHITE;
+		}
+	}
 }

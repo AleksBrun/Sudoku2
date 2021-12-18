@@ -3,13 +3,13 @@ package com.mycompany.models;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Star extends CommonGroup {
+public class GroupImage extends CommonGroup {
     
     private final Image[] stars;
-    public Star(float sizeCell, TextureRegion texture){
-        super(sizeCell*6, sizeCell);
+    public GroupImage(int quantityImage, float sizeCell, TextureRegion texture){
+        super(sizeCell*quantityImage, sizeCell);
         
-        stars = new Image[6];
+        stars = new Image[quantityImage];
         for (int i = 0; i < stars.length; i++) {
             Image tmp = new Image(texture);
             tmp.setSize(sizeCell, sizeCell);
