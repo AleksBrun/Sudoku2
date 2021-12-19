@@ -4,12 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
+
+import java.util.StringTokenizer;
 
 public class ResourceManager implements Disposable {
 
@@ -56,6 +59,9 @@ public class ResourceManager implements Disposable {
     public final static String ICON_CROSS = "icon_cross";
     public final static String ICON_SOUND_ON = "icon_sound_on";
     public final static String ICON_SOUND_OFF = "icon_sound_off";
+
+    public static String black_restart ="images/black_restart.png";
+    public static String white_restart = "images/white_restart.png";
     
     public final static String white_musicOff = "white_musicOff";
     public final static String white_musicOn = "white_musicOn";
@@ -71,6 +77,7 @@ public class ResourceManager implements Disposable {
     public final static String image_button_pause = "imageButtonPause";
     public final static String image_button_home = "imageButtonHome";
     public final static String image_button_setting = "imageButtonSetting";
+    public final static String image_button_restart = "imageButtonRestart";
     public final static String slider_style_hor =  "slider_hor";
     public final static String textbox_style = "textbox_01";
 
@@ -87,9 +94,15 @@ public class ResourceManager implements Disposable {
         fontBig = new BitmapFont(Gdx.files.internal("font/font-white-big.fnt"));
         loadTextureAtlas();
         loadMusic();
+        loadTexture();
         manager.finishLoading();
         getCups();
         setUiNew();
+    }
+
+    private void loadTexture(){
+        manager.load(white_restart, Texture.class);
+        manager.load(black_restart, Texture.class);
     }
 
     private void loadMusic(){
@@ -115,6 +128,10 @@ public class ResourceManager implements Disposable {
 
     public TextureRegion getTextureAtlas(String nameTexture){
         return new TextureRegion(manager.get(name_ui, TextureAtlas.class).findRegion(nameTexture));
+    }
+
+    public TextureRegion getTextureRegion(String nameTexture){
+        return new TextureRegion(manager.get(nameTexture, Texture.class));
     }
 
     public TextureRegion getNumber(int _number){
@@ -205,6 +222,11 @@ public class ResourceManager implements Disposable {
         imageButtonHome.up = new TextureRegionDrawable(getTextureRegionAtlas("black_home"));
         imageButtonHome.down = new TextureRegionDrawable(getTextureRegionAtlas("white_home"));
         skin.add(image_button_home, imageButtonHome, ImageButton.ImageButtonStyle.class);
+
+        ImageButton.ImageButtonStyle imageButtonRestart = new ImageButton.ImageButtonStyle();
+        imageButtonRestart.up = new TextureRegionDrawable(getTextureRegion(black_restart));
+        imageButtonRestart.down = new TextureRegionDrawable(getTextureRegion(white_restart));
+        skin.add(image_button_restart, imageButtonRestart, ImageButton.ImageButtonStyle.class);
     }
 
     public Skin getSkin(){

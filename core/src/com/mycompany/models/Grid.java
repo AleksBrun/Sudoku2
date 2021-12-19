@@ -9,6 +9,7 @@ public class Grid {
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
 
+
     public Grid(float _x, float _y, float _size){
         this.x = _x;
         this.y = _y;
@@ -24,6 +25,8 @@ public class Grid {
         }
         return true;
     }
+
+
 
     public Cell getCell(int index){
         for (Cell[] cellRow:cells){

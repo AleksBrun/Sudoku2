@@ -67,6 +67,9 @@ public class MainScreen extends CommonScreen {
         final ImageButton homeIcon = new ImageButton(getSkin(), ResourceManager.image_button_home);
         //homeIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
 
+        final ImageButton restartIcon = new ImageButton(getSkin(), ResourceManager.image_button_restart);
+        //homeIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
+
         final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
         final Label labelError = new Label(Setting.label_error, getManager().getSkin(), ResourceManager.label_style_big);
         final GroupImage star = new GroupImage(5,size / 2, getManager().getTextureRegionAtlas(ResourceManager.star));
@@ -82,7 +85,8 @@ public class MainScreen extends CommonScreen {
         
         row1.getTable().add(starIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
         row1.getTable().add(stars).expandX().left().padLeft(5);
-        row1.getTable().add(musicIcon).width(size).height(size).padRight(5).fill();
+        row1.getTable().add(restartIcon).width(size).height(size).padRight(5).fillX();
+        row1.getTable().add(musicIcon).width(size).height(size).padRight(5);
         row1.getTable().add(pauseIcon).width(size).height(size).padRight(5);
         row1.getTable().add(settingIcon).width(size).height(size).padRight(5);
         row1.getTable().add(homeIcon).width(size).height(size).padRight(20);
@@ -98,6 +102,12 @@ public class MainScreen extends CommonScreen {
         row5.getTable().add(bonusLabel).padLeft(30);
         row5.getTable().add(bonus).expandX().left().padLeft(10);
 
+        restartIcon.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                updateGame.bonusActive();
+            }
+        });
         settingIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){

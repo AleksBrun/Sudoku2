@@ -28,6 +28,7 @@ public class UpdateGame extends InputAdapter {
     private final Bonus bonus;
     private int counter_bonus;
     private int indexCell;
+    private boolean bonusVisible = true;
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -160,6 +161,21 @@ public class UpdateGame extends InputAdapter {
                 playMusic();
             }
         }
+    }
+    public void bonusActive(){
+        if (bonusVisible){
+            for (Cell[] rowCell:grid.getCells()){
+                for (Cell cell:rowCell){
+                    if (cell.getBonusId() != 0) {
+                        cell.setMark(true);
+                        cell.setMarkRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals));
+                    }
+                }
+            }
+        } else {
+            grid.resetMark();
+        }
+        System.out.println(bonusVisible);
     }
 
     public void setVolume() {
