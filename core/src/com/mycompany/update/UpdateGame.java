@@ -38,7 +38,6 @@ public class UpdateGame extends InputAdapter {
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y() / 2 - Setting.getSizeGrid() / 20,
                       Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
         clock = new Clock();
-
         bonus = new Bonus();
     }
 

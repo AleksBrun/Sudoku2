@@ -81,7 +81,6 @@ public class Grid {
             case 6: return getSquare(0, 6);
             case 7: return getSquare(3, 6);
             case 8: return getSquare(6, 6);
-            default: break;
         }
         return null;
     }
