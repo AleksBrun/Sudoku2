@@ -1,6 +1,7 @@
 package com.mycompany.models;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
 public class Grid {
 
@@ -8,6 +9,7 @@ public class Grid {
     private TextureRegion background;
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
+    private Array<Cell> cellArrayTmp = new Array<Cell>();
 
 
     public Grid(float _x, float _y, float _size){
@@ -15,6 +17,26 @@ public class Grid {
         this.y = _y;
         this.size = _size;
         createCells();
+    }
+
+    public void load(int[][] sudoku){
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                cells[column][row].setNumber(sudoku[column][row]);
+            }
+        }
+    }
+
+    public Array<Cell> getCellNumber(int number){
+        cellArrayTmp.clear();
+        for (Cell[] rowCell:cells){
+            for (Cell cell:rowCell){
+                if (cell.getNumber() == number){
+                    cellArrayTmp.add(cell);
+                }
+            }
+        }
+        return cellArrayTmp;
     }
 
     public boolean isFilledIn(){
@@ -26,7 +48,29 @@ public class Grid {
         return true;
     }
 
+    public Cell getHit(int x, int y){
+        for (Cell[] cellRow:cells){
+            for (Cell cell:cellRow){
+                if (cell.hit(x, y) != null) return cell;
+            }
+        }
+        return null;
+    }
 
+    public void resetMark(){
+        for (Cell[] tmpRow:cells){
+            for (Cell cell:tmpRow){
+                cell.setMark(false);
+            }
+        }
+    }
+    public void resetBonus(){
+        for (Cell[] tmpRow:cells){
+            for (Cell cell:tmpRow){
+                cell.setBonusId(0);
+            }
+        }
+    }
 
     public Cell getCell(int index){
         for (Cell[] cellRow:cells){
@@ -96,30 +140,6 @@ public class Grid {
             }
         }
         return tmpCells;
-    }
-
-    public Cell getHit(int x, int y){
-        for (Cell[] cellRow:cells){
-            for (Cell cell:cellRow){
-                if (cell.hit(x, y) != null) return cell;
-            }
-        }
-        return null;
-    }
-
-    public void resetMark(){
-        for (Cell[] tmpRow:cells){
-            for (Cell cell:tmpRow){
-                cell.setMark(false);
-            }
-        }
-    }
-    public void resetBonus(){
-        for (Cell[] tmpRow:cells){
-            for (Cell cell:tmpRow){
-                cell.setBonusId(0);
-            }
-        }
     }
 
     private void createCells(){

@@ -57,22 +57,20 @@ public class UpdateGame extends InputAdapter {
     }
 
     public void playGame(int[][] sudoku) {
-        Array<Cell> cellArray = new Array<Cell>();
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                Cell cell = grid.getCells()[column][row];
-                cell.setNumber(sudoku[column][row]);
-                cell.setMark(false);
-                cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+        grid.load(sudoku);
+        grid.resetMark();
+        grid.resetBonus();
+        for (Cell[] rowCell:grid.getCells()) {
+            for (Cell cell:rowCell) {
+                setNumberCell(cell);
                 if (cell.getNumber() == 0) {
                     cell.setActive(true);
-                    cellArray.add(cell);
                 }
             }
         }
-        grid.resetBonus();
+        Array<Cell> tmp = grid.getCellNumber(1);
         for (int i = 0; i < AppPreference.getBonus(); i++){
-            cellArray.random().setBonusId(1);
+            tmp.random().setBonusId(1);
         }
         clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
         mainScreen.setBonus(AppPreference.getBonus());
@@ -105,6 +103,22 @@ public class UpdateGame extends InputAdapter {
         mainScreen.setBonus(AppPreference.getBonus());
     }
 
+    private void setMarkRed(Cell cell){
+        cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark3));
+    }
+
+    private void setMarkYellow(Cell cell){
+        cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark));
+    }
+
+    private void setMarkBlue(Cell cell){
+        cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
+    }
+
+    private void setNumberCell(Cell cell){
+        cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+    }
+
     private void updateTouch(int screenX, int screenY) {
         grid.resetMark();
         Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
@@ -113,9 +127,9 @@ public class UpdateGame extends InputAdapter {
             cell.setMark(true);
             key.setActive(true);
             if (cell.isActive()) {
-                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark));
+                setMarkYellow(cell);
             } else {
-                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
+                setMarkBlue(cell);
             }
         }
         Cell keyHit = key.getHit(screenX, Gdx.graphics.getHeight() - screenY);
@@ -128,7 +142,7 @@ public class UpdateGame extends InputAdapter {
             }
             if (grid.errorAllGrid()) {
                 cell.setMark(true);
-                cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark3));
+                setMarkRed(cell);
                 AppPreference.setErrorGame(AppPreference.getErrorGame() + 1);
                 AppPreference.setAllError(AppPreference.getAllError() + 1);
                 mainScreen.setLabelError(AppPreference.getErrorGame());
