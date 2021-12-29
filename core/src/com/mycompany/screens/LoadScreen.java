@@ -20,18 +20,20 @@ public class LoadScreen extends CommonScreen{
     public void show() {
         super.show();
 
-        Array<Parameter> parameters = game.getParameters();
+        final Array<Parameter> parameters = game.getParameters();
+        Array<TextButton> textButtons = new Array<TextButton>();
         for (int index = 0; index < parameters.size; index++){
-            TextButton label = new TextButton("     "+(index+1)+"   "+parameters.get(index).data+"     ", getManager().getSkin(), ResourceManager.button_style);
+            final TextButton label = new TextButton("     "+(index+1)+"   "+parameters.get(index).data+"     ", getManager().getSkin(), ResourceManager.button_style);
             label.setName(""+index);
             table.add(label).padTop(10).fillX().row();
-
+            final int finalIndex = index;
             label.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println(event.getRelatedActor().getZIndex());
+                    start(parameters.get(finalIndex));
                 }
             });
+            textButtons.add(label);
         }
 
         TextButton menu = new TextButton(Setting.name_menu_button, getManager().getSkin(), ResourceManager.button_style);
@@ -45,6 +47,12 @@ public class LoadScreen extends CommonScreen{
                 game.setStateScreen(MyGdxGame.State.MENU);
             }
         });
+    }
+
+    private void start(Parameter parameter){
+        dispose();
+        game.createSudoku(parameter);
+        game.setStateScreen(MyGdxGame.State.MAIN);
     }
 
     @Override
