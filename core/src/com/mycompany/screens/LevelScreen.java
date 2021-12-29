@@ -5,10 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mycompany.mygame.AppPreference;
-import com.mycompany.mygame.MyGdxGame;
-import com.mycompany.mygame.ResourceManager;
-import com.mycompany.mygame.Setting;
+import com.mycompany.mygame.*;
+import com.mycompany.utils.LoaderSudoku;
+import com.mycompany.utils.Sudoku;
 
 
 public class LevelScreen extends CommonScreen {
@@ -36,12 +35,14 @@ public class LevelScreen extends CommonScreen {
         
         TextButton difficult_max = new TextButton(Setting.level_4, getSkin(), ResourceManager.button_style);
 
-        TextButton random = new TextButton(Setting.level_random, getSkin(), ResourceManager.button_style);
+        TextButton load = new TextButton(Setting.load_sudoku, getSkin(), ResourceManager.button_style);
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(levelLabel);
+        table.row();
+        table.add(load).fillX().padTop(20);
         table.row();
         table.add(easy_min).fillX().padTop(10);
         table.row();
@@ -54,7 +55,14 @@ public class LevelScreen extends CommonScreen {
         table.add(difficult_max).fillX().padTop(10);
         table.row();
         table.add(menu).fillX().padTop(10);
-        
+
+        load.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.LOAD);
+            }
+        });
         continuation.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
@@ -62,6 +70,7 @@ public class LevelScreen extends CommonScreen {
                 game.setStateScreen(MyGdxGame.State.MAIN);
             }
         });
+
         easy_min.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -75,18 +84,21 @@ public class LevelScreen extends CommonScreen {
                     startNewGame(2,40);
                 }
             });
+
         average.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     startNewGame(3, 45);
                 }
             });
+
         difficult.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     startNewGame(4, 50);
                 }
             });
+
         difficult_max.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -94,7 +106,7 @@ public class LevelScreen extends CommonScreen {
 
                 }
             });
-        random.addListener(new ClickListener(){
+        load.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
 
@@ -110,19 +122,25 @@ public class LevelScreen extends CommonScreen {
     }
 
     private void startNewGame(int difficulty, int missing_digits){
-        dispose();
-        AppPreference.setDifficultyLevel(difficulty);
-        reset();
-        game .createSudoku(missing_digits);
-        game.setStateScreen(MyGdxGame.State.MAIN);
-    }
-    private void reset() {
-        AppPreference.setContinuationEnabled(true);
-        AppPreference.setTimeMinute(0);
-        AppPreference.setTimeSecond(0);
-        AppPreference.setErrorGame(0);
-        AppPreference.setStarGame(0);
-        AppPreference.setBonus(5);
+
+        if (game.getParameters().size < 9) {
+            AppPreference.setDifficultyLevel(difficulty);
+            AppPreference.setContinuationEnabled(true);
+            AppPreference.setTimeMinute(0);
+            AppPreference.setTimeSecond(0);
+            AppPreference.setErrorGame(0);
+            AppPreference.setStarGame(0);
+            AppPreference.setBonus(5);
+            Sudoku sudoku = new Sudoku();
+            Parameter parameter = new Parameter();
+            parameter.difficulty_level = difficulty;
+            parameter.sudokuGame = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
+            parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
+            parameter.data = new java.util.Date().toLocaleString();
+            dispose();
+            game.createSudoku(parameter);
+            game.setStateScreen(MyGdxGame.State.MAIN);
+        }
     }
 
     @Override

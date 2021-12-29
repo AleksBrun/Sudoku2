@@ -1,5 +1,6 @@
 package com.mycompany.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -13,6 +14,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
+import com.mycompany.utils.XMLparse;
 
 public class SettingScreen extends CommonScreen {
 
@@ -126,6 +128,8 @@ public class SettingScreen extends CommonScreen {
                 AppPreference.setAllTime(0);
                 reset.setVisible(false);
                 getManager().setUiNew();
+                XMLparse.delete();
+                Gdx.app.exit();
             }
         });
 

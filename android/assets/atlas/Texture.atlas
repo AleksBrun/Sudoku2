@@ -53,51 +53,51 @@ background1
   orig: 720, 1018
   offset: 0, 0
   index: -1
-background3
+background2
   rotate: false
   xy: 2, 104
   size: 800, 800
   orig: 800, 800
   offset: 0, 0
   index: -1
-background5
-  rotate: false
-  xy: 804, 217
-  size: 800, 800
-  orig: 800, 800
-  offset: 0, 0
-  index: -1
 black_MusicOff
-  rotate: false
-  xy: 1036, 115
-  size: 100, 100
-  orig: 100, 100
-  offset: 0, 0
-  index: -1
-black_config
-  rotate: false
-  xy: 104, 2
-  size: 100, 100
-  orig: 100, 100
-  offset: 0, 0
-  index: -1
-black_home
-  rotate: false
-  xy: 1931, 1835
-  size: 100, 100
-  orig: 100, 100
-  offset: 0, 0
-  index: -1
-black_musicOn
   rotate: false
   xy: 206, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
+black_config
+  rotate: false
+  xy: 1036, 115
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+black_home
+  rotate: false
+  xy: 104, 2
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+black_musicOn
+  rotate: false
+  xy: 1138, 115
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 black_pause
   rotate: false
-  xy: 1931, 1937
+  xy: 2, 2
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+black_restart
+  rotate: false
+  xy: 308, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
@@ -121,6 +121,13 @@ cup3
   xy: 1526, 1747
   size: 273, 290
   orig: 273, 290
+  offset: 0, 0
+  index: -1
+grid1
+  rotate: false
+  xy: 804, 217
+  size: 800, 800
+  orig: 800, 800
   offset: 0, 0
   index: -1
 love
@@ -167,63 +174,43 @@ mark4
   index: -1
 white_config
   rotate: false
-  xy: 1138, 115
+  xy: 1240, 115
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_home
   rotate: false
-  xy: 934, 115
+  xy: 1931, 1835
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_musicOff
   rotate: false
-  xy: 308, 2
+  xy: 410, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_musicOn
   rotate: false
-  xy: 1240, 115
+  xy: 1342, 115
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_pause
   rotate: false
-  xy: 2, 2
+  xy: 934, 115
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-
-Texture2.png
-size: 2048, 2048
-format: RGBA8888
-filter: Nearest, Nearest
-repeat: none
-background2
+white_restart
   rotate: false
-  xy: 2, 804
-  size: 800, 800
-  orig: 800, 800
-  offset: 0, 0
-  index: -1
-background4
-  rotate: false
-  xy: 804, 804
-  size: 800, 800
-  orig: 800, 800
-  offset: 0, 0
-  index: -1
-grid1
-  rotate: false
-  xy: 2, 2
-  size: 800, 800
-  orig: 800, 800
+  xy: 1931, 1937
+  size: 100, 100
+  orig: 100, 100
   offset: 0, 0
   index: -1

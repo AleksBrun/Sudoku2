@@ -6,5 +6,6 @@ public class Parameter {
     public String sudokuFull;
     public String sudokuGame;
     public String sudokuSave;
+    public String data;
     public int difficulty_level;
 }

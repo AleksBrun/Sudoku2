@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mycompany.screens.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mycompany.utils.Sudoku;
+import com.mycompany.utils.LoaderSudoku;
 import com.mycompany.utils.XMLparse;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS, CREATE}
+	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS, CREATE, LOAD}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
@@ -20,18 +20,18 @@ public class MyGdxGame extends Game {
 	private LoseScreen loseScreen;
 	private TrophyScreen trophyScreen;
     private StatisticsScreen statisticsScreen;
+	private LoadScreen loadScreen;
 	private CreateScreen createScreen;
 	private SpriteBatch batch;
     private ShapeRenderer render;
 	private ResourceManager manager;
 	private int[][] sudoku;
-    private Sudoku createSudoku;
 	private Array<Parameter> parameters;
 
 	@Override
 	public void create () {
 		parameters = XMLparse.load();
-        createSudoku = new Sudoku();
+		System.out.println(parameters.size);
         manager = new ResourceManager();
 		batch = new SpriteBatch();
         render = new ShapeRenderer();
@@ -74,6 +74,9 @@ public class MyGdxGame extends Game {
 			case CREATE: if (createScreen == null) createScreen = new CreateScreen(this);
 			setScreen(createScreen);
 			break;
+			case LOAD: if (loadScreen == null) loadScreen = new LoadScreen(this);
+			setScreen(loadScreen);
+			break;
 		}
 	}
 
@@ -97,11 +100,15 @@ public class MyGdxGame extends Game {
 		this.sudoku = _sudoku;
 	}
     
-    public void createSudoku(int missing_digits){
-        setSudoku(createSudoku.getRandomSudoku(missing_digits));
+    public void createSudoku(Parameter parameter){
+		parameters.add(parameter);
+        setSudoku(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
+		XMLparse.save(parameters);
     }
-    
 
+	public Array<Parameter> getParameters() {
+		return parameters;
+	}
 
 	@Override
 	public void dispose () {

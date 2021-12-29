@@ -13,7 +13,7 @@ import java.io.OutputStreamWriter;
 
 public class XMLparse {
 
-    private static final String sudoku = "sudoku";
+    private static final String sudoku = "Sudoku";
     private static final String appFolder = "MyApp/";
     private static final String nameFile = "parameter.xml";
 
@@ -32,6 +32,7 @@ public class XMLparse {
                 parameter.sudokuGame = element.get("game");
                 parameter.sudokuSave = element.get("save");
                 parameter.difficulty_level = element.getInt("level");
+                parameter.data = element.get("data");
                 parameters.add(parameter);
             }
 
@@ -56,10 +57,11 @@ public class XMLparse {
                     resultsXml).write(false)));
 
             XmlWriter xml = new XmlWriter(out);
-
+            int index = 0;
             xml.element(sudoku).attribute("date", new java.util.Date());
             for (Parameter parameter : parameters) {
-                saveTaskResult(xml, parameter);
+                saveTaskResult(xml, parameter, index);
+                index++;
             }
             xml.close();
         } catch (GdxRuntimeException ex) {
@@ -84,12 +86,14 @@ public class XMLparse {
         }
     }
 
-    private static void saveTaskResult(XmlWriter xml, Parameter parameter)
+    private static void saveTaskResult(XmlWriter xml, Parameter parameter, int index)
             throws IOException {
-        xml.element(sudoku+parameter.index).attribute("index", parameter.index)
+        xml.element(sudoku+index).attribute("index", parameter.index)
                 .attribute("full", parameter.sudokuFull)
                 .attribute("game", parameter.sudokuGame)
                 .attribute("save", parameter.sudokuSave)
-                .attribute("level", parameter.difficulty_level).pop();
+                .attribute("level", parameter.difficulty_level)
+                .attribute("data", parameter.data)
+                .pop();
     }
 }

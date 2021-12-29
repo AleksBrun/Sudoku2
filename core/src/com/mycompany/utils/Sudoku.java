@@ -2,8 +2,8 @@ package com.mycompany.utils;
 
 public class Sudoku {
 
-    private int[][] mat;
-    private int [][] copyMat;
+    private final int[][] mat;
+    private final int [][] copyMat;
     private int N = 9; // number of columns/rows.
     private final int SRN = 3; // square root of N
     private int K; // No. Of missing digits
@@ -26,7 +26,11 @@ public class Sudoku {
         // Fill remaining blocks
         fillRemaining(0, SRN);
 
-        //copyMat = mat;
+        for (int row = 0; row < 9; row++){
+            for (int column = 0; column < 9; column++){
+                copyMat[column][row] = mat[column][row];
+            }
+        }
         // Remove Randomly K digits to make game
         removeKDigits();
     }
@@ -69,6 +73,7 @@ public class Sudoku {
                 mat[row+i][col+j] = num;
             }
         }
+
     }
 
     // Random generator

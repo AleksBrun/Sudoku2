@@ -12,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
 
-import java.util.StringTokenizer;
-
 public class ResourceManager implements Disposable {
 
     private final String music = "music/music.mp3";
@@ -34,9 +32,7 @@ public class ResourceManager implements Disposable {
     public static final String love = "love";
     public static final String background1 = "background1";
     public static final String background2 = "background2";
-    public static final String background3 = "background3";
-    public static final String background4 = "background4";
-    public static final String background5 = "background5";
+
     public static final String coin = "Coin";
     public static final String crystal = "Crystal";
     public static final String paper = "Paper";
@@ -54,19 +50,6 @@ public class ResourceManager implements Disposable {
     private final String ui_yellow = "skin/ui-yellow.atlas";
 
     public final static String ICON_STAR = "icon_star";
-    public final static String ICON_BACK = "icon_back";
-    public final static String ICON_PAUSE = "icon_pause";
-    public final static String ICON_CROSS = "icon_cross";
-    public final static String ICON_SOUND_ON = "icon_sound_on";
-    public final static String ICON_SOUND_OFF = "icon_sound_off";
-
-    public static String black_restart ="images/black_restart.png";
-    public static String white_restart = "images/white_restart.png";
-    
-    public final static String white_musicOff = "white_musicOff";
-    public final static String white_musicOn = "white_musicOn";
-    public final static String black_musicOn = "black_musicOn";
-    public final static String black_MusicOff = "black_MusicOff";
 
     public final static String button_style = "buttonStyle";
     public final static String label_style_normal = "labelStyle_normal";
@@ -94,16 +77,11 @@ public class ResourceManager implements Disposable {
         fontBig = new BitmapFont(Gdx.files.internal("font/font-white-big.fnt"));
         loadTextureAtlas();
         loadMusic();
-        loadTexture();
         manager.finishLoading();
         getCups();
         setUiNew();
     }
 
-    private void loadTexture(){
-        manager.load(white_restart, Texture.class);
-        manager.load(black_restart, Texture.class);
-    }
 
     private void loadMusic(){
         manager.load(music, Music.class);
@@ -119,7 +97,6 @@ public class ResourceManager implements Disposable {
         manager.load(ui_white, TextureAtlas.class);
         manager.load(ui_yellow, TextureAtlas.class);
         manager.load(textureAtlas, TextureAtlas.class);
-
     }
 
     public TextureRegion getTextureRegionAtlas(String nameTexture){
@@ -156,7 +133,6 @@ public class ResourceManager implements Disposable {
 
     private void createSkin(int index_color_font){
         skin = new Skin();
-
         TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
         style.up = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_UP));
         style.down = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion(BUTTON_DOWN));
@@ -224,8 +200,8 @@ public class ResourceManager implements Disposable {
         skin.add(image_button_home, imageButtonHome, ImageButton.ImageButtonStyle.class);
 
         ImageButton.ImageButtonStyle imageButtonRestart = new ImageButton.ImageButtonStyle();
-        imageButtonRestart.up = new TextureRegionDrawable(getTextureRegion(black_restart));
-        imageButtonRestart.down = new TextureRegionDrawable(getTextureRegion(white_restart));
+        imageButtonRestart.up = new TextureRegionDrawable(getTextureRegionAtlas("black_restart"));
+        imageButtonRestart.down = new TextureRegionDrawable(getTextureRegionAtlas("white_restart"));
         skin.add(image_button_restart, imageButtonRestart, ImageButton.ImageButtonStyle.class);
     }
 

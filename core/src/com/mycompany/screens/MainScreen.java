@@ -32,8 +32,6 @@ public class MainScreen extends CommonScreen {
     @Override
     public void show() {
         super.show();
-
-        
         float size = Setting.size_icon;
         
         CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
@@ -56,19 +54,14 @@ public class MainScreen extends CommonScreen {
         final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.crystal));
 
         final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
-        //musicIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
 
         final ImageButton pauseIcon = new ImageButton(getSkin(), ResourceManager.image_button_pause);
-        //pauseIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
 
         final ImageButton settingIcon = new ImageButton(getSkin(), ResourceManager.image_button_setting);
-        //settingIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
 
         final ImageButton homeIcon = new ImageButton(getSkin(), ResourceManager.image_button_home);
-        //homeIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
 
         final ImageButton restartIcon = new ImageButton(getSkin(), ResourceManager.image_button_restart);
-        //homeIcon.setColor(Setting.getColorTopic(AppPreference.getColorTopic()));
 
         final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
         final Label labelError = new Label(Setting.label_error, getManager().getSkin(), ResourceManager.label_style_big);

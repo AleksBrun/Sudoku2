@@ -1,7 +1,6 @@
 package com.mycompany.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,7 +30,7 @@ public class MenuScreen extends CommonScreen {
         TextButton test = new TextButton(Setting.name_love_button, getSkin(), ResourceManager.button_style);
         TextButton statistics = new TextButton(Setting.name_statistics_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getBackground("background" + MathUtils.random(2,5))));
+        table.setBackground(new TextureRegionDrawable(getManager().getBackground(ResourceManager.background2)));
         table.bottom().right().padRight(10).padBottom(10);
         table.add(continuation).row();
         table.add(start).fillX().padTop(Setting.pad_ui_menu).row();

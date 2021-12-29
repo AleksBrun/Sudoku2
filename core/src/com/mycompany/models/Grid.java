@@ -9,7 +9,7 @@ public class Grid {
     private TextureRegion background;
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
-    private Array<Cell> cellArrayTmp = new Array<Cell>();
+    private final Array<Cell> cellArrayTmp = new Array<Cell>();
 
 
     public Grid(float _x, float _y, float _size){

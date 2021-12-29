@@ -32,6 +32,7 @@ public class Setting {
 	public static final String level_3 = "   Трудно ";
     public static final String level_4 = "   Очень трудно ";
 	public static final String level_random = " Создать ";
+	public static final String load_sudoku = "   Загрузить  ";
     
 	public static float pad_ui_menu = 5;
 	public static float pad_ui_menu_bottom = getHeight_Ui(420) / 12;
