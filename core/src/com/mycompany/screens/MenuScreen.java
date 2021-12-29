@@ -23,6 +23,7 @@ public class MenuScreen extends CommonScreen {
         super.show();
         TextButton continuation = new TextButton(Setting.name_continuation_button, getSkin(), ResourceManager.button_style);
         continuation.setVisible(AppPreference.isContinuationEnabled());
+        TextButton load = new TextButton(Setting.load_sudoku, getSkin(), ResourceManager.button_style);
         TextButton start = new TextButton(Setting.name_play_button, getSkin(), ResourceManager.button_style);
         TextButton exit = new TextButton(Setting.name_exit_button, getSkin(), ResourceManager.button_style);
         TextButton color = new TextButton(Setting.name_setting_button, getSkin(), ResourceManager.button_style);
@@ -33,6 +34,7 @@ public class MenuScreen extends CommonScreen {
         table.setBackground(new TextureRegionDrawable(getManager().getBackground(ResourceManager.background2)));
         table.bottom().right().padRight(10).padBottom(10);
         table.add(continuation).row();
+        table.add(load).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(start).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(color).fillX().padTop(Setting.pad_ui_menu).row();
         table.add(test).fillX().padTop(Setting.pad_ui_menu).row();
@@ -72,7 +74,6 @@ public class MenuScreen extends CommonScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 dispose();
-                game.setSudoku(LoaderSudoku.getIntegerSudoku(AppPreference.loadSudoku()));
                 game.setStateScreen(MyGdxGame.State.MAIN);
             }
         });
@@ -88,6 +89,13 @@ public class MenuScreen extends CommonScreen {
             public void clicked(InputEvent event, float x, float y){
                 dispose();
                 game.setStateScreen(MyGdxGame.State.STATISTICS);
+            }
+        });
+        load.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setStateScreen(MyGdxGame.State.LOAD);
             }
         });
     }

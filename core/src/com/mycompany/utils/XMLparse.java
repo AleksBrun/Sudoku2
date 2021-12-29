@@ -33,6 +33,7 @@ public class XMLparse {
                 parameter.sudokuSave = element.get("save");
                 parameter.difficulty_level = element.getInt("level");
                 parameter.data = element.get("data");
+                parameter.time = element.getInt("time");
                 parameters.add(parameter);
             }
 
@@ -94,6 +95,7 @@ public class XMLparse {
                 .attribute("save", parameter.sudokuSave)
                 .attribute("level", parameter.difficulty_level)
                 .attribute("data", parameter.data)
+                .attribute("time", parameter.time)
                 .pop();
     }
 }

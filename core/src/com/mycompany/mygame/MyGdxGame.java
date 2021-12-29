@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mycompany.screens.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mycompany.utils.LoaderSudoku;
 import com.mycompany.utils.XMLparse;
 
 public class MyGdxGame extends Game {
@@ -25,8 +24,8 @@ public class MyGdxGame extends Game {
 	private SpriteBatch batch;
     private ShapeRenderer render;
 	private ResourceManager manager;
-	private int[][] sudoku;
 	private Array<Parameter> parameters;
+	private Parameter parameter;
 
 	@Override
 	public void create () {
@@ -92,17 +91,19 @@ public class MyGdxGame extends Game {
 		return manager;
 	}
 
-	public int[][] getSudoku() {
-		return sudoku;
+	public Parameter getParameter() {
+		return parameter;
 	}
 
-	public void setSudoku(int[][] _sudoku) {
-		this.sudoku = _sudoku;
+	public void setParameter(Parameter parameter) {
+		this.parameter = parameter;
 	}
-    
-    public void createSudoku(Parameter parameter){
-		parameters.add(parameter);
-        setSudoku(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
+
+	public void createSudoku(Parameter _parameter , boolean append){
+		if (append){
+			parameters.add(_parameter);
+		}
+		setParameter(_parameter);
 		XMLparse.save(parameters);
     }
 

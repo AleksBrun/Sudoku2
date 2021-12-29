@@ -27,6 +27,7 @@ public class UpdateGame extends InputAdapter {
     private int counter_bonus;
     private int indexCell;
     private boolean bonusVisible = true;
+    private Parameter parameter;
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -54,8 +55,9 @@ public class UpdateGame extends InputAdapter {
         }
     }
 
-    public void playGame(int[][] sudoku) {
-        grid.load(sudoku);
+    public void playGame(Parameter _parameter) {
+        this.parameter = _parameter;
+        grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
         grid.resetMark();
         grid.resetBonus();
         for (Cell[] rowCell:grid.getCells()) {
@@ -70,18 +72,16 @@ public class UpdateGame extends InputAdapter {
         for (int i = 0; i < AppPreference.getBonus(); i++){
             tmp.random().setBonusId(1);
         }
-        clock.setTime(AppPreference.getTimeMinute(), AppPreference.getTimeSecond());
+        clock.setTime(TimeUtils.getTime(parameter.time));
         mainScreen.setBonus(AppPreference.getBonus());
     }
 
     public void saveGame() {
-        AppPreference.setTimeMinute(clock.getMinute());
-        AppPreference.setTimeSecond(clock.getSecond());
-        int allTime = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
-        allTime += AppPreference.getAllTime();
-        AppPreference.setAllTime(allTime);
-        AppPreference.saveSudoku(LoaderSudoku.getStringSudoku(grid.getSudoku()));
+        parameter.sudokuSave = LoaderSudoku.getStringSudoku(grid.getSudoku());
+        parameter.time = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
+        AppPreference.setAllTime(AppPreference.getAllTime()+parameter.time);
         stopMusic();
+        XMLparse.save(mainScreen.game.getParameters());
     }
 
     private void victoryGame() {

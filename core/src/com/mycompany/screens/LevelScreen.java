@@ -35,16 +35,14 @@ public class LevelScreen extends CommonScreen {
         
         TextButton difficult_max = new TextButton(Setting.level_4, getSkin(), ResourceManager.button_style);
 
-        TextButton load = new TextButton(Setting.load_sudoku, getSkin(), ResourceManager.button_style);
+
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(levelLabel);
         table.row();
-        table.add(load).fillX().padTop(20);
-        table.row();
-        table.add(easy_min).fillX().padTop(10);
+        table.add(easy_min).fillX().padTop(20);
         table.row();
         table.add(easy).fillX().padTop(10);
         table.row();
@@ -56,13 +54,7 @@ public class LevelScreen extends CommonScreen {
         table.row();
         table.add(menu).fillX().padTop(10);
 
-        load.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                dispose();
-                game.setStateScreen(MyGdxGame.State.LOAD);
-            }
-        });
+
         continuation.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
@@ -103,15 +95,9 @@ public class LevelScreen extends CommonScreen {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     startNewGame(5, 55);
-
                 }
             });
-        load.addListener(new ClickListener(){
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
 
-                }
-            });
         menu.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -134,11 +120,11 @@ public class LevelScreen extends CommonScreen {
             Sudoku sudoku = new Sudoku();
             Parameter parameter = new Parameter();
             parameter.difficulty_level = difficulty;
-            parameter.sudokuGame = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
+            parameter.sudokuGame = parameter.sudokuSave = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
             parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
             dispose();
-            game.createSudoku(parameter);
+            game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);
         }
     }

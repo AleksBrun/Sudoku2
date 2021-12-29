@@ -135,7 +135,7 @@ public class MainScreen extends CommonScreen {
                 }
             });
 
-        updateGame.playGame(game.getSudoku());
+        updateGame.playGame(game.getParameter());
         updateGame.setVolume();
         InputMultiplexer multiplexer = new InputMultiplexer(stage, updateGame);
         Gdx.input.setInputProcessor(multiplexer);

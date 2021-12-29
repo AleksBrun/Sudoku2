@@ -1,5 +1,7 @@
 package com.mycompany.utils;
 
+import com.badlogic.gdx.math.GridPoint2;
+
 public class Clock {
 
     private int second;
@@ -14,6 +16,12 @@ public class Clock {
         active = true;
     }
 
+    public void setTime(GridPoint2 point){
+        this.second = point.x;
+        this.minute = point.y;
+        stateTime = 0;
+        active = true;
+    }
     public void update(){
         if (active){
             if (stateTime == 60){

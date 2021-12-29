@@ -1,9 +1,9 @@
 package com.mycompany.screens;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Parameter;
@@ -38,6 +38,7 @@ public class LoadScreen extends CommonScreen{
 
         TextButton menu = new TextButton(Setting.name_menu_button, getManager().getSkin(), ResourceManager.button_style);
 
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
         table.add(menu).padTop(20);
 
         menu.addListener(new ClickListener(){
@@ -51,7 +52,7 @@ public class LoadScreen extends CommonScreen{
 
     private void start(Parameter parameter){
         dispose();
-        game.createSudoku(parameter);
+        game.createSudoku(parameter, false);
         game.setStateScreen(MyGdxGame.State.MAIN);
     }
 
