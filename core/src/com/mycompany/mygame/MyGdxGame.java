@@ -2,9 +2,11 @@ package com.mycompany.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.mycompany.screens.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mycompany.utils.Sudoku;
+import com.mycompany.utils.XMLparse;
 
 public class MyGdxGame extends Game {
 
@@ -24,9 +26,11 @@ public class MyGdxGame extends Game {
 	private ResourceManager manager;
 	private int[][] sudoku;
     private Sudoku createSudoku;
+	private Array<Parameter> parameters;
 
 	@Override
 	public void create () {
+		parameters = XMLparse.load();
         createSudoku = new Sudoku();
         manager = new ResourceManager();
 		batch = new SpriteBatch();

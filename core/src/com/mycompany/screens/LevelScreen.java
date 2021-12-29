@@ -113,7 +113,7 @@ public class LevelScreen extends CommonScreen {
         dispose();
         AppPreference.setDifficultyLevel(difficulty);
         reset();
-        game.createSudoku(missing_digits);
+        game .createSudoku(missing_digits);
         game.setStateScreen(MyGdxGame.State.MAIN);
     }
     private void reset() {

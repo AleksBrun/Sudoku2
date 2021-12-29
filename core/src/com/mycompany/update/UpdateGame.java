@@ -8,14 +8,12 @@ import com.mycompany.models.Bonus;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
-import com.mycompany.mygame.AppPreference;
-import com.mycompany.mygame.MyGdxGame;
-import com.mycompany.mygame.ResourceManager;
-import com.mycompany.mygame.Setting;
+import com.mycompany.mygame.*;
 import com.mycompany.screens.MainScreen;
 import com.mycompany.utils.Clock;
 import com.mycompany.utils.LoaderSudoku;
 import com.mycompany.utils.TimeUtils;
+import com.mycompany.utils.XMLparse;
 
 public class UpdateGame extends InputAdapter {
 

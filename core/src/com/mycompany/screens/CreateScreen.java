@@ -60,7 +60,7 @@ public class CreateScreen extends CommonScreen{
                 dispose();
                 int mission_digits = AppPreference.getMissingDigits();
                 AppPreference.setDifficultyLevel(getDifficultyLevel(mission_digits));
-                game.createSudoku(AppPreference.getMissingDigits());
+                //game.createSudoku(AppPreference.getMissingDigits());
                 game.setStateScreen(MyGdxGame.State.MAIN);
             }
         });
