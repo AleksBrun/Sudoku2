@@ -9,4 +9,5 @@ public class Parameter {
     public String data;
     public int difficulty_level;
     public int time;
+    public int bonus;
 }

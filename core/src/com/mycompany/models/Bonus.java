@@ -2,11 +2,7 @@ package com.mycompany.models;
 
 public class Bonus extends Cell{
 
-    
-    public Bonus(float _x, float _y, float _size , int index) {
-        super(_x, _y, _size, index);
-
-    }
+    private int counter_bonus;
 
     public Bonus(){
         super(0,0,0,0);
@@ -18,5 +14,14 @@ public class Bonus extends Cell{
         setSize(_size);
         setBonusId(_id);
         setActive(true);
+    }
+
+    public void update(){
+        if (isActive() && counter_bonus < 30){
+           counter_bonus++;
+        } else {
+            counter_bonus = 0;
+            setActive(false);
+        }
     }
 }

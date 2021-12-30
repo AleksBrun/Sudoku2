@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlWriter;
+import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.Parameter;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -34,11 +35,13 @@ public class XMLparse {
                 parameter.difficulty_level = element.getInt("level");
                 parameter.data = element.get("data");
                 parameter.time = element.getInt("time");
+                parameter.bonus = element.getInt("bonus");
                 parameters.add(parameter);
             }
 
         } catch (Exception exception){
-            exception.printStackTrace();
+            System.out.println("No Xml");
+            AppPreference.setContinuationEnabled(false);
         }
         return parameters;
     }
@@ -96,6 +99,7 @@ public class XMLparse {
                 .attribute("level", parameter.difficulty_level)
                 .attribute("data", parameter.data)
                 .attribute("time", parameter.time)
+                .attribute("bonus", parameter.bonus)
                 .pop();
     }
 }

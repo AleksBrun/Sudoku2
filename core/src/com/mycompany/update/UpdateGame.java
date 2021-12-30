@@ -44,15 +44,7 @@ public class UpdateGame extends InputAdapter {
     public void update() {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
-        if (bonus.isActive()){
-            if (counter_bonus < 30){
-                counter_bonus++;
-            } else {
-                bonus.setActive(false);
-                counter_bonus = 0;
-                mainScreen.setStars(10);
-            }
-        }
+        bonus.update();
     }
 
     public void playGame(Parameter _parameter) {
@@ -60,20 +52,10 @@ public class UpdateGame extends InputAdapter {
         grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
         grid.resetMark();
         grid.resetBonus();
-        for (Cell[] rowCell:grid.getCells()) {
-            for (Cell cell:rowCell) {
-                setNumberCell(cell);
-                if (cell.getNumber() == 0) {
-                    cell.setActive(true);
-                }
-            }
-        }
-        Array<Cell> tmp = grid.getCellNumber(1);
-        for (int i = 0; i < AppPreference.getBonus(); i++){
-            tmp.random().setBonusId(1);
-        }
+        setNumberCell();
+        setBonus();
         clock.setTime(TimeUtils.getTime(parameter.time));
-        mainScreen.setBonus(AppPreference.getBonus());
+
     }
 
     public void saveGame() {
@@ -93,12 +75,29 @@ public class UpdateGame extends InputAdapter {
         mainScreen.getGame().setStateScreen(MyGdxGame.State.LOSE);
     }
 
+    private void setBonus(){
+        mainScreen.setBonus(parameter.bonus);
+        Array<Cell> tmp = grid.getCellNumber(0);
+        for (int i = 0; i < parameter.bonus; i++){
+            tmp.random().setBonusId(4);
+        }
+    }
+
     private void bonusActivation(Cell cell){
         bonus.init(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
-        bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal));
+        switch (cell.getBonusId()){
+            case 1: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal));
+            break;
+            case 2: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.coin));
+            break;
+            case 3: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals));
+            break;
+            case 4: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.skull));
+            break;
+        }
         cell.setBonusId(0);
-        AppPreference.setBonus(AppPreference.getBonus()-1);
-        mainScreen.setBonus(AppPreference.getBonus());
+        parameter.bonus -= 1;
+        mainScreen.setBonus(parameter.bonus);
     }
 
     private void setMarkRed(Cell cell){
@@ -113,8 +112,15 @@ public class UpdateGame extends InputAdapter {
         cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
     }
 
-    private void setNumberCell(Cell cell){
-        cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+    private void setNumberCell(){
+        for (Cell[] rowCell:grid.getCells()) {
+            for (Cell cell:rowCell) {
+                cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+                if (cell.getNumber() == 0) {
+                    cell.setActive(true);
+                }
+            }
+        }
     }
 
     private void updateTouch(int screenX, int screenY) {
@@ -180,14 +186,12 @@ public class UpdateGame extends InputAdapter {
                 for (Cell cell:rowCell){
                     if (cell.getBonusId() != 0) {
                         cell.setMark(true);
-                        cell.setMarkRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals));
                     }
                 }
             }
         } else {
             grid.resetMark();
         }
-        System.out.println(bonusVisible);
     }
 
     public void setVolume() {

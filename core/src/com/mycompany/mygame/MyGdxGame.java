@@ -22,7 +22,6 @@ public class MyGdxGame extends Game {
 	private LoadScreen loadScreen;
 	private CreateScreen createScreen;
 	private SpriteBatch batch;
-    private ShapeRenderer render;
 	private ResourceManager manager;
 	private Array<Parameter> parameters;
 	private Parameter parameter;
@@ -30,11 +29,8 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		parameters = XMLparse.load();
-		System.out.println(parameters.size);
         manager = new ResourceManager();
 		batch = new SpriteBatch();
-        render = new ShapeRenderer();
-        render.setAutoShapeType(true);
 		setStateScreen(State.MENU);
 	}
 
@@ -82,10 +78,6 @@ public class MyGdxGame extends Game {
 	public SpriteBatch getBatch() {
 		return batch;
 	}
-    
-    public ShapeRenderer getRender(){
-        return this.render;
-    }
 
 	public ResourceManager getManager() {
 		return manager;
@@ -114,7 +106,6 @@ public class MyGdxGame extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-        render.dispose();
 		manager.dispose();
 	}
 }

@@ -70,10 +70,13 @@ public class MainScreen extends CommonScreen {
         
         skull = new GroupImage(5,size/2, getManager().getTextureRegionAtlas(ResourceManager.skull));
         skull.setStars(AppPreference.getErrorGame());
+
         labelClock = new Label(Setting.label_time_game, getSkin(), ResourceManager.label_style_big);
+
         stars = new Label(String.valueOf(AppPreference.getStarsGame()), getManager().getSkin(), ResourceManager.label_style_big);
 
         final Label bonusLabel = new Label(Setting.label_bonus, getSkin(), ResourceManager.label_style_big);
+
         bonus = new GroupImage(5, size/2, getManager().getTextureRegionAtlas(ResourceManager.crystal));
         
         row1.getTable().add(starIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
@@ -144,7 +147,7 @@ public class MainScreen extends CommonScreen {
     @Override
     public void render(float delta) {
         updateGame.update();
-        drawGame.draw(game.getBatch(), game.getRender());
+        drawGame.draw(game.getBatch());
         stage.draw();
     }
 

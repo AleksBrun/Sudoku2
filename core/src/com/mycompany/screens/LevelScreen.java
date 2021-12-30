@@ -123,6 +123,7 @@ public class LevelScreen extends CommonScreen {
             parameter.sudokuGame = parameter.sudokuSave = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
             parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
+            parameter.bonus = 5;
             dispose();
             game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);
