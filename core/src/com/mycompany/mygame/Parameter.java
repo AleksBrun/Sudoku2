@@ -10,4 +10,8 @@ public class Parameter {
     public int difficulty_level;
     public int time;
     public int bonus;
+    public int max_bonus;
+    public int error;
+    public int progress;
+    public int start_progress;
 }

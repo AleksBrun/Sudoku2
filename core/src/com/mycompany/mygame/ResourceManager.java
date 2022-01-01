@@ -32,6 +32,9 @@ public class ResourceManager implements Disposable {
     public static final String love = "love";
     public static final String background1 = "background1";
     public static final String background2 = "background2";
+    public static final String background3 = "background3";
+    public static final String background4 = "background4";
+    public static final String background5 = "background5";
 
     public static final String coin = "Coin";
     public static final String crystal = "Crystal";
@@ -39,6 +42,9 @@ public class ResourceManager implements Disposable {
     public static final String skull = "Skull";
     public static final String minerals = "Minerals";
     public static final String star = "Star";
+    public static final String chest = "chest";
+    public static final String key = "key";
+    public static final String key2 = "key2";
     
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
@@ -75,14 +81,26 @@ public class ResourceManager implements Disposable {
         fontSmall = new BitmapFont(Gdx.files.internal("font/font-white-small.fnt"));
         fontNormal = new BitmapFont(Gdx.files.internal("font/font-white-normal.fnt"));
         fontBig = new BitmapFont(Gdx.files.internal("font/font-white-big.fnt"));
+        loadTexture();
         loadTextureAtlas();
         loadMusic();
         manager.finishLoading();
+        manager.get(textureAtlas, TextureAtlas.class).addRegion(background1, new TextureRegion(manager.get("images/background1.jpg", Texture.class)));
+        manager.get(textureAtlas, TextureAtlas.class).addRegion(background2, new TextureRegion(manager.get("images/background2.png", Texture.class)));
+        manager.get(textureAtlas, TextureAtlas.class).addRegion(background3, new TextureRegion(manager.get("images/background3.jpg", Texture.class)));
+        manager.get(textureAtlas, TextureAtlas.class).addRegion(background4, new TextureRegion(manager.get("images/background4.jpg", Texture.class)));
+        manager.get(textureAtlas, TextureAtlas.class).addRegion(background5, new TextureRegion(manager.get("images/background5.jpg", Texture.class)));
         getCups();
         setUiNew();
     }
 
-
+    private void loadTexture(){
+        manager.load("images/background1.jpg", Texture.class);
+        manager.load("images/background2.png", Texture.class);
+        manager.load("images/background3.jpg", Texture.class);
+        manager.load("images/background4.jpg", Texture.class);
+        manager.load("images/background5.jpg", Texture.class);
+    }
     private void loadMusic(){
         manager.load(music, Music.class);
     }
@@ -218,7 +236,6 @@ public class ResourceManager implements Disposable {
         return new TextureRegion(manager.get(textureAtlas,TextureAtlas.class).findRegion(nameBackground), 200, 0, (int)Setting.getWidth(height), height);
         
     }
-
 
     @Override
     public void dispose() {

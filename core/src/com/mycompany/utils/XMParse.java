@@ -6,13 +6,12 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlWriter;
-import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.Parameter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public class XMLparse {
+public class XMParse {
 
     private static final String sudoku = "Sudoku";
     private static final String appFolder = "MyApp/";
@@ -36,12 +35,15 @@ public class XMLparse {
                 parameter.data = element.get("data");
                 parameter.time = element.getInt("time");
                 parameter.bonus = element.getInt("bonus");
+                parameter.max_bonus = element.getInt("max_bonus");
+                parameter.error = element.getInt("error");
+                parameter.progress = element.getInt("progress");
+                parameter.start_progress = element.getInt("start_progress");
                 parameters.add(parameter);
             }
 
         } catch (Exception exception){
-            System.out.println("No Xml");
-            AppPreference.setContinuationEnabled(false);
+            System.out.println("No Xml File!!!");
         }
         return parameters;
     }
@@ -100,6 +102,10 @@ public class XMLparse {
                 .attribute("data", parameter.data)
                 .attribute("time", parameter.time)
                 .attribute("bonus", parameter.bonus)
+                .attribute("max_bonus", parameter.max_bonus)
+                .attribute("error", parameter.error)
+                .attribute("progress", parameter.progress)
+                .attribute("start_progress", parameter.start_progress)
                 .pop();
     }
 }

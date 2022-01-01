@@ -13,7 +13,7 @@ import com.mycompany.screens.MainScreen;
 import com.mycompany.utils.Clock;
 import com.mycompany.utils.LoaderSudoku;
 import com.mycompany.utils.TimeUtils;
-import com.mycompany.utils.XMLparse;
+import com.mycompany.utils.XMParse;
 
 public class UpdateGame extends InputAdapter {
 
@@ -24,9 +24,7 @@ public class UpdateGame extends InputAdapter {
     private boolean pause;
     private final Clock clock;
     private final Bonus bonus;
-    private int counter_bonus;
     private int indexCell;
-    private boolean bonusVisible = true;
     private Parameter parameter;
 
     public UpdateGame(final MainScreen _mainScreen) {
@@ -47,23 +45,25 @@ public class UpdateGame extends InputAdapter {
         bonus.update();
     }
 
-    public void playGame(Parameter _parameter) {
+    public void loadGame(Parameter _parameter) {
         this.parameter = _parameter;
-        grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
-        grid.resetMark();
-        grid.resetBonus();
+        mainScreen.setAll_coin(AppPreference.getAllStars());
+        mainScreen.setLevel(parameter.difficulty_level);
+        mainScreen.setError(parameter.error);
+        mainScreen.setBonus(parameter.bonus);
+        clock.setTime(TimeUtils.getTime(parameter.time));
+        grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuSave));
         setNumberCell();
         setBonus();
-        clock.setTime(TimeUtils.getTime(parameter.time));
-
     }
 
     public void saveGame() {
         parameter.sudokuSave = LoaderSudoku.getStringSudoku(grid.getSudoku());
         parameter.time = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
+        parameter.progress = (int)((float)(parameter.start_progress)/100*(parameter.start_progress-grid.getCellNumber(0).size));
         AppPreference.setAllTime(AppPreference.getAllTime()+parameter.time);
         stopMusic();
-        XMLparse.save(mainScreen.game.getParameters());
+        XMParse.save(mainScreen.game.getParameters());
     }
 
     private void victoryGame() {
@@ -71,33 +71,25 @@ public class UpdateGame extends InputAdapter {
         mainScreen.getGame().setStateScreen(MyGdxGame.State.VICTORY);
     }
     private void loseGame() {
+        parameter.sudokuSave = parameter.sudokuGame;
+        parameter.error = 0;
         mainScreen.dispose();
         mainScreen.getGame().setStateScreen(MyGdxGame.State.LOSE);
     }
 
     private void setBonus(){
-        mainScreen.setBonus(parameter.bonus);
+        mainScreen.setBonus(parameter.max_bonus);
         Array<Cell> tmp = grid.getCellNumber(0);
-        for (int i = 0; i < parameter.bonus; i++){
-            tmp.random().setBonusId(4);
+        for (int i = 0; i < parameter.max_bonus; i++){
+            tmp.random().setBonusId(5);
         }
     }
 
     private void bonusActivation(Cell cell){
         bonus.init(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
-        switch (cell.getBonusId()){
-            case 1: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal));
-            break;
-            case 2: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.coin));
-            break;
-            case 3: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals));
-            break;
-            case 4: bonus.setRegion(mainScreen.getManager().getTextureRegionAtlas(ResourceManager.skull));
-            break;
-        }
+        bonus.setMarkRegion(getTextureBonus(cell.getBonusId()));
         cell.setBonusId(0);
-        parameter.bonus -= 1;
-        mainScreen.setBonus(parameter.bonus);
+        mainScreen.setBonus(++parameter.bonus);
     }
 
     private void setMarkRed(Cell cell){
@@ -121,6 +113,17 @@ public class UpdateGame extends InputAdapter {
                 }
             }
         }
+    }
+
+    private TextureRegion getTextureBonus(int id){
+        switch (id){
+            case 1: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.chest);
+            case 2: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.coin);
+            case 3: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals);
+            case 4: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal);
+            case 5: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.key);
+        }
+        return null;
     }
 
     private void updateTouch(int screenX, int screenY) {
@@ -147,13 +150,12 @@ public class UpdateGame extends InputAdapter {
             if (grid.errorAllGrid()) {
                 cell.setMark(true);
                 setMarkRed(cell);
-                AppPreference.setErrorGame(AppPreference.getErrorGame() + 1);
+                mainScreen.setError(++parameter.error);
                 AppPreference.setAllError(AppPreference.getAllError() + 1);
-                mainScreen.setLabelError(AppPreference.getErrorGame());
             } else if (cell.getBonusId() != 0){
                 bonusActivation(cell);
             }
-            if (AppPreference.getErrorGame() >= 5) {
+            if (parameter.error >= 5) {
                 loseGame();
             }
             if (grid.isFilledIn()) {
@@ -180,27 +182,11 @@ public class UpdateGame extends InputAdapter {
             }
         }
     }
-    public void bonusActive(){
-        if (bonusVisible){
-            for (Cell[] rowCell:grid.getCells()){
-                for (Cell cell:rowCell){
-                    if (cell.getBonusId() != 0) {
-                        cell.setMark(true);
-                    }
-                }
-            }
-        } else {
-            grid.resetMark();
-        }
-    }
-
-    public void setVolume() {
-        mainScreen.getGame().getManager().getMusic().setVolume(AppPreference.getMusicVolume());
-        mainScreen.getGame().getManager().getMusic().setLooping(true);
-    }
 
     public void playMusic() {
         mainScreen.getGame().getManager().getMusic().play();
+        mainScreen.getGame().getManager().getMusic().setVolume(AppPreference.getMusicVolume());
+        mainScreen.getGame().getManager().getMusic().setLooping(true);
     }
 
     public void stopMusic() {
@@ -220,7 +206,7 @@ public class UpdateGame extends InputAdapter {
     }
 
     public TextureRegion getBackground() {
-        return mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.background1);
+        return mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.background4);
     }
 
     public boolean isPause() {
@@ -229,5 +215,12 @@ public class UpdateGame extends InputAdapter {
     
     public Bonus getBonus(){
         return this.bonus;
+    }
+
+    public void visibleAllBonus(){
+        for (Cell cell: grid.getBonusCell()){
+            cell.setMark(true);
+            cell.setMarkRegion(getTextureBonus(cell.getBonusId()));
+        }
     }
 }

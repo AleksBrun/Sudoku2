@@ -18,11 +18,11 @@ public class GroupImage extends CommonGroup {
         }
     }
     
-    public void setStars(int _star){
+    public void setQuantity(int _quantity){
         for (Image star:stars){
             star.setVisible(false);
         }
-        for (int i = 0; i < _star; i++) {
+        for (int i = 0; i < _quantity; i++) {
             stars[i].setVisible(true);
         }
     }

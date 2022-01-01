@@ -4,8 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.mycompany.screens.*;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mycompany.utils.XMLparse;
+import com.mycompany.utils.XMParse;
 
 public class MyGdxGame extends Game {
 
@@ -28,7 +27,8 @@ public class MyGdxGame extends Game {
 
 	@Override
 	public void create () {
-		parameters = XMLparse.load();
+		parameters = XMParse.load();
+		AppPreference.setContinuationEnabled(!isEmpty());
         manager = new ResourceManager();
 		batch = new SpriteBatch();
 		setStateScreen(State.MENU);
@@ -37,9 +37,6 @@ public class MyGdxGame extends Game {
 	public void setStateScreen(State state){
 		switch (state){
 			case MAIN: if (mainScreen == null) mainScreen =new MainScreen(this);
-				if (AppPreference.isMusicEnabled()){
-					getManager().getMusic().play();
-				}
 			setScreen(mainScreen);
 			break;
 			case MENU: if (menuScreen == null) menuScreen = new MenuScreen(this);
@@ -75,6 +72,10 @@ public class MyGdxGame extends Game {
 		}
 	}
 
+	private boolean isEmpty(){
+		return parameters.size == 0;
+	}
+
 	public SpriteBatch getBatch() {
 		return batch;
 	}
@@ -96,7 +97,7 @@ public class MyGdxGame extends Game {
 			parameters.add(_parameter);
 		}
 		setParameter(_parameter);
-		XMLparse.save(parameters);
+		XMParse.save(parameters);
     }
 
 	public Array<Parameter> getParameters() {
@@ -107,5 +108,6 @@ public class MyGdxGame extends Game {
 	public void dispose () {
 		batch.dispose();
 		manager.dispose();
+		System.out.println("All dispose!!!");
 	}
 }

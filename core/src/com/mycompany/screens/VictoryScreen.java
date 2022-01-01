@@ -31,7 +31,7 @@ public class VictoryScreen extends CommonScreen {
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
         table.add(title).row();
         table.add(time).padTop(20).row();
         table.add(error).row();

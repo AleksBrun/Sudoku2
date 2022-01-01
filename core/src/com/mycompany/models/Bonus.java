@@ -17,7 +17,7 @@ public class Bonus extends Cell{
     }
 
     public void update(){
-        if (isActive() && counter_bonus < 30){
+        if (isActive() && counter_bonus < 60){
            counter_bonus++;
         } else {
             counter_bonus = 0;

@@ -23,7 +23,7 @@ public class CreateScreen extends CommonScreen{
         super.show();
 
         final GroupImage star = new GroupImage(5, Setting.size_icon/2, getManager().getTextureAtlas(ResourceManager.ICON_STAR));
-        star.setStars(getDifficultyLevel(AppPreference.getMissingDigits()));
+        star.setQuantity(getDifficultyLevel(AppPreference.getMissingDigits()));
 
         final Label levelInfo = new Label("Сложность", getSkin(), ResourceManager.label_style_big);
 
@@ -70,7 +70,7 @@ public class CreateScreen extends CommonScreen{
                 AppPreference.setMissingDigits((int)slider.getValue());
                 AppPreference.setDifficultyLevel(getDifficultyLevel(AppPreference.getMissingDigits()));
                 sliderInfo.setText(String.valueOf(AppPreference.getMissingDigits()));
-                star.setStars(AppPreference.getDifficultyLevel());
+                star.setQuantity(AppPreference.getDifficultyLevel());
             }
 
             @Override

@@ -39,7 +39,7 @@ public class LevelScreen extends CommonScreen {
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
         table.add(levelLabel);
         table.row();
         table.add(easy_min).fillX().padTop(20);
@@ -66,35 +66,35 @@ public class LevelScreen extends CommonScreen {
         easy_min.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(1, 35);
+                    startNewGame(1, 35, 2);
                 }
             });
 
         easy.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(2,40);
+                    startNewGame(2,40, 3);
                 }
             });
 
         average.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(3, 45);
+                    startNewGame(3, 45, 4);
                 }
             });
 
         difficult.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(4, 50);
+                    startNewGame(4, 50, 5);
                 }
             });
 
         difficult_max.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(5, 55);
+                    startNewGame(5, 55, 6);
                 }
             });
 
@@ -107,23 +107,19 @@ public class LevelScreen extends CommonScreen {
             });
     }
 
-    private void startNewGame(int difficulty, int missing_digits){
+    private void startNewGame(int difficulty, int missing_digits, int max_bonus){
 
         if (game.getParameters().size < 9) {
-            AppPreference.setDifficultyLevel(difficulty);
-            AppPreference.setContinuationEnabled(true);
-            AppPreference.setTimeMinute(0);
-            AppPreference.setTimeSecond(0);
-            AppPreference.setErrorGame(0);
-            AppPreference.setStarGame(0);
-            AppPreference.setBonus(5);
             Sudoku sudoku = new Sudoku();
             Parameter parameter = new Parameter();
             parameter.difficulty_level = difficulty;
             parameter.sudokuGame = parameter.sudokuSave = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
             parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
-            parameter.bonus = 5;
+            parameter.bonus = 0;
+            parameter.error = 0;
+            parameter.max_bonus = max_bonus;
+            parameter.start_progress = missing_digits;
             dispose();
             game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);

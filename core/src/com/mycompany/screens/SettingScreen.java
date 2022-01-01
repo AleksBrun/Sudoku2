@@ -14,7 +14,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.utils.XMLparse;
+import com.mycompany.utils.XMParse;
 
 public class SettingScreen extends CommonScreen {
 
@@ -49,7 +49,7 @@ public class SettingScreen extends CommonScreen {
 
 
 
-        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background1)));
+        table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
         table.add(title).colspan(2).padTop(10);
         table.row();
         table.add(color_ui).colspan(2).fillX().padTop(40);
@@ -128,7 +128,7 @@ public class SettingScreen extends CommonScreen {
                 AppPreference.setAllTime(0);
                 reset.setVisible(false);
                 getManager().setUiNew();
-                XMLparse.delete();
+                XMParse.delete();
                 Gdx.app.exit();
             }
         });

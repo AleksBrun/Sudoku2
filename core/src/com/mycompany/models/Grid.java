@@ -25,6 +25,21 @@ public class Grid {
                 cells[column][row].setNumber(sudoku[column][row]);
             }
         }
+        resetMark();
+        resetBonus();
+    }
+
+    public Array<Cell> getBonusCell(){
+        cellArrayTmp.clear();
+        for (Cell[] rowCell:cells){
+            for (Cell cell:rowCell){
+                if (cell.getBonusId() != 0){
+                    cellArrayTmp.add(cell);
+                }
+            }
+        }
+        System.out.println("Size bonus "+cellArrayTmp.size);
+        return cellArrayTmp;
     }
 
     public Array<Cell> getCellNumber(int number){
@@ -36,6 +51,7 @@ public class Grid {
                 }
             }
         }
+
         return cellArrayTmp;
     }
 
