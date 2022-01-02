@@ -6,14 +6,14 @@ filter: Nearest, Nearest
 repeat: none
 Coin
   rotate: false
-  xy: 1611, 1909
+  xy: 934, 1065
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 Crystal
   rotate: false
-  xy: 1481, 1779
+  xy: 804, 935
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -27,7 +27,7 @@ Minerals
   index: -1
 Paper
   rotate: false
-  xy: 1481, 1909
+  xy: 804, 1065
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -41,14 +41,14 @@ Skull
   index: -1
 Star
   rotate: false
-  xy: 1207, 1617
+  xy: 1077, 1487
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 black_MusicOff
   rotate: false
-  xy: 804, 861
+  xy: 1843, 1937
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
@@ -62,21 +62,21 @@ black_config
   index: -1
 black_home
   rotate: false
-  xy: 1741, 1937
+  xy: 934, 963
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 black_musicOn
   rotate: false
-  xy: 1843, 1937
+  xy: 804, 731
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 black_pause
   rotate: false
-  xy: 804, 963
+  xy: 1611, 1807
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
@@ -90,7 +90,7 @@ black_restart
   index: -1
 chest
   rotate: false
-  xy: 934, 1195
+  xy: 1481, 1779
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -125,7 +125,7 @@ grid1
   index: -1
 key
   rotate: false
-  xy: 1077, 1487
+  xy: 1207, 1617
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -133,6 +133,20 @@ key
 key2
   rotate: false
   xy: 804, 1325
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+key3
+  rotate: false
+  xy: 934, 1195
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+key6
+  rotate: false
+  xy: 1481, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -153,7 +167,7 @@ mark
   index: -1
 mark1
   rotate: false
-  xy: 1207, 1487
+  xy: 1611, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -174,28 +188,28 @@ mark3
   index: -1
 mark4
   rotate: false
-  xy: 804, 1065
+  xy: 1207, 1487
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 white_config
   rotate: false
-  xy: 804, 759
+  xy: 1945, 1937
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_home
   rotate: false
-  xy: 1611, 1807
+  xy: 804, 833
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_musicOff
   rotate: false
-  xy: 1945, 1937
+  xy: 804, 629
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
@@ -209,7 +223,7 @@ white_musicOn
   index: -1
 white_pause
   rotate: false
-  xy: 934, 1093
+  xy: 1741, 1937
   size: 100, 100
   orig: 100, 100
   offset: 0, 0

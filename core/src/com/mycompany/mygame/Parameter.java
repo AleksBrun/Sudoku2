@@ -14,4 +14,5 @@ public class Parameter {
     public int error;
     public int progress;
     public int start_progress;
+    public int coin;
 }

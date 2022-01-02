@@ -17,11 +17,11 @@ public class MainScreen extends CommonScreen {
 
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
-    private Label labelClock, all_stars;
+    private Label labelClock, labelAllStars, labelCoins;
     private GroupImage error, bonus, level;
 
     public MainScreen(MyGdxGame game) {
-        super(720, game);
+        super(Setting.width_main_ui, game);
         updateGame = new UpdateGame(this);
         drawGame = new DrawGame(updateGame);
     }
@@ -35,20 +35,22 @@ public class MainScreen extends CommonScreen {
         
         CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
         
-        CommonGroup row2 = new CommonGroup(stage.getWidth(), size/1.5f);
+        CommonGroup row2 = new CommonGroup(stage.getWidth(), size/2f);
        
-        CommonGroup row3 = new CommonGroup(stage.getWidth(), size/1.5f);
+        CommonGroup row3 = new CommonGroup(stage.getWidth(), size/2f);
         
-        CommonGroup row4 = new CommonGroup(stage.getWidth(), size/1.5f);
+        CommonGroup row4 = new CommonGroup(stage.getWidth(), size/2f);
 
-        CommonGroup row5 = new CommonGroup(stage.getWidth(), size/1.5f);
+        CommonGroup row5 = new CommonGroup(stage.getWidth(), size/2f);
        
-        table.top().padTop(20);
+        table.top().padTop(5);
         table.add(row1).row();
         table.add(row2).row();
         table.add(row3).row();
         table.add(row4).row();
         table.add(row5);
+
+        final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
 
         final Image coinIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.coin));
 
@@ -72,14 +74,19 @@ public class MainScreen extends CommonScreen {
 
         labelClock = new Label(Setting.label_time_game, getSkin(), ResourceManager.label_style_big);
 
-        all_stars = new Label(String.valueOf(AppPreference.getStarsGame()), getManager().getSkin(), ResourceManager.label_style_big);
+        labelAllStars = new Label(String.valueOf(500), getManager().getSkin(), ResourceManager.label_style_big);
+
+        labelCoins = new Label(String.valueOf(10000), getManager().getSkin(), ResourceManager.label_style_big);
+
 
         final Label bonusLabel = new Label(Setting.label_bonus, getSkin(), ResourceManager.label_style_big);
 
-        bonus = new GroupImage(parameter.max_bonus, size/2, getManager().getTextureRegionAtlas(ResourceManager.chest));
+        bonus = new GroupImage(parameter.bonus, size/2, getManager().getTextureRegionAtlas(ResourceManager.chest));
         
-        row1.getTable().add(coinIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
-        row1.getTable().add(all_stars).expandX().left().padLeft(5);
+        row1.getTable().add(starIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
+        row1.getTable().add(labelAllStars).expandX().left().padLeft(5);
+        row1.getTable().add(coinIcon).width(size/1.5f).height(size/1.5f).left().padLeft(20);
+        row1.getTable().add(labelCoins).expandX().left().padLeft(5);
         row1.getTable().add(restartIcon).width(size).height(size).padRight(5).fillX();
         row1.getTable().add(musicIcon).width(size).height(size).padRight(5);
         row1.getTable().add(pauseIcon).width(size).height(size).padRight(5);
@@ -167,8 +174,11 @@ public class MainScreen extends CommonScreen {
     public void setTime(int minute, int second){
         this.labelClock.setText(Setting.label_time_game+minute+":"+second);
     }
-    public void setAll_coin(int _coin){
-        this.all_stars.setText(String.valueOf(_coin));
+    public void setAll_Stars(int stars){
+        this.labelAllStars.setText(String.valueOf(stars));
+    }
+    public void setCoins(int coin){
+        this.labelCoins.setText(String.valueOf(coin));
     }
     public void setError(int _errors){
         this.error.setQuantity(_errors);

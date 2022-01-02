@@ -35,8 +35,6 @@ public class LevelScreen extends CommonScreen {
         
         TextButton difficult_max = new TextButton(Setting.level_4, getSkin(), ResourceManager.button_style);
 
-
-
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
@@ -116,10 +114,11 @@ public class LevelScreen extends CommonScreen {
             parameter.sudokuGame = parameter.sudokuSave = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
             parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
-            parameter.bonus = 0;
             parameter.error = 0;
             parameter.max_bonus = max_bonus;
+            parameter.bonus = parameter.max_bonus;
             parameter.start_progress = missing_digits;
+            parameter.coin = 0;
             dispose();
             game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);

@@ -39,6 +39,7 @@ public class XMParse {
                 parameter.error = element.getInt("error");
                 parameter.progress = element.getInt("progress");
                 parameter.start_progress = element.getInt("start_progress");
+                parameter.coin = element.getInt("coin");
                 parameters.add(parameter);
             }
 
@@ -106,6 +107,7 @@ public class XMParse {
                 .attribute("error", parameter.error)
                 .attribute("progress", parameter.progress)
                 .attribute("start_progress", parameter.start_progress)
+                .attribute("coin", parameter.coin)
                 .pop();
     }
 }

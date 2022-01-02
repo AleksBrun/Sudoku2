@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 
 public class Setting {
 
-    public static float width_main_ui = 720;
+    public static float width_main_ui = 1080;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
 	public static final int start_color = 5;
@@ -35,6 +35,7 @@ public class Setting {
 	public static final String load_sudoku = "   Загрузить  ";
     
 	public static float pad_ui_menu = 5;
+	public static float pad_ui_main = 5;
 	public static float pad_ui_menu_bottom = getHeight_Ui(420) / 12;
 
 	public static float getHeight_Ui(float width) {
@@ -45,7 +46,7 @@ public class Setting {
         return  height*((float)Gdx.graphics.getWidth()/Gdx.graphics.getHeight());
     }
 
-	public static float size_icon = width_main_ui / 10;
+	public static float size_icon = width_main_ui / 15;
 
 	public static float getSizeGrid() {
 		return Gdx.graphics.getWidth() - 20;

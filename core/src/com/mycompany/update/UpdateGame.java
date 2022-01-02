@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.mycompany.models.Bonus;
 import com.mycompany.models.Cell;
 import com.mycompany.models.Grid;
@@ -38,25 +39,23 @@ public class UpdateGame extends InputAdapter {
         clock = new Clock();
         bonus = new Bonus();
     }
-
     public void update() {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
         bonus.update();
     }
-
     public void loadGame(Parameter _parameter) {
         this.parameter = _parameter;
-        mainScreen.setAll_coin(AppPreference.getAllStars());
+        mainScreen.setAll_Stars(AppPreference.getAllStars());
         mainScreen.setLevel(parameter.difficulty_level);
         mainScreen.setError(parameter.error);
         mainScreen.setBonus(parameter.bonus);
+        mainScreen.setCoins(parameter.coin);
         clock.setTime(TimeUtils.getTime(parameter.time));
         grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuSave));
         setNumberCell();
         setBonus();
     }
-
     public void saveGame() {
         parameter.sudokuSave = LoaderSudoku.getStringSudoku(grid.getSudoku());
         parameter.time = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
@@ -65,7 +64,6 @@ public class UpdateGame extends InputAdapter {
         stopMusic();
         XMParse.save(mainScreen.game.getParameters());
     }
-
     private void victoryGame() {
         mainScreen.dispose();
         mainScreen.getGame().setStateScreen(MyGdxGame.State.VICTORY);
@@ -78,18 +76,20 @@ public class UpdateGame extends InputAdapter {
     }
 
     private void setBonus(){
-        mainScreen.setBonus(parameter.max_bonus);
+        mainScreen.setBonus(parameter.bonus);
         Array<Cell> tmp = grid.getCellNumber(0);
-        for (int i = 0; i < parameter.max_bonus; i++){
+        for (int i = 0; i < parameter.bonus; i++){
             tmp.random().setBonusId(5);
         }
     }
 
     private void bonusActivation(Cell cell){
         bonus.init(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
-        bonus.setMarkRegion(getTextureBonus(cell.getBonusId()));
+        bonus.setRegion(getTextureBonus(cell.getBonusId()));
+        parameter.coin += parameter.difficulty_level*10;
+        mainScreen.setBonus(--parameter.bonus);
+        mainScreen.setCoins(parameter.coin);
         cell.setBonusId(0);
-        mainScreen.setBonus(++parameter.bonus);
     }
 
     private void setMarkRed(Cell cell){
@@ -121,7 +121,7 @@ public class UpdateGame extends InputAdapter {
             case 2: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.coin);
             case 3: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals);
             case 4: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal);
-            case 5: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.key);
+            case 5: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.key6);
         }
         return null;
     }
@@ -129,7 +129,7 @@ public class UpdateGame extends InputAdapter {
     private void updateTouch(int screenX, int screenY) {
         grid.resetMark();
         Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
-        if (cell != null) {
+        if (grid.isActive() && cell != null) {
             indexCell = cell.getIndex();
             cell.setMark(true);
             key.setActive(true);
@@ -140,7 +140,7 @@ public class UpdateGame extends InputAdapter {
             }
         }
         Cell keyHit = key.getHit(screenX, Gdx.graphics.getHeight() - screenY);
-        if (keyHit != null && key.isActive()) {
+        if (key.isActive() && keyHit != null) {
             key.setActive(false);
             cell = grid.getCell(indexCell);
             if (cell.isActive()) {
@@ -150,6 +150,14 @@ public class UpdateGame extends InputAdapter {
             if (grid.errorAllGrid()) {
                 cell.setMark(true);
                 setMarkRed(cell);
+                final Cell finalCell = cell;
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        finalCell.setNumber(0);
+                        finalCell.setMark(false);
+                    }
+                }, 2f);
                 mainScreen.setError(++parameter.error);
                 AppPreference.setAllError(AppPreference.getAllError() + 1);
             } else if (cell.getBonusId() != 0){
@@ -163,7 +171,6 @@ public class UpdateGame extends InputAdapter {
             }
         }
     }
-
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         updateTouch(screenX, screenY);
@@ -182,7 +189,6 @@ public class UpdateGame extends InputAdapter {
             }
         }
     }
-
     public void playMusic() {
         mainScreen.getGame().getManager().getMusic().play();
         mainScreen.getGame().getManager().getMusic().setVolume(AppPreference.getMusicVolume());

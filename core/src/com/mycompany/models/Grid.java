@@ -10,6 +10,7 @@ public class Grid {
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
     private final Array<Cell> cellArrayTmp = new Array<Cell>();
+    private boolean active = true;
 
 
     public Grid(float _x, float _y, float _size){
@@ -201,5 +202,13 @@ public class Grid {
 
     public void setBackground(TextureRegion background) {
         this.background = background;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

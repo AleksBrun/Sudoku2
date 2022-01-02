@@ -44,7 +44,7 @@ public class ResourceManager implements Disposable {
     public static final String star = "Star";
     public static final String chest = "chest";
     public static final String key = "key";
-    public static final String key2 = "key2";
+    public static final String key6 = "key6";
     
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";
