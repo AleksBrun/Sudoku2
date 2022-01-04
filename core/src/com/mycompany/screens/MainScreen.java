@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mycompany.draw.DrawGame;
 import com.mycompany.models.CommonGroup;
@@ -17,7 +18,7 @@ public class MainScreen extends CommonScreen {
 
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
-    private Label labelClock, labelAllStars, labelCoins;
+    private Label labelClock, labelAllStars, labelCoins, labelHeart;
     private GroupImage error, bonus, level;
 
     public MainScreen(MyGdxGame game) {
@@ -36,23 +37,24 @@ public class MainScreen extends CommonScreen {
         CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
         
         CommonGroup row2 = new CommonGroup(stage.getWidth(), size/2f);
-       
-        CommonGroup row3 = new CommonGroup(stage.getWidth(), size/2f);
-        
-        CommonGroup row4 = new CommonGroup(stage.getWidth(), size/2f);
 
-        CommonGroup row5 = new CommonGroup(stage.getWidth(), size/2f);
+        CommonGroup row3 = new CommonGroup(stage.getWidth(), size/2f);
+
+        CommonGroup row4 = new CommonGroup(stage.getWidth(), size/2f);
        
-        table.top().padTop(5);
+        table.top().padTop(20);
         table.add(row1).row();
-        table.add(row2).row();
-        table.add(row3).row();
-        table.add(row4).row();
-        table.add(row5);
+        table.add(row2).padTop(20).row();
+        table.add(row3).padTop(10).row();
+        table.add(row4).padTop(10);
 
         final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
 
         final Image coinIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.coin));
+
+        final Image heartIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.heart1));
+
+        final Image clockIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.clock));
 
         final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
 
@@ -78,31 +80,35 @@ public class MainScreen extends CommonScreen {
 
         labelCoins = new Label(String.valueOf(10000), getManager().getSkin(), ResourceManager.label_style_big);
 
+        labelHeart = new Label(String.valueOf(0), getManager().getSkin(), ResourceManager.label_style_big);
+
 
         final Label bonusLabel = new Label(Setting.label_bonus, getSkin(), ResourceManager.label_style_big);
 
         bonus = new GroupImage(parameter.bonus, size/2, getManager().getTextureRegionAtlas(ResourceManager.chest));
-        
-        row1.getTable().add(starIcon).width(size/1.5f).height(size/1.5f).left().padLeft(30);
-        row1.getTable().add(labelAllStars).expandX().left().padLeft(5);
-        row1.getTable().add(coinIcon).width(size/1.5f).height(size/1.5f).left().padLeft(20);
-        row1.getTable().add(labelCoins).expandX().left().padLeft(5);
+        float sizeIcon = size/1.5f;
+        row1.getTable().add(starIcon).width(sizeIcon).height(sizeIcon).left().padLeft(30);
+        row1.getTable().add(labelAllStars).padLeft(5);
+        row1.getTable().add(coinIcon).width(sizeIcon).height(sizeIcon).left().padLeft(20);
+        row1.getTable().add(labelCoins).padLeft(5);
+        row1.getTable().add(heartIcon).width(sizeIcon).height(sizeIcon).padLeft(20);
+        row1.getTable().add(labelHeart).padLeft(5);
+        row1.getTable().add(clockIcon).width(sizeIcon).height(sizeIcon).padLeft(20);
+        row1.getTable().add(labelClock).expandX().left().padLeft(5);
         row1.getTable().add(restartIcon).width(size).height(size).padRight(5).fillX();
         row1.getTable().add(musicIcon).width(size).height(size).padRight(5);
         row1.getTable().add(pauseIcon).width(size).height(size).padRight(5);
         row1.getTable().add(settingIcon).width(size).height(size).padRight(5);
         row1.getTable().add(homeIcon).width(size).height(size).padRight(20);
         
-        row2.getTable().add(title).padLeft(30);
-        row2.getTable().add(level).expandX().left().padLeft(10);
-        
-        row3.getTable().add(labelClock).expandX().left().padLeft(30);
-        
-        row4.getTable().add(labelError).padLeft(30);
-        row4.getTable().add(error).expandX().left().padLeft(10);
+        row2.getTable().add(title);
+        row2.getTable().add(level);
 
-        row5.getTable().add(bonusLabel).padLeft(30);
-        row5.getTable().add(bonus).expandX().left().padLeft(10);
+        row3.getTable().add(bonusLabel);
+        row3.getTable().add(bonus);
+
+        row4.getTable().add(labelError);
+        row4.getTable().add(error);
 
         restartIcon.addListener(new ClickListener(){
             @Override
@@ -172,7 +178,7 @@ public class MainScreen extends CommonScreen {
         this.bonus.setQuantity(_bonus);
     }
     public void setTime(int minute, int second){
-        this.labelClock.setText(Setting.label_time_game+minute+":"+second);
+        this.labelClock.setText(minute+":"+second);
     }
     public void setAll_Stars(int stars){
         this.labelAllStars.setText(String.valueOf(stars));
@@ -185,6 +191,9 @@ public class MainScreen extends CommonScreen {
     }
     public void setLevel(int _level){
         this.level.setQuantity(_level);
+    }
+    public void setHeart(int heart){
+        labelHeart.setText(String.valueOf(heart));
     }
     public MyGdxGame getGame() {
         return game;
