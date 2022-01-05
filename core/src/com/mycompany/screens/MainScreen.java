@@ -41,12 +41,15 @@ public class MainScreen extends CommonScreen {
         CommonGroup row3 = new CommonGroup(stage.getWidth(), size/2f);
 
         CommonGroup row4 = new CommonGroup(stage.getWidth(), size/2f);
+
+        CommonGroup row5 = new CommonGroup(stage.getWidth(), size*2);
        
         table.top().padTop(20);
         table.add(row1).row();
         table.add(row2).padTop(20).row();
         table.add(row3).padTop(10).row();
-        table.add(row4).padTop(10);
+        table.add(row4).padTop(10).row();
+        table.add(row5).padTop(10);
 
         final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
 
@@ -65,6 +68,10 @@ public class MainScreen extends CommonScreen {
         final ImageButton homeIcon = new ImageButton(getSkin(), ResourceManager.image_button_home);
 
         final ImageButton restartIcon = new ImageButton(getSkin(), ResourceManager.image_button_restart);
+
+        final Image fullSudokuButton = new Image(getManager().getTextureRegionAtlas(ResourceManager.paper));
+
+        final Image  shopButton = new Image(getManager().getTextureRegionAtlas(ResourceManager.paper));
 
         final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
 
@@ -86,6 +93,7 @@ public class MainScreen extends CommonScreen {
         final Label bonusLabel = new Label(Setting.label_bonus, getSkin(), ResourceManager.label_style_big);
 
         bonus = new GroupImage(parameter.bonus, size/2, getManager().getTextureRegionAtlas(ResourceManager.chest));
+
         float sizeIcon = size/1.5f;
         row1.getTable().add(starIcon).width(sizeIcon).height(sizeIcon).left().padLeft(30);
         row1.getTable().add(labelAllStars).padLeft(5);
@@ -110,6 +118,15 @@ public class MainScreen extends CommonScreen {
         row4.getTable().add(labelError).padLeft(20);
         row4.getTable().add(error).expandX().left().padLeft(5);
 
+        row5.getTable().add(fullSudokuButton);
+        row5.getTable().add(shopButton);
+
+        fullSudokuButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                updateGame.visibleAllActiveCell();
+            }
+        });
         restartIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

@@ -20,10 +20,12 @@ public class Grid {
         createCells();
     }
 
-    public void load(int[][] sudoku){
+    public void load(int[][] sudoku, int[][] cellsActive){
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                cells[column][row].setNumber(sudoku[column][row]);
+                Cell cell = cells[column][row];
+                cell.setNumber(sudoku[column][row]);
+                cell.setActive( cellsActive[column][row] == 0 );
             }
         }
         resetMark();

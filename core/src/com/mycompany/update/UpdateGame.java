@@ -27,6 +27,8 @@ public class UpdateGame extends InputAdapter {
     private final Bonus bonus;
     private int indexCell;
     private Parameter parameter;
+    private final String[] iconArray =  {ResourceManager.chest, ResourceManager.coin, ResourceManager.minerals,
+        ResourceManager.crystal, ResourceManager.key6};
 
     public UpdateGame(final MainScreen _mainScreen) {
         this.mainScreen = _mainScreen;
@@ -53,8 +55,9 @@ public class UpdateGame extends InputAdapter {
         mainScreen.setCoins(parameter.coin);
         mainScreen.setHeart(parameter.max_error);
         clock.setTime(TimeUtils.getTime(parameter.time));
-        grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuSave));
-        grid.loadActiveCells(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
+        grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuSave), LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
+        System.out.println(parameter.sudokuSave);
+        System.out.println(parameter.sudokuGame);
         setNumberCell();
         setBonus();
     }
@@ -81,7 +84,7 @@ public class UpdateGame extends InputAdapter {
         mainScreen.setBonus(parameter.bonus);
         Array<Cell> tmp = grid.getCellNumber(0);
         for (int i = 0; i < parameter.bonus; i++){
-            tmp.random().setBonusId(5);
+            tmp.random().setBonusId(4);
         }
     }
     private void errorActivation(final Cell cell){
@@ -126,22 +129,12 @@ public class UpdateGame extends InputAdapter {
         for (Cell[] rowCell:grid.getCells()) {
             for (Cell cell:rowCell) {
                 cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
-                //if (cell.getNumber() == 0) {
-                    //cell.setActive(true);
-                //}
             }
         }
     }
 
     private TextureRegion getTextureBonus(int id){
-        switch (id){
-            case 1: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.chest);
-            case 2: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.coin);
-            case 3: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.minerals);
-            case 4: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.crystal);
-            case 5: return mainScreen.getManager().getTextureRegionAtlas(ResourceManager.key6);
-        }
-        return null;
+        return mainScreen.getManager().getTextureRegionAtlas(iconArray[id]);
     }
 
     private void updateTouch(int screenX, int screenY) {
@@ -229,6 +222,15 @@ public class UpdateGame extends InputAdapter {
         return this.bonus;
     }
 
+    public void visibleAllActiveCell(){
+        for (Cell[] cellRow: grid.getCells()){
+            for (Cell cell:cellRow){
+                if (cell.isActive() && cell.getNumber() != 0){
+                    setMarkYellow(cell);
+                }
+            }
+        }
+    }
     public void visibleAllBonus(){
         for (Cell cell: grid.getBonusCell()){
             cell.setMark(true);
