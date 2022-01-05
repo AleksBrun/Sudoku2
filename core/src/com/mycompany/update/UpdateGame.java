@@ -51,8 +51,10 @@ public class UpdateGame extends InputAdapter {
         mainScreen.setError(parameter.error);
         mainScreen.setBonus(parameter.bonus);
         mainScreen.setCoins(parameter.coin);
+        mainScreen.setHeart(parameter.max_error);
         clock.setTime(TimeUtils.getTime(parameter.time));
         grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuSave));
+        grid.loadActiveCells(LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
         setNumberCell();
         setBonus();
     }
@@ -82,6 +84,19 @@ public class UpdateGame extends InputAdapter {
             tmp.random().setBonusId(5);
         }
     }
+    private void errorActivation(final Cell cell){
+        setMarkRed(cell);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                cell.setNumber(0);
+                cell.setMark(false);
+            }
+        }, 2f);
+        mainScreen.setError(++parameter.error);
+        mainScreen.setHeart(parameter.max_error - parameter.error);
+        AppPreference.setAllError(AppPreference.getAllError() + 1);
+    }
 
     private void bonusActivation(Cell cell){
         bonus.init(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
@@ -93,14 +108,17 @@ public class UpdateGame extends InputAdapter {
     }
 
     private void setMarkRed(Cell cell){
+        cell.setMark(true);
         cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark3));
     }
 
     private void setMarkYellow(Cell cell){
+        cell.setMark(true);
         cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark));
     }
 
     private void setMarkBlue(Cell cell){
+        cell.setMark(true);
         cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
     }
 
@@ -108,9 +126,9 @@ public class UpdateGame extends InputAdapter {
         for (Cell[] rowCell:grid.getCells()) {
             for (Cell cell:rowCell) {
                 cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
-                if (cell.getNumber() == 0) {
-                    cell.setActive(true);
-                }
+                //if (cell.getNumber() == 0) {
+                    //cell.setActive(true);
+                //}
             }
         }
     }
@@ -131,7 +149,6 @@ public class UpdateGame extends InputAdapter {
         Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
         if (grid.isActive() && cell != null) {
             indexCell = cell.getIndex();
-            cell.setMark(true);
             key.setActive(true);
             if (cell.isActive()) {
                 setMarkYellow(cell);
@@ -148,24 +165,13 @@ public class UpdateGame extends InputAdapter {
                 cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
             }
             if (grid.errorAllGrid()) {
-                cell.setMark(true);
-                setMarkRed(cell);
-                final Cell finalCell = cell;
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        finalCell.setNumber(0);
-                        finalCell.setMark(false);
-                    }
-                }, 2f);
-                mainScreen.setError(++parameter.error);
-                AppPreference.setAllError(AppPreference.getAllError() + 1);
+                errorActivation(cell);
             } else if (cell.getBonusId() != 0){
                 bonusActivation(cell);
             }
-            if (parameter.error >= 5) {
+            if (parameter.error >= parameter.max_error) {
                 loseGame();
-            }
+            }    
             if (grid.isFilledIn()) {
                 victoryGame();
             }

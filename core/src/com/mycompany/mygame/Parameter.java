@@ -12,6 +12,7 @@ public class Parameter {
     public int bonus;
     public int max_bonus;
     public int error;
+    public int max_error;
     public int progress;
     public int start_progress;
     public int coin;

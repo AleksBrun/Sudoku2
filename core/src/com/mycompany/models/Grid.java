@@ -30,6 +30,16 @@ public class Grid {
         resetBonus();
     }
 
+    public void loadActiveCells(int[][] cellsActive){
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                if (cellsActive[column][row] == 0){
+                    cells[column][row].setActive(true);
+                }
+            }
+        }
+    }
+
     public Array<Cell> getBonusCell(){
         cellArrayTmp.clear();
         for (Cell[] rowCell:cells){

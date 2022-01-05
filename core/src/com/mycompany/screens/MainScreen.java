@@ -101,14 +101,14 @@ public class MainScreen extends CommonScreen {
         row1.getTable().add(settingIcon).width(size).height(size).padRight(5);
         row1.getTable().add(homeIcon).width(size).height(size).padRight(20);
         
-        row2.getTable().add(title);
-        row2.getTable().add(level);
+        row2.getTable().add(title).padLeft(20);
+        row2.getTable().add(level).expandX().left().padLeft(5);
 
-        row3.getTable().add(bonusLabel);
-        row3.getTable().add(bonus);
+        row3.getTable().add(bonusLabel).padLeft(20);
+        row3.getTable().add(bonus).expandX().left().padLeft(5);
 
-        row4.getTable().add(labelError);
-        row4.getTable().add(error);
+        row4.getTable().add(labelError).padLeft(20);
+        row4.getTable().add(error).expandX().left().padLeft(5);
 
         restartIcon.addListener(new ClickListener(){
             @Override

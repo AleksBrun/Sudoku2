@@ -115,6 +115,7 @@ public class LevelScreen extends CommonScreen {
             parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
             parameter.error = 0;
+            parameter.max_error = 3;
             parameter.max_bonus = max_bonus;
             parameter.bonus = parameter.max_bonus;
             parameter.start_progress = missing_digits;
