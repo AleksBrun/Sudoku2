@@ -6,56 +6,56 @@ filter: Nearest, Nearest
 repeat: none
 Coin
   rotate: false
-  xy: 1741, 1779
+  xy: 1871, 1779
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 Crystal
   rotate: false
-  xy: 804, 788
+  xy: 804, 547
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 Minerals
   rotate: false
-  xy: 804, 1178
+  xy: 1077, 1470
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 Paper
   rotate: false
-  xy: 804, 1308
+  xy: 1077, 1600
   size: 145, 145
   orig: 145, 145
   offset: 0, 0
   index: -1
 Skull
   rotate: false
-  xy: 1207, 1617
+  xy: 1481, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 Star
   rotate: false
-  xy: 804, 1048
+  xy: 1611, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 black_MusicOff
   rotate: false
-  xy: 206, 2
+  xy: 804, 225
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 black_config
   rotate: false
-  xy: 804, 584
+  xy: 934, 993
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
@@ -69,35 +69,35 @@ black_home
   index: -1
 black_musicOn
   rotate: false
-  xy: 804, 482
+  xy: 206, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 black_pause
   rotate: false
-  xy: 951, 1353
+  xy: 1224, 1645
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 black_restart
   rotate: false
-  xy: 308, 2
+  xy: 934, 891
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 chest
   rotate: false
-  xy: 1611, 1779
+  xy: 1741, 1779
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 clock
   rotate: false
-  xy: 1351, 1779
+  xy: 804, 937
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -132,35 +132,35 @@ grid1
   index: -1
 heart1
   rotate: false
-  xy: 1871, 1921
+  xy: 804, 429
   size: 128, 116
   orig: 128, 116
   offset: 0, 0
   index: -1
 key
   rotate: false
-  xy: 1481, 1909
+  xy: 1481, 1779
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 key2
   rotate: false
-  xy: 1077, 1617
+  xy: 1351, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 key3
   rotate: false
-  xy: 1611, 1909
+  xy: 1741, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 key6
   rotate: false
-  xy: 1481, 1779
+  xy: 1611, 1779
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
@@ -174,70 +174,77 @@ love
   index: -1
 mark
   rotate: false
-  xy: 1077, 1487
+  xy: 1351, 1779
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 mark1
   rotate: false
-  xy: 1741, 1909
+  xy: 1871, 1909
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 mark2
   rotate: false
-  xy: 1207, 1487
+  xy: 804, 807
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 mark3
   rotate: false
-  xy: 1351, 1909
+  xy: 804, 1067
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 mark4
   rotate: false
-  xy: 804, 918
+  xy: 804, 677
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
+progress
+  rotate: false
+  xy: 804, 1197
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
 white_config
   rotate: false
-  xy: 804, 380
+  xy: 804, 123
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_home
   rotate: false
-  xy: 1871, 1819
+  xy: 804, 327
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_musicOff
   rotate: false
-  xy: 410, 2
+  xy: 308, 2
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_musicOn
   rotate: false
-  xy: 804, 278
+  xy: 934, 789
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 white_pause
   rotate: false
-  xy: 804, 686
+  xy: 934, 1095
   size: 100, 100
   orig: 100, 100
   offset: 0, 0

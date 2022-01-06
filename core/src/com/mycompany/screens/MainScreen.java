@@ -62,6 +62,7 @@ public class MainScreen extends CommonScreen {
         final Image clockIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.clock));
 
         final ImageButton musicIcon = new ImageButton(getSkin(), ResourceManager.image_button_music);
+        musicIcon.setChecked(AppPreference.isMusicEnabled());
 
         final ImageButton pauseIcon = new ImageButton(getSkin(), ResourceManager.image_button_pause);
 
@@ -157,12 +158,12 @@ public class MainScreen extends CommonScreen {
         musicIcon.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (!updateGame.isPause()){
-                        if (musicIcon.isChecked()){
-                            updateGame.pauseMusic();
-                        } else {
-                            updateGame.playMusic();
-                        }
+                    if (musicIcon.isChecked()){
+                        updateGame.pauseMusic();
+                        AppPreference.setMusicEnabled(true);
+                    } else {
+                        updateGame.playMusic();
+                        AppPreference.setMusicEnabled(false);
                     }
                 }
             });
@@ -181,10 +182,15 @@ public class MainScreen extends CommonScreen {
                 }
             });
 
-        if (AppPreference.isMusicEnabled()) updateGame.playMusic();
+
         updateGame.loadGame(parameter);
         InputMultiplexer multiplexer = new InputMultiplexer(stage, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
+        if (musicIcon.isChecked()){
+            updateGame.pauseMusic();
+        } else {
+            updateGame.playMusic();
+        }
     }
 
     @Override
@@ -196,8 +202,8 @@ public class MainScreen extends CommonScreen {
 
     @Override
     public void pause() {
-        super.pause();
-        updateGame.pause();
+        dispose();
+        game.setStateScreen(MyGdxGame.State.INFO);
     }
 
     @Override

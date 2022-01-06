@@ -29,7 +29,6 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 		parameters = XMParse.load();
-		AppPreference.setContinuationEnabled(!isEmpty());
         manager = new ResourceManager();
 		batch = new SpriteBatch();
 		setStateScreen(State.MENU);
@@ -76,7 +75,7 @@ public class MyGdxGame extends Game {
 		}
 	}
 
-	private boolean isEmpty(){
+	public boolean isEmpty(){
 		return parameters.size == 0;
 	}
 

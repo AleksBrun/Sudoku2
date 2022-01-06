@@ -40,9 +40,6 @@ public class LoseScreen extends CommonScreen {
     @Override
     public void hide() {
         super.hide();
-        AppPreference.setTimeMinute(0);
-        AppPreference.setTimeSecond(0);
-        AppPreference.setErrorGame(0);
         AppPreference.setContinuationEnabled(false);
     }
 

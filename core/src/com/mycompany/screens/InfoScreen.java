@@ -24,7 +24,7 @@ public class InfoScreen extends CommonScreen{
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
 
-        final Label labelTitle = new Label(Setting.label_info, getSkin(), ResourceManager.label_style_big);
+        final Label labelTitle = new Label(Setting.label_pause, getSkin(), ResourceManager.label_style_big);
 
         final Image imageStar = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
         final Label labelStar = new Label(String.valueOf(AppPreference.getAllStars()), getSkin(), ResourceManager.label_style_big);
@@ -45,11 +45,14 @@ public class InfoScreen extends CommonScreen{
         final Image imageTime = new Image(getManager().getTextureRegionAtlas(ResourceManager.clock));
         final Label labelTime = new Label(time.y+":"+time.x, getSkin(), ResourceManager.label_style_big);
 
+        final Image imageProgress = new Image(getManager().getTextureRegionAtlas(ResourceManager.progress));
+        final Label labelProgress = new Label(parameter.progress+"%", getSkin(), ResourceManager.label_style_big);
+
         TextButton continuum = new TextButton(Setting.name_continuation_button, getSkin(), ResourceManager.button_style);
 
         table.add(labelTitle).colspan(2);
         table.row();
-        table.add(imageStar).width(size).height(size).padTop(20);
+        table.add(imageStar).width(size).height(size).padTop(40);
         table.add(labelStar);
         table.row();
         table.add(imageCoin).width(size).height(size).padTop(10);
@@ -67,7 +70,10 @@ public class InfoScreen extends CommonScreen{
         table.add(imageTime).width(size).height(size).padTop(10);
         table.add(labelTime);
         table.row();
-        table.add(continuum).colspan(2).padTop(10);
+        table.add(imageProgress).width(size).height(size).padTop(10);
+        table.add(labelProgress);
+        table.row();
+        table.add(continuum).colspan(2).padTop(40);
 
         continuum.addListener(new ClickListener(){
             @Override

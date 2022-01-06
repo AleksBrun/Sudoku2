@@ -120,6 +120,7 @@ public class LevelScreen extends CommonScreen {
             parameter.bonus = parameter.max_bonus;
             parameter.start_progress = missing_digits;
             parameter.coin = 0;
+            parameter.stars = difficulty;
             dispose();
             game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);

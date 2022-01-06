@@ -24,7 +24,7 @@ public class LoadScreen extends CommonScreen{
         int index = 0;
         float size = Setting.size_icon;
         final Array<Parameter> parameters = game.getParameters();
-        Array<Label> textButtons = new Array<Label>();
+        Array<Label> labelArray = new Array<Label>();
         for (Parameter parameter:parameters){
             final Label label = new Label((index+1)+"   "+parameter.data+"     "+ parameter.progress+"%", getManager().getSkin(), ResourceManager.label_style_big);
             table.add(label).padTop(20).fillX();
@@ -38,7 +38,7 @@ public class LoadScreen extends CommonScreen{
                     start(parameters.get(finalIndex));
                 }
             });
-            textButtons.add(label);
+            labelArray.add(label);
             index++;
         }
 
@@ -47,6 +47,8 @@ public class LoadScreen extends CommonScreen{
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
         table.add(menu).padTop(20).colspan(2);
 
+
+
         menu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -54,6 +56,7 @@ public class LoadScreen extends CommonScreen{
                 game.setStateScreen(MyGdxGame.State.MENU);
             }
         });
+
     }
 
     private void start(Parameter parameter){

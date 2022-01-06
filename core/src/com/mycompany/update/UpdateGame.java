@@ -19,7 +19,7 @@ public class UpdateGame extends InputAdapter {
     private final Grid grid;
     private  final Key key;
 
-    private boolean pause, touch;
+    private boolean touch;
     private final Clock clock;
     private final Bonus bonus;
     private int indexCell;
@@ -44,7 +44,7 @@ public class UpdateGame extends InputAdapter {
     }
     public void loadGame(Parameter _parameter) {
         this.parameter = _parameter;
-        mainScreen.setAll_Stars(AppPreference.getAllStars());
+        mainScreen.setAll_Stars(parameter.stars);
         mainScreen.setLevel(parameter.difficulty_level);
         mainScreen.setError(parameter.error);
         mainScreen.setBonus(parameter.bonus);
@@ -189,18 +189,6 @@ public class UpdateGame extends InputAdapter {
         return false;
     }
 
-    public void pause() {
-        pause = !pause;
-        if (isPause()) {
-            clock.pause();
-            pauseMusic();
-        } else {
-            clock.start();
-            if (AppPreference.isMusicEnabled()) {
-                playMusic();
-            }
-        }
-    }
     public void playMusic() {
         mainScreen.getGame().getManager().getMusic().play();
         mainScreen.getGame().getManager().getMusic().setVolume(AppPreference.getMusicVolume());
@@ -227,10 +215,6 @@ public class UpdateGame extends InputAdapter {
         return mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.background4);
     }
 
-    public boolean isPause() {
-        return pause;
-    }
-    
     public Bonus getBonus(){
         return this.bonus;
     }

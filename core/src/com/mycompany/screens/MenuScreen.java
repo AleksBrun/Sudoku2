@@ -20,6 +20,7 @@ public class MenuScreen extends CommonScreen {
     @Override
     public void show() {
         super.show();
+        AppPreference.setContinuationEnabled(!game.isEmpty());
         TextButton continuation = new TextButton(Setting.name_continuation_button, getSkin(), ResourceManager.button_style);
         continuation.setVisible(AppPreference.isContinuationEnabled());
         TextButton load = new TextButton(Setting.load_sudoku, getSkin(), ResourceManager.button_style);

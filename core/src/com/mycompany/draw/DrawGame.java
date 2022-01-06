@@ -60,7 +60,6 @@ public class DrawGame {
     }
 
     private void drawCells(SpriteBatch batch){
-        if (updateGame.isPause()) return;
         Cell[][] cells = updateGame.getGrid().getCells();
         for (Cell[] cellRow:cells){
             for (Cell cell:cellRow){

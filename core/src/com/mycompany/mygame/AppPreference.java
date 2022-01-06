@@ -23,13 +23,6 @@ public class AppPreference {
     private static final String DIFFICULTY_LEVEL = "difficulty_level";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
-    public static void setBonus(int bonus){
-        prefs.putInteger(BONUS, bonus);
-        prefs.flush();
-    }
-    public static int getBonus(){
-        return prefs.getInteger(BONUS, 5);
-    }
     public static void setColorTopic(int colorTopic){
         prefs.putInteger(COLOR_TOPIC, colorTopic);
         prefs.flush();
@@ -64,24 +57,7 @@ public class AppPreference {
     public static int getAllError(){
         return prefs.getInteger(ALL_ERROR, 0);
     }
-    // Сохранить колличество ошибок за игру
-    public static void setErrorGame(int errorGame){
-        prefs.putInteger(ERROR_GAME, errorGame);
-        prefs.flush();
-    }
-    // Получить колличество ошибок за игру
-    public static int getErrorGame(){
-        return prefs.getInteger(ERROR_GAME, 0);
-    }
-    // Сохранить звезды за игру
-    public static void setStarGame(int stars){
-        prefs.putInteger(STARS_GAME, stars);
-        prefs.flush();
-    }
-    // Получить звезды за игру
-    public static int getStarsGame(){
-        return prefs.getInteger(STARS_GAME, 0);
-    }
+
     // сочранить общее число звезд(ОЧКОВ)
     public static void setAllStars(int stars){
         prefs.putInteger(ALL_STARS, stars);
@@ -100,23 +76,10 @@ public class AppPreference {
     public static int getDifficultyLevel(){
         return prefs.getInteger(DIFFICULTY_LEVEL);
     }
-    // Записать сетку судоку в строке
-    public static void saveSudoku(String sudoku) {
-        prefs.putString(SUDOKU, sudoku);
-        prefs.flush();
-    }
-    // Получить строку судоку
-    public static String loadSudoku() {
-        return prefs.getString(SUDOKU);
-    }
     // Записать колличество пустых ячеек
     public static void setMissingDigits(int missing_digits) {
         prefs.putInteger(MISSING_DIGITS, missing_digits);
         prefs.flush();
-    }
-    // Получить колличество пустых ячек
-    public static int getMissingDigits() {
-        return prefs.getInteger(MISSING_DIGITS, 40);
     }
     // Проверка возможности продолжить игру
     public static boolean isContinuationEnabled() {
@@ -125,24 +88,6 @@ public class AppPreference {
     // Записаить сосояие продолжить игпу
     public static void setContinuationEnabled(boolean continuationEnabled) {
         prefs.putBoolean(CONTINUATION_ENABLED, continuationEnabled);
-        prefs.flush();
-    }
-
-    public static int getTimeMinute() {
-        return prefs.getInteger(MINUTE, 0);
-    }
-
-    public static int getTimeSecond() {
-        return prefs.getInteger(SECOND, 0);
-    }
-
-    public static void setTimeMinute(int minute) {
-        prefs.putInteger(MINUTE, minute);
-        prefs.flush();
-    }
-
-    public static void setTimeSecond(int second) {
-        prefs.putInteger(SECOND, second);
         prefs.flush();
     }
 
