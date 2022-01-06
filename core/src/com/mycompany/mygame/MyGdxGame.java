@@ -8,7 +8,7 @@ import com.mycompany.utils.XMParse;
 
 public class MyGdxGame extends Game {
 
-	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS, CREATE, LOAD}
+	public enum State {MAIN, MENU, LEVEL, SETTING, HELLO, VICTORY, LOSE,TROPHY, STATISTICS, CREATE, LOAD, INFO}
 	private MainScreen mainScreen;
 	private MenuScreen menuScreen;
 	private LevelScreen levelScreen;
@@ -19,7 +19,8 @@ public class MyGdxGame extends Game {
 	private TrophyScreen trophyScreen;
     private StatisticsScreen statisticsScreen;
 	private LoadScreen loadScreen;
-	private CreateScreen createScreen;
+	private ShopScreen createScreen;
+	private InfoScreen infoScreen;
 	private SpriteBatch batch;
 	private ResourceManager manager;
 	private Array<Parameter> parameters;
@@ -63,11 +64,14 @@ public class MyGdxGame extends Game {
             case STATISTICS: if (statisticsScreen == null) statisticsScreen = new StatisticsScreen(this);
             setScreen(statisticsScreen);
             break;
-			case CREATE: if (createScreen == null) createScreen = new CreateScreen(this);
+			case CREATE: if (createScreen == null) createScreen = new ShopScreen(this);
 			setScreen(createScreen);
 			break;
 			case LOAD: if (loadScreen == null) loadScreen = new LoadScreen(this);
 			setScreen(loadScreen);
+			break;
+			case INFO: if (infoScreen == null) infoScreen = new InfoScreen(this);
+			setScreen(infoScreen);
 			break;
 		}
 	}

@@ -1,6 +1,20 @@
 package com.mycompany.utils;
 
-public class LoaderSudoku {
+import com.badlogic.gdx.math.GridPoint2;
+
+public class Utils {
+
+    public static float getProgress(int allCell, int findCell){
+        return (float) findCell/allCell*100;
+    }
+
+    public static GridPoint2 getTime(int second){
+        return new GridPoint2(second- second/60*60, second/60);
+    }
+
+    public static int setTime(int minute, int second){
+        return minute*60+second;
+    }
 
     public static int[][] getIntegerSudoku(String name){
         int index = 0;

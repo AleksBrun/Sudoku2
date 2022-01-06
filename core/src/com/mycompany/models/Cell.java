@@ -105,4 +105,8 @@ public class Cell {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public boolean isBonusActive(){
+        return bonusId != 0;
+    }
 }

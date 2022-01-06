@@ -11,10 +11,7 @@ import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
 import com.mycompany.mygame.*;
 import com.mycompany.screens.MainScreen;
-import com.mycompany.utils.Clock;
-import com.mycompany.utils.LoaderSudoku;
-import com.mycompany.utils.TimeUtils;
-import com.mycompany.utils.XMParse;
+import com.mycompany.utils.*;
 
 public class UpdateGame extends InputAdapter {
 
@@ -22,7 +19,7 @@ public class UpdateGame extends InputAdapter {
     private final Grid grid;
     private  final Key key;
 
-    private boolean pause;
+    private boolean pause, touch;
     private final Clock clock;
     private final Bonus bonus;
     private int indexCell;
@@ -44,7 +41,6 @@ public class UpdateGame extends InputAdapter {
     public void update() {
         clock.update();
         mainScreen.setTime(clock.getMinute(), clock.getSecond());
-        bonus.update();
     }
     public void loadGame(Parameter _parameter) {
         this.parameter = _parameter;
@@ -53,18 +49,17 @@ public class UpdateGame extends InputAdapter {
         mainScreen.setError(parameter.error);
         mainScreen.setBonus(parameter.bonus);
         mainScreen.setCoins(parameter.coin);
-        mainScreen.setHeart(parameter.max_error);
-        clock.setTime(TimeUtils.getTime(parameter.time));
-        grid.load(LoaderSudoku.getIntegerSudoku(parameter.sudokuSave), LoaderSudoku.getIntegerSudoku(parameter.sudokuGame));
-        System.out.println(parameter.sudokuSave);
-        System.out.println(parameter.sudokuGame);
-        setNumberCell();
+        mainScreen.setHeart(parameter.max_error- parameter.error);
+        mainScreen.setProgress(parameter.progress);
+        clock.setTime(Utils.getTime(parameter.time));
+        grid.load(Utils.getIntegerSudoku(parameter.sudokuSave), Utils.getIntegerSudoku(parameter.sudokuGame));
+        setTextureNumberCell();
         setBonus();
+        touch = true;
     }
     public void saveGame() {
-        parameter.sudokuSave = LoaderSudoku.getStringSudoku(grid.getSudoku());
-        parameter.time = TimeUtils.setTime(clock.getMinute(), clock.getSecond());
-        parameter.progress = (int)((float)(parameter.start_progress)/100*(parameter.start_progress-grid.getCellNumber(0).size));
+        parameter.sudokuSave = Utils.getStringSudoku(grid.getSudoku());
+        parameter.time = Utils.setTime(clock.getMinute(), clock.getSecond());
         AppPreference.setAllTime(AppPreference.getAllTime()+parameter.time);
         stopMusic();
         XMParse.save(mainScreen.game.getParameters());
@@ -81,33 +76,49 @@ public class UpdateGame extends InputAdapter {
     }
 
     private void setBonus(){
-        mainScreen.setBonus(parameter.bonus);
         Array<Cell> tmp = grid.getCellNumber(0);
         for (int i = 0; i < parameter.bonus; i++){
             tmp.random().setBonusId(4);
         }
+        mainScreen.setBonus(parameter.bonus);
     }
     private void errorActivation(final Cell cell){
+        touch = false;
         setMarkRed(cell);
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 cell.setNumber(0);
                 cell.setMark(false);
+                touch = true;
             }
         }, 2f);
         mainScreen.setError(++parameter.error);
         mainScreen.setHeart(parameter.max_error - parameter.error);
         AppPreference.setAllError(AppPreference.getAllError() + 1);
+        if (parameter.error >= parameter.max_error) {
+            loseGame();
+        }
     }
 
     private void bonusActivation(Cell cell){
         bonus.init(cell.getX(), cell.getY(), cell.getSize(), cell.getBonusId());
         bonus.setRegion(getTextureBonus(cell.getBonusId()));
+        bonus.visible();
         parameter.coin += parameter.difficulty_level*10;
         mainScreen.setBonus(--parameter.bonus);
         mainScreen.setCoins(parameter.coin);
         cell.setBonusId(0);
+    }
+
+    private void setCoins(int coins){
+        parameter.coin += coins;
+        mainScreen.setCoins(parameter.coin);
+    }
+
+    private void setProgress(){
+        parameter.progress = (int)Utils.getProgress(parameter.start_progress, parameter.start_progress-grid.getCellNumber(0).size);
+        mainScreen.setProgress(parameter.progress);
     }
 
     private void setMarkRed(Cell cell){
@@ -125,7 +136,7 @@ public class UpdateGame extends InputAdapter {
         cell.setMarkRegion(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.mark1));
     }
 
-    private void setNumberCell(){
+    private void setTextureNumberCell(){
         for (Cell[] rowCell:grid.getCells()) {
             for (Cell cell:rowCell) {
                 cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
@@ -138,37 +149,39 @@ public class UpdateGame extends InputAdapter {
     }
 
     private void updateTouch(int screenX, int screenY) {
-        grid.resetMark();
-        Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
-        if (grid.isActive() && cell != null) {
-            indexCell = cell.getIndex();
-            key.setActive(true);
-            if (cell.isActive()) {
-                setMarkYellow(cell);
-            } else {
-                setMarkBlue(cell);
+        if (touch){
+            grid.resetMark();
+            Cell cell = grid.getHit(screenX, Gdx.graphics.getHeight() - screenY);
+            if (grid.isActive() && cell != null) {
+                indexCell = cell.getIndex();
+                key.setActive(true);
+                if (cell.isActive()) {
+                    setMarkYellow(cell);
+                } else {
+                    setMarkBlue(cell);
+                }
+            }
+            Cell keyHit = key.getHit(screenX, Gdx.graphics.getHeight() - screenY);
+            if (key.isActive() && keyHit != null) {
+                key.setActive(false);
+                cell = grid.getCell(indexCell);
+                if (cell.isActive()) {
+                    cell.setNumber(keyHit.getNumber());
+                    cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
+                }
+                if (grid.errorAllGrid()) {
+                    errorActivation(cell);
+                } else if (cell.isBonusActive()){
+                    bonusActivation(cell);
+                }
+                setProgress();
+                setCoins(parameter.difficulty_level);
+                if (grid.isFilledIn()) {
+                    victoryGame();
+                }
             }
         }
-        Cell keyHit = key.getHit(screenX, Gdx.graphics.getHeight() - screenY);
-        if (key.isActive() && keyHit != null) {
-            key.setActive(false);
-            cell = grid.getCell(indexCell);
-            if (cell.isActive()) {
-                cell.setNumber(keyHit.getNumber());
-                cell.setRegion(mainScreen.getGame().getManager().getNumber(cell.getNumber()));
-            }
-            if (grid.errorAllGrid()) {
-                errorActivation(cell);
-            } else if (cell.getBonusId() != 0){
-                bonusActivation(cell);
-            }
-            if (parameter.error >= parameter.max_error) {
-                loseGame();
-            }    
-            if (grid.isFilledIn()) {
-                victoryGame();
-            }
-        }
+
     }
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {

@@ -14,6 +14,8 @@ public class Setting {
 	public static final String label_time_game = "Время игры     ";
 	public static final String label_error = "Ошибки ";
 	public static final String label_bonus = "Бонусы ";
+	public static final String label_progress = "Прогресс ";
+	public static final String label_info = "Информация ";
 	public static final String name_continuation_button = "    Продолжить  ";
 	public static final String name_play_button = "   Новая Игра ";
 	public static final String name_menu_button = "   Меню ";

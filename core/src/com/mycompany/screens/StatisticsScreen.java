@@ -10,7 +10,7 @@ import com.mycompany.mygame.AppPreference;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
-import com.mycompany.utils.TimeUtils;
+import com.mycompany.utils.Utils;
 
 public class StatisticsScreen extends CommonScreen {
 
@@ -28,7 +28,7 @@ public class StatisticsScreen extends CommonScreen {
         
         final Label starLabel = new Label("Звезд за игру  "+AppPreference.getStarsGame(), getSkin(), ResourceManager.label_style_normal);
 
-        final GridPoint2 allTime = TimeUtils.getTime(AppPreference.getAllTime());
+        final GridPoint2 allTime = Utils.getTime(AppPreference.getAllTime());
         final Label allTimeLabel = new Label("Общее время игры  "+allTime.x+":"+allTime.y, getSkin(), ResourceManager.label_style_normal);
         
         final Label timeLabel = new Label("Время текущей игры   "+AppPreference.getTimeMinute()+":"+AppPreference.getTimeMinute(), getSkin(), ResourceManager.label_style_normal);

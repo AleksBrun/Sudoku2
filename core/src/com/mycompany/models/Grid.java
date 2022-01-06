@@ -51,7 +51,6 @@ public class Grid {
                 }
             }
         }
-        System.out.println("Size bonus "+cellArrayTmp.size);
         return cellArrayTmp;
     }
 

@@ -6,8 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mycompany.mygame.*;
-import com.mycompany.utils.LoaderSudoku;
 import com.mycompany.utils.Sudoku;
+import com.mycompany.utils.Utils;
 
 
 public class LevelScreen extends CommonScreen {
@@ -64,35 +64,35 @@ public class LevelScreen extends CommonScreen {
         easy_min.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(1, 35, 2);
+                    startNewGame(1, 35, 2, 2);
                 }
             });
 
         easy.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(2,40, 3);
+                    startNewGame(2,40, 3, 2);
                 }
             });
 
         average.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(3, 45, 4);
+                    startNewGame(3, 45, 4, 3);
                 }
             });
 
         difficult.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(4, 50, 5);
+                    startNewGame(4, 50, 5, 3);
                 }
             });
 
         difficult_max.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    startNewGame(5, 55, 6);
+                    startNewGame(5, 55, 6, 3);
                 }
             });
 
@@ -105,17 +105,17 @@ public class LevelScreen extends CommonScreen {
             });
     }
 
-    private void startNewGame(int difficulty, int missing_digits, int max_bonus){
+    private void startNewGame(int difficulty, int missing_digits, int max_bonus, int _max_error){
 
         if (game.getParameters().size < 9) {
             Sudoku sudoku = new Sudoku();
             Parameter parameter = new Parameter();
             parameter.difficulty_level = difficulty;
-            parameter.sudokuGame = parameter.sudokuSave = LoaderSudoku.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
-            parameter.sudokuFull = LoaderSudoku.getStringSudoku(sudoku.getCopyMat());
+            parameter.sudokuGame = parameter.sudokuSave = Utils.getStringSudoku(sudoku.getRandomSudoku(missing_digits));
+            parameter.sudokuFull = Utils.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
             parameter.error = 0;
-            parameter.max_error = 3;
+            parameter.max_error = _max_error;
             parameter.max_bonus = max_bonus;
             parameter.bonus = parameter.max_bonus;
             parameter.start_progress = missing_digits;

@@ -1,5 +1,5 @@
 package com.mycompany.mygame;
-import com.mycompany.utils.LoaderSudoku;
+import com.mycompany.utils.Utils;
 
 public class ExampleGrid {
 
@@ -54,7 +54,7 @@ public class ExampleGrid {
                     break;
             }
         }
-        return LoaderSudoku.getIntegerSudoku(tmp);
+        return Utils.getIntegerSudoku(tmp);
     }
     public static int [][] getSudoku(Difficulty difficulty){
         switch (difficulty){

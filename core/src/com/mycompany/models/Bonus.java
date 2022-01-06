@@ -1,8 +1,8 @@
 package com.mycompany.models;
 
-public class Bonus extends Cell{
+import com.badlogic.gdx.utils.Timer;
 
-    private int counter_bonus;
+public class Bonus extends Cell{
 
     public Bonus(){
         super(0,0,0,0);
@@ -16,12 +16,13 @@ public class Bonus extends Cell{
         setActive(true);
     }
 
-    public void update(){
-        if (isActive() && counter_bonus < 60){
-           counter_bonus++;
-        } else {
-            counter_bonus = 0;
-            setActive(false);
-        }
+    public void visible(){
+        setActive(true);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                setActive(false);
+            }
+        },2);
     }
 }
