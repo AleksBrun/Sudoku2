@@ -17,4 +17,5 @@ public class Parameter {
     public int start_progress;
     public int coin;
     public int stars;
+    public int live;
 }

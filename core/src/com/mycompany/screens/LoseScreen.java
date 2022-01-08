@@ -5,10 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mycompany.mygame.AppPreference;
-import com.mycompany.mygame.MyGdxGame;
-import com.mycompany.mygame.ResourceManager;
-import com.mycompany.mygame.Setting;
+import com.mycompany.mygame.*;
 
 public class LoseScreen extends CommonScreen {
 
@@ -19,6 +16,7 @@ public class LoseScreen extends CommonScreen {
     @Override
     public void show() {
         super.show();
+        Parameter parameter = game.getParameter();
         Label title =  new Label("ВЫ ПРОИГРАЛИ",getSkin(), ResourceManager.label_style_big);
 
         TextButton menu = new TextButton(Setting.name_menu_button, getSkin(), ResourceManager.button_style);
@@ -35,6 +33,8 @@ public class LoseScreen extends CommonScreen {
                 game.setStateScreen(MyGdxGame.State.MENU);
             }
         });
+
+        game.deleteParameter(parameter);
     }
 
     @Override

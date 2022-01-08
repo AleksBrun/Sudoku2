@@ -79,6 +79,10 @@ public class MyGdxGame extends Game {
 		return parameters.size == 0;
 	}
 
+	public boolean isFull(){
+		return parameters.size == 9;
+	}
+
 	public SpriteBatch getBatch() {
 		return batch;
 	}
@@ -91,17 +95,24 @@ public class MyGdxGame extends Game {
 		return parameter;
 	}
 
-	public void setParameter(Parameter parameter) {
-		this.parameter = parameter;
+	public void setPeekParameter(){
+		this.parameter = parameters.peek();
+	}
+
+	public void deleteParameter(Parameter parameter){
+		this.parameters.removeIndex(parameter.index);
 	}
 
 	public void createSudoku(Parameter _parameter , boolean append){
 		if (append){
 			parameters.add(_parameter);
 		}
-		setParameter(_parameter);
-		XMParse.save(parameters);
+		this.parameter = _parameter;
+		saveParameters();
     }
+	public void saveParameters(){
+		XMParse.save(parameters);
+	}
 
 	public Array<Parameter> getParameters() {
 		return parameters;

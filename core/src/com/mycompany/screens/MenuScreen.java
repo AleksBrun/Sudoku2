@@ -74,7 +74,7 @@ public class MenuScreen extends CommonScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 dispose();
-                game.setParameter(game.getParameters().peek());
+                game.setPeekParameter();
                 game.setStateScreen(MyGdxGame.State.MAIN);
             }
         });

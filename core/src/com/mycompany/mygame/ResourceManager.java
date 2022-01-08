@@ -41,13 +41,19 @@ public class ResourceManager implements Disposable {
     public static final String paper = "Paper";
     public static final String skull = "Skull";
     public static final String minerals = "Minerals";
-    public static final String star = "Star";
+    public static final String star = "star";
     public static final String chest = "chest";
     public static final String key = "key";
     public static final String key6 = "key6";
     public static final String heart1 = "heart1";
     public static final String clock = "clock";
     public static final String progress = "progress";
+    public static final String all_star = "all_star";
+    public static final String shop = "shop";
+    public static final String hint1 = "hint1";
+    public static final String hint2 = "hint2";
+    public static final String hint3 = "hint3";
+    public static final String tree = "tree";
     
     private String name_ui;
     private final String ui_blue  = "skin/ui-blue.atlas";

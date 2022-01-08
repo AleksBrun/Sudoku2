@@ -32,6 +32,7 @@ public class MainScreen extends CommonScreen {
         Parameter parameter = game.getParameter();
 
         float size = Setting.size_icon;
+        float sizeButton = size *1.75f;
         
         CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
         
@@ -72,9 +73,15 @@ public class MainScreen extends CommonScreen {
 
         final ImageButton restartIcon = new ImageButton(getSkin(), ResourceManager.image_button_restart);
 
-        final Image fullSudokuButton = new Image(getManager().getTextureRegionAtlas(ResourceManager.paper));
+        final Image fullSudokuButton = new Image(getManager().getTextureRegionAtlas(ResourceManager.tree));
 
-        final Image  shopButton = new Image(getManager().getTextureRegionAtlas(ResourceManager.paper));
+        final Image  shopButton = new Image(getManager().getTextureRegionAtlas(ResourceManager.shop));
+
+        final Image hint1 = new Image(getManager().getTextureRegionAtlas(ResourceManager.hint1));
+
+        final Image  hint2 = new Image(getManager().getTextureRegionAtlas(ResourceManager.hint2));
+
+        final Image  hint3 = new Image(getManager().getTextureRegionAtlas(ResourceManager.hint3));
 
         final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
 
@@ -124,8 +131,11 @@ public class MainScreen extends CommonScreen {
 
         row5.getTable().add(labelProgress).expandX().left().padLeft(20);
 
-        row6.getTable().add(fullSudokuButton).width(size*1.5f).height(size*1.5f).padLeft(20);
-        row6.getTable().add(shopButton).width(size*1.5f).height(size*1.5f).expandX().left().padLeft(20);
+        row6.getTable().add(fullSudokuButton).width(sizeButton).height(sizeButton).padLeft(20);
+        row6.getTable().add(hint1).width(sizeButton).height(sizeButton).padLeft(20);
+        row6.getTable().add(hint2).width(sizeButton).height(sizeButton).padLeft(20);
+        row6.getTable().add(hint3).width(sizeButton).height(sizeButton).padLeft(20);
+        row6.getTable().add(shopButton).width(sizeButton).height(sizeButton).expandX().left().padLeft(20);
 
         shopButton.addListener(new ClickListener(){
             @Override
@@ -217,7 +227,7 @@ public class MainScreen extends CommonScreen {
     public void setTime(int minute, int second){
         this.labelClock.setText(minute+":"+second);
     }
-    public void setAll_Stars(int stars){
+    public void setStars(int stars){
         this.labelAllStars.setText(String.valueOf(stars));
     }
     public void setCoins(int coin){

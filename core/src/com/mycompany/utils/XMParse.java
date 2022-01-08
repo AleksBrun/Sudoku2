@@ -42,6 +42,7 @@ public class XMParse {
                 parameter.start_progress = element.getInt("start_progress");
                 parameter.coin = element.getInt("coin");
                 parameter.stars = element.getInt("stars");
+                parameter.live = element.getInt("live");
                 parameters.add(parameter);
             }
 
@@ -69,7 +70,9 @@ public class XMParse {
             int index = 0;
             xml.element(sudoku).attribute("date", new java.util.Date());
             for (Parameter parameter : parameters) {
+                parameter.index = index;
                 saveTaskResult(xml, parameter, index);
+                System.out.println(index);
                 index++;
             }
             xml.close();
@@ -97,7 +100,8 @@ public class XMParse {
 
     private static void saveTaskResult(XmlWriter xml, Parameter parameter, int index)
             throws IOException {
-        xml.element(sudoku+index).attribute("index", parameter.index)
+        xml.element(sudoku+index)
+                .attribute("index", parameter.index)
                 .attribute("full", parameter.sudokuFull)
                 .attribute("game", parameter.sudokuGame)
                 .attribute("save", parameter.sudokuSave)
@@ -112,6 +116,7 @@ public class XMParse {
                 .attribute("coin", parameter.coin)
                 .attribute("max_error", parameter.max_error)
                 .attribute("stars", parameter.stars)
+                .attribute("live", parameter.live)
                 .pop();
     }
 }

@@ -1,5 +1,6 @@
 package com.mycompany.screens;
 
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -11,6 +12,7 @@ import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Parameter;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
+import com.mycompany.utils.Utils;
 
 public class LoadScreen extends CommonScreen{
 
@@ -26,9 +28,12 @@ public class LoadScreen extends CommonScreen{
         final Array<Parameter> parameters = game.getParameters();
         Array<Label> labelArray = new Array<Label>();
         for (Parameter parameter:parameters){
-            final Label label = new Label((index+1)+"   "+parameter.data+"     "+ parameter.progress+"%", getManager().getSkin(), ResourceManager.label_style_big);
+            GridPoint2 time = Utils.getTime(parameter.time);
+            final Label label = new Label((parameter.index)+"   "+parameter.data+"    "+ parameter.progress+"%", getManager().getSkin(), ResourceManager.label_style_big);
+            final Label labelTime = new Label(time.y+":"+time.x, getSkin(), ResourceManager.label_style_big);
             table.add(label).padTop(20).fillX();
-            table.add(new GroupImage(parameter.difficulty_level, size/3, getManager().getTextureRegionAtlas(ResourceManager.star))).left().padLeft(10);
+            table.add(labelTime).padTop(20).padLeft(10);
+            table.add(new GroupImage(parameter.difficulty_level, size/3, getManager().getTextureRegionAtlas(ResourceManager.star))).left().padLeft(10).padTop(20);
             table.row();
 
             final int finalIndex = index;

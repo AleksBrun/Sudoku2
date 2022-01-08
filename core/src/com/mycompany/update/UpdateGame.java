@@ -44,12 +44,12 @@ public class UpdateGame extends InputAdapter {
     }
     public void loadGame(Parameter _parameter) {
         this.parameter = _parameter;
-        mainScreen.setAll_Stars(parameter.stars);
         mainScreen.setLevel(parameter.difficulty_level);
         mainScreen.setError(parameter.error);
         mainScreen.setBonus(parameter.bonus);
         mainScreen.setCoins(parameter.coin);
-        mainScreen.setHeart(parameter.max_error- parameter.error);
+        mainScreen.setHeart(parameter.live);
+        mainScreen.setStars(parameter.stars);
         mainScreen.setProgress(parameter.progress);
         clock.setTime(Utils.getTime(parameter.time));
         grid.load(Utils.getIntegerSudoku(parameter.sudokuSave), Utils.getIntegerSudoku(parameter.sudokuGame));
@@ -62,7 +62,8 @@ public class UpdateGame extends InputAdapter {
         parameter.time = Utils.setTime(clock.getMinute(), clock.getSecond());
         AppPreference.setAllTime(AppPreference.getAllTime()+parameter.time);
         stopMusic();
-        XMParse.save(mainScreen.game.getParameters());
+        mainScreen.game.saveParameters();
+        //XMParse.save(mainScreen.game.getParameters());
     }
     private void victoryGame() {
         mainScreen.dispose();
@@ -94,11 +95,18 @@ public class UpdateGame extends InputAdapter {
             }
         }, 2f);
         mainScreen.setError(++parameter.error);
-        mainScreen.setHeart(parameter.max_error - parameter.error);
         AppPreference.setAllError(AppPreference.getAllError() + 1);
         if (parameter.error >= parameter.max_error) {
-            loseGame();
+            parameter.live--;
+            if (parameter.live == 0){
+                loseGame();
+            } else {
+                parameter.error = 0;
+            }
         }
+        mainScreen.setHeart(parameter.live);
+        parameter.stars = parameter.live * parameter.difficulty_level;
+        mainScreen.setStars(parameter.stars);
     }
 
     private void bonusActivation(Cell cell){

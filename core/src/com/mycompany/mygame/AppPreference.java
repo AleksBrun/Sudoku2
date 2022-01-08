@@ -3,24 +3,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 public class AppPreference {
-    private static final String BONUS = "bonus";
     private static final String COLOR_TOPIC = "color.topic";
-    private static final String STARS_GAME = "stars.game";
     private static final String ALL_ERROR = "all.error";
     private static final String ALL_MINUTE = "all.minute";
-    private static final String ERROR_GAME = "error.game";
     private static final String ALL_STARS = "all.stars";
     private static final String MUSIC_VOLUME = "volume";
     private static final String MUSIC_ENABLED = "music.enabled";
     private static final String PREFS_NAME = "b2dtut";
     private static final String COLOR_INDEX = "color.ui";
     private static final String COLOR_FONT = "color.font";
-    private static final String SUDOKU = "sudoku";
     private static final String CONTINUATION_ENABLED = "continuation.enabled";
-    private static final String MINUTE = "time_minute";
-    private static final String SECOND = "time_second";
     private static final String MISSING_DIGITS = "missing_digits";
-    private static final String DIFFICULTY_LEVEL = "difficulty_level";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
     public static void setColorTopic(int colorTopic){
@@ -66,15 +59,6 @@ public class AppPreference {
     // Получить общее число звезд
     public static int getAllStars(){
         return prefs.getInteger(ALL_STARS, 0);
-    }
-    // Сохранить ровень сложности
-    public static void setDifficultyLevel(int level){
-        prefs.putInteger(DIFFICULTY_LEVEL, level);
-        prefs.flush();
-    }
-    // Получить уровень сложности
-    public static int getDifficultyLevel(){
-        return prefs.getInteger(DIFFICULTY_LEVEL);
     }
     // Записать колличество пустых ячеек
     public static void setMissingDigits(int missing_digits) {

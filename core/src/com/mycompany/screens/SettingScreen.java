@@ -120,7 +120,6 @@ public class SettingScreen extends CommonScreen {
             public void clicked(InputEvent event, float x, float y){
                 AppPreference.setContinuationEnabled(false);
                 AppPreference.setMissingDigits(40);
-                AppPreference.setDifficultyLevel(1);
                 AppPreference.setColorUI(Setting.start_color);
                 AppPreference.setColorFont(Setting.start_color_font);
                 AppPreference.setAllStars(0);

@@ -107,7 +107,7 @@ public class LevelScreen extends CommonScreen {
 
     private void startNewGame(int difficulty, int missing_digits, int max_bonus, int _max_error){
 
-        if (game.getParameters().size < 9) {
+        if (!game.isFull()) {
             Sudoku sudoku = new Sudoku();
             Parameter parameter = new Parameter();
             parameter.difficulty_level = difficulty;
@@ -120,7 +120,8 @@ public class LevelScreen extends CommonScreen {
             parameter.bonus = parameter.max_bonus;
             parameter.start_progress = missing_digits;
             parameter.coin = 0;
-            parameter.stars = difficulty;
+            parameter.live = 1;
+            parameter.stars = difficulty * parameter.live;
             dispose();
             game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);

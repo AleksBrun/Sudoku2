@@ -27,7 +27,10 @@ public class InfoScreen extends CommonScreen{
         final Label labelTitle = new Label(Setting.label_pause, getSkin(), ResourceManager.label_style_big);
 
         final Image imageStar = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
-        final Label labelStar = new Label(String.valueOf(AppPreference.getAllStars()), getSkin(), ResourceManager.label_style_big);
+        final Label labelStar = new Label(String.valueOf(parameter.stars), getSkin(), ResourceManager.label_style_big);
+
+        final Image imageAllStar = new Image(getManager().getTextureRegionAtlas(ResourceManager.all_star));
+        final Label labelAllStar = new Label(String.valueOf(AppPreference.getAllStars()), getSkin(), ResourceManager.label_style_big);
 
         final Image imageCoin = new Image(getManager().getTextureRegionAtlas(ResourceManager.coin));
         final Label labelCoin = new Label(String.valueOf(parameter.coin), getSkin(), ResourceManager.label_style_big);
@@ -53,13 +56,16 @@ public class InfoScreen extends CommonScreen{
         table.add(labelTitle).colspan(2);
         table.row();
         table.add(imageStar).width(size).height(size).padTop(40);
-        table.add(labelStar);
+        table.add(labelStar).padTop(40);
+        table.row();
+        table.add(imageAllStar).width(size).height(size).padTop(10);
+        table.add(labelAllStar).padTop(10);
         table.row();
         table.add(imageCoin).width(size).height(size).padTop(10);
-        table.add(labelCoin);
+        table.add(labelCoin).padTop(10);
         table.row();
         table.add(imageBonus).width(size).height(size).padTop(10);
-        table.add(labelBonus);
+        table.add(labelBonus).padTop(10);
         table.row();
         table.add(imageError).width(size).height(size).padTop(10);
         table.add(labelError);
