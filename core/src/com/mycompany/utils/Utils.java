@@ -40,7 +40,8 @@ public class Utils {
         return tmp.toString();
     }
 
-    public static Vector2 getStageLocation(Actor actor) {
-        return actor.localToStageCoordinates(new Vector2(0, 0));
+    public static Vector2 getScreenLocation(Actor actor) {
+        return actor.getStage().stageToScreenCoordinates(actor.screenToLocalCoordinates(new Vector2()));
+        //return actor.screenToLocalCoordinates(new Vector2(0, 0));
     }
 }

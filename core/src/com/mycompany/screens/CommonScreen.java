@@ -35,7 +35,6 @@ public class CommonScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(.8f, .8f, .8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //if (stage != null) stage.draw();
     }
 
     @Override

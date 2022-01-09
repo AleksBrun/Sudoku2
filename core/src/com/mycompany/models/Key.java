@@ -5,14 +5,15 @@ import com.mycompany.mygame.ResourceManager;
 public class Key {
 
     private final ResourceManager manager;
-    private final float x, y, width, sizeCell;
+    private float x;
+    private float y;
+    private final float sizeCell;
     private final Cell[] keys;
     private boolean active;
 
-    public Key(float _x, float _y, float _width, float _sizeCell,  ResourceManager _manager) {
+    public Key(float _x, float _y, float _sizeCell,  ResourceManager _manager) {
         this.x = _x;
         this.y = _y;
-        this.width = _width;
         this.sizeCell = _sizeCell;
         this.manager = _manager;
 
@@ -38,6 +39,14 @@ public class Key {
         }
     }
 
+    public void setPosition(float _x, float _y){
+        this.x = _x;
+        this.y = _y;
+        for (int column = 0; column < keys.length; column++){
+            keys[column].setPosition(+column* sizeCell, y);
+        }
+    }
+
     public Cell[] getKeys() {
         return keys;
     }
@@ -56,5 +65,9 @@ public class Key {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public float getSize() {
+        return sizeCell;
     }
 }

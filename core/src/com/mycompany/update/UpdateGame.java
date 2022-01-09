@@ -35,7 +35,7 @@ public class UpdateGame extends InputAdapter {
                         Setting.getSizeGrid());
         grid.setBackground(mainScreen.getGame().getManager().getTextureRegionAtlas(ResourceManager.grid));
         key = new Key(Setting.getPositionGrid_X(), Setting.getPositionGrid_Y() / 2 - Setting.getSizeGrid() / 20,
-                      Setting.getWidthKeys(), Setting.getHeightKeys(), mainScreen.getGame().getManager());
+                      Setting.getHeightKeys(), mainScreen.getGame().getManager());
         clock = new Clock();
         bonus = new Bonus();
     }
@@ -244,10 +244,8 @@ public class UpdateGame extends InputAdapter {
         }
     }
 
-    public void setPositionGrid(float _x, float _y){
-        this.grid.setPosition(_x, _y);
-    }
-    public void setPositionGrid(Vector2 position){
-        this.grid.setPosition(position.x, position.y);
+    public void setTransformer(Vector2 position){
+        grid.setPosition(grid.getX(), position.y-grid.getSize()-20);
+        key.setPosition(key.getX(), grid.getY()/2- key.getSize()/2);
     }
 }

@@ -2,19 +2,17 @@ package com.mycompany.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
 import com.mycompany.draw.DrawGame;
 import com.mycompany.models.CommonGroup;
 import com.mycompany.models.GroupImage;
 import com.mycompany.mygame.*;
 import com.mycompany.update.UpdateGame;
+import com.mycompany.utils.Utils;
 
 public class MainScreen extends CommonScreen {
 
@@ -32,11 +30,11 @@ public class MainScreen extends CommonScreen {
     @Override
     public void show() {
         super.show();
+        table.setDebug(true);
         Parameter parameter = game.getParameter();
-
         float size = Setting.size_icon;
-        float sizeButton = size *1.75f;
-        
+        float sizeButton = size *1.5f;
+
         CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
         
         CommonGroup row2 = new CommonGroup(stage.getWidth(), size/2f);
@@ -196,8 +194,7 @@ public class MainScreen extends CommonScreen {
                     game.setStateScreen(MyGdxGame.State.MENU);
                 }
             });
-        Vector2 pos = row6.localToParentCoordinates(new Vector2(table.getX(), table.getY()));
-        Gdx.app.log("log", pos.y+"");
+
         updateGame.loadGame(parameter);
         InputMultiplexer multiplexer = new InputMultiplexer(stage, updateGame);
         Gdx.input.setInputProcessor(multiplexer);
@@ -206,10 +203,14 @@ public class MainScreen extends CommonScreen {
         } else {
             updateGame.playMusic();
         }
+
+        stage.draw();
+        updateGame.setTransformer(Utils.getScreenLocation(row6));
     }
 
     @Override
     public void render(float delta) {
+        super.render(delta);
         updateGame.update();
         drawGame.draw(game.getBatch());
         stage.draw();
