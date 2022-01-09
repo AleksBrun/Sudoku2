@@ -72,7 +72,6 @@ public class XMParse {
             for (Parameter parameter : parameters) {
                 parameter.index = index;
                 saveTaskResult(xml, parameter, index);
-                System.out.println(index);
                 index++;
             }
             xml.close();

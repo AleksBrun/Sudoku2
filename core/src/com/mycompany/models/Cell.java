@@ -38,6 +38,11 @@ public class Cell {
         return touchX > x && touchX < x+size && touchY > y && touchY < y+size ? this:null;
     }
 
+    public  void setPosition(float _x, float _y){
+        this.x = _x;
+        this.y = _y;
+    }
+
     public TextureRegion getRegion() {
         return region;
     }

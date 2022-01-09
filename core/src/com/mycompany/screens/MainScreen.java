@@ -2,11 +2,14 @@ package com.mycompany.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.mycompany.draw.DrawGame;
 import com.mycompany.models.CommonGroup;
 import com.mycompany.models.GroupImage;
@@ -53,6 +56,8 @@ public class MainScreen extends CommonScreen {
         table.add(row4).padTop(5).row();
         table.add(row5).padTop(5).row();
         table.add(row6).padTop(20);
+
+
 
         final Image starIcon = new Image(getManager().getTextureRegionAtlas(ResourceManager.star));
 
@@ -191,8 +196,8 @@ public class MainScreen extends CommonScreen {
                     game.setStateScreen(MyGdxGame.State.MENU);
                 }
             });
-
-
+        Vector2 pos = row6.localToParentCoordinates(new Vector2(table.getX(), table.getY()));
+        Gdx.app.log("log", pos.y+"");
         updateGame.loadGame(parameter);
         InputMultiplexer multiplexer = new InputMultiplexer(stage, updateGame);
         Gdx.input.setInputProcessor(multiplexer);

@@ -5,18 +5,20 @@ import com.badlogic.gdx.utils.Array;
 
 public class Grid {
 
-    private final float x, y, size;
+    private float x, y, size;
     private TextureRegion background;
     private final Cell[][] cells = new Cell[9][9];
     private final Cell[] tmpCells = new Cell[9];
     private final Array<Cell> cellArrayTmp = new Array<Cell>();
     private boolean active = true;
+    float sizeCell;
 
 
     public Grid(float _x, float _y, float _size){
         this.x = _x;
         this.y = _y;
         this.size = _size;
+        this.sizeCell = size/9;
         createCells();
     }
 
@@ -171,7 +173,6 @@ public class Grid {
     }
 
     private void createCells(){
-        float sizeCell = size/9;
         int index = 0;
         for (int row = 0; row < cells.length; row++){
             for (int column = 0;column < cells[0].length; column++){
@@ -189,6 +190,16 @@ public class Grid {
                 }
             }
         return tmp;
+    }
+
+    public void setPosition(float _x, float _y){
+        this.x = _x;
+        this.y = _y;
+        for (int row = 0; row < cells.length; row++){
+            for (int column = 0;column < cells[0].length; column++){
+                cells[row][column].setPosition(x+column*sizeCell, y+row*sizeCell);
+            }
+        }
     }
 
     public float getX() {

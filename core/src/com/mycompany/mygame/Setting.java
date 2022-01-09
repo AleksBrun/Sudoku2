@@ -1,10 +1,9 @@
 package com.mycompany.mygame;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 
 public class Setting {
 
-    public static float width_main_ui = 800;
+    public static float width_main_ui = 1080;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
 	public static final int start_color = 5;
@@ -38,7 +37,6 @@ public class Setting {
 	public static final String load_sudoku = "   Загрузить  ";
     
 	public static float pad_ui_menu = 5;
-	public static float pad_ui_main = 5;
 	public static float pad_ui_menu_bottom = getHeight_Ui(420) / 12;
 
 	public static float getHeight_Ui(float width) {
@@ -70,14 +68,4 @@ public class Setting {
     public static float getHeightKeys() {
 		return getWidthKeys() / 10;
     }
-
-	public static Color getColorTopic(int indexColor){
-		switch (indexColor){
-			case 0: return Color.BLACK;
-			case 1: return Color.BLUE;
-			case 2: return Color.RED;
-			case 3: return Color.GREEN;
-			default: return Color.WHITE;
-		}
-	}
 }

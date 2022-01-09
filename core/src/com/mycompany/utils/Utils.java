@@ -1,6 +1,8 @@
 package com.mycompany.utils;
 
 import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Utils {
 
@@ -36,5 +38,9 @@ public class Utils {
             }
         }
         return tmp.toString();
+    }
+
+    public static Vector2 getStageLocation(Actor actor) {
+        return actor.localToStageCoordinates(new Vector2(0, 0));
     }
 }

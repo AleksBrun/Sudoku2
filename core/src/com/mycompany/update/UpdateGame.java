@@ -3,6 +3,7 @@ package com.mycompany.update;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
 import com.mycompany.models.Bonus;
@@ -241,5 +242,12 @@ public class UpdateGame extends InputAdapter {
             cell.setMark(true);
             cell.setMarkRegion(getTextureBonus(cell.getBonusId()));
         }
+    }
+
+    public void setPositionGrid(float _x, float _y){
+        this.grid.setPosition(_x, _y);
+    }
+    public void setPositionGrid(Vector2 position){
+        this.grid.setPosition(position.x, position.y);
     }
 }
