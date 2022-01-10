@@ -43,7 +43,7 @@ public class Key {
         this.x = _x;
         this.y = _y;
         for (int column = 0; column < keys.length; column++){
-            keys[column].setPosition(+column* sizeCell, y);
+            keys[column].setPosition(x+column* sizeCell, y);
         }
     }
 

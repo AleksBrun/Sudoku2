@@ -6,7 +6,7 @@ public class Setting {
     public static float width_main_ui = 720;
 	public static float pad_cell = 10;
 	public static float pad_mark= 2;
-	public static final int start_color = 5;
+	public static final int start_color = 4;
 	public static final int start_color_font = 1;
 
 	public static final String label_lvl = "Уровень сложности ";
@@ -50,7 +50,7 @@ public class Setting {
 	public static float size_icon = width_main_ui / 15;
 
 	public static float getSizeGrid() {
-		return Gdx.graphics.getWidth() - 20;
+		return Gdx.graphics.getWidth() - 80;
 	}
 
 	public static float getPositionGrid_X() {

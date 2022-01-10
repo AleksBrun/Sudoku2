@@ -201,8 +201,10 @@ public class ResourceManager implements Disposable {
         skin.add(textbox_style, textFieldStyle, TextField.TextFieldStyle.class);
 
         Window.WindowStyle windowStyle = new Window.WindowStyle();
-        windowStyle.background = new TextureRegionDrawable(manager.get(name_ui, TextureAtlas.class).findRegion("window_01"));
-        windowStyle.titleFont = fontSmall;
+        windowStyle.background = new TextureRegionDrawable(getTextureRegionAtlas(background3));
+        windowStyle.titleFont = fontBig;
+        windowStyle.titleFontColor = Color.BLACK;
+        //windowStyle.stageBackground = new TextureRegionDrawable(getTextureRegionAtlas(background1));
         skin.add(window_style, windowStyle, Window.WindowStyle.class);
         
         ImageButton.ImageButtonStyle imageButtonMusic = new ImageButton.ImageButtonStyle();
@@ -230,6 +232,7 @@ public class ResourceManager implements Disposable {
         imageButtonRestart.up = new TextureRegionDrawable(getTextureRegionAtlas("black_restart"));
         imageButtonRestart.down = new TextureRegionDrawable(getTextureRegionAtlas("white_restart"));
         skin.add(image_button_restart, imageButtonRestart, ImageButton.ImageButtonStyle.class);
+        
     }
 
     public Skin getSkin(){

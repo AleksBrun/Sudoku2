@@ -30,10 +30,9 @@ public class MainScreen extends CommonScreen {
     @Override
     public void show() {
         super.show();
-        table.setDebug(true);
         Parameter parameter = game.getParameter();
         float size = Setting.size_icon;
-        float sizeButton = size *1.5f;
+        float sizeButton = size *2f;
 
         CommonGroup row1 = new CommonGroup(stage.getWidth(), size);
         
@@ -46,6 +45,8 @@ public class MainScreen extends CommonScreen {
         CommonGroup row5 = new CommonGroup(stage.getWidth(), size/2f);
 
         CommonGroup row6 = new CommonGroup(stage.getWidth(), size*1.5f);
+        
+        Label infoLabel = new Label("The product was created by Aleks Brun", getSkin(), ResourceManager.label_style_normal);
 
         table.top().padTop(20);
         table.add(row1).row();
@@ -53,7 +54,8 @@ public class MainScreen extends CommonScreen {
         table.add(row3).padTop(5).row();
         table.add(row4).padTop(5).row();
         table.add(row5).padTop(5).row();
-        table.add(row6).padTop(20);
+        table.add(row6).padTop(40).row();
+        table.add(infoLabel).expand().bottom().padBottom(10);
 
 
 

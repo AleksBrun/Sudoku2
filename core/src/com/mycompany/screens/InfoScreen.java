@@ -12,14 +12,14 @@ import com.mycompany.utils.Utils;
 
 public class InfoScreen extends CommonScreen{
     public InfoScreen(MyGdxGame _game) {
-        super(720, _game);
+        super(600, _game);
     }
 
     @Override
     public void show() {
         super.show();
 
-        float size = Setting.size_icon/2f;
+        float size = Setting.size_icon;
         Parameter parameter = game.getParameter();
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));

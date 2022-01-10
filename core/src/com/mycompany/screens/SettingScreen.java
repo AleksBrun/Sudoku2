@@ -119,7 +119,7 @@ public class SettingScreen extends CommonScreen {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 AppPreference.setContinuationEnabled(false);
-                AppPreference.setMissingDigits(40);
+                //AppPreference.setMissingDigits(40);
                 AppPreference.setColorUI(Setting.start_color);
                 AppPreference.setColorFont(Setting.start_color_font);
                 AppPreference.setAllStars(0);

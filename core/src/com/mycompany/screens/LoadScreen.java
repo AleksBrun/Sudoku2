@@ -7,12 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.mycompany.models.DialogWindow;
 import com.mycompany.models.GroupImage;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Parameter;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.utils.Utils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class LoadScreen extends CommonScreen{
 
@@ -47,12 +51,15 @@ public class LoadScreen extends CommonScreen{
             index++;
         }
 
+        DialogWindow dialogWindow = new DialogWindow(size*4, size*3, getManager());
+        dialogWindow.setVisible(false);
+
         TextButton menu = new TextButton(Setting.name_menu_button, getManager().getSkin(), ResourceManager.button_style);
 
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
         table.add(menu).padTop(20).colspan(2);
 
-
+        stage.addActor(dialogWindow);
 
         menu.addListener(new ClickListener(){
             @Override

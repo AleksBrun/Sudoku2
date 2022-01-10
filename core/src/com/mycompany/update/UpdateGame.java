@@ -245,7 +245,8 @@ public class UpdateGame extends InputAdapter {
     }
 
     public void setTransformer(Vector2 position){
-        grid.setPosition(grid.getX(), position.y-grid.getSize()-20);
-        key.setPosition(key.getX(), grid.getY()/2- key.getSize()/2);
+        grid.setPosition(grid.getX(), position.y-grid.getSize()-40);
+        Gdx.app.log("Grid x", grid.getX()+"");
+        key.setPosition(grid.getX(), grid.getY()/2- key.getSize()/2);
     }
 }
