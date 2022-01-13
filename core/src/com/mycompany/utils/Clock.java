@@ -58,4 +58,8 @@ public class Clock {
     public int getMinute() {
         return minute;
     }
+    
+    public int getAllSeconds(){
+        return minute*60+second;
+    }
 }

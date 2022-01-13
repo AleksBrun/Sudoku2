@@ -101,6 +101,7 @@ public class MyGdxGame extends Game {
 
 	public void deleteParameter(Parameter parameter){
 		this.parameters.removeIndex(parameter.index);
+        saveParameters();
 	}
 
 	public void createSudoku(Parameter _parameter , boolean append){

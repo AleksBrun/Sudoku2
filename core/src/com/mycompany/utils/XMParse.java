@@ -21,7 +21,7 @@ public class XMParse {
         Array<Parameter> parameters = new Array<Parameter>();
         try {
             XmlReader xmlReader = new XmlReader();
-            FileHandle fileHandler = Gdx.files.external(appFolder+nameFile);
+            FileHandle fileHandler = Gdx.files.external( appFolder+nameFile);
             XmlReader.Element root = xmlReader.parse(fileHandler);
 
             for (int index = 0; index < root.getChildCount(); index++){
@@ -43,6 +43,8 @@ public class XMParse {
                 parameter.coin = element.getInt("coin");
                 parameter.stars = element.getInt("stars");
                 parameter.live = element.getInt("live");
+                parameter.id_bonus = element.getInt("id_bonus");
+                parameter.key = element.getInt("key");
                 parameters.add(parameter);
             }
 
@@ -116,6 +118,8 @@ public class XMParse {
                 .attribute("max_error", parameter.max_error)
                 .attribute("stars", parameter.stars)
                 .attribute("live", parameter.live)
+                .attribute("id_bonus", parameter.id_bonus)
+                .attribute("key", parameter.key)
                 .pop();
     }
 }

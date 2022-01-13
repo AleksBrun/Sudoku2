@@ -29,6 +29,7 @@ public class ResourceManager implements Disposable {
     public static final String mark2 = "mark4";
     public static final String mark3 = "mark3";
     public static final String mark4 = "mark2";
+    public static final String mark5 = "mark5";
     public static final String love = "love";
     public static final String background1 = "background1";
     public static final String background2 = "background2";
@@ -53,6 +54,7 @@ public class ResourceManager implements Disposable {
     public static final String hint1 = "hint1";
     public static final String hint2 = "hint2";
     public static final String hint3 = "hint3";
+    public static final String hint4 = "hint4";
     public static final String tree = "tree";
     
     private String name_ui;
@@ -99,6 +101,7 @@ public class ResourceManager implements Disposable {
         manager.get(textureAtlas, TextureAtlas.class).addRegion(background3, new TextureRegion(manager.get("images/background3.jpg", Texture.class)));
         manager.get(textureAtlas, TextureAtlas.class).addRegion(background4, new TextureRegion(manager.get("images/background4.jpg", Texture.class)));
         manager.get(textureAtlas, TextureAtlas.class).addRegion(background5, new TextureRegion(manager.get("images/background5.jpg", Texture.class)));
+        manager.get(textureAtlas, TextureAtlas.class).addRegion(hint4, new TextureRegion(manager.get("images/wifi.png", Texture.class)));
         getCups();
         setUiNew();
     }
@@ -109,6 +112,7 @@ public class ResourceManager implements Disposable {
         manager.load("images/background3.jpg", Texture.class);
         manager.load("images/background4.jpg", Texture.class);
         manager.load("images/background5.jpg", Texture.class);
+        manager.load("images/wifi.png", Texture.class);
     }
     private void loadMusic(){
         manager.load(music, Music.class);
@@ -201,10 +205,10 @@ public class ResourceManager implements Disposable {
         skin.add(textbox_style, textFieldStyle, TextField.TextFieldStyle.class);
 
         Window.WindowStyle windowStyle = new Window.WindowStyle();
-        windowStyle.background = new TextureRegionDrawable(getTextureRegionAtlas(background3));
+        windowStyle.background = new TextureRegionDrawable(getTextureRegionAtlas(mark4));
         windowStyle.titleFont = fontBig;
         windowStyle.titleFontColor = Color.BLACK;
-        //windowStyle.stageBackground = new TextureRegionDrawable(getTextureRegionAtlas(background1));
+        windowStyle.stageBackground = new TextureRegionDrawable(getTextureRegionAtlas(background4));
         skin.add(window_style, windowStyle, Window.WindowStyle.class);
         
         ImageButton.ImageButtonStyle imageButtonMusic = new ImageButton.ImageButtonStyle();

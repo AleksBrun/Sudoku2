@@ -8,7 +8,6 @@ import com.mycompany.models.Grid;
 import com.mycompany.models.Key;
 import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
-import com.mycompany.models.Bonus;
 
 public class DrawGame {
 
@@ -23,20 +22,12 @@ public class DrawGame {
         drawBackground(batch);
         drawGrid(batch);
         drawCells(batch);
-        drawBonus(batch);
         drawKeys(batch);
         batch.end();
     }
 
     private void drawBackground(SpriteBatch batch){
         batch.draw(updateGame.getBackground(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    }
-    
-    private void drawBonus(SpriteBatch batch){
-        Bonus bonus = updateGame.getBonus();
-        if (bonus != null && bonus.isActive()){
-            batch.draw(bonus.getRegion(), bonus.getX(), bonus.getY(), bonus.getSize(), bonus.getSize());
-        }
     }
 
     private void drawKeys(SpriteBatch batch){

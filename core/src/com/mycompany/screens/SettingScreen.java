@@ -125,6 +125,7 @@ public class SettingScreen extends CommonScreen {
                 AppPreference.setAllStars(0);
                 AppPreference.setAllError(0);
                 AppPreference.setAllTime(0);
+                AppPreference.setAllGames(0);
                 reset.setVisible(false);
                 getManager().setUiNew();
                 XMParse.delete();

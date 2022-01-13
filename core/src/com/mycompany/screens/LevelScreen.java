@@ -115,6 +115,7 @@ public class LevelScreen extends CommonScreen {
             parameter.sudokuFull = Utils.getStringSudoku(sudoku.getCopyMat());
             parameter.data = new java.util.Date().toLocaleString();
             parameter.error = 0;
+            parameter.id_bonus = 4;
             parameter.max_error = _max_error;
             parameter.max_bonus = max_bonus;
             parameter.bonus = parameter.max_bonus;
@@ -125,6 +126,7 @@ public class LevelScreen extends CommonScreen {
             dispose();
             game.createSudoku(parameter, true);
             game.setStateScreen(MyGdxGame.State.MAIN);
+            AppPreference.setAllGames(AppPreference.getAllGames()+1);
         }
     }
 

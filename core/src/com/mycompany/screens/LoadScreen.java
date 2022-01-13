@@ -7,16 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.mycompany.models.DialogWindow;
 import com.mycompany.models.GroupImage;
 import com.mycompany.mygame.MyGdxGame;
 import com.mycompany.mygame.Parameter;
 import com.mycompany.mygame.ResourceManager;
 import com.mycompany.mygame.Setting;
 import com.mycompany.utils.Utils;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 
 public class LoadScreen extends CommonScreen{
 
@@ -33,7 +30,7 @@ public class LoadScreen extends CommonScreen{
         Array<Label> labelArray = new Array<Label>();
         for (Parameter parameter:parameters){
             GridPoint2 time = Utils.getTime(parameter.time);
-            final Label label = new Label((parameter.index)+"   "+parameter.data+"    "+ parameter.progress+"%", getManager().getSkin(), ResourceManager.label_style_big);
+            final Label label = new Label((parameter.index+1)+"   "+parameter.data+"    "+ parameter.progress+"%", getManager().getSkin(), ResourceManager.label_style_big);
             final Label labelTime = new Label(time.y+":"+time.x, getSkin(), ResourceManager.label_style_big);
             table.add(label).padTop(20).fillX();
             table.add(labelTime).padTop(20).padLeft(10);
@@ -44,23 +41,17 @@ public class LoadScreen extends CommonScreen{
             label.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    start(parameters.get(finalIndex));
+                    start(label.getY(), parameters.get(finalIndex));
                 }
             });
             labelArray.add(label);
             index++;
         }
 
-        DialogWindow dialogWindow = new DialogWindow(size*4, size*3, getManager());
-        dialogWindow.setVisible(false);
-
         TextButton menu = new TextButton(Setting.name_menu_button, getManager().getSkin(), ResourceManager.button_style);
-
         table.setBackground(new TextureRegionDrawable(getManager().getTextureRegionAtlas(ResourceManager.background4)));
-        table.add(menu).padTop(20).colspan(2);
-
-        stage.addActor(dialogWindow);
-
+        table.add(menu).padTop(100).colspan(2);
+        
         menu.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -68,13 +59,45 @@ public class LoadScreen extends CommonScreen{
                 game.setStateScreen(MyGdxGame.State.MENU);
             }
         });
-
     }
 
-    private void start(Parameter parameter){
-        dispose();
-        game.createSudoku(parameter, false);
-        game.setStateScreen(MyGdxGame.State.MAIN);
+    private void start(float _y, final Parameter parameter){
+        final Dialog dialog = new Dialog("", getSkin(), ResourceManager.window_style);
+        stage.addActor(dialog);
+        dialog.setSize(450, 150);
+        dialog.setPosition(stage.getWidth()/2-dialog.getWidth()/2, _y);
+        dialog.text(new Label("Что сделать с", getSkin(), ResourceManager.label_style_big));
+        dialog.text(new Label("Sudoku "+(parameter.index+1)+"?", getSkin(), ResourceManager.label_style_big));
+        TextButton loadButton = new TextButton("  Загрузить", getSkin(), ResourceManager.button_style);
+        TextButton deleteButton = new TextButton("  Удалить",getSkin(), ResourceManager.button_style);
+        TextButton closeButton = new TextButton("  Закрыть", getSkin(), ResourceManager.button_style);
+        dialog.button(loadButton).padBottom(20);
+        dialog.button(deleteButton).padBottom(20);
+        dialog.button(closeButton).padBottom(20);
+        
+        loadButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                dispose();
+                game.createSudoku(parameter, false);
+                game.setStateScreen(MyGdxGame.State.MAIN);
+            }
+        });
+        deleteButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                game.deleteParameter(parameter);
+                dispose();
+                game.setStateScreen(MyGdxGame.State.LOAD);
+            }
+        });
+        closeButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                dialog.cancel();
+                dialog.remove();
+            }
+        });
     }
 
     @Override

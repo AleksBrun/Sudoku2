@@ -7,6 +7,7 @@ public class AppPreference {
     private static final String ALL_ERROR = "all.error";
     private static final String ALL_MINUTE = "all.minute";
     private static final String ALL_STARS = "all.stars";
+    private static final String ALL_GAMES = "all.games";
     private static final String MUSIC_VOLUME = "volume";
     private static final String MUSIC_ENABLED = "music.enabled";
     private static final String PREFS_NAME = "b2dtut";
@@ -16,6 +17,13 @@ public class AppPreference {
     private static final String MISSING_DIGITS = "missing_digits";
     private static final Preferences prefs = Gdx.app.getPreferences(PREFS_NAME);
 
+    public static void setAllGames(int games){
+        prefs.putInteger(ALL_GAMES, games);
+        prefs.flush();
+    }
+    public static int getAllGames(){
+        return prefs.getInteger(ALL_GAMES, 0);
+    }
     public static void setColorTopic(int colorTopic){
         prefs.putInteger(COLOR_TOPIC, colorTopic);
         prefs.flush();

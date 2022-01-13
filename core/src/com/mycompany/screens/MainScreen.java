@@ -10,14 +10,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mycompany.draw.DrawGame;
 import com.mycompany.models.CommonGroup;
 import com.mycompany.models.GroupImage;
-import com.mycompany.mygame.*;
+import com.mycompany.mygame.AppPreference;
+import com.mycompany.mygame.MyGdxGame;
+import com.mycompany.mygame.Parameter;
+import com.mycompany.mygame.ResourceManager;
+import com.mycompany.mygame.Setting;
 import com.mycompany.update.UpdateGame;
+import com.mycompany.utils.Clock;
 import com.mycompany.utils.Utils;
 
 public class MainScreen extends CommonScreen {
 
     private final UpdateGame updateGame;
     private final DrawGame drawGame;
+    private final Clock clock;
     private Label labelClock, labelAllStars, labelCoins, labelHeart, labelProgress;
     private GroupImage error, bonus, level;
 
@@ -25,6 +31,7 @@ public class MainScreen extends CommonScreen {
         super(Setting.width_main_ui, game);
         updateGame = new UpdateGame(this);
         drawGame = new DrawGame(updateGame);
+        clock = new Clock();
     }
 
     @Override
@@ -87,6 +94,9 @@ public class MainScreen extends CommonScreen {
         final Image  hint2 = new Image(getManager().getTextureRegionAtlas(ResourceManager.hint2));
 
         final Image  hint3 = new Image(getManager().getTextureRegionAtlas(ResourceManager.hint3));
+        
+        final Image  hint4 = new Image(getManager().getTextureRegionAtlas(ResourceManager.hint4));
+        
 
         final Label title = new Label(Setting.label_lvl, getManager().getSkin(), ResourceManager.label_style_big);
 
@@ -136,12 +146,27 @@ public class MainScreen extends CommonScreen {
 
         row5.getTable().add(labelProgress).expandX().left().padLeft(20);
 
-        row6.getTable().add(fullSudokuButton).width(sizeButton).height(sizeButton).padLeft(20);
-        row6.getTable().add(hint1).width(sizeButton).height(sizeButton).padLeft(20);
-        row6.getTable().add(hint2).width(sizeButton).height(sizeButton).padLeft(20);
-        row6.getTable().add(hint3).width(sizeButton).height(sizeButton).padLeft(20);
-        row6.getTable().add(shopButton).width(sizeButton).height(sizeButton).expandX().left().padLeft(20);
+        row6.getTable().padLeft(20).padRight(20);
+        row6.getTable().add(fullSudokuButton).width(sizeButton).height(sizeButton).expandX();
+        row6.getTable().add(hint1).width(sizeButton).height(sizeButton).expandX();
+        row6.getTable().add(hint2).width(sizeButton).height(sizeButton).expandX();
+        row6.getTable().add(hint3).width(sizeButton).height(sizeButton).expandX();
+        row6.getTable().add(hint4).width(sizeButton).height(sizeButton).expandX();
+        row6.getTable().add(shopButton).width(sizeButton).height(sizeButton).expandX();
 
+        hint1.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                updateGame.visibleAllBonus();
+            }
+        });
+        hint3.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                dispose();
+                game.setStateScreen(MyGdxGame.State.INFO);
+            }
+        });
         shopButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -158,7 +183,6 @@ public class MainScreen extends CommonScreen {
         restartIcon.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //updateGame.visibleAllBonus();
                 dispose();
                 game.setStateScreen(MyGdxGame.State.INFO);
             }
@@ -213,7 +237,8 @@ public class MainScreen extends CommonScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        updateGame.update();
+        clock.update();
+        setTime(clock.getMinute(), clock.getSecond());
         drawGame.draw(game.getBatch());
         stage.draw();
     }
@@ -254,6 +279,8 @@ public class MainScreen extends CommonScreen {
         this.labelProgress.setText(Setting.label_progress+ _progress +"%");
     }
     public MyGdxGame getGame() {
-        return game;
-    }
+        return this.game;}
+    
+    public Clock getClock(){
+        return this.clock;}
 }
